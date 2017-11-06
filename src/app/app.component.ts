@@ -14,22 +14,17 @@ export class AppComponent {
 
   }
   ngOnInit() {
-    
+    debugger;
     var token = localStorage.getItem('authenticationtoken');
     if (token && token != "") {
       this.commonService.menuVisibility = true;
     //  this.commonService.applyRoleOnMenu();
     
-    const prm = ['GUEST'];
-    this.permisstionService.loadPermissions(prm);
-
-    // this.roleService.addRoles(
-    //   {
-    //     'USER':['canRead'],
-    //     'ADMIN' :['canRead','canAdd'],
-    //     'SUPERADMIN' : ['canRead','canAdd','canDelete']
-    
-    //   });
+     this.roleService.addRoles(
+       {
+         'SUPERADMIN':['canRead','canAdd']
+     
+       });
     //debugger;
  
 

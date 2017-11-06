@@ -23,6 +23,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AppSidebarComponent } from './Components/shared/appSideBar.component';
 import { commonService } from './Services/common.service';
+import { ModalModule } from 'ngx-bootstrap';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
   
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ModalModule.forRoot(),
     NgxPermissionsModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

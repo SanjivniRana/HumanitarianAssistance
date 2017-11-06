@@ -1,5 +1,6 @@
 /* left sidebar */
 .navbar-fixed-left { background-color:#343f51;}
+.navbar-fixed-left .left-sidebar ul { width: 232px;}
 .left-sidebar .navbar-nav>li>a { padding-top:5px;padding-bottom:5px;border-left:2px solid #343f51;margin:5px 0;}
 .left-sidebar .navbar-nav>li>a:hover { color:#3dc5ab;border-left-color:#3dc5ab;}
 .left-sidebar .navbar-nav>li>a span { display:inline-block;width:30px;}

@@ -1,136 +1,198 @@
 <h2 class="page-heading">Users</h2>
 
-<div class="row">
-  <!-- <div class="col-sm-3">
-      <h3 class="page-heading">Office Permissions</h3>
-        <div class="filter-box clearfix">
-          <div class="filter-item">
-              <input type="checkbox" id="fi-1" />
-                <label for="fi-1">All Offices</label>
-            </div>
-            <div class="filter-item">
-              <input type="checkbox" id="fi-2" />
-                <label for="fi-2">All Offices</label>
-            </div>
-        </div>
-    </div>   -->
+<!-- Add USer ModalPOUP BUtton -->
 
+<div class="row">
     <div class="col-sm-12">
-      <button (click)="showDialog()"><i class="fa fa-plus-square pull-right" style="font-size: 21px;" aria-hidden="true"></i></button>
-      <br/>
-      <!-- <h3 class="page-heading">Modules Permissions</h3> -->
-        <div class="table-responsive">
-            <table class="table-default">
-                <thead>
-                  <tr>
-                      <th>Module Name</th>
-                        <th>View</th>
-                        <th>Add New</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                        <th>Validate</th>
-                        <th>Invalidate</th>
-                        <th>Export to Excel</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                      <td>Coding</td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>Voucher/Journal/Ledger/Trial Balance</td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                        <td>
-                          <div class="filter-item no-margin">
-                                <input type="checkbox" />
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <!-- <div class="pull-right mt20 clearfix">
-          <a href="javascript:void(0);" class="btn btn-default btn-green">Save</a>
-            <a href="javascript:void(0);" class="btn btn-default btn-gray">Cancel</a>
-        </div> -->
+            <a class="btn btn-primary pull-right"  (click)="openModalWithClass(template)">
+                    <i class="fa fa-plus fa-lg"></i>
+                </a>
     </div>
 </div>
 
-<button type="button" class="btn btn-default" (click)="modal.open()">Open me!</button>
+<!-- User listing Datatable -->
+<div class="ui-widget-header" style="padding:10px;border-bottom: 0 none;">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input #gb type="text" pInputText size="50" placeholder="Search">
+    </div>    
+<p-dataTable [value]="cars" [rows]="4" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
+        <p-column field="vin" header="Vin" [sortable]="true"></p-column>
+        <p-column field="year" header="Year" [sortable]="true"></p-column>
+        <p-column field="brand" header="Brand" [sortable]="true"></p-column>
+        <p-column field="color" header="Color" [sortable]="true"></p-column>
+        <p-column field="Permissions" header="Permission" [sortable]="true">
+                <ng-template let-col let-car="rowData" pTemplate="body">
+                        <a (click)="openModalPermissions(templatePermissions)">
+                                Permissions
+                            </a>
+                </ng-template>
+        </p-column>
+        <p-column field="Edit" header="Edit" [sortable]="true">
+                <ng-template let-col let-car="rowData" pTemplate="body">
+                        <a (click)="openModalPermissions(templatePermissions)">
+                                EditUser
+                            </a>
+                </ng-template>
+        </p-column>
+        <p-column field="Permissions" header="Permission" [sortable]="true">
+                <ng-template let-col let-car="rowData" pTemplate="body">
+                        <a (click)="openModalPermissions(templatePermissions)">
+                                Reset Password
+                            </a>
+                </ng-template>
+        </p-column>
+    </p-dataTable>
 
-<bs-modal #modal>
-   <bs-modal-header [showDismiss]="true">
-       <h4 class="modal-title">I'm a modal!</h4>
-   </bs-modal-header>
-   <bs-modal-body>
-       Hello World!
-   </bs-modal-body>
-   <bs-modal-footer [showDefaultButtons]="true"></bs-modal-footer>
-</bs-modal>
+
+<!-- Add USERS MODAL POPUP -->
+
+<!-- DIfference -->
+<ng-template #template>
+    <form name="userForm" [formGroup]="userForm" class="login-inner" (ngSubmit)="userForm.valid && userFormSubmit(userForm.value)">
+ <div class="modal-header gray-header">
+   <h4 class="modal-title pull-left">Add User</h4>
+   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ <div class="modal-body gray-body" style="background-color:#fff;color:#000">
+   <div class="row">
+        <div class="col-sm-6">
+            <div class="col-sm-6">
+                    <label>First Name:</label>
+             </div> 
+             <div class="col-sm-6">                    
+                    <input type="text" formControlName="FirstName" placeholder="First Name" required/>
+                    <div *ngIf="userForm.controls['FirstName'].errors && !userForm.controls['FirstName'].pristine" class="error-msg">
+                            <div [hidden]="!userForm.controls['FirstName'].errors.required">FirstName is required.</div>
+                            <div [hidden]="!userForm.controls['FirstName'].errors.patternInvalid">FirstName is invalid.</div>
+                    </div>
+             </div> 
+        </div>   
+        <div class="col-sm-6">
+             <div class="col-sm-6">
+                    <label>Last Name:</label>
+              </div> 
+              <div class="col-sm-6">
+                    <input type="text" formControlName="LastName" placeholder="Last Name"/>
+                    <div *ngIf="userForm.controls['LastName'].errors && !userForm.controls['LastName'].pristine" class="error-msg">
+                            <div [hidden]="!userForm.controls['LastName'].errors.required">LastName is required.</div>
+                            <div [hidden]="!userForm.controls['LastName'].errors.patternInvalid">LastName is invalid.</div>
+                    </div>
+              </div> 
+         </div> 
+    </div>
+   <div class="row">
+        <div class="col-sm-6">
+            <div class="col-sm-6">
+                 <label>Email:</label>
+             </div> 
+             <div class="col-sm-6">
+                 <input type="Email" formControlName="Email" placeholder="Email"/>
+                 <div *ngIf="userForm.controls['Email'].errors && !userForm.controls['Email'].pristine" class="error-msg">
+                        <div [hidden]="!userForm.controls['Email'].errors.required">Email is required.</div>
+                        <div [hidden]="!userForm.controls['Email'].errors.patternInvalid">Email is invalid.</div>
+                </div>
+             </div> 
+        </div>   
+        <div class="col-sm-6">
+             <div class="col-sm-6">
+                  <label>Phone:</label>
+              </div> 
+              <div class="col-sm-6">
+                  <input type="number" formControlName="Phone" placeholder="Phone"/>
+                  <div *ngIf="userForm.controls['Phone'].errors && !userForm.controls['Phone'].pristine" class="error-msg">
+                        <div [hidden]="!userForm.controls['Phone'].errors.required">Phone is required.</div>
+                        <div [hidden]="!userForm.controls['Phone'].errors.patternInvalid">Phone is invalid.</div>
+                </div>
+              </div> 
+         </div> 
+    </div>
+    <div class="row">
+            <div class="col-sm-6">
+                <div class="col-sm-6">
+                     <label>Password:</label>
+                 </div> 
+                 <div class="col-sm-6">
+                     <input type="password" formControlName="Password" placeholder="Password"/>
+                     <div *ngIf="userForm.controls['Password'].errors && !userForm.controls['Password'].pristine" class="error-msg">
+                            <div [hidden]="!userForm.controls['Password'].errors.required">Password is required.</div>
+                            <div [hidden]="!userForm.controls['Password'].errors.patternInvalid">Password is invalid.</div>
+                    </div>
+                 </div> 
+            </div>   
+            <div class="col-sm-6">
+                 <div class="col-sm-6">
+                      <label>Confirm Password:</label>
+                  </div> 
+                  <div class="col-sm-6">
+                      <input type="password" formControlName="ConfirmPassword" placeholder="Confirm Password"/>
+                      <div *ngIf="userForm.controls['ConfirmPassword'].errors && !userForm.controls['ConfirmPassword'].pristine" class="error-msg">
+                            <div [hidden]="!userForm.controls['ConfirmPassword'].errors.required">ConfirmPassword is required.</div>
+                            <div [hidden]="!userForm.controls['ConfirmPassword'].errors.patternInvalid">ConfirmPassword is invalid.</div>
+                    </div>
+                  </div> 
+             </div> 
+        </div>                     
+        <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-sm-6">  
+                         <label>Roles:</label>
+                     </div> 
+                     <div class="col-sm-6">
+                            <p-multiSelect [options]="roles" formControlName="Roles"></p-multiSelect>
+                            <div *ngIf="userForm.controls['Roles'].errors && !userForm.controls['Roles'].pristine" class="error-msg">
+                                    <div [hidden]="!userForm.controls['Roles'].errors.required">Roles is required.</div>
+                                    <div [hidden]="!userForm.controls['Roles'].errors.patternInvalid">Roles is invalid.</div>
+                            </div>
+                     </div> 
+                </div>    
+                <div class="col-sm-6">
+                        <div class="col-sm-6">  
+                             <label>Status:</label>
+                         </div> 
+                         <div class="col-sm-6">
+                                <p-dropdown [options]="status" formControlName="Status"  placeholder="Select a Status"></p-dropdown>
+                                <div *ngIf="userForm.controls['Status'].errors && !userForm.controls['Status'].pristine" class="error-msg">
+                                        <div [hidden]="!userForm.controls['Status'].errors.required">Status is required.</div>
+                                        <div [hidden]="!userForm.controls['Status'].errors.patternInvalid">Status is invalid.</div>
+                                </div>
+                         </div> 
+                    </div>                
+            </div>      
+ </div>
+ <div class="modal-footer gray-body">
+        <div class="pull-right">
+                <button type="submit" class="btn btn-primary add-btn-basic">Save</button>
+                <a (click)="modalRef.hide()" class="btn btn-default" >Cancel</a>
+        </div>
+</div>   
+
+</form>
+</ng-template>
+
+
+<!-- Modal Popup for Permissions -->
+
+<ng-template #templatePermissions>
+        <!-- <form [formGroup]="userForm" class="login-inner" (ngSubmit)="userFormSubmit(userForm.value) && userForm.valid"> -->
+     <div class="modal-header gray-header">
+       <h4 class="modal-title pull-left">Permissions</h4>
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefPermission.hide()">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body gray-body" style="background-color:#fff;color:#000">                    
+     </div>
+     <div class="modal-footer gray-body">
+            <div class="pull-right">
+                    <button type="submit" class="btn btn-primary add-btn-basic">Save</button>
+                    <a (click)="modalRefPermission.hide()" class="btn btn-default" >Cancel</a>
+            </div>
+    </div>   
+    
+    <!-- </form> -->
+    </ng-template>
 
 
 
