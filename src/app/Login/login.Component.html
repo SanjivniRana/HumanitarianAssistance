@@ -1,0 +1,35 @@
+<div class="container">
+        <div class="row">
+
+
+                    <div class="col-md-5" style="margin-top: 120px;margin-left: 160px;">
+                        <h2><span style="color:#1caf9a;">Coordination of Humanitarian Assistance</span></h2>
+                         <h4><strong>Management  Web Application </strong></h4>
+                    </div>
+                   
+                    <div class="login col-md-5" style="margin-top: 130px;border:1">
+                        <p>Sign In</p>
+                        <p>Login to access your account.</p>
+                            <hr>
+                                <form [formGroup]="rForm" class="login-inner" (ngSubmit)="onFormSubmit(rForm.value) && rForm.valid">                                                            
+                                    
+                                            <!-- <label>Username:<span style="color:red">*</span> -->
+                                                <div class="form-group">
+                                                        <input type="text" class="form-control email" id="email-input" formControlName="Username" placeholder="Username">                                                     
+                                                </div>
+                                             <div class="form-group">
+                                                    <input type="password" formControlName="Password" class="form-control password" id="password-input" placeholder="Password">               
+                                             </div>
+                                            <!-- </label> -->
+                                        
+                                            <!-- <label>Password:<span style="color:red">*</span>                                                   -->
+                                            
+                                            <!-- </label>  -->
+                                <input class="btn btn-block btn-lg btn-success submit" style="background-color: #1CAF9A;border-color: #17a08c;" type="submit" value="Login" [disabled]="!rForm.valid">                    
+                                </form>
+                    </div>
+        </div>
+    </div>
+
+
+

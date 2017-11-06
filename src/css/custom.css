@@ -1,0 +1,61 @@
+body { background-color:#ffffff;font-family:'Poppins', sans-serif;}
+.container { max-width:100%;padding-left:25px;padding-right:25px;}
+
+/* margins */
+.mt20 { margin-top:20px;}
+
+/* header */
+header { position:fixed;left:232px;top:0;right:0;background-color:#ffffff;padding:9px;z-index:10000;box-shadow:0 0 3px 0 rgba(0,0,0,0.2);}
+.navbar-fixed-left .navbar-header { padding:0;}
+.profile-dropdown .dropdown-toggle img { width:49px;height:49px;border-radius:50%;margin-right:10px;}
+.profile-dropdown .dropdown-toggle i { position:relative;top:15px;font-weight:bold;}
+.profile-dropdown .dropdown a { color:#acacac;text-decoration:none;}
+
+/* logo */
+.navbar>.container .navbar-brand { margin-left:0;height:auto;background-color:#3dc5ab;font-size:15px;text-align:center;line-height:normal;padding:15px 0 15px 0;}
+
+/* search panel */
+.search-panel { margin-right:20px;border:1px solid #a3abba;border-radius:20px;padding:5px 20px;margin-top:4px;}
+.search-panel .sp-dropdown { margin-right:10px;position:relative;}
+.search-panel .sp-dropdown select { border:none;padding:4px;border-right:1px solid #a3abba;color:#a7a7a7;-webkit-appearance: none;width:175px;}
+.search-panel .sp-dropdown .fa-caret-down { position:absolute;right:10px;top:5px;font-size:18px;color:#acacac;}
+.search-panel .sp-input-wrap { position:relative;}
+.search-panel .sp-input-wrap input[type="text"] { border:none;padding:4px;}
+.search-panel .sp-input-wrap input[type="text"]::-webkit-input-placeholder { color:#B7B7B7;}
+.search-panel .sp-input-wrap input[type="text"]::-moz-placeholder { color:#B7B7B7;}
+.search-panel .sp-input-wrap input[type="text"]:-moz-placeholder { color:#B7B7B7;}
+.search-panel .sp-input-wrap input[type="text"]:-ms-input-placeholder { color:#B7B7B7;}
+.search-panel .sp-input-wrap input[type="submit"] { position:absolute;background-color:transparent;background-image:url(../img/icon-search.png);background-repeat:no-repeat;background-position:center center;top:4px;right:0;width:22px;height:22px;}
+.search-panel .sp-dropdown select:focus,
+.search-panel .sp-input-wrap input[type="text"]:focus,
+.search-panel .sp-input-wrap input[type="submit"]:focus { outline:none;}
+
+/* heading */
+h2.page-heading { color:#a3abba;font-size:18px;border-bottom:1px solid #edeef1;padding-bottom:20px;}
+h3.page-heading { color:#3dc5ab;margin-bottom:20px;font-size:18px;font-weight:500;}
+
+/* filter */
+.filter-box { border:1px solid #ebebeb;padding:16px 20px;border-radius:4px;}
+.filter-item { margin:12px 0;}
+.filter-item.no-margin { margin:0;}
+.filter-item input[type="checkbox"] { -webkit-appearance:none;border:1px solid #bec4ce;border-radius:5px;width:20px;height:20px;margin:0;display:inline-block;vertical-align:middle;}
+.filter-item input[type="checkbox"]:focus { outline:none;}
+.filter-item input[type="checkbox"]:checked { background-color:#0ce3ac;border-color:#0ce3ac;}
+.filter-item label { color:#a3abba;font-size:14px;font-weight:normal;display:inline-block;vertical-align:middle;margin-bottom:0;margin-left:10px;}
+
+/* table */
+.table-default { width:100%;border:1px solid #ebebeb;border-radius:4px;text-align:center;}
+.table-default tr th { background-color:#3dc5ab;color:#ffffff;padding:15px;font-weight:500;font-size:13px;text-align:center;}
+.table-default tr th:first-child { border-top-left-radius:4px;text-align:left;}
+.table-default tr th:last-child { border-top-right-radius:4px;}
+.table-default tr td { color:#848484;font-size:14px;padding:15px;max-width:175px;word-wrap:break-word;}
+.table-default tr td:first-child { text-align:left;}
+
+/* buttons */
+.btn-default { width:120px;height:35px;font-size:14px;padding:4px 15px;font-weight:500;}
+.btn-default.btn-green { color:#ffffff;background-color:#3dc5ab;border:none;border-bottom:5px solid #2f9a85;}
+.btn-default.btn-gray { color:#686869;background-color:#e1e1e1;border:none;border-bottom:5px solid #a1a1a1;}
+
+/* footer */
+footer { box-shadow:0 0 13px 0 rgba(0,0,0,0.07);margin-top:50px;padding:20px;text-align:center;}
+footer p { font-size:13px;color:#848484;font-weight:500;margin:0;}
