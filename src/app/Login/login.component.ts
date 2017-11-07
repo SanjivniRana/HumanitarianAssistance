@@ -43,12 +43,12 @@ import { Router, ActivatedRoute } from '@angular/router';
       .subscribe(
         data => {    
           debugger;      
-          if (data.message == "Success" || data.statuscode==200) {
-            localStorage.setItem('authenticationtoken', data.data.token);
-            localStorage.setItem('UserRoles', data.data.roles[0]);
+          if (data.Message == "Success" || data.StatusCode==200) {
+            localStorage.setItem('authenticationtoken', data.data.Token);
+            localStorage.setItem('UserRoles', data.data.Roles[0]);
             // localStorage.setItem('userRoles', data.RolesTicket);
             //localStorage.setItem('userId', data.UserId);
-            if (data.data.roles[0] == "SuperAdmin") {  
+            if (data.data.Roles[0] == "SuperAdmin") {  
                 this.checkToken.emit();            
                 this.router.navigate(['admin']);              
             }

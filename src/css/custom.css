@@ -165,3 +165,35 @@ footer p { font-size:13px;color:#848484;font-weight:500;margin:0;}
 }
 /* hover style just for information */
 label:hover:before { border:1px solid #3dc5ab !important;}
+
+
+/*** css update***/
+.ui-widget-header {
+	background: transparent;
+	border: 0px;
+	position: relative;
+	padding-left: 0 !important;
+}
+	.ui-widget-header input[type="text"] {
+		border: 1px solid #e2e2e2;
+		border-radius: 50px;
+		padding: 7px 38px;
+		width: 34%;
+	}
+	.ui-widget-header .fa.fa-search {		position: absolute;		left: 14px;		top: 15px;		font-size: 18px;		color: #464545;	}
+.ui-datatable th.ui-state-default {background: #3dc5ab;	border-color: #d9d9d9;	color: #fff;	padding: 9px 2px !important;}
+.ui-datatable-data.ui-widget-content td {padding: 7px 10px !important;}
+.ui-datatable .ui-datatable-thead > tr > th, .ui-datatable .ui-datatable-tfoot > tr > td, .ui-datatable .ui-datatable-data > tr > td {
+	border-color: inherit;box-sizing: border-box;	padding: .25em .5em;	border-width: 0 !important;	border-style: solid;}
+.ui-datatable-tablewrapper {border-radius: 3px;	overflow: hidden;
+}
+.ui-datatable table {border-collapse: collapse;border: 1px solid #e2e2e2;	width: 100%;	table-layout: fixed;	border: 1px solid;	border-top: 0;}
+.ui-datatable tbody > tr.ui-widget-content { border-color: #d9d9d9;  border-top: 0px;}
+.add-common-btn { background-color: #3dc5ab;  border: none;  padding: 8px 19px;}
+.btn-primary:hover { color: #ffffff;  background-color: #3dc5ab !important;  border-color: #253c54;}
+.add-common-btn .fa {background: #2d917e;  padding: 5px 4px;  border-radius: 100%;  font-size: 11px;  height: 20px;  width: 20px;}
+.ui-paginator .ui-paginator-page.ui-state-active {  background: #3dc5ab;  color: #ffffff;  border-color: #3dc5ab;  border-radius: 100%;  padding:3px 8px;  height: 25px;  width: 25px;    margin: 0 10px;}
+.ui-state-default { border: 0px; background: #ffffff;  color: #555555;}
+.ui-datatable .ui-paginator-bottom { border-top-width: 0; text-align: right; margin-top: 10px;}
+.ui-datatable th.ui-sortable-column:not(.ui-state-active):hover {background: #3dc5ab; border-color: #d9d9d9; color: #fff;}
+
