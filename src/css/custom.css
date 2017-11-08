@@ -196,4 +196,26 @@ label:hover:before { border:1px solid #3dc5ab !important;}
 .ui-state-default { border: 0px; background: #ffffff;  color: #555555;}
 .ui-datatable .ui-paginator-bottom { border-top-width: 0; text-align: right; margin-top: 10px;}
 .ui-datatable th.ui-sortable-column:not(.ui-state-active):hover {background: #3dc5ab; border-color: #d9d9d9; color: #fff;}
+.popup-default-form p-dropdown.form-control, .popup-default-form p-multiSelect.form-control { width: 100%; height: 100%;border: 1px solid #e2e2e2 !important; padding: 0;}
+.add-btn-basic { background-color: #3dc5ab; border: none;}
+p-multiselect.form-control{border: 1px solid #e2e2e2;}
+.ui-state-default { border: 0px;  background: #ffffff;  color: #555555;  }
+.ui-multiselect .ui-multiselect-label {display: block; padding: 3px 1px;}
+.ui-multiselect.ui-widget.ui-state-default.ui-corner-all { width: 100%;}
+span.ui-cell-data { display: inline-block;  width: 100%;  text-align: center;  font-size: 15px;}
+span.ui-cell-data .fa { font-size: 18px; padding: 0 3px;}
+span.ui-cell-data .fa:hover{ cursor: pointer;}
+.btn { min-width: 124px; padding: 7px 0;}
+p-multiselect.form-control { border: 1px solid #e2e2e2;  padding: 7px 6px;}
+.ui-chkbox .ui-state-default {  border: 1px solid #e2e2e2;  background: #ffffff;  color: #555555;}
+input.ui-inputtext.ui-widget.ui-state-default.ui-corner-all { width: 100%;  padding: 5px 0;}
+.ui-multiselect-header .ui-multiselect-filter-container { position: relative;  display: inline-block;  vertical-align: middle;  width: 80%;
+}
+.ui-multiselect-filter-container .ui-widget-header .fa.fa-search {position: absolute; left: 14px;  top: 9px; font-size: 18px;  color: #464545;}
+.ui-state-highlight { border-color: #156090;  background: #3dc5ab !important;  color: #FFFFFF;}
+.ui-multiselect-header .ui-multiselect-close { position: absolute;  right: 1px;  top: 9px;  display: block;  font-size: 16px;  border: 0 none;}
+.modal-lg {width: 67%;}
+.add-role-mod { width: 55%;}
+.ui-multiselect-filter-container .fa-fw {top: 9px !important;left: 8px !important;}
+input.ui-inputtext.ui-widget.ui-state-default.ui-corner-all { width: 100%;  padding: 5px 30px;}
 

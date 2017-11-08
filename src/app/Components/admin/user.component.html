@@ -6,7 +6,7 @@
     <div class="col-sm-12">
             <a class="btn btn-primary pull-right add-common-btn"  (click)="openModalWithClass(template)">
                     <i class="fa fa-user-plus"></i> Add User
-                </a>
+            </a>
     </div>
 </div>
 
@@ -15,7 +15,7 @@
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" placeholder="Search">
     </div>    
-<p-dataTable [value]="cars" [rows]="4" [paginator]="true"  [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
+<p-dataTable [value]="cars" [rows]="5" [paginator]="true"  [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
         <p-column field="FirstName" header="FirstName" [sortable]="true"></p-column>
         <p-column field="LastName" header="LastName" [sortable]="true"></p-column>
         <p-column field="Email" header="Email" [sortable]="true"></p-column>
@@ -31,27 +31,12 @@
                          <a (click)="openModalPermissions(templatePermissions,cars[i])"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                          <a > <i class="fa fa-exchange" aria-hidden="true"></i> </a>
                 </ng-template>
-        </p-column>
-        <!-- <p-column field="Edit" header="Edit" [sortable]="true">
-                <ng-template let-col let-car="rowData" pTemplate="body">
-                        <a>
-                                EditUser
-                            </a>
-                </ng-template>
-        </p-column>
-        <p-column field="Reset" header="Reset" [sortable]="true">
-                <ng-template let-col let-car="rowData" pTemplate="body">
-                        <a >
-                                Reset Password
-                            </a>
-                </ng-template>
-        </p-column> -->
+        </p-column>        
     </p-dataTable>
 
 
 <!-- Add USERS MODAL POPUP -->
 
-<!-- DIfference -->
 <ng-template #template>
     <form name="userForm" [formGroup]="userForm" class="login-inner" (ngSubmit)="userForm.valid && userFormSubmit(userForm.value)" novalidate>
  <div class="modal-header gray-header">
@@ -158,8 +143,7 @@
                          <label>Office:</label><span style="color:red">*</span>
                      </div> 
                      <div class="col-sm-7">
-                                <p-dropdown [options]="officeId" class="form-control" formControlName="OfficeId"  placeholder="Select an Office" (onChange)="onChangeOffice($event.value)" required></p-dropdown>
-                            <!-- <p-multiSelect [options]="roles" class="form-control" formControlName="Roles" defaultLabel="Select Roles"></p-multiSelect> -->
+                                <p-dropdown [options]="officeId" class="form-control" formControlName="OfficeId"  placeholder="Select an Office" (onChange)="onChangeOffice($event.value)" required></p-dropdown>                            
                             <div *ngIf="userForm.controls['OfficeId'].errors && !userForm.controls['OfficeId'].pristine &&  OfficeId.length > 0" class="error-msg">
                                     <div [hidden]="!userForm.controls['OfficeId'].errors.required">OfficeId is required.</div>
                                     <div [hidden]="!userForm.controls['OfficeId'].errors.patternInvalid">OfficeId is invalid.</div>
@@ -215,7 +199,7 @@
  
 <ng-template #templatePermissions>
 <form name="userRoles" [formGroup]="userRoles" class="login-inner" (ngSubmit)="userRoles.valid && assignRolesToUser(userRoles.value)" novalidate> -->
-     <div class="modal-header gray-header">
+     <div class="modal-header gray-header ">
        <h4 class="modal-title pull-left">Add Roles</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefPermission.hide()">
          <span aria-hidden="true">&times;</span>
