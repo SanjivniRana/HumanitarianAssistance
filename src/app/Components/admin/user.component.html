@@ -15,20 +15,24 @@
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" placeholder="Search">
     </div>    
-<p-dataTable [value]="cars" [rows]="4" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
+<p-dataTable [value]="cars" [rows]="4" [paginator]="true"  [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
         <p-column field="FirstName" header="FirstName" [sortable]="true"></p-column>
         <p-column field="LastName" header="LastName" [sortable]="true"></p-column>
         <p-column field="Email" header="Email" [sortable]="true"></p-column>
         <p-column field="Office" header="Office" [sortable]="true"></p-column>
         <p-column field="Status" header="Status" [sortable]="true"></p-column>
-        <p-column field="Roles" header="Roles" [sortable]="true">
-                <ng-template let-col let-car="rowData" pTemplate="body">
-                        <a (click)="openModalPermissions(templatePermissions)">
-                                Permissions
-                            </a>
+        <p-column field="Action" header="Action" [sortable]="true">
+        <p-column field="UserId" header="UserId" [hidden]="true"></p-column>
+
+                <ng-template let-col let-car="rowData" pTemplate="body" let-i="rowIndex">
+                        <a (click)="openModalPermissions(templatePermissions,cars[i])">
+                                        <i class="fa fa-sitemap" aria-hidden="true"></i>
+                         </a>
+                         <a (click)="openModalPermissions(templatePermissions,cars[i])"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                         <a > <i class="fa fa-exchange" aria-hidden="true"></i> </a>
                 </ng-template>
         </p-column>
-        <p-column field="Edit" header="Edit" [sortable]="true">
+        <!-- <p-column field="Edit" header="Edit" [sortable]="true">
                 <ng-template let-col let-car="rowData" pTemplate="body">
                         <a>
                                 EditUser
@@ -41,7 +45,7 @@
                                 Reset Password
                             </a>
                 </ng-template>
-        </p-column>
+        </p-column> -->
     </p-dataTable>
 
 
@@ -210,7 +214,7 @@
 <!-- Modal Popup for Permissions -->
  
 <ng-template #templatePermissions>
-                <!-- <form name="userRoles" [formGroup]="userRoles" class="login-inner" (ngSubmit)="userRoles.valid && userRolesSubmit(userRoles.value)" novalidate> -->
+<form name="userRoles" [formGroup]="userRoles" class="login-inner" (ngSubmit)="userRoles.valid && assignRolesToUser(userRoles.value)" novalidate> -->
      <div class="modal-header gray-header">
        <h4 class="modal-title pull-left">Add Roles</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefPermission.hide()">
@@ -225,11 +229,10 @@
                                          <label>Add Roles:</label>                                         
                                      </div> 
                                      <div class="col-sm-7">
-                                                <p-multiSelect [options]="roles" class="form-control" formControlName="Roles" defaultLabel="Select Roles"></p-multiSelect>
-                                                                                       
+                                                <p-multiSelect [options]="roles" class="form-control" formControlName="Roles" defaultLabel="Select Roles"></p-multiSelect>                                                                                       
                                      </div>
                                 </div> 
-                                </div>                   
+                                </div>                                                     
                             </div>                     
      </div>
      <div class="modal-footer gray-body">
@@ -239,7 +242,7 @@
             </div>
     </div>   
     
-    <!-- </form> -->
+    </form>
     </ng-template> 
 
 

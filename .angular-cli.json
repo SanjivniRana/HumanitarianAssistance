@@ -31,6 +31,7 @@
          "../node_modules/primeng/resources/primeng.min.css",
           "styles.css",
          "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+         "../node_modules/ngx-toastr/toastr.css",
           "css/main.css"
       ],
       "scripts": [

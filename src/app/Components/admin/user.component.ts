@@ -16,6 +16,8 @@ export interface Car {
   Email;
   Office;
   Status;
+  UserId;
+  Id;
 }
 @Component({
   selector: 'app-user',
@@ -28,6 +30,7 @@ export interface Car {
 export class UserComponent implements OnInit {
 
   // AddUser Modal Popup
+  selectedValue:any;
   userForm: FormGroup;
   userRoles: FormGroup;
   modalRef: BsModalRef;
@@ -53,7 +56,9 @@ export class UserComponent implements OnInit {
 
   roles: SelectItem[];
 
-  
+  //UserId For AddRoles
+  UserId:any;
+  addRoles: any[];
 
   constructor(private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
@@ -77,18 +82,8 @@ export class UserComponent implements OnInit {
     {label:'InActive',value:0}];
 
     this.userRoles = this.fb.group({
-
       'Roles' : [null]
-    });
-
-    this.roles = [
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-  ];
-    
+    });    
   }
 
   display: boolean = false;        
@@ -106,7 +101,6 @@ export class UserComponent implements OnInit {
 
   getOffices()
   {
-    debugger;
     this.userService.getOffices(this.setting.getBaseUrl() +GLOBAL.API_AllOffice_URL).subscribe(data=>{      
       this.officeId=[];
       data.data.OfficeDetailsList.forEach(element => {
@@ -127,21 +121,46 @@ export class UserComponent implements OnInit {
 
   onChangeOffice(officeCode:any)
   {
-    debugger;
     this.getDepartment(officeCode);
   }
 
   
   getUserList()
-  {
-    debugger;
+  {    
     this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
-      data => {
-        debugger;
+      data => {        
         this.cars = [];
         data.data.UserDetailsList.forEach(element => {
-          this.cars.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Email,Office:element.OfficeName,Status:element.Status});
+          this.cars.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
         });
+      }
+    )
+  }
+
+  getUserRoles()
+  {
+    this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList).subscribe(
+      data => {
+        debugger;
+        this.roles = [];
+        data.data.RoleList.forEach(element => {          
+          this.roles.push({label:element.RoleName,value:{id:element.Id, name: element.RoleName}});
+        });
+      }
+    )
+  }
+
+  assignRolesToUser(Roles)
+  {        
+    debugger;
+    this.addRoles = [];
+    for(var i in Roles.Roles){
+      this.addRoles.push(Roles.Roles[i].name);
+    }
+    
+    this.userService.assignRolesToUser(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_AssignRoleToUser, this.UserId , this.addRoles).subscribe(
+      data => {
+        
       }
     )
   }
@@ -152,7 +171,6 @@ export class UserComponent implements OnInit {
   //   );
   // }
   openModalWithClass(template: TemplateRef<any>) {
-    debugger;
     this.modalRef = this.modalService.show(
       template,
       Object.assign({}, this.config, { class: 'gray modal-lg' })
@@ -161,7 +179,6 @@ export class UserComponent implements OnInit {
 
   userFormSubmit(model)
   {
-    debugger;
     var obj: any = {};
     var addUser:AddUsers = {
       UserName : model.Email, 
@@ -200,8 +217,10 @@ export class UserComponent implements OnInit {
     this.modalRef.hide();
   }  
 
-  openModalPermissions(templatePermissions: TemplateRef<any>) { 
-    debugger;       
+  openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
+    debugger; 
+    this.UserId = colvalue.Id;  
+    this.getUserRoles();   
     this.modalRefPermission = this.modalService.show(
       templatePermissions,
       Object.assign({}, this.config, { class: 'gray modal-lg' })

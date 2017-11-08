@@ -24,6 +24,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { AppSidebarComponent } from './Components/shared/appSideBar.component';
 import { commonService } from './Services/common.service';
 import { ModalModule } from 'ngx-bootstrap';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { ToastrModule } from 'ngx-toastr';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
   
@@ -52,7 +54,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
           deps: [HttpClient]
         }
     }),
-   
+    ToastrModule.forRoot(),
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.threeBounce,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      primaryColour: '#31c3aa', 
+      secondaryColour: '#000', 
+      tertiaryColour: '#a129'
+  }),
     NgIdleKeepaliveModule.forRoot()
   ]
   ,

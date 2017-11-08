@@ -31,6 +31,41 @@ export class UserService {
 
     }
 
+    getUserRoles(url: string) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    return user;
+                }
+
+            }).catch(this.handleError);
+
+    }
+
+    assignRolesToUser(url: string, userId:string ,addRoles:any[]) {        
+        var obj = {
+            UserId : userId,
+            Roles : addRoles
+        };    
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.post(url,obj, options)
+            .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    return user;
+                }
+
+            }).catch(this.handleError);
+
+    }
+
     AddUser(url: string, model: AddUsers) {
         debugger;
         let Myheaders = new Headers();

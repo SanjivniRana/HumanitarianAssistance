@@ -12,6 +12,7 @@ import { UserLogin } from '../Models/User';
 import { AuthenticationService } from './../Services/Authentication.Service';
 import { AppSettingsService } from '../Services/App-settings.Service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
   @Component({
     selector: "app-Login",
     templateUrl: './login.Component.html'
@@ -21,7 +22,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     rForm: FormGroup;
     returnUrl: string;
     messages: any = [];
-    constructor( private fb: FormBuilder,private router: Router,private appSettigs: AppSettingsService,private authenticationService: AuthenticationService,  private route: ActivatedRoute, ) { 
+    constructor(private toastr: ToastrService, private fb: FormBuilder,private router: Router,private appSettigs: AppSettingsService,private authenticationService: AuthenticationService,  private route: ActivatedRoute, ) { 
               
          this.rForm = fb.group({
           'Username' : [null, Validators.required],
@@ -29,12 +30,13 @@ import { Router, ActivatedRoute } from '@angular/router';
         });
      }
     loginModel = new UserLogin();
-    
+    loading=false;
    
     ngOnInit() {
      // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
     onFormSubmit (e) {    
+      this.loading=true;
       debugger; 
       this.returnUrl;
       this.loginModel.UserName = e.Username;
@@ -61,7 +63,10 @@ import { Router, ActivatedRoute } from '@angular/router';
           }
         },
         error => {
+          this.loading=false;
+          this.toastr.error("Invalid Password or User Name");
           if (error.message == 500) {
+            
             this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
           }
           else if (error.message == 0) {

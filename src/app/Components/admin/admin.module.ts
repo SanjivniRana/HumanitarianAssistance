@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
     DialogModule,
     MultiSelectModule,
     DropdownModule,
-    DataTableModule,SharedModule,
+    DataTableModule,SharedModule,    
     NgxPermissionsModule.forChild({
       permissionsIsolate: true, 
       rolesIsolate: true}),

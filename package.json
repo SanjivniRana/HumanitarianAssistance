@@ -33,7 +33,9 @@
     "jquery": "^3.2.1",
     "ng2-bs3-modal": "^0.13.0",
     "ngx-bootstrap": "^2.0.0-beta.8",
+    "ngx-loading": "^1.0.8",
     "ngx-permissions": "^2.1.1",
+    "ngx-toastr": "^6.5.0",
     "primeng": "^4.2.2",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"

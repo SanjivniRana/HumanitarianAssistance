@@ -10,6 +10,7 @@ import { NgxRolesService } from 'ngx-permissions';
 export class AppComponent {
   title = 'app';
   commonService = new CommonService();
+  
   constructor(private permisstionService:NgxPermissionsService,private roleService : NgxRolesService){
 
   }
