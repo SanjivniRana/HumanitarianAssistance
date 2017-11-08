@@ -10,6 +10,7 @@ import { GLOBAL } from '../../shared/global';
 import { DropdownModule } from 'primeng/primeng';
 import { AppSettingsService } from '../../Services/App-settings.Service';
 import { AddUsers } from '../../Models/AddUser';
+import { ToastrService } from 'ngx-toastr';
 export interface Car {
   FirstName;
   LastName;
@@ -30,6 +31,7 @@ export interface Car {
 export class UserComponent implements OnInit {
 
   // AddUser Modal Popup
+  loading=false;
   selectedValue:any;
   userForm: FormGroup;
   userRoles: FormGroup;
@@ -60,7 +62,7 @@ export class UserComponent implements OnInit {
   UserId:any;
   addRoles: any[];
 
-  constructor(private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
+  constructor(private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
     this.getOffices();    
     this.getUserList();
@@ -127,13 +129,28 @@ export class UserComponent implements OnInit {
   
   getUserList()
   {    
+    this.loading=true;
     this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
       data => {        
         this.cars = [];
+        this.loading=false;
         data.data.UserDetailsList.forEach(element => {
           this.cars.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
         });
-      }
+      },
+      error => {
+        this.loading=false;
+        this.toastr.error("There is Some error....");
+        if (error.message == 500) {
+          
+        //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
+        }
+        else if (error.message == 0) {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
+        }
+        else {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
+        }}
     )
   }
 
