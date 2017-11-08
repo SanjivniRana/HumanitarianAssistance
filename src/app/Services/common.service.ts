@@ -275,7 +275,6 @@ export class commonService {
      }
 
      verifyCurrentDomain(){
-         debugger;
          let parts = location.hostname.split('.');
          let SubDomain = parts.shift();
      }

@@ -11,7 +11,7 @@ import { DropdownModule } from 'primeng/primeng';
 import { AppSettingsService } from '../../Services/App-settings.Service';
 import { AddUsers } from '../../Models/AddUser';
 import { ToastrService } from 'ngx-toastr';
-export interface Car {
+export interface UserDetails {
   FirstName;
   LastName;
   Email;
@@ -35,8 +35,12 @@ export class UserComponent implements OnInit {
   selectedValue:any;
   userForm: FormGroup;
   userRoles: FormGroup;
+  AddPermissions: FormGroup;
+
+  //Modal popup instances
   modalRef: BsModalRef;
   modalRefPermission: BsModalRef;
+  modalPermission: BsModalRef;
   config = {
     animated: true,
     keyboard: true,
@@ -45,18 +49,15 @@ export class UserComponent implements OnInit {
   };
 
   //User DataTabale
-  cars: Car[];
-  sortF: any;
+  userDetails: UserDetails[];
 
-  // Roles Multiselect 
+  // Add User dropdowns
   officeId: SelectItem[];
-  selectedCities1: any[];
-
   status: SelectItem[];
-   
   department: SelectItem[];
-
   roles: SelectItem[];
+  RolesUser: SelectItem[];
+  Permissions : SelectItem[];
 
   //UserId For AddRoles
   UserId:any;
@@ -64,8 +65,6 @@ export class UserComponent implements OnInit {
 
   constructor(private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
-    this.getOffices();    
-    this.getUserList();
     // AddUser Modal Popup
     
     this.userForm = this.fb.group({
@@ -80,26 +79,37 @@ export class UserComponent implements OnInit {
       'Status' : [null]
     });
 
+    //Status Array
     this.status = [{label:'Active',value:1},
     {label:'InActive',value:0}];
 
+    //Add Roles Form
     this.userRoles = this.fb.group({
       'Roles' : [null]
     });    
+
+    //Add Permissions Form
+    this.AddPermissions = this.fb.group({
+      'Roles' : [null],
+      'Permissions' : [null]
+    }); 
+
+    this.Permissions = [
+      {label:'CanAdd', value:{id:1, name: 'CanAdd', code: 'NY'}},
+      {label:'CanDelete', value:{id:2, name: 'CanDelete', code: 'RM'}},
+      {label:'CanView', value:{id:3, name: 'CanView', code: 'LDN'}},
+      {label:'CaRead', value:{id:4, name: 'CaRead', code: 'IST'}}      
+    ];
   }
 
   display: boolean = false;        
   ngOnInit() {
-  }
 
-  changeSort(event) {
-      if (!event.order) {
-        this.sortF = 'year';
-      } else {
-        this.sortF = event.field;
-      }
-  }
+    this.getOffices();    
+    this.getUserList();
+    this.getUserRoles();
 
+  }
 
   getOffices()
   {
@@ -132,10 +142,10 @@ export class UserComponent implements OnInit {
     this.loading=true;
     this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
       data => {        
-        this.cars = [];
+        this.userDetails = [];
         this.loading=false;
         data.data.UserDetailsList.forEach(element => {
-          this.cars.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
+          this.userDetails.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
         });
       },
       error => {
@@ -158,10 +168,9 @@ export class UserComponent implements OnInit {
   {
     this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList).subscribe(
       data => {
-        debugger;
         this.roles = [];
         data.data.RoleList.forEach(element => {          
-          this.roles.push({label:element.RoleName,value:{id:element.Id, name: element.RoleName}});
+          this.roles.push({label:element.RoleName,value:{id:element.Id, name: element.RoleName}});      
         });
       }
     )
@@ -169,7 +178,6 @@ export class UserComponent implements OnInit {
 
   assignRolesToUser(Roles)
   {        
-    debugger;
     this.addRoles = [];
     for(var i in Roles.Roles){
       this.addRoles.push(Roles.Roles[i].name);
@@ -181,12 +189,20 @@ export class UserComponent implements OnInit {
       }
     )
   }
-  
-  // openModal(template: TemplateRef<any>) {
-  //   this.modalRef = this.modalService.show(template,
-  //     Object.assign({}, this.config, { class: 'gray' })
-  //   );
-  // }
+
+  PermissionsInRoles(value)
+  {
+    debugger;
+    var obj = {
+      RoleId : value.Roles.id
+    };
+    this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles).subscribe(
+      data => {
+        
+      }
+    )
+  }
+
   openModalWithClass(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
@@ -235,12 +251,27 @@ export class UserComponent implements OnInit {
   }  
 
   openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
-    debugger; 
-    this.UserId = colvalue.Id;  
-    this.getUserRoles();   
+    this.UserId = colvalue.Id;     
     this.modalRefPermission = this.modalService.show(
       templatePermissions,
       Object.assign({}, this.config, { class: 'gray modal-lg' })
     );
   } 
+
+  openModalAddPermissions(AddPermissionsTemplate: TemplateRef<any>) { 
+    //this.getPermissions();
+    this.modalPermission = this.modalService.show(
+      AddPermissionsTemplate,
+      Object.assign({}, this.config, { class: 'gray modal-lg' })
+    );
+  } 
+
+  getPermissions()
+  {    
+    this.userService.getPermissions(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetAllPermissions).subscribe(
+      data => {        
+      }
+    )
+  }
+
 }

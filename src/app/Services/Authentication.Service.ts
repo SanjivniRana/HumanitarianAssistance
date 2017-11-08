@@ -18,7 +18,6 @@ export class AuthenticationService {
     }
 
     login(loginDetails: UserLogin) {
-        debugger;
         let url = this.settings.getBaseUrl() + GLOBAL.API_Login_Auth_Url;
         return this.http.request(url, {
             body: loginDetails,
@@ -27,7 +26,6 @@ export class AuthenticationService {
             })
         })
             .map((response: Response) => {
-                debugger;
                 let loginResponse = response.json();
                 localStorage.setItem('authenticationtoken', loginResponse.Token);
                 localStorage.setItem('plainRolesText', loginResponse.Roles);
@@ -77,7 +75,6 @@ export class AuthenticationService {
     }
 
     getUserType(){
-        debugger;
         return this.httpClient
         .get(GLOBAL.API_Account_GetUserType);
     }

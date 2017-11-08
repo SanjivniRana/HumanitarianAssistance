@@ -3,10 +3,15 @@
 <!-- Add USer ModalPOUP BUtton -->
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-10">
+            <a class="btn btn-primary pull-right add-common-btn"  (click)="openModalAddPermissions(AddPermissionsTemplate)">
+                    <i class="fa fa-user-plus"></i> Add Permissions
+            </a>                        
+    </div>
+    <div class="col-sm-2">
             <a class="btn btn-primary pull-right add-common-btn"  (click)="openModalWithClass(template)">
                     <i class="fa fa-user-plus"></i> Add User
-            </a>
+            </a>                        
     </div>
 </div>
 
@@ -15,7 +20,7 @@
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input #gb type="text" pInputText size="50" placeholder="Search">
     </div>    
-<p-dataTable [value]="cars" [rows]="5" [paginator]="true"  [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
+<p-dataTable [value]="userDetails" [rows]="5" [paginator]="true"  [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" sortMode="multiple" [globalFilter]="gb">
         <p-column field="FirstName" header="FirstName" [sortable]="true"></p-column>
         <p-column field="LastName" header="LastName" [sortable]="true"></p-column>
         <p-column field="Email" header="Email" [sortable]="true"></p-column>
@@ -25,10 +30,10 @@
         <p-column field="UserId" header="UserId" [hidden]="true"></p-column>
 
                 <ng-template let-col let-car="rowData" pTemplate="body" let-i="rowIndex">
-                        <a (click)="openModalPermissions(templatePermissions,cars[i])">
+                        <a (click)="openModalPermissions(templatePermissions,userDetails[i])">
                                         <i class="fa fa-sitemap" aria-hidden="true"></i>
                          </a>
-                         <a (click)="openModalPermissions(templatePermissions,cars[i])"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                         <a (click)="openModalPermissions(templatePermissions,userDetails[i])"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                          <a > <i class="fa fa-exchange" aria-hidden="true"></i> </a>
                 </ng-template>
         </p-column>        
@@ -195,10 +200,10 @@
 </ng-template>
 
 
-<!-- Modal Popup for Permissions -->
+<!-- Modal Popup for Roles -->
  
 <ng-template #templatePermissions>
-<form name="userRoles" [formGroup]="userRoles" class="login-inner" (ngSubmit)="userRoles.valid && assignRolesToUser(userRoles.value)" novalidate> -->
+<form name="userRoles" [formGroup]="userRoles" class="login-inner" (ngSubmit)="userRoles.valid && assignRolesToUser(userRoles.value)" novalidate>
      <div class="modal-header gray-header ">
        <h4 class="modal-title pull-left">Add Roles</h4>
        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefPermission.hide()">
@@ -228,6 +233,53 @@
     
     </form>
     </ng-template> 
+
+<!-- Modal Popup for Permissions -->
+ 
+<ng-template #AddPermissionsTemplate>
+        <form name="AddPermissions" [formGroup]="AddPermissions" class="login-inner" (ngSubmit)="AddPermissions.valid && PermissionsInRoles(AddPermissions.value)" novalidate>
+             <div class="modal-header gray-header ">
+               <h4 class="modal-title pull-left">Add Permissions</h4>
+               <button type="button" class="close pull-right" aria-label="Close" (click)="modalPermission.hide()">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body gray-body" style="background-color:#fff;color:#000">
+                        <div class="row">
+                                        <div class="col-sm-6">
+                                                        <div class="row">
+                                                                 <div class="col-sm-5">  
+                                                                         <label>Roles:</label>                                         
+                                                                 </div> 
+                                                                 <div class="col-sm-7">
+                                                                        <p-dropdown [options]="roles" class="form-control" formControlName="Roles"  placeholder="Select a Role"></p-dropdown>                            
+                                                                 </div>
+                                                         </div> 
+                                        </div>
+                                        <div class="col-sm-6">
+                                               <div class="row">
+                                                        <div class="col-sm-5">  
+                                                                <label>Add Permissions:</label>                                         
+                                                        </div> 
+                                                        <div class="col-sm-7">
+                                                                        <p-multiSelect [options]="Permissions" class="form-control" formControlName="Permissions" defaultLabel="Select Permissions"></p-multiSelect>
+                                                        </div>
+                                                </div> 
+                                        </div>                                                     
+                                    </div>                     
+             </div>
+             <div class="modal-footer gray-body">
+                    <div class="pull-right">
+                            <button type="submit" class="btn btn-primary add-btn-basic">Save</button>
+                            <a (click)="modalPermission.hide()" class="btn btn-default" >Cancel</a>
+                    </div>
+            </div>   
+            
+            </form>
+            </ng-template> 
+
+
+    <!-- Loader Before User Listings -->
     <div>
                 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
     </div>

@@ -15,7 +15,6 @@ export class AppComponent {
 
   }
   ngOnInit() {
-    debugger;
     var token = localStorage.getItem('authenticationtoken');
     if (token && token != "") {
       this.commonService.menuVisibility = true;
@@ -26,7 +25,6 @@ export class AppComponent {
          'SUPERADMIN':['canRead','canAdd']
      
        });
-    //debugger;
  
 
 

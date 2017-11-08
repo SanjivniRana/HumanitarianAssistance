@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
-import {Car} from '../admin/user.component';
 import { Observable } from 'rxjs/Observable';
 import { AddUsers } from '../../Models/AddUser';
 @Injectable()
@@ -8,15 +7,7 @@ export class UserService {
 
     constructor(private http: Http) {}
 
-    // getCarsSmall() {
-    //     return this.http.get('/showcase/resources/data/cars-small.json')
-    //                 .toPromise()
-    //                 .then(res => <Car[]> res.json().data)
-    //                 .then(data => { return data; });
-    // }
-
     GetUserList(url: string) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -32,7 +23,6 @@ export class UserService {
     }
 
     getUserRoles(url: string) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -67,7 +57,6 @@ export class UserService {
     }
 
     AddUser(url: string, model: AddUsers) {
-        debugger;
         let Myheaders = new Headers();
         console.log(localStorage.getItem("authenticationtoken"));
         console.log(model);
@@ -103,7 +92,6 @@ export class UserService {
     }
 
     getOffices(url: string) {
-            debugger;
             let Myheaders = new Headers();
             Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
             let options = new RequestOptions({ headers: Myheaders });
@@ -120,7 +108,6 @@ export class UserService {
      }    
 
      getDepartment(url: string ,officeCode) {
-        debugger;
         var obj: any = {};
         obj.officeCode   = officeCode;        
         let Myheaders = new Headers();            
@@ -136,7 +123,42 @@ export class UserService {
 
             }).catch(this.handleError);
 
- }
+    }
+
+    getPermissions(url: string) {     
+        let Myheaders = new Headers();            
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url,options) 
+            .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    console.log(user);
+                    return user;
+                }
+
+            }).catch(this.handleError);
+
+    }
+
+    PermissionsInRoles(url: string) {        
+        // var obj = {
+        //     UserId : userId,
+        //     Roles : addRoles
+        // };    
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.post(url, options)
+            .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    return user;
+                }
+
+            }).catch(this.handleError);
+
+    }
 
      private handleError(error: Response) {
         

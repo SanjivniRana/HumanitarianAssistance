@@ -30,7 +30,6 @@ export class AppSidebarComponent {
         // this.authService
         // .getUserType()
         // .subscribe(data =>{
-        //     debugger;
         //    if(data == UserType.Admin){
         //     this.isMaster = false;
         //     this.isAdmin = true;

@@ -31,7 +31,6 @@ export class AppHeaderComponent {
         private router: Router,
         private zone: NgZone
     ) { 
-        debugger;
         let token=localStorage.getItem('authenticationtoken');
         
         idle.setIdle(300);
@@ -57,7 +56,6 @@ export class AppHeaderComponent {
       }
 
      logout(){
-         debugger;
         localStorage.removeItem('authenticationtoken');
         localStorage.removeItem('languageID');
         localStorage.removeItem('ng2Idle.main.expiry');

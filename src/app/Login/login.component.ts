@@ -37,14 +37,12 @@ import { ToastrService } from 'ngx-toastr';
     }
     onFormSubmit (e) {    
       this.loading=true;
-      debugger; 
       this.returnUrl;
       this.loginModel.UserName = e.Username;
       this.loginModel.Password = e.Password;
       this.authenticationService.login(this.loginModel)
       .subscribe(
-        data => {    
-          debugger;      
+        data => {          
           if (data.Message == "Success" || data.StatusCode==200) {
             localStorage.setItem('authenticationtoken', data.data.Token);
             localStorage.setItem('UserRoles', data.data.Roles[0]);
