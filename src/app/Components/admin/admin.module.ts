@@ -13,6 +13,7 @@ import { UserService } from './user.service';
 import { MultiSelectModule } from 'primeng/components/multiselect/multiselect';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { CommonModule } from '@angular/common';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 
 @NgModule({
@@ -26,14 +27,22 @@ import { CommonModule } from '@angular/common';
     DialogModule,
     MultiSelectModule,
     DropdownModule,
-    DataTableModule,SharedModule,
+    DataTableModule,SharedModule,    
     NgxPermissionsModule.forChild({
       permissionsIsolate: true, 
       rolesIsolate: true}),
       //BrowserAnimationsModule,
       FormsModule,
       ReactiveFormsModule,
-    TranslateModule.forChild({    })
+    TranslateModule.forChild({    }),
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.threeBounce,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      primaryColour: '#31c3aa', 
+      secondaryColour: '#000', 
+      tertiaryColour: '#a129'
+  }),
   ],
   providers: [UserService],
   

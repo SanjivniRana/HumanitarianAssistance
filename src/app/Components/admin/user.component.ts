@@ -8,11 +8,17 @@ import { MultiSelectModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/components/common/api';
 import { GLOBAL } from '../../shared/global';
 import { DropdownModule } from 'primeng/primeng';
+import { AppSettingsService } from '../../Services/App-settings.Service';
+import { AddUsers } from '../../Models/AddUser';
+import { ToastrService } from 'ngx-toastr';
 export interface Car {
-  vin;
-  year;
-  brand;
-  color;
+  FirstName;
+  LastName;
+  Email;
+  Office;
+  Status;
+  UserId;
+  Id;
 }
 @Component({
   selector: 'app-user',
@@ -25,7 +31,10 @@ export interface Car {
 export class UserComponent implements OnInit {
 
   // AddUser Modal Popup
+  loading=false;
+  selectedValue:any;
   userForm: FormGroup;
+  userRoles: FormGroup;
   modalRef: BsModalRef;
   modalRefPermission: BsModalRef;
   config = {
@@ -40,15 +49,25 @@ export class UserComponent implements OnInit {
   sortF: any;
 
   // Roles Multiselect 
-  roles: SelectItem[];
+  officeId: SelectItem[];
   selectedCities1: any[];
 
   status: SelectItem[];
+   
+  department: SelectItem[];
 
-  constructor(private fb: FormBuilder, private modalService: BsModalService, private userService: UserService) { 
+  roles: SelectItem[];
 
+  //UserId For AddRoles
+  UserId:any;
+  addRoles: any[];
+
+  constructor(private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
+
+    this.getOffices();    
+    this.getUserList();
     // AddUser Modal Popup
-
+    
     this.userForm = this.fb.group({
       'FirstName' : [null,Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
       'LastName' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
@@ -56,77 +75,21 @@ export class UserComponent implements OnInit {
       'Phone' : [null, Validators.required],
       'Password' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
       'ConfirmPassword' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
-      'Roles' : [null, Validators.required],
+      'OfficeId' : [null, Validators.required],
+      'Department' : [null, Validators.required],      
       'Status' : [null]
     });
 
-    this.roles = [
-      {label:'SuperAdmin', value:{id:1, name: 'SuperAdmin'}},
-      {label:'Admin', value:{id:2, name: 'Admin'}},
-      {label:'Branch Manager', value:{id:3, name: 'Branch Manager'}},
-      {label:'Department Head', value:{id:4, name: 'Department Head'}},
-      {label:'User', value:{id:5, name: 'User'}}
-    ];
+    this.status = [{label:'Active',value:1},
+    {label:'InActive',value:0}];
 
-    this.status = [{label:'Active',value:'Active'},
-    {label:'InActive',value:'InActive'}];
+    this.userRoles = this.fb.group({
+      'Roles' : [null]
+    });    
   }
 
   display: boolean = false;        
   ngOnInit() {
-    this.cars = [
-      {vin:'dsa',
-      year:'dsdasa',
-      brand:'ddasdas',
-      color:'dasd'},
-
-      {vin:'dsaghfgh',
-      year:'dsa',
-      brand:'dfdsas',
-      color:'dasd'},
-
-      {vin:'dsa',
-      year:'dsdfga',
-      brand:'dajghjs',
-      color:'dasd'},
-
-      {vin:'dsfsa',
-      year:'dsa',
-      brand:'dadfgs',
-      color:'dasd'},
-
-      {vin:'dsa',
-      year:'dsafsdds',
-      brand:'das',
-      color:'dasd'},
-
-      {vin:'dsa',
-      year:'dsafsdfsd',
-      brand:'das',
-      color:'dasd'},
-
-      {vin:'dsa',
-      year:'dsa',
-      brand:'das',
-      color:'dasd'},
-
-      {vin:'dsa',
-        year:'dsa',
-        brand:'ddasddas',
-        color:'dasd'},
-
-        {vin:'dsdasdsada',
-        year:'dsadas',
-        brand:'daddasass',
-        color:'dasd'},
-
-        {vin:'dsa',
-        year:'dsdasdaa',
-        brand:'das',
-        color:'dadsasd'}
-  ];    
-
-  // this.getUserList();
   }
 
   changeSort(event) {
@@ -137,15 +100,87 @@ export class UserComponent implements OnInit {
       }
   }
 
-  // getUserList()
-  // {
-  //   debugger;
-  //   this.userService.GetUserList(GLOBAL.API_UserDetail_GetUserList).subscribe(
-  //     data => {
 
-  //     }
-  //   )
-  // }
+  getOffices()
+  {
+    this.userService.getOffices(this.setting.getBaseUrl() +GLOBAL.API_AllOffice_URL).subscribe(data=>{      
+      this.officeId=[];
+      data.data.OfficeDetailsList.forEach(element => {
+        this.officeId.push({label:element.OfficeName,value:element.OfficeCode});
+      });    
+    });
+  }
+
+  getDepartment(officeCode)
+  {
+    this.userService.getDepartment(this.setting.getBaseUrl() + GLOBAL.API_AllDepartment_Url,officeCode).subscribe(data=>{      
+      this.department=[];
+      data.data.Departments.forEach(element => {
+        this.department.push({label:element.DepartmentName,value:element.DepartmentId});
+      });
+    });
+  }
+
+  onChangeOffice(officeCode:any)
+  {
+    this.getDepartment(officeCode);
+  }
+
+  
+  getUserList()
+  {    
+    this.loading=true;
+    this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
+      data => {        
+        this.cars = [];
+        this.loading=false;
+        data.data.UserDetailsList.forEach(element => {
+          this.cars.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
+        });
+      },
+      error => {
+        this.loading=false;
+        this.toastr.error("There is Some error....");
+        if (error.message == 500) {
+          
+        //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
+        }
+        else if (error.message == 0) {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
+        }
+        else {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
+        }}
+    )
+  }
+
+  getUserRoles()
+  {
+    this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList).subscribe(
+      data => {
+        debugger;
+        this.roles = [];
+        data.data.RoleList.forEach(element => {          
+          this.roles.push({label:element.RoleName,value:{id:element.Id, name: element.RoleName}});
+        });
+      }
+    )
+  }
+
+  assignRolesToUser(Roles)
+  {        
+    debugger;
+    this.addRoles = [];
+    for(var i in Roles.Roles){
+      this.addRoles.push(Roles.Roles[i].name);
+    }
+    
+    this.userService.assignRolesToUser(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_AssignRoleToUser, this.UserId , this.addRoles).subscribe(
+      data => {
+        
+      }
+    )
+  }
   
   // openModal(template: TemplateRef<any>) {
   //   this.modalRef = this.modalService.show(template,
@@ -153,17 +188,29 @@ export class UserComponent implements OnInit {
   //   );
   // }
   openModalWithClass(template: TemplateRef<any>) {
-    debugger;
     this.modalRef = this.modalService.show(
       template,
       Object.assign({}, this.config, { class: 'gray modal-lg' })
     );
   }
 
-  userFormSubmit(formValues)
+  userFormSubmit(model)
   {
-    debugger;
-    this.userService.AddUser(GLOBAL.API_UserDetail_AddUser, formValues).subscribe(
+    var obj: any = {};
+    var addUser:AddUsers = {
+      UserName : model.Email, 
+      Email: model.Email, 
+      Password : model.Password,
+      FirstName : model.FirstName,
+     LastName : model.LastName,
+     UserType : localStorage.getItem("UserRoles"),
+     OfficeCode : model.OfficeId,
+     OfficeName: "",
+     DepartmentName : "",
+     DepartmentId : model.Department,
+     Status : model.Status
+    };
+    this.userService.AddUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_AddUser, addUser).subscribe(
       data => {
           if (data == true) //Success
           {
@@ -187,8 +234,10 @@ export class UserComponent implements OnInit {
     this.modalRef.hide();
   }  
 
-  openModalPermissions(templatePermissions: TemplateRef<any>) { 
-    debugger;       
+  openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
+    debugger; 
+    this.UserId = colvalue.Id;  
+    this.getUserRoles();   
     this.modalRefPermission = this.modalService.show(
       templatePermissions,
       Object.assign({}, this.config, { class: 'gray modal-lg' })
