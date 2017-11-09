@@ -15,7 +15,7 @@ import { TranslateHttpLoader} from  '@ngx-translate/http-loader';
 import { TranslateStore } from '@ngx-translate/core/src/translate.store';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { AuthenticationService } from './Services/Authentication.Service';
 import { AppSettingsService } from './Services/App-settings.Service';
 import { httpClientService } from "./Auth/httpClient";
@@ -42,7 +42,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     routing,
     HttpModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule,    
     ReactiveFormsModule,
     HttpClientModule,
     ModalModule.forRoot(),

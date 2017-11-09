@@ -33,7 +33,7 @@
                         <a (click)="openModalPermissions(templatePermissions,userDetails[i])">
                                         <i class="fa fa-sitemap" aria-hidden="true"></i>
                          </a>
-                         <a (click)="openModalPermissions(templatePermissions,userDetails[i])"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                         <a ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                          <a > <i class="fa fa-exchange" aria-hidden="true"></i> </a>
                 </ng-template>
         </p-column>        
@@ -102,7 +102,7 @@
                   <label>Phone:</label>
               </div> 
               <div class="col-sm-7">
-                  <input class="form-control" type="number" formControlName="Phone" placeholder="Phone"/>
+                  <input [textMask]="{mask: mask}" class="form-control" type="text" formControlName="Phone" placeholder="Phone"/>
                   <div *ngIf="userForm.controls['Phone'].errors && !userForm.controls['Phone'].pristine" class="error-msg">
                         <div [hidden]="!userForm.controls['Phone'].errors.required">Phone is required.</div>
                         <div [hidden]="!userForm.controls['Phone'].errors.patternInvalid">Phone is invalid.</div>
@@ -252,7 +252,7 @@
                                                                          <label>Roles:</label>                                         
                                                                  </div> 
                                                                  <div class="col-sm-7">
-                                                                        <p-dropdown [options]="roles" class="form-control" formControlName="Roles"  placeholder="Select a Role"></p-dropdown>                            
+                                                                        <p-dropdown [options]="roles" class="form-control" formControlName="Roles" (onChange)="onRoleChange($event)"  placeholder="Select a Role"></p-dropdown>                            
                                                                  </div>
                                                          </div> 
                                         </div>
@@ -262,7 +262,9 @@
                                                                 <label>Add Permissions:</label>                                         
                                                         </div> 
                                                         <div class="col-sm-7">
-                                                                        <p-multiSelect [options]="Permissions" class="form-control" formControlName="Permissions" defaultLabel="Select Permissions"></p-multiSelect>
+                                                                        <p-multiSelect [options]="Permissions" [(ngModel)]="selectedValueInPermission" displaySelectedLabel="selectedValueInPermission" class="form-control"  formControlName="Permissions" (onChange)="onChangePermission($event)" defaultLabel="Select Permissions">
+                                                                                 
+                                                                        </p-multiSelect>
                                                         </div>
                                                 </div> 
                                         </div>                                                     

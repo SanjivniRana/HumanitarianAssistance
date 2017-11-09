@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone,Output, EventEmitter,ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone,Output, EventEmitter,ViewChild, TemplateRef } from '@angular/core';
 import {PasswordModule} from 'primeng/primeng';
 import { LanguageChange } from '../../Shared/languageChange';
 import{CommonService}from '../../app.common';
@@ -6,14 +6,18 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 //import {ChangePasswordComponent} from '../shared/changePassword.component';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { CustomValidation } from '../../Shared/customValidations';
 
 @Component({
     selector : "app-header",
-    templateUrl:'./appHeader.component.html',
-  //  providers:[//ChangePasswordComponent]
+    templateUrl:'./appHeader.component.html'
+    // providers:[FormGroup]
 })
 
 export class AppHeaderComponent {
+    
     @Output() checkToken : EventEmitter<any> = new EventEmitter<any>();
    // @ViewChild(ChangePasswordComponent) changepassword:ChangePasswordComponent;
     display: boolean = false;
@@ -22,6 +26,15 @@ export class AppHeaderComponent {
     idleState = 'Not started.';
     timedOut = false;
     lastPing?: Date = null;
+    modalChangePassword: BsModalRef;
+    private ChangePassword: FormGroup;
+
+    config = {
+        animated: true,
+        keyboard: true,
+        backdrop: true,
+        ignoreBackdropClick: false
+      };
 
     constructor(  
         private idle: Idle,
@@ -29,7 +42,10 @@ export class AppHeaderComponent {
         private  languageChange : LanguageChange,
         private route: ActivatedRoute,
         private router: Router,
-        private zone: NgZone
+        private zone: NgZone,
+        private modalService: BsModalService,
+        private fb: FormBuilder
+        
     ) { 
         let token=localStorage.getItem('authenticationtoken');
         
@@ -47,7 +63,12 @@ export class AppHeaderComponent {
         keepalive.interval(60);
         keepalive.onPing.subscribe(() => this.lastPing = new Date());
         this.reset();
-    
+
+        this.ChangePassword = this.fb.group({
+            'CurrentPassword':[null,Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20),CustomValidation.checkCurrentPasswordForServer])],
+            'NewPassword': [null,Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
+            'ConfirmPassword':[null,Validators.compose([CustomValidation.ConfirmPassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
+        });    
     }
 
     changeLang(lang){
@@ -76,5 +97,18 @@ export class AppHeaderComponent {
         this.idle.watch();
         this.idleState = 'Started.';
         this.timedOut = false;
+      }
+
+      ChangePasswordModal(template: TemplateRef<any>) {          
+        this.modalChangePassword = this.modalService.show(
+          template,
+          Object.assign({}, this.config, { class: 'gray modal-lg' })
+        );
+      }
+
+      currentPasswordMatch(event)
+      {
+        debugger;
+        this
       }
 }

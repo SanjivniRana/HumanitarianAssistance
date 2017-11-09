@@ -11,6 +11,9 @@ import { DropdownModule } from 'primeng/primeng';
 import { AppSettingsService } from '../../Services/App-settings.Service';
 import { AddUsers } from '../../Models/AddUser';
 import { ToastrService } from 'ngx-toastr';
+import { TextMaskModule } from 'angular2-text-mask';
+import { CustomValidation } from '../../Shared/customValidations';
+
 export interface UserDetails {
   FirstName;
   LastName;
@@ -62,6 +65,10 @@ export class UserComponent implements OnInit {
   //UserId For AddRoles
   UserId:any;
   addRoles: any[];
+  arrPermissionsId: any[];
+  arrPermissionsName: any[];
+
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
@@ -73,7 +80,7 @@ export class UserComponent implements OnInit {
       'Email' : [null, [Validators.required, Validators.email]],
       'Phone' : [null, Validators.required],
       'Password' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
-      'ConfirmPassword' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
+      'ConfirmPassword' : [null, Validators.compose([CustomValidation.ComparePassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
       'OfficeId' : [null, Validators.required],
       'Department' : [null, Validators.required],      
       'Status' : [null]
@@ -93,13 +100,7 @@ export class UserComponent implements OnInit {
       'Roles' : [null],
       'Permissions' : [null]
     }); 
-
-    this.Permissions = [
-      {label:'CanAdd', value:{id:1, name: 'CanAdd', code: 'NY'}},
-      {label:'CanDelete', value:{id:2, name: 'CanDelete', code: 'RM'}},
-      {label:'CanView', value:{id:3, name: 'CanView', code: 'LDN'}},
-      {label:'CaRead', value:{id:4, name: 'CaRead', code: 'IST'}}      
-    ];
+    
   }
 
   display: boolean = false;        
@@ -135,8 +136,36 @@ export class UserComponent implements OnInit {
   {
     this.getDepartment(officeCode);
   }
+  selectedRole:any;
+  onRoleChange(event){
+    this.selectedValueInPermission=[];
+    this.selectedRole=event.value.id;
+    this.userService.getPermissionByRoleId(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissionsByRoleId,this.selectedRole).
+    subscribe(data=>{
+      this.loading=false;    
+      data.data.PermissionsInRolesList.forEach(element => {
+        this.selectedValueInPermission.push({PermissionId:element.PermissionId,PermissionName:element.PermissionName});  
+      });        
+  },
+  error => {
+    //this.loading=false;
+    //this.toastr.error("There is Some error....");
+    if (error.message == 500) {
+      
+    //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
+    }
+    else if (error.message == 0) {
+      //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
+    }
+    else {
+      //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
+    }}
 
-  
+);
+
+  //this.selectedValueInPermission=[{PermissionId: "2de4ec45-fee4-46b4-a991-a824011c8418", PermissionName: "CanAdd"}];
+
+  }
   getUserList()
   {    
     this.loading=true;
@@ -175,7 +204,14 @@ export class UserComponent implements OnInit {
       }
     )
   }
-
+  permissionsAndRoleModel:any[];
+  onChangePermission(event){
+  this.permissionsAndRoleModel=[];
+  //console.log(event);
+   event.value.forEach(element => {
+     this.permissionsAndRoleModel.push({RoleId:this.selectedRole,PermissionId:element.PermissionId});  
+   });    
+  }
   assignRolesToUser(Roles)
   {        
     this.addRoles = [];
@@ -192,13 +228,9 @@ export class UserComponent implements OnInit {
 
   PermissionsInRoles(value)
   {
-    debugger;
-    var obj = {
-      RoleId : value.Roles.id
-    };
-    this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles).subscribe(
-      data => {
-        
+   
+    this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles, this.permissionsAndRoleModel).subscribe(
+      data => { 
       }
     )
   }
@@ -258,20 +290,24 @@ export class UserComponent implements OnInit {
     );
   } 
 
-  openModalAddPermissions(AddPermissionsTemplate: TemplateRef<any>) { 
-    //this.getPermissions();
+  openModalAddPermissions(AddPermissionsTemplate: TemplateRef<any>) {     
+    this.getPermissions();
     this.modalPermission = this.modalService.show(
       AddPermissionsTemplate,
       Object.assign({}, this.config, { class: 'gray modal-lg' })
     );
   } 
 
+ selectedValueInPermission :any[];
   getPermissions()
-  {    
-    this.userService.getPermissions(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetAllPermissions).subscribe(
-      data => {        
+  {
+    this.Permissions = [];
+    this.userService.getPermissions(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissions).subscribe(
+      data => {             
+        data.data.PermissionsList.forEach(element => {          
+          this.Permissions.push({label:element.Name,value:{PermissionId:element.Id,PermissionName:element.Name}});                  
+        });
       }
     )
   }
-
 }
