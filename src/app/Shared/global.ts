@@ -8,6 +8,7 @@ export class GLOBAL {
     public static API_UserDetail_GetUserList ='Account/GetAllUserDetails';
     public static API_UserRoles_GetRolesList = 'Account/GetRoles';
     public static API_UserRoles_AssignRoleToUser = 'Account/AssignRoleToUser';
-    public static API_Permissions_GetAllPermissions = '';
-    public static API_Permissions_AddPermissionInRoles = '';
+    public static API_Permissions_GetPermissionsByRoleId = 'Account/GetPermissionByRoleId';
+    public static API_Permissions_GetPermissions = 'Account/GetPermissions';
+    public static API_Permissions_AddPermissionInRoles = 'Account/PermissionsInRoles';
 }

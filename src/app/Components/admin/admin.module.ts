@@ -14,7 +14,8 @@ import { MultiSelectModule } from 'primeng/components/multiselect/multiselect';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { CommonModule } from '@angular/common';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
-
+import { TextMaskModule } from 'angular2-text-mask';
+import {CheckboxModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,10 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
     adminRoute,
     DialogModule,
     MultiSelectModule,
+    TextMaskModule,
     DropdownModule,
     DataTableModule,SharedModule,    
+    CheckboxModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true, 
       rolesIsolate: true}),

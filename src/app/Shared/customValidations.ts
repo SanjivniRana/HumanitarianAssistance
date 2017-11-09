@@ -1,4 +1,7 @@
-import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, ValidatorFn, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import 'rxjs/add/observable/timer'
+
+import { Observable } from 'rxjs/Observable';
 export class CustomValidation {
 
     static checkValidDate(control: FormControl) {
@@ -87,6 +90,20 @@ export class CustomValidation {
         return null;
     }
 
+    static ConfirmPassword(control: FormControl) {
+        if (control.parent != undefined) {
+            const Password = control.parent.controls["NewPassword"].value;
+            const ConfirmPassword = control.parent.controls["ConfirmPassword"].value;
+            if (Password != undefined && (ConfirmPassword != undefined && ConfirmPassword != '')) {
+                if (Password != ConfirmPassword) {
+                    return { ComparePassword: true }
+                }
+            }
+            return null;
+        }
+        return null;
+    }
+
     static checkFormula(control: FormControl) {
         if(control !=  undefined && control !=  null){
         if(control.value != null){
@@ -107,4 +124,37 @@ export class CustomValidation {
 }
         return null;
     }
+
+   static checkCurrentPasswordForServer(ctrl:FormControl) {
+    return (control: FormControl): Promise<any> => {
+        return new Promise<any>((resolve, reject) => {
+            console.log("existing");
+            if (ctrl.value != undefined) {
+                 if(ctrl.value=="abc"){
+                    console.log("existing");
+                    resolve({ checkCurrentPasswordForServer: true });
+                    
+                 }
+        //         userservice.isUserNameExisting(currentPassword, control.value).subscribe(
+        //             (res) => {
+        //                 if (res.isUserNameExisting) {
+        //                     console.log("existing");
+        //                     resolve({ 'existing': true });
+        //                 } else {
+        //                     console.log("NOT existing");
+        //                     resolve(null);
+        //                 }
+        //             },
+        //             (error) => {
+        //                 console.log(error);
+        //             }
+        //         );
+             } else {
+                 resolve(null);
+             }
+         })
+     }
+
+   }
+    
 }

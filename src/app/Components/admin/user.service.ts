@@ -141,15 +141,16 @@ export class UserService {
 
     }
 
-    PermissionsInRoles(url: string) {        
+    PermissionsInRoles(url: string, obj) {        
         // var obj = {
         //     UserId : userId,
         //     Roles : addRoles
         // };    
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        return this.http.post(url, options)
+        return this.http.post(url, obj, options)
             .map((response: Response) => {
                 let user = response.json();
                 if (user) {
@@ -159,7 +160,20 @@ export class UserService {
             }).catch(this.handleError);
 
     }
+ getPermissionByRoleId (url:string,roleid){
+    let Myheaders = new Headers();
+    Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+    Myheaders.append("Content-Type", "application/json");
+    let options = new RequestOptions({ headers: Myheaders });
+    return this.http.get(url+"?roleid="+roleid,options)
+    .map((response: Response) => {
+        let user = response.json();
+        if (user) {
+            return user;
+        }
 
+    }).catch(this.handleError);
+ }
      private handleError(error: Response) {
         
             return Observable.throw(error.json().error || 'Server error');
