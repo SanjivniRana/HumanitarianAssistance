@@ -205,7 +205,7 @@ p-multiselect.form-control{border: 1px solid #e2e2e2;}
 span.ui-cell-data { display: inline-block;  width: 100%;  text-align: center;  font-size: 15px;}
 span.ui-cell-data .fa { font-size: 18px; padding: 0 3px;}
 span.ui-cell-data .fa:hover{ cursor: pointer;}
-.btn { min-width: 124px; padding: 7px 0;}
+.btn { min-width: 124px; padding: 7px 10px;}
 p-multiselect.form-control { border: 1px solid #e2e2e2;  padding: 7px 6px;}
 .ui-chkbox .ui-state-default {  border: 1px solid #e2e2e2;  background: #ffffff;  color: #555555;}
 input.ui-inputtext.ui-widget.ui-state-default.ui-corner-all { width: 100%;  padding: 5px 0;}
@@ -218,4 +218,23 @@ input.ui-inputtext.ui-widget.ui-state-default.ui-corner-all { width: 100%;  padd
 .add-role-mod { width: 55%;}
 .ui-multiselect-filter-container .fa-fw {top: 9px !important;left: 8px !important;}
 input.ui-inputtext.ui-widget.ui-state-default.ui-corner-all { width: 100%;  padding: 5px 30px;}
+.modal-body label {font-weight: 400;}
+input.form-control {border: 1px solid #e2e2e2;margin-bottom: 14px; height: 36px;}
+.modal-header { padding: 15px; border-bottom: 1px solid #e2e2e2;}
+.modal-footer { padding: 20px;  text-align: right;  border-top: 1px solid #e2e2e2;}
+.ui-dropdown .ui-dropdown-trigger .fa { margin-top: 10px; margin-left: -.125em;}
+p-multiselect.form-control {height: 34px;}
+.ui-multiselect .ui-multiselect-label {display: block;padding: 0px 1px; height: 17px;}
+.ui-multiselect .ui-multiselect-trigger .fa {margin-top: -0.6em; margin-left: -.125em;}
+p-dropdown.form-control.ng-tns-c2-5 { border: 1px solid #e2e2e2 !important; height: 32px;}
+.form-control, input, textarea { border: 1px solid #e2e2e2;}
+p-dropdown.form-control.ng-tns-c2-1 { height: 34px;}
+.ng-tns-c2-1.ui-dropdown.ui-widget.ui-state-default.ui-corner-all.ui-helper-clearfix {
+  width: 100% !important;display: inline-block; height: 26px !important;}
+p-dropdown.form-control.ng-tns-c2-1 { height: 34px;  padding: 2px 7px !important;}
+.ui-dropdown .ui-dropdown-trigger .fa {margin-top: 6px; margin-left: -.125em;}
+.multi-drop-custom .form-control { height: 34px; padding: 2px 6px;}
+.multi-drop-custom .ui-dropdown { width: 100% !important;}
+
+
 

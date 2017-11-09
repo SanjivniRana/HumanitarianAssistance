@@ -30,11 +30,11 @@
         <p-column field="UserId" header="UserId" [hidden]="true"></p-column>
 
                 <ng-template let-col let-car="rowData" pTemplate="body" let-i="rowIndex">
-                        <a (click)="openModalPermissions(templatePermissions,userDetails[i])">
+                        <a (click)="openModalPermissions(templatePermissions,userDetails[i])" title="Add Roles">
                                         <i class="fa fa-sitemap" aria-hidden="true"></i>
                          </a>
-                         <a ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                         <a > <i class="fa fa-exchange" aria-hidden="true"></i> </a>
+                         <a (click)="openModalEditPermissions(templateEditUser,userDetails[i])" title="Edit User"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                         <a title="Reset Password"> <i class="fa fa-exchange" aria-hidden="true"></i> </a>
                 </ng-template>
         </p-column>        
     </p-dataTable>
@@ -200,6 +200,129 @@
 </ng-template>
 
 
+<!-- Edit USERS MODAL POPUP -->
+
+<ng-template #templateEditUser>
+                <form name="userEditForm" [formGroup]="userEditForm" class="login-inner" (ngSubmit)="userEditForm.valid && userEditFormSubmit(userEditForm.value)" novalidate>
+             <div class="modal-header gray-header">
+               <h4 class="modal-title pull-left">Edit User</h4>
+               <button type="button" class="close pull-right" aria-label="Close" (click)="modalEditUserPermission.hide()">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body gray-body popup-default-form" style="background-color:#fff;color:#000">
+               <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-5">
+                             <label>First Name:</label><span style="color:red">*</span>
+                        </div> 
+                        <div class="col-sm-7" [ngClass]="{ 'has-error': userEditForm.submitted && !FirstName.valid }">                    
+                            <input type="text" class="form-control" formControlName="FirstName" placeholder="First Name" />                            
+                        </div>
+                    </div> 
+                    </div>   
+                    <div class="col-sm-6">
+                        <div class="row">
+                         <div class="col-sm-5">
+                                <label>Last Name:</label><span style="color:red">*</span>
+                          </div> 
+                          <div class="col-sm-7">
+                                <input class="form-control" type="text" formControlName="LastName" placeholder="Last Name"/>                                
+                          </div> 
+                    </div> 
+                     </div> 
+                </div>
+               <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                        <div class="col-sm-5">
+                             <label>Email:</label><span style="color:red">*</span>
+                         </div> 
+                         <div class="col-sm-7">
+                             <input class="form-control" type="Email" formControlName="Email" placeholder="Email"/>                             
+                         </div>
+                    </div> 
+                    </div>   
+                    <div class="col-sm-6">
+                          <div class="row">
+                            <div class="col-sm-5">
+                              <label>Phone:</label>
+                          </div> 
+                          <div class="col-sm-7">
+                              <input [textMask]="{mask: mask}" class="form-control" type="text" formControlName="Phone" placeholder="Phone"/>                              
+                          </div>
+                    </div> 
+                     </div> 
+                </div>
+                <div class="row">
+                        <div class="col-sm-6">
+                           <div class="row">
+                            <div class="col-sm-5">
+                                 <label>Password:</label><span style="color:red">*</span>
+                             </div> 
+                             <div class="col-sm-7">
+                                 <input class="form-control" type="password" formControlName="Password" placeholder="Password"/>                                 
+                             </div>
+                            </div> 
+                        </div>   
+                        <div class="col-sm-6">
+                           <div class="row"> 
+                            <div class="col-sm-5">
+                                  <label>Confirm Password:</label><span style="color:red">*</span>
+                              </div> 
+                              <div class="col-sm-7">
+                                  <input class="form-control" type="password" formControlName="ConfirmPassword" placeholder="Confirm Password"/>                                  
+                              </div> 
+                            </div>
+                         </div> 
+                    </div>                     
+                    <div class="row">
+                            <div class="col-sm-6">
+                                   <div class="row">
+                                    <div class="col-sm-5">  
+                                     <label>Office:</label><span style="color:red">*</span>
+                                 </div> 
+                                 <div class="col-sm-7">
+                                            <p-dropdown [options]="officeId" class="form-control" formControlName="OfficeId"  placeholder="Select an Office" (onChange)="onChangeOffice($event.value)" required></p-dropdown>                                                                    
+                                 </div>
+                            </div> 
+                            </div>    
+                            <div class="col-sm-6">
+                                   <div class="row">
+                                    <div class="col-sm-5">  
+                                         <label>Department:</label><span style="color:red">*</span>
+                                     </div> 
+                                     <div class="col-sm-7">
+                                            <p-dropdown [options]="department" class="form-control" formControlName="Department"  placeholder="Select a Department"></p-dropdown>                                            
+                                     </div> 
+                                    </div> 
+                                </div>                
+                        </div>      
+            
+                        <div class="row">   
+                                    <div class="col-sm-6">
+                                           <div class="row">
+                                            <div class="col-sm-5">  
+                                                 <label>Status:</label>
+                                             </div> 
+                                             <div class="col-sm-7">
+                                                    <p-dropdown [options]="status" class="form-control" formControlName="Status"  placeholder="Select a Status"></p-dropdown>                                                    
+                                             </div> 
+                                            </div> 
+                                        </div>                
+                                </div> 
+             </div>
+             <div class="modal-footer gray-body">
+                    <div class="pull-right">
+                            <button type="submit" [disabled]="!userEditForm.valid" class="btn btn-default btn-primary add-btn-basic">Save</button>
+                            <a (click)="modalEditUserPermission.hide()" class="btn btn-default" >Cancel</a>
+                    </div>
+            </div>               
+            </form>
+            </ng-template>
+
+
 <!-- Modal Popup for Roles -->
  
 <ng-template #templatePermissions>
@@ -252,8 +375,10 @@
                                                                          <label>Roles:</label>                                         
                                                                  </div> 
                                                                  <div class="col-sm-7">
+                                                                         <div class="multi-drop-custom">
                                                                         <p-dropdown [options]="roles" class="form-control" formControlName="Roles" (onChange)="onRoleChange($event)"  placeholder="Select a Role"></p-dropdown>                            
-                                                                 </div>
+                                                                          </div>      
+                                                                </div>
                                                          </div> 
                                         </div>
                                         <div class="col-sm-6">

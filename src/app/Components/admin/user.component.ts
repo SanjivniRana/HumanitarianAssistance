@@ -39,11 +39,13 @@ export class UserComponent implements OnInit {
   userForm: FormGroup;
   userRoles: FormGroup;
   AddPermissions: FormGroup;
+  userEditForm: FormGroup;
 
   //Modal popup instances
   modalRef: BsModalRef;
   modalRefPermission: BsModalRef;
   modalPermission: BsModalRef;
+  modalEditUserPermission : BsModalRef;
   config = {
     animated: true,
     keyboard: true,
@@ -63,7 +65,7 @@ export class UserComponent implements OnInit {
   Permissions : SelectItem[];
 
   //UserId For AddRoles
-  UserId:any;
+  UserId:any;               //Global UserId FROM Table is selected for controls
   addRoles: any[];
   arrPermissionsId: any[];
   arrPermissionsName: any[];
@@ -99,7 +101,19 @@ export class UserComponent implements OnInit {
     this.AddPermissions = this.fb.group({
       'Roles' : [null],
       'Permissions' : [null]
-    }); 
+    });     
+
+    this.userEditForm = this.fb.group({
+      'FirstName' : [null,Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
+      'LastName' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
+      'Email' : [null, [Validators.required, Validators.email]],
+      'Phone' : [null, Validators.required],
+      'Password' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
+      'ConfirmPassword' : [null, Validators.compose([CustomValidation.ComparePassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
+      'OfficeId' : [null, Validators.required],
+      'Department' : [null, Validators.required],      
+      'Status' : [null]
+    });
     
   }
 
@@ -171,11 +185,13 @@ export class UserComponent implements OnInit {
     this.loading=true;
     this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
       data => {        
+        debugger;
         this.userDetails = [];
         this.loading=false;
         data.data.UserDetailsList.forEach(element => {
           this.userDetails.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
         });
+        console.log(this.userDetails);
       },
       error => {
         this.loading=false;
@@ -222,6 +238,28 @@ export class UserComponent implements OnInit {
     this.userService.assignRolesToUser(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_AssignRoleToUser, this.UserId , this.addRoles).subscribe(
       data => {
         
+      }
+    )
+  }
+
+  getUserDetailByUserId(UserId)
+  {
+    this.userService.getUserDetailByUserId(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserDetailsByUserId, UserId).subscribe(
+      data => {
+        debugger;
+        data.data.UserDetailsList.forEach(element => {
+          this.userEditForm.setValue({
+            FirstName : element.FirstName,
+            LastName : element.LastName,
+            Email : element.Username,
+            Phone : "1212121212",
+            Password : "aA123456!",
+            ConfirmPassword : 'aA123456!',
+            OfficeId : element.OfficeCode,
+            Department : element.DepartmentId,
+            Status: 1
+          });
+        });              
       }
     )
   }
@@ -282,6 +320,46 @@ export class UserComponent implements OnInit {
     this.modalRef.hide();
   }  
 
+  userEditFormSubmit(model)
+  {
+    var obj: any = {};
+    var addUser:AddUsers = {
+      UserName : model.Email, 
+      Email: model.Email, 
+      Password : model.Password,
+      FirstName : model.FirstName,
+     LastName : model.LastName,
+     UserType : localStorage.getItem("UserRoles"),
+     OfficeCode : model.OfficeId,
+     OfficeName: "",
+     DepartmentName : "",
+     DepartmentId : model.Department,
+     Status : model.Status
+    };
+    this.userService.AddUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_AddUser, addUser).subscribe(
+      data => {
+          if (data == true) //Success
+          {
+              //this.msg = "Data successfully added.";
+              
+              //this.LoadUsers();                            
+          }
+          else {
+              //error  message
+
+          }
+
+          this.modalRef.hide();
+        
+
+      },
+      error => {
+          //error message
+      }
+  );
+    this.modalRef.hide();
+  }  
+
   openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
     this.UserId = colvalue.Id;     
     this.modalRefPermission = this.modalService.show(
@@ -297,6 +375,15 @@ export class UserComponent implements OnInit {
       Object.assign({}, this.config, { class: 'gray modal-lg' })
     );
   } 
+
+  openModalEditPermissions(EditPermissionsTemplate: TemplateRef<any>,colvalue) {     
+    this.getPermissions();
+    this.getUserDetailByUserId(colvalue.Id);    
+    this.modalEditUserPermission = this.modalService.show(
+      EditPermissionsTemplate,
+      Object.assign({}, this.config, { class: 'gray modal-lg' })
+    );
+  }
 
  selectedValueInPermission :any[];
   getPermissions()
