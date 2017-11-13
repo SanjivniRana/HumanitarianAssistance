@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+
+import { CurrentPasswordModel, RestPasswordModel } from '../../Models/CurrentPasswordModel';
 import { AddUsers, EditUsers } from '../../Models/AddUser';
 @Injectable()
 export class UserService {
 
     constructor(private http: Http) {}
 
+    
     GetUserList(url: string) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
@@ -22,7 +25,7 @@ export class UserService {
 
     }
 
-    getUserRoles(url: string) {
+    getUserRoles(url: string) :Observable<any> {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -152,7 +155,7 @@ export class UserService {
 
     }
 
-    getOffices(url: string) {
+    getOffices(url: string):Observable<any> {
             let Myheaders = new Headers();
             Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
             let options = new RequestOptions({ headers: Myheaders });
@@ -184,7 +187,7 @@ export class UserService {
 
     }
 
-    getPermissions(url: string) {     
+    getPermissions(url: string):Observable<any> {     
         let Myheaders = new Headers();            
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -199,7 +202,7 @@ export class UserService {
 
     }
 
-    PermissionsInRoles(url: string, obj) {        
+    PermissionsInRoles(url: string, obj):Observable<any> {        
         // var obj = {
         //     UserId : userId,
         //     Roles : addRoles
@@ -232,8 +235,55 @@ export class UserService {
 
     }).catch(this.handleError);
  }
-     private handleError(error: Response) {
-        
-            return Observable.throw(error.json().error || 'Server error');
-        }
+     
+ resetPassword(url:string,model:RestPasswordModel){
+     
+     console.log(model);
+    let Myheaders=new  Headers();
+    
+       Myheaders.append("Authorization","Bearer "+localStorage.getItem("authenticationtoken"));
+       Myheaders.append("Content-Type","application/json");
+       let options =new RequestOptions({headers:Myheaders});
+       return this.http.post(url,model,options).
+        map(response=>
+        {
+            let user = response.json();
+            if (user) {
+                return user;
+            } 
+        }).catch(this.handleError);
+ }
+ changePassword(url:string,model:CurrentPasswordModel){
+    let Myheaders=new  Headers();
+    
+       Myheaders.append("Authorization","Bearer "+localStorage.getItem("authenticationtoken"));
+       Myheaders.append("Content-Type","application/json");
+       let options =new RequestOptions({headers:Myheaders});
+       return this.http.post(url,model,options).map(response=>
+        {
+            let user = response.json();
+            if (user) {
+                return user;
+            } 
+        }).catch(this.handleError);
+ }
+   checkCurrentPassword(url:string,currentPassword:string){
+       let Myheaders=new  Headers();
+    
+       Myheaders.append("Authorization","Bearer "+localStorage.getItem("authenticationtoken"));
+       Myheaders.append("Content-Type","application/json");
+       let options =new RequestOptions({headers:Myheaders});
+       return this.http.get(url+"?pwd="+currentPassword,options).map(response=>
+        {
+            let user = response.json();
+            if (user) {
+                return user;
+            } 
+        }).catch(this.handleError);
+   } 
+   private handleError(error: Response) {
+    
+    console.log(error.json());
+        return Observable.throw(error.json().error || 'Server error');
+    }    
 }
