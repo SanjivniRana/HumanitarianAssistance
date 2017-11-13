@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone,Output, EventEmitter,ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, NgZone,Output, EventEmitter,ViewChild, TemplateRef, OnDestroy } from '@angular/core';
 import {PasswordModule} from 'primeng/primeng';
 import { LanguageChange } from '../../Shared/languageChange';
 import{CommonService}from '../../app.common';
@@ -7,35 +7,48 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { CustomValidation } from '../../Shared/customValidations';
-
+import { commonService } from '../../Services/common.service';
+import { AppSettingsService } from '../../Services/App-settings.Service';
+import { Http } from '@angular/http';
+//import { ChangePasswordComponent } from './changePassword.component';
+import { GLOBAL } from '../../shared/global';
+import { UserService } from '../admin/user.service';
+import { Subject } from 'rxjs';
+import { CurrentPasswordModel } from '../../Models/CurrentPasswordModel';
+import { ToastrService } from 'ngx-toastr';
 @Component({
     selector : "app-header",
-    templateUrl:'./appHeader.component.html'
-    // providers:[FormGroup]
+    templateUrl:'./appHeader.component.html',
+     providers:[GLOBAL]
 })
 
-export class AppHeaderComponent {
+export class AppHeaderComponent implements OnDestroy {
     
     @Output() checkToken : EventEmitter<any> = new EventEmitter<any>();
    // @ViewChild(ChangePasswordComponent) changepassword:ChangePasswordComponent;
+
     display: boolean = false;
     currentLanguage : string =  'en';
+    loading=false;
     commonService=new CommonService();
     idleState = 'Not started.';
     timedOut = false;
     lastPing?: Date = null;
     modalChangePassword: BsModalRef;
     private ChangePassword: FormGroup;
-
+    private CurrentPassword: FormControl;
+    private unsubscribe: Subject<void> = new Subject<void>();
+    
+    
     config = {
         animated: true,
         keyboard: true,
         backdrop: true,
         ignoreBackdropClick: false
       };
-
+ isValidPassword =true;
     constructor(  
         private idle: Idle,
         private keepalive: Keepalive,
@@ -44,7 +57,15 @@ export class AppHeaderComponent {
         private router: Router,
         private zone: NgZone,
         private modalService: BsModalService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private cs: commonService,
+        private settings: AppSettingsService,
+        private http:Http,
+        private setting:AppSettingsService,
+        private userService : UserService,
+        private toastr: ToastrService
+        
+        
         
     ) { 
         let token=localStorage.getItem('authenticationtoken');
@@ -64,13 +85,80 @@ export class AppHeaderComponent {
         keepalive.onPing.subscribe(() => this.lastPing = new Date());
         this.reset();
 
+        this.CurrentPassword =new FormControl('',Validators.compose([Validators.required]));
         this.ChangePassword = this.fb.group({
-            'CurrentPassword':[null,Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20),CustomValidation.checkCurrentPasswordForServer])],
-            'NewPassword': [null,Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
-            'ConfirmPassword':[null,Validators.compose([CustomValidation.ConfirmPassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
+            CurrentPassword :this.CurrentPassword,
+            //'CurrentPassword' : ["", [Validators.required],[this.cs.validateCurrentPassword.bind(this)]],
+            'NewPassword': ["",Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
+            'ConfirmPassword':["",Validators.compose([CustomValidation.ConfirmPassword,Validators.required, Validators.minLength(5), Validators.maxLength(20)])]
         });    
     }
+    isConfirmPassword=true;
+    isFormValid =false;
 
+    onSubmitPasswordChange(value:CurrentPasswordModel){
+    console.log(value);
+    if(value!=null){
+        this.loading=true;
+        this.userService.changePassword(this.setting.getBaseUrl()+GLOBAL.API_ChangePassword,value)
+        .takeUntil(this.unsubscribe)
+        .subscribe(data=>{
+            if(data.StatusCode==200){
+            this.toastr.success("Password changed");
+            this.modalChangePassword.hide();
+           }else{
+            this.toastr.error("there is some error on page");
+           }
+           this.loading=false;
+        });
+    }
+   
+    }
+    confirmPasswordCheck(value,newpass){
+        debugger;
+        if(value!=newpass){
+            this.isConfirmPassword=false;
+            this.isFormValid=false;
+        }else{
+            this.isConfirmPassword=true;
+            this.isFormValid=true;
+        }
+    }
+
+    passwordIsValid(value){
+        debugger;
+        console.log(value);
+        if(value!=undefined && value!=null && value!=''){
+        this.userService.
+        checkCurrentPassword(this.setting.getBaseUrl()+GLOBAL.API_CheckCurrentPassword,value)
+        .takeUntil(this.unsubscribe)
+        .subscribe(data=>{
+            console.log(data);
+           if(data.StatusCode==200){
+            this.isValidPassword=true;
+            this.isFormValid=true;
+           }else{
+            this.isFormValid=false;
+            this.isValidPassword=false;
+           }
+        },error=>{
+            console.log(error);
+        });
+    }else{
+        this.isValidPassword=true;
+    }
+    }
+    get newPassword ()
+    {
+        return this.ChangePassword.controls["NewPassword"];
+    }
+    get currentPassword()
+    {
+        return this.ChangePassword.controls["CurrentPassword"];
+    }
+    onblur(e){
+        console.log(e);
+    }
     changeLang(lang){
         this.languageChange.changeLang(lang)
         this.currentLanguage = lang;        
@@ -108,7 +196,10 @@ export class AppHeaderComponent {
 
       currentPasswordMatch(event)
       {
-        debugger;
-        this
+        
       }
+      ngOnDestroy(): void {
+        this.unsubscribe.next();
+        this.unsubscribe.complete(); 
+       }
 }

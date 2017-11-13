@@ -11,4 +11,7 @@ export class GLOBAL {
     public static API_Permissions_GetPermissionsByRoleId = 'Account/GetPermissionByRoleId';
     public static API_Permissions_GetPermissions = 'Account/GetPermissions';
     public static API_Permissions_AddPermissionInRoles = 'Account/PermissionsInRoles';
+    public static API_CheckCurrentPassword ="Account/CheckCurrentPassword";
+    public static API_ChangePassword = "Account/ChangePassword";
+    public static API_ResetPassword = "Account/ResetPassword";
 }

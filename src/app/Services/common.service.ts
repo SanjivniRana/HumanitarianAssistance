@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { GLOBAL } from '../shared/global';
 import { AppSettingsService } from '../Services/App-settings.Service';
 import { RequestStatus } from '../shared/enums'
+import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 
 @Injectable()
 
@@ -39,7 +40,36 @@ export class commonService {
                 }
             });
     }
+    private checktimeout;
+    validateCurrentPassword(control:FormControl) :Promise<ValidationErrors>|null|Observable<ValidationErrors> {
+        clearTimeout(this.checktimeout);
+        return new Promise<any>((resolve,reject)=>{
+           this.checktimeout= setTimeout(()=>{
+            let Myheaders = new Headers();
+            Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+            Myheaders.append("Content-Type", "application/json");
+            let options = new RequestOptions({ headers: Myheaders });
+            let url=this.settings.getBaseUrl()+GLOBAL.API_CheckCurrentPassword;
+            //let obj={Password:control.value.toString()};
+            return this.http.get(
+                url+"?pwd="+control.value,options).map(response=>response.json())
+                .subscribe(data=>{
+                    console.log(data);
+                    if(data.StausCode==200) {
+                        resolve({validateCurrentPassword:true});
+                        
+                    }else
+                    {
+                        resolve(null)
+                    }
+                    
+                });
+           
 
+            },2000);
+            
+        });
+    }
 
     // GetPatients() {
     //     let url = this.settings.getBaseUrl() + GLOBAL.API_Common_GetPatients;

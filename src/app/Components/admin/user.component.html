@@ -34,7 +34,7 @@
                                         <i class="fa fa-sitemap" aria-hidden="true"></i>
                          </a>
                          <a ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                         <a > <i class="fa fa-exchange" aria-hidden="true"></i> </a>
+                         <a (click)="openModelOnResetPassword(ResetPasswordTemplate,userDetails[i])"> <i class="fa fa-exchange" aria-hidden="true"></i> </a>
                 </ng-template>
         </p-column>        
     </p-dataTable>
@@ -232,10 +232,11 @@
     </div>   
     
     </form>
-    </ng-template> 
+ </ng-template> 
 
 <!-- Modal Popup for Permissions -->
- 
+
+
 <ng-template #AddPermissionsTemplate>
         <form name="AddPermissions" [formGroup]="AddPermissions" class="login-inner" (ngSubmit)="AddPermissions.valid && PermissionsInRoles(AddPermissions.value)" novalidate>
              <div class="modal-header gray-header ">
@@ -280,6 +281,62 @@
             </form>
             </ng-template> 
 
+            <ng-template #ResetPasswordTemplate>
+                        <form name="ChangePassword" [formGroup]="ChangePassword" class="login-inner" (ngSubmit)="onSubmitPasswordChange(ChangePassword.value)">
+                             <div class="modal-header gray-header ">
+                               <h4 class="modal-title pull-left">Reset Password</h4>
+                               <button type="button" class="close pull-right" aria-label="Close" (click)="modalChangePassword.hide();">
+                                 <span aria-hidden="true">&times;</span>
+                               </button>
+                             </div>
+                             <div class="modal-body gray-body" style="background-color:#fff;color:#000">
+                                <div class="row">
+                                        <div class="col-sm-6">
+                                                <div class="row">
+                                                 <div class="col-sm-5">
+                                                        <label>New Password:</label><span style="color:red">*</span>
+                                                  </div> 
+                                                  <div class="col-sm-7">
+                                                        <input class="form-control" type="password" formControlName="NewPassword" placeholder="New Password"/>
+                                                        <div *ngIf="ChangePassword.controls['NewPassword'].errors && !ChangePassword.controls['NewPassword'].pristine" class="error-msg">
+                                                                <div [hidden]="!ChangePassword.controls['NewPassword'].errors.required">New Password is required.</div>
+                                                                <div [hidden]="!ChangePassword.controls['NewPassword'].errors.patternInvalid">New Password is invalid.</div>
+                                                        </div>
+                                                  </div> 
+                                            </div> 
+                                            </div> 
+                                </div>   
+                                
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                             <label>Confirm Password:</label><span style="color:red">*</span>
+                                        </div> 
+                                        <div class="col-sm-7" >                    
+                                            <input type="password" class="form-control" formControlName="ConfirmPassword"  placeholder="Confirm Password" />
+                                            
+                                            <div *ngIf="ChangePassword.controls['ConfirmPassword'].errors && !ChangePassword.controls['ConfirmPassword'].pristine" class="error-msg">
+                                                    <div *ngIf="!ChangePassword.controls['ConfirmPassword'].errors.ConfirmPassword">Confirm Password is wrong.</div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    </div>    
+                                </div>
+                
+                             </div>
+                             <div class="modal-footer gray-body">
+                                    <div class="pull-right">
+                                            <button type="submit" [disabled]="!ChangePassword.valid " class="btn btn-primary add-btn-basic">Save</button>
+                                            <a (click)="modalResetPassword.hide()" class="btn btn-default" >Cancel</a>
+                                    </div>
+                            </div>   
+                            
+                            </form>
+                            <div>
+                                    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                            </div>
+                            </ng-template>      
 
     <!-- Loader Before User Listings -->
     <div>
