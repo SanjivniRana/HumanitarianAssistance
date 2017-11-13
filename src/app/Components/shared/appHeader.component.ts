@@ -107,8 +107,6 @@ export class AppHeaderComponent {
       }
 
       currentPasswordMatch(event)
-      {
-        debugger;
-        this
+      {        
       }
 }

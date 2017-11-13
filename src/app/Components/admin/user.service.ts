@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { AddUsers } from '../../Models/AddUser';
+import { AddUsers, EditUsers } from '../../Models/AddUser';
 @Injectable()
 export class UserService {
 
@@ -27,6 +27,21 @@ export class UserService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
         return this.http.get(url, options)
+            .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    return user;
+                }
+
+            }).catch(this.handleError);
+
+    }
+
+    getUserRolesByUserId(url: string, UserId) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url+"?userid="+UserId, options)
             .map((response: Response) => {
                 let user = response.json();
                 if (user) {
@@ -73,8 +88,6 @@ export class UserService {
 
     AddUser(url: string, model: AddUsers) {
         let Myheaders = new Headers();
-        console.log(localStorage.getItem("authenticationtoken"));
-        console.log(model);
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
@@ -85,16 +98,49 @@ export class UserService {
             FirstName:model.FirstName,
             LastName:model.LastName,
             UserName : model.UserName,
-        Email : model.Email,
-        Password : model.Password,
-        UserType : 1,
-        OfficeCode : model.OfficeCode,
-        DepartmentId :model.DepartmentId,
-        Status:model.Status
+            Email : model.Email,
+            Password : model.Password,
+            UserType : 1,
+            OfficeCode : model.OfficeCode,
+            DepartmentId :model.DepartmentId,
+            Status:model.Status,
+            Phone: model.Phone
         
         }
+                
+        return this.http.post(url, JSON.stringify(b)
+        ,options)            
+        .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    return user;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    EditUser(url: string, model: EditUsers) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
         
-        console.log(JSON.stringify(model));
+        let a=new RequestOptions();
+        let b=
+         {
+            FirstName:model.FirstName,
+            LastName:model.LastName,
+            UserName : model.UserName,
+            Email : model.Email,
+            // Password : model.Password,
+            UserType : 1,
+            OfficeCode : model.OfficeCode,
+            DepartmentId :model.DepartmentId,
+            Status:model.Status,
+            Id: model.Id,
+            Phone: model.Phone
+        }
+                
         return this.http.post(url, JSON.stringify(b)
         ,options)            
         .map((response: Response) => {
@@ -113,8 +159,7 @@ export class UserService {
             return this.http.get(url,options)
                 .map((response: Response) => {
                     let user = response.json();
-                    if (user) {
-                        console.log(user);
+                    if (user) {                        
                         return user;
                     }
     
@@ -131,8 +176,7 @@ export class UserService {
         return this.http.get(url+"?officeCode="+officeCode,options) 
             .map((response: Response) => {
                 let user = response.json();
-                if (user) {
-                    console.log(user);
+                if (user) {                    
                     return user;
                 }
 
@@ -147,8 +191,7 @@ export class UserService {
         return this.http.get(url,options) 
             .map((response: Response) => {
                 let user = response.json();
-                if (user) {
-                    console.log(user);
+                if (user) {                    
                     return user;
                 }
 

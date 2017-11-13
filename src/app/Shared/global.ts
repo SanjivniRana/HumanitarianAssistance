@@ -7,9 +7,11 @@ export class GLOBAL {
     public static API_UserDetail_AddUser ='Account/AddUsers';
     public static API_UserDetail_GetUserList ='Account/GetAllUserDetails';
     public static API_UserRoles_GetRolesList = 'Account/GetRoles';
+    public static API_UserRoles_GetUserRolesByUserId = 'Account/GetUserRole';
     public static API_UserRoles_AssignRoleToUser = 'Account/AssignRoleToUser';
     public static API_Permissions_GetPermissionsByRoleId = 'Account/GetPermissionByRoleId';
     public static API_Permissions_GetPermissions = 'Account/GetPermissions';
     public static API_Permissions_AddPermissionInRoles = 'Account/PermissionsInRoles';
     public static API_UserDetail_GetUserDetailsByUserId = 'Account/GetUserDetailsByUserId';
+    public static API_UserDetail_EditUser ='Account/EditUser';
 }

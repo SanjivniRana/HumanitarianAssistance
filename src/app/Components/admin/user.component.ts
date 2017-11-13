@@ -9,7 +9,7 @@ import { SelectItem } from 'primeng/components/common/api';
 import { GLOBAL } from '../../shared/global';
 import { DropdownModule } from 'primeng/primeng';
 import { AppSettingsService } from '../../Services/App-settings.Service';
-import { AddUsers } from '../../Models/AddUser';
+import { AddUsers, EditUsers } from '../../Models/AddUser';
 import { ToastrService } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CustomValidation } from '../../Shared/customValidations';
@@ -69,13 +69,16 @@ export class UserComponent implements OnInit {
   addRoles: any[];
   arrPermissionsId: any[];
   arrPermissionsName: any[];
+  permissionsAndRoleModel:any[];
+  selectedValueInRoles :any[];
+  selectedRole:any;
+  setDepartmentValue:any;
 
   public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
-    // AddUser Modal Popup
-    
+    // AddUser Modal Popup    
     this.userForm = this.fb.group({
       'FirstName' : [null,Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
       'LastName' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
@@ -108,22 +111,19 @@ export class UserComponent implements OnInit {
       'LastName' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
       'Email' : [null, [Validators.required, Validators.email]],
       'Phone' : [null, Validators.required],
-      'Password' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
-      'ConfirmPassword' : [null, Validators.compose([CustomValidation.ComparePassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
+      // 'Password' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
+      // 'ConfirmPassword' : [null, Validators.compose([CustomValidation.ComparePassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
       'OfficeId' : [null, Validators.required],
       'Department' : [null, Validators.required],      
       'Status' : [null]
-    });
-    
+    });    
   }
 
   display: boolean = false;        
   ngOnInit() {
-
     this.getOffices();    
     this.getUserList();
     this.getUserRoles();
-
   }
 
   getOffices()
@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
 
   getDepartment(officeCode)
   {
-    this.userService.getDepartment(this.setting.getBaseUrl() + GLOBAL.API_AllDepartment_Url,officeCode).subscribe(data=>{      
+    this.userService.getDepartment(this.setting.getBaseUrl() + GLOBAL.API_AllDepartment_Url,officeCode).subscribe(data=>{     
       this.department=[];
       data.data.Departments.forEach(element => {
         this.department.push({label:element.DepartmentName,value:element.DepartmentId});
@@ -150,48 +150,44 @@ export class UserComponent implements OnInit {
   {
     this.getDepartment(officeCode);
   }
-  selectedRole:any;
-  onRoleChange(event){
+  
+  onRoleChange(event)
+  {    
     this.selectedValueInPermission=[];
     this.selectedRole=event.value.id;
     this.userService.getPermissionByRoleId(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissionsByRoleId,this.selectedRole).
-    subscribe(data=>{
-      this.loading=false;    
-      data.data.PermissionsInRolesList.forEach(element => {
-        this.selectedValueInPermission.push({PermissionId:element.PermissionId,PermissionName:element.PermissionName});  
-      });        
-  },
-  error => {
-    //this.loading=false;
-    //this.toastr.error("There is Some error....");
-    if (error.message == 500) {
-      
-    //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
-    }
-    else if (error.message == 0) {
-      //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
-    }
-    else {
-      //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
-    }}
-
-);
-
-  //this.selectedValueInPermission=[{PermissionId: "2de4ec45-fee4-46b4-a991-a824011c8418", PermissionName: "CanAdd"}];
-
+      subscribe(data=>{      
+        this.loading=false;
+        data.data.PermissionsInRolesList.forEach(element => {
+          this.selectedValueInPermission.push({PermissionId:element.PermissionId,PermissionName:element.PermissionName});  
+        });        
+        },
+      error => {
+        //this.loading=false;
+        //this.toastr.error("There is Some error....");
+        if (error.message == 500) {
+          
+        //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
+        }
+        else if (error.message == 0) {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
+        }
+        else {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
+        }}
+    );  
   }
+
   getUserList()
   {    
     this.loading=true;
     this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
-      data => {        
-        debugger;
+      data => {              
         this.userDetails = [];
         this.loading=false;
         data.data.UserDetailsList.forEach(element => {
           this.userDetails.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
-        });
-        console.log(this.userDetails);
+        });        
       },
       error => {
         this.loading=false;
@@ -210,9 +206,9 @@ export class UserComponent implements OnInit {
   }
 
   getUserRoles()
-  {
+  {    
     this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList).subscribe(
-      data => {
+      data => {        
         this.roles = [];
         data.data.RoleList.forEach(element => {          
           this.roles.push({label:element.RoleName,value:{id:element.Id, name: element.RoleName}});      
@@ -220,14 +216,16 @@ export class UserComponent implements OnInit {
       }
     )
   }
-  permissionsAndRoleModel:any[];
-  onChangePermission(event){
-  this.permissionsAndRoleModel=[];
-  //console.log(event);
-   event.value.forEach(element => {
-     this.permissionsAndRoleModel.push({RoleId:this.selectedRole,PermissionId:element.PermissionId});  
-   });    
+  
+  onChangePermission(event)
+  {
+      this.permissionsAndRoleModel=[];  
+      event.value.forEach(element => {
+        this.permissionsAndRoleModel.push({RoleId:this.selectedRole,PermissionId:element.PermissionId});  
+      });    
   }
+
+
   assignRolesToUser(Roles)
   {        
     this.addRoles = [];
@@ -245,19 +243,19 @@ export class UserComponent implements OnInit {
   getUserDetailByUserId(UserId)
   {
     this.userService.getUserDetailByUserId(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserDetailsByUserId, UserId).subscribe(
-      data => {
-        debugger;
+      data => {          
+        this.setDepartmentValue = [];
+        this.getDepartment(data.data.UserDetailsList[0].OfficeCode);   
         data.data.UserDetailsList.forEach(element => {
+          this.setDepartmentValue.push({label:element.DepartmentName,value:element.DepartmentId});
           this.userEditForm.setValue({
             FirstName : element.FirstName,
             LastName : element.LastName,
             Email : element.Username,
-            Phone : "1212121212",
-            Password : "aA123456!",
-            ConfirmPassword : 'aA123456!',
+            Phone : element.Phone,            
             OfficeId : element.OfficeCode,
             Department : element.DepartmentId,
-            Status: 1
+            Status: element.Status            
           });
         });              
       }
@@ -265,8 +263,7 @@ export class UserComponent implements OnInit {
   }
 
   PermissionsInRoles(value)
-  {
-   
+  {   
     this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles, this.permissionsAndRoleModel).subscribe(
       data => { 
       }
@@ -288,79 +285,89 @@ export class UserComponent implements OnInit {
       Email: model.Email, 
       Password : model.Password,
       FirstName : model.FirstName,
-     LastName : model.LastName,
-     UserType : localStorage.getItem("UserRoles"),
-     OfficeCode : model.OfficeId,
-     OfficeName: "",
-     DepartmentName : "",
-     DepartmentId : model.Department,
-     Status : model.Status
+      LastName : model.LastName,
+      UserType : localStorage.getItem("UserRoles"),
+      OfficeCode : model.OfficeId,
+      OfficeName: "",
+      DepartmentName : "",
+      DepartmentId : model.Department,
+      Status : model.Status,
+      Phone : model.Phone
     };
     this.userService.AddUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_AddUser, addUser).subscribe(
-      data => {
-          if (data == true) //Success
+      data => {        
+          if (data.StatusCode == 200) //Success
           {
-              //this.msg = "Data successfully added.";
-              
-              //this.LoadUsers();                            
+            this.toastr.success("User Added Successfully!!!");
+            this.getUserList();
+            this.modalRef.hide();  
           }
+          else if(data.StatusCode == 900)
+          {
+            this.toastr.error("User already exist!!!");
+          }          
           else {
-              //error  message
-
-          }
-
-          this.modalRef.hide();
-        
-
+            this.toastr.error("Error!!!");
+          }                
       },
       error => {
           //error message
       }
   );
-    this.modalRef.hide();
+    // this.modalRef.hide();
   }  
 
   userEditFormSubmit(model)
   {
     var obj: any = {};
-    var addUser:AddUsers = {
+    var editUser:EditUsers = {
       UserName : model.Email, 
       Email: model.Email, 
-      Password : model.Password,
+      // Password : model.Password,
       FirstName : model.FirstName,
-     LastName : model.LastName,
-     UserType : localStorage.getItem("UserRoles"),
-     OfficeCode : model.OfficeId,
-     OfficeName: "",
-     DepartmentName : "",
-     DepartmentId : model.Department,
-     Status : model.Status
+      LastName : model.LastName,
+      UserType : localStorage.getItem("UserRoles"),
+      OfficeCode : model.OfficeId,
+      OfficeName: "",
+      DepartmentName : "",
+      DepartmentId : model.Department,
+      Status : model.Status,
+      Id: this.UserId,
+      Phone : model.Phone
     };
-    this.userService.AddUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_AddUser, addUser).subscribe(
-      data => {
-          if (data == true) //Success
-          {
-              //this.msg = "Data successfully added.";
-              
-              //this.LoadUsers();                            
-          }
-          else {
-              //error  message
 
-          }
-
-          this.modalRef.hide();
-        
-
+    this.userService.EditUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_EditUser, editUser).subscribe(
+      data => {        
+        if (data.StatusCode == 200) //Success
+        {
+          this.toastr.success("User Updated Successfully!!!");
+          this.getUserList();
+        }
+        else {
+          this.toastr.error("Error!!!");
+        }
+          this.modalEditUserPermission.hide();        
       },
       error => {
           //error message
       }
   );
-    this.modalRef.hide();
+    this.modalEditUserPermission.hide();
   }  
 
-  openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
+  getUserRolesByUserId(UserId)
+  {    
+    this.userService.getUserRolesByUserId(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetUserRolesByUserId, UserId).subscribe(
+      data => {                        
+        this.selectedValueInRoles = [];
+        data.data.RoleList.forEach(element => {
+          this.selectedValueInRoles.push({id:element.Id, name: element.RoleName});  
+        });
+      }
+    )
+  }
+
+  openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) {             
     this.UserId = colvalue.Id;     
     this.modalRefPermission = this.modalService.show(
       templatePermissions,
@@ -378,7 +385,8 @@ export class UserComponent implements OnInit {
 
   openModalEditPermissions(EditPermissionsTemplate: TemplateRef<any>,colvalue) {     
     this.getPermissions();
-    this.getUserDetailByUserId(colvalue.Id);    
+    this.getUserDetailByUserId(colvalue.Id);   
+    this.UserId = colvalue.Id;   
     this.modalEditUserPermission = this.modalService.show(
       EditPermissionsTemplate,
       Object.assign({}, this.config, { class: 'gray modal-lg' })

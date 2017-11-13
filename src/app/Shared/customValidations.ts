@@ -127,11 +127,9 @@ export class CustomValidation {
 
    static checkCurrentPasswordForServer(ctrl:FormControl) {
     return (control: FormControl): Promise<any> => {
-        return new Promise<any>((resolve, reject) => {
-            console.log("existing");
+        return new Promise<any>((resolve, reject) => {            
             if (ctrl.value != undefined) {
-                 if(ctrl.value=="abc"){
-                    console.log("existing");
+                 if(ctrl.value=="abc"){                    
                     resolve({ checkCurrentPasswordForServer: true });
                     
                  }

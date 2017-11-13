@@ -60,7 +60,7 @@ import { ToastrService } from 'ngx-toastr';
             this.loginModel.ErrorMessage = data.Result;
           }
         },
-        error => {
+        error => {          
           this.loading=false;
           this.toastr.error("Invalid Password or User Name");
           if (error.message == 500) {
