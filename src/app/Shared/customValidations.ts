@@ -127,5 +127,34 @@ export class CustomValidation {
     }
 
     
+   static checkCurrentPasswordForServer(ctrl:FormControl) {
+    return (control: FormControl): Promise<any> => {
+        return new Promise<any>((resolve, reject) => {            
+            if (ctrl.value != undefined) {
+                 if(ctrl.value=="abc"){                    
+                    resolve({ checkCurrentPasswordForServer: true });
+                    
+                 }
+        //         userservice.isUserNameExisting(currentPassword, control.value).subscribe(
+        //             (res) => {
+        //                 if (res.isUserNameExisting) {
+        //                     console.log("existing");
+        //                     resolve({ 'existing': true });
+        //                 } else {
+        //                     console.log("NOT existing");
+        //                     resolve(null);
+        //                 }
+        //             },
+        //             (error) => {
+        //                 console.log(error);
+        //             }
+        //         );
+             } else {
+                 resolve(null);
+             }
+         })
+     }
+
+   }
     
 }

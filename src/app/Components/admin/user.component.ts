@@ -9,7 +9,7 @@ import { SelectItem } from 'primeng/components/common/api';
 import { GLOBAL } from '../../shared/global';
 import { DropdownModule } from 'primeng/primeng';
 import { AppSettingsService } from '../../Services/App-settings.Service';
-import { AddUsers } from '../../Models/AddUser';
+import { AddUsers, EditUsers } from '../../Models/AddUser';
 import { ToastrService } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CustomValidation } from '../../Shared/customValidations';
@@ -47,6 +47,7 @@ export class UserComponent implements OnInit,OnDestroy {
   userForm: FormGroup;
   userRoles: FormGroup;
   AddPermissions: FormGroup;
+  userEditForm: FormGroup;
 
   //Modal popup instances
   modalRef: BsModalRef;
@@ -54,6 +55,7 @@ export class UserComponent implements OnInit,OnDestroy {
   modalPermission: BsModalRef;
   modalResetPassword:BsModalRef;
   
+  modalEditUserPermission : BsModalRef;
   config = {
     animated: true,
     keyboard: true,
@@ -74,17 +76,20 @@ export class UserComponent implements OnInit,OnDestroy {
   private ChangePassword: FormGroup;
 
   //UserId For AddRoles
-  UserId:any;
+  UserId:any;               //Global UserId FROM Table is selected for controls
   addRoles: any[];
   arrPermissionsId: any[];
   arrPermissionsName: any[];
+  permissionsAndRoleModel:any[];
+  selectedValueInRoles :any[];
+  selectedRole:any;
+  setDepartmentValue:any;
 
   public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private router: Router, private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
-    // AddUser Modal Popup
-    
+    // AddUser Modal Popup    
     this.userForm = this.fb.group({
       'FirstName' : [null,Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
       'LastName' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
@@ -114,17 +119,26 @@ export class UserComponent implements OnInit,OnDestroy {
     this.AddPermissions = this.fb.group({
       'Roles' : [null],
       'Permissions' : [null]
-    }); 
-    
+    });     
+
+    this.userEditForm = this.fb.group({
+      'FirstName' : [null,Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
+      'LastName' : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
+      'Email' : [null, [Validators.required, Validators.email]],
+      'Phone' : [null, Validators.required],
+      // 'Password' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
+      // 'ConfirmPassword' : [null, Validators.compose([CustomValidation.ComparePassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])], 
+      'OfficeId' : [null, Validators.required],
+      'Department' : [null, Validators.required],      
+      'Status' : [null]
+    });    
   }
 
   display: boolean = false;        
   ngOnInit() {
-
     this.getOffices();    
     this.getUserList();
     this.getUserRoles();
-
   }
 
   getOffices()
@@ -142,9 +156,7 @@ export class UserComponent implements OnInit,OnDestroy {
 
   getDepartment(officeCode)
   {
-    this.userService.getDepartment(this.setting.getBaseUrl() + GLOBAL.API_AllDepartment_Url,officeCode)
-    .takeUntil(this.unsubscribe)
-    .subscribe(data=>{      
+    this.userService.getDepartment(this.setting.getBaseUrl() + GLOBAL.API_AllDepartment_Url,officeCode).subscribe(data=>{     
       this.department=[];
       data.data.Departments.forEach(element => {
         this.department.push({label:element.DepartmentName,value:element.DepartmentId});
@@ -156,49 +168,44 @@ export class UserComponent implements OnInit,OnDestroy {
   {
     this.getDepartment(officeCode);
   }
-  selectedRole:any;
-  onRoleChange(event){
+  
+  onRoleChange(event)
+  {    
     this.selectedValueInPermission=[];
     this.selectedRole=event.value.id;
-    this.userService.getPermissionByRoleId(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissionsByRoleId,this.selectedRole)
-    .takeUntil(this.unsubscribe)
-    .subscribe(data=>{
-      this.loading=false;    
-      data.data.PermissionsInRolesList.forEach(element => {
-        this.selectedValueInPermission.push({PermissionId:element.PermissionId,PermissionName:element.PermissionName});  
-      });        
-  },
-  error => {
-    //this.loading=false;
-    //this.toastr.error("There is Some error....");
-    if (error.message == 500) {
-      
-    //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
-    }
-    else if (error.message == 0) {
-      //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
-    }
-    else {
-      //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
-    }}
-
-);
-
-  //this.selectedValueInPermission=[{PermissionId: "2de4ec45-fee4-46b4-a991-a824011c8418", PermissionName: "CanAdd"}];
-
+    this.userService.getPermissionByRoleId(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissionsByRoleId,this.selectedRole).
+      subscribe(data=>{      
+        this.loading=false;
+        data.data.PermissionsInRolesList.forEach(element => {
+          this.selectedValueInPermission.push({PermissionId:element.PermissionId,PermissionName:element.PermissionName});  
+        });        
+        },
+      error => {
+        //this.loading=false;
+        //this.toastr.error("There is Some error....");
+        if (error.message == 500) {
+          
+        //  this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Oops, Something went wrong. Please try again.' });
+        }
+        else if (error.message == 0) {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Network error, Please try again later' });
+        }
+        else {
+          //this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
+        }}
+    );  
   }
-  
+
   getUserList()
   {    
     this.loading=true;
-    this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).
-    takeUntil(this.unsubscribe).subscribe(
-      data => {        
+    this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
+      data => {              
         this.userDetails = [];
         this.loading=false;
         data.data.UserDetailsList.forEach(element => {
           this.userDetails.push({FirstName:element.FirstName,LastName:element.LastName,Email:element.Username,UserId:element.UserId,Id:element.Id, Office:element.OfficeName,Status:element.Status==1 ? "Active" : "InActive"});
-        });
+        });        
       },
       error => {
         this.loading=false;
@@ -226,11 +233,9 @@ export class UserComponent implements OnInit,OnDestroy {
   }
 
   getUserRoles()
-  {
-    this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList)
-    .takeUntil(this.unsubscribe)
-    .subscribe(
-      data => {
+  {    
+    this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList).subscribe(
+      data => {        
         this.roles = [];
         data.data.RoleList.forEach(element => {          
           this.roles.push({label:element.RoleName,value:{id:element.Id, name: element.RoleName}});      
@@ -238,14 +243,16 @@ export class UserComponent implements OnInit,OnDestroy {
       }
     )
   }
-  permissionsAndRoleModel:any[];
-  onChangePermission(event){
-  this.permissionsAndRoleModel=[];
-  //console.log(event);
-   event.value.forEach(element => {
-     this.permissionsAndRoleModel.push({RoleId:this.selectedRole,PermissionId:element.PermissionId});  
-   });    
+  
+  onChangePermission(event)
+  {
+      this.permissionsAndRoleModel=[];  
+      event.value.forEach(element => {
+        this.permissionsAndRoleModel.push({RoleId:this.selectedRole,PermissionId:element.PermissionId});  
+      });    
   }
+
+
   assignRolesToUser(Roles)
   {        
     this.addRoles = [];
@@ -260,12 +267,31 @@ export class UserComponent implements OnInit,OnDestroy {
     )
   }
 
-  PermissionsInRoles(value)
+  getUserDetailByUserId(UserId)
   {
-   
-    this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles, this.permissionsAndRoleModel)
-    .takeUntil(this.unsubscribe)
-    .subscribe(
+    this.userService.getUserDetailByUserId(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserDetailsByUserId, UserId).subscribe(
+      data => {          
+        this.setDepartmentValue = [];
+        this.getDepartment(data.data.UserDetailsList[0].OfficeCode);   
+        data.data.UserDetailsList.forEach(element => {
+          this.setDepartmentValue.push({label:element.DepartmentName,value:element.DepartmentId});
+          this.userEditForm.setValue({
+            FirstName : element.FirstName,
+            LastName : element.LastName,
+            Email : element.Username,
+            Phone : element.Phone,            
+            OfficeId : element.OfficeCode,
+            Department : element.DepartmentId,
+            Status: element.Status            
+          });
+        });              
+      }
+    )
+  }
+
+  PermissionsInRoles(value)
+  {   
+    this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles, this.permissionsAndRoleModel).subscribe(
       data => { 
       }
     )
@@ -286,38 +312,74 @@ export class UserComponent implements OnInit,OnDestroy {
       Email: model.Email, 
       Password : model.Password,
       FirstName : model.FirstName,
-     LastName : model.LastName,
-     UserType : localStorage.getItem("UserRoles"),
-     OfficeCode : model.OfficeId,
-     OfficeName: "",
-     DepartmentName : "",
-     DepartmentId : model.Department,
-     Status : model.Status
+      LastName : model.LastName,
+      UserType : localStorage.getItem("UserRoles"),
+      OfficeCode : model.OfficeId,
+      OfficeName: "",
+      DepartmentName : "",
+      DepartmentId : model.Department,
+      Status : model.Status,
+      Phone : model.Phone
     };
-    this.userService.AddUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_AddUser, addUser)
-    .takeUntil(this.unsubscribe)
-    .subscribe(
-      data => {
-          if (data == true) //Success
+    this.userService.AddUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_AddUser, addUser).subscribe(
+      data => {        
+          if (data.StatusCode == 200) //Success
           {
-              //this.msg = "Data successfully added.";
-              
-              //this.LoadUsers();                            
+            this.toastr.success("User Added Successfully!!!");
+            this.getUserList();
+            this.modalRef.hide();  
           }
+          else if(data.StatusCode == 900)
+          {
+            this.toastr.error("User already exist!!!");
+          }          
           else {
-              //error  message
-
-          }
-
-          this.modalRef.hide();
-        
-
+            this.toastr.error("Error!!!");
+          }                
       },
       error => {
           //error message
       }
   );
-    this.modalRef.hide();
+    // this.modalRef.hide();
+  }  
+
+  userEditFormSubmit(model)
+  {
+    var obj: any = {};
+    var editUser:EditUsers = {
+      UserName : model.Email, 
+      Email: model.Email, 
+      // Password : model.Password,
+      FirstName : model.FirstName,
+      LastName : model.LastName,
+      UserType : localStorage.getItem("UserRoles"),
+      OfficeCode : model.OfficeId,
+      OfficeName: "",
+      DepartmentName : "",
+      DepartmentId : model.Department,
+      Status : model.Status,
+      Id: this.UserId,
+      Phone : model.Phone
+    };
+
+    this.userService.EditUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_EditUser, editUser).subscribe(
+      data => {        
+        if (data.StatusCode == 200) //Success
+        {
+          this.toastr.success("User Updated Successfully!!!");
+          this.getUserList();
+        }
+        else {
+          this.toastr.error("Error!!!");
+        }
+          this.modalEditUserPermission.hide();        
+      },
+      error => {
+          //error message
+      }
+  );
+    this.modalEditUserPermission.hide();
   }  
 
    private userName :string;
@@ -344,7 +406,20 @@ export class UserComponent implements OnInit,OnDestroy {
       Object.assign({}, this.config, { class: 'gray modal-lg' })
     );
   }
-  openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
+  //openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
+  getUserRolesByUserId(UserId)
+  {    
+    this.userService.getUserRolesByUserId(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetUserRolesByUserId, UserId).subscribe(
+      data => {                        
+        this.selectedValueInRoles = [];
+        data.data.RoleList.forEach(element => {
+          this.selectedValueInRoles.push({id:element.Id, name: element.RoleName});  
+        });
+      }
+    )
+  }
+
+  openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) {             
     this.UserId = colvalue.Id;     
     console.log(colvalue);
     this.modalRefPermission = this.modalService.show(
@@ -360,6 +435,16 @@ export class UserComponent implements OnInit,OnDestroy {
       Object.assign({}, this.config, { class: 'gray modal-lg' })
     );
   } 
+
+  openModalEditPermissions(EditPermissionsTemplate: TemplateRef<any>,colvalue) {     
+    this.getPermissions();
+    this.getUserDetailByUserId(colvalue.Id);   
+    this.UserId = colvalue.Id;   
+    this.modalEditUserPermission = this.modalService.show(
+      EditPermissionsTemplate,
+      Object.assign({}, this.config, { class: 'gray modal-lg' })
+    );
+  }
 
  selectedValueInPermission :any[];
   getPermissions()

@@ -30,11 +30,12 @@
         <p-column field="UserId" header="UserId" [hidden]="true"></p-column>
 
                 <ng-template let-col let-car="rowData" pTemplate="body" let-i="rowIndex">
-                        <a (click)="openModalPermissions(templatePermissions,userDetails[i])">
+                        <a (click)="openModalPermissions(templatePermissions,userDetails[i])" title="Add Roles">
                                         <i class="fa fa-sitemap" aria-hidden="true"></i>
                          </a>
-                         <a ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                         <a (click)="openModalEditPermissions(templateEditUser,userDetails[i])" title="Edit User"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                          <a (click)="openModelOnResetPassword(ResetPasswordTemplate,userDetails[i])"> <i class="fa fa-exchange" aria-hidden="true"></i> </a>
+                         
                 </ng-template>
         </p-column>        
     </p-dataTable>
@@ -59,10 +60,6 @@
             </div> 
             <div class="col-sm-7" [ngClass]="{ 'has-error': userForm.submitted && !FirstName.valid }">                    
                 <input type="text" class="form-control" formControlName="FirstName" placeholder="First Name" />
-                <div *ngIf="userForm.controls['FirstName'].errors && !userForm.controls['FirstName'].pristine && userForm.controls['FirstName'].touched==true" class="error-msg">
-                    <div [hidden]="!userForm.controls['FirstName'].errors.required">FirstName is required.</div>
-                    <div [hidden]="!userForm.controls['FirstName'].errors.patternInvalid">FirstName is invalid.</div>
-                </div>
             </div>
         </div> 
         </div>   
@@ -72,11 +69,7 @@
                     <label>Last Name:</label><span style="color:red">*</span>
               </div> 
               <div class="col-sm-7">
-                    <input class="form-control" type="text" formControlName="LastName" placeholder="Last Name"/>
-                    <div *ngIf="userForm.controls['LastName'].errors && !userForm.controls['LastName'].pristine" class="error-msg">
-                            <div [hidden]="!userForm.controls['LastName'].errors.required">LastName is required.</div>
-                            <div [hidden]="!userForm.controls['LastName'].errors.patternInvalid">LastName is invalid.</div>
-                    </div>
+                    <input class="form-control" type="text" formControlName="LastName" placeholder="Last Name"/>                   
               </div> 
         </div> 
          </div> 
@@ -88,11 +81,7 @@
                  <label>Email:</label><span style="color:red">*</span>
              </div> 
              <div class="col-sm-7">
-                 <input class="form-control" type="Email" formControlName="Email" placeholder="Email"/>
-                 <div *ngIf="userForm.controls['Email'].errors && !userForm.controls['Email'].pristine" class="error-msg">
-                        <div [hidden]="!userForm.controls['Email'].errors.required">Email is required.</div>
-                        <div [hidden]="!userForm.controls['Email'].errors.patternInvalid">Email is invalid.</div>
-                </div>
+                 <input class="form-control" type="Email" formControlName="Email" placeholder="Email"/>                 
              </div>
         </div> 
         </div>   
@@ -102,11 +91,7 @@
                   <label>Phone:</label>
               </div> 
               <div class="col-sm-7">
-                  <input [textMask]="{mask: mask}" class="form-control" type="text" formControlName="Phone" placeholder="Phone"/>
-                  <div *ngIf="userForm.controls['Phone'].errors && !userForm.controls['Phone'].pristine" class="error-msg">
-                        <div [hidden]="!userForm.controls['Phone'].errors.required">Phone is required.</div>
-                        <div [hidden]="!userForm.controls['Phone'].errors.patternInvalid">Phone is invalid.</div>
-                </div>
+                  <input [textMask]="{mask: mask}" class="form-control" type="text" formControlName="Phone" placeholder="Phone"/>                  
               </div>
         </div> 
          </div> 
@@ -118,11 +103,7 @@
                      <label>Password:</label><span style="color:red">*</span>
                  </div> 
                  <div class="col-sm-7">
-                     <input class="form-control" type="password" formControlName="Password" placeholder="Password"/>
-                     <div *ngIf="userForm.controls['Password'].errors && !userForm.controls['Password'].pristine" class="error-msg">
-                            <div [hidden]="!userForm.controls['Password'].errors.required">Password is required.</div>
-                            <div [hidden]="!userForm.controls['Password'].errors.patternInvalid">Password is invalid.</div>
-                    </div>
+                     <input class="form-control" type="password" formControlName="Password" placeholder="Password"/>                     
                  </div>
                 </div> 
             </div>   
@@ -132,11 +113,7 @@
                       <label>Confirm Password:</label><span style="color:red">*</span>
                   </div> 
                   <div class="col-sm-7">
-                      <input class="form-control" type="password" formControlName="ConfirmPassword" placeholder="Confirm Password"/>
-                      <div *ngIf="userForm.controls['ConfirmPassword'].errors && !userForm.controls['ConfirmPassword'].pristine" class="error-msg">
-                            <div [hidden]="!userForm.controls['ConfirmPassword'].errors.required">ConfirmPassword is required.</div>
-                            <div [hidden]="!userForm.controls['ConfirmPassword'].errors.patternInvalid">ConfirmPassword is invalid.</div>
-                    </div>
+                      <input class="form-control" type="password" formControlName="ConfirmPassword" placeholder="Confirm Password"/>                      
                   </div> 
                 </div>
              </div> 
@@ -148,11 +125,7 @@
                          <label>Office:</label><span style="color:red">*</span>
                      </div> 
                      <div class="col-sm-7">
-                                <p-dropdown [options]="officeId" class="form-control" formControlName="OfficeId"  placeholder="Select an Office" (onChange)="onChangeOffice($event.value)" required></p-dropdown>                            
-                            <div *ngIf="userForm.controls['OfficeId'].errors && !userForm.controls['OfficeId'].pristine &&  OfficeId.length > 0" class="error-msg">
-                                    <div [hidden]="!userForm.controls['OfficeId'].errors.required">OfficeId is required.</div>
-                                    <div [hidden]="!userForm.controls['OfficeId'].errors.patternInvalid">OfficeId is invalid.</div>
-                            </div>
+                                <p-dropdown [options]="officeId" class="form-control" formControlName="OfficeId"  placeholder="Select an Office" (onChange)="onChangeOffice($event.value)" required></p-dropdown>                                                        
                      </div>
                 </div> 
                 </div>    
@@ -162,11 +135,7 @@
                              <label>Department:</label><span style="color:red">*</span>
                          </div> 
                          <div class="col-sm-7">
-                                <p-dropdown [options]="department" class="form-control" formControlName="Department"  placeholder="Select a Department"></p-dropdown>
-                                <div *ngIf="userForm.controls['Department'].errors && !userForm.controls['Department'].pristine" class="error-msg">
-                                        <div [hidden]="!userForm.controls['Department'].errors.required">Department is required.</div>
-                                        <div [hidden]="!userForm.controls['Department'].errors.patternInvalid">Department is invalid.</div>
-                                </div>
+                                <p-dropdown [options]="department" class="form-control" formControlName="Department"  placeholder="Select a Department"></p-dropdown>                                
                          </div> 
                         </div> 
                     </div>                
@@ -179,11 +148,7 @@
                                      <label>Status:</label>
                                  </div> 
                                  <div class="col-sm-7">
-                                        <p-dropdown [options]="status" class="form-control" formControlName="Status"  placeholder="Select a Status"></p-dropdown>
-                                        <div *ngIf="userForm.controls['Status'].errors && !userForm.controls['Status'].pristine" class="error-msg">
-                                                <div [hidden]="!userForm.controls['Status'].errors.required">Status is required.</div>
-                                                <div [hidden]="!userForm.controls['Status'].errors.patternInvalid">Status is invalid.</div>
-                                        </div>
+                                        <p-dropdown [options]="status" class="form-control" formControlName="Status"  placeholder="Select a Status"></p-dropdown>                                        
                                  </div> 
                                 </div> 
                             </div>                
@@ -198,6 +163,129 @@
 
 </form>
 </ng-template>
+
+
+<!-- Edit USERS MODAL POPUP -->
+
+<ng-template #templateEditUser>
+                <form name="userEditForm" [formGroup]="userEditForm" class="login-inner" (ngSubmit)="userEditForm.valid && userEditFormSubmit(userEditForm.value)" novalidate>
+             <div class="modal-header gray-header">
+               <h4 class="modal-title pull-left">Edit User</h4>
+               <button type="button" class="close pull-right" aria-label="Close" (click)="modalEditUserPermission.hide()">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body gray-body popup-default-form" style="background-color:#fff;color:#000">
+               <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-5">
+                             <label>First Name:</label><span style="color:red">*</span>
+                        </div> 
+                        <div class="col-sm-7" [ngClass]="{ 'has-error': userEditForm.submitted && !FirstName.valid }">                    
+                            <input type="text" class="form-control" formControlName="FirstName" placeholder="First Name" />                            
+                        </div>
+                    </div> 
+                    </div>   
+                    <div class="col-sm-6">
+                        <div class="row">
+                         <div class="col-sm-5">
+                                <label>Last Name:</label><span style="color:red">*</span>
+                          </div> 
+                          <div class="col-sm-7">
+                                <input class="form-control" type="text" formControlName="LastName" placeholder="Last Name"/>                                
+                          </div> 
+                    </div> 
+                     </div> 
+                </div>
+               <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                        <div class="col-sm-5">
+                             <label>Email:</label><span style="color:red">*</span>
+                         </div> 
+                         <div class="col-sm-7">
+                             <input class="form-control" type="Email" formControlName="Email" placeholder="Email"/>                             
+                         </div>
+                    </div> 
+                    </div>   
+                    <div class="col-sm-6">
+                          <div class="row">
+                            <div class="col-sm-5">
+                              <label>Phone:</label>
+                          </div> 
+                          <div class="col-sm-7">
+                              <input [textMask]="{mask: mask}" class="form-control" type="text" formControlName="Phone" placeholder="Phone"/>                              
+                          </div>
+                    </div> 
+                     </div> 
+                </div>
+                <!-- <div class="row">
+                        <div class="col-sm-6">
+                           <div class="row">
+                            <div class="col-sm-5">
+                                 <label>Password:</label><span style="color:red">*</span>
+                             </div> 
+                             <div class="col-sm-7">
+                                 <input class="form-control" type="password" formControlName="Password" placeholder="Password"/>                                 
+                             </div>
+                            </div> 
+                        </div>   
+                        <div class="col-sm-6">
+                           <div class="row"> 
+                            <div class="col-sm-5">
+                                  <label>Confirm Password:</label><span style="color:red">*</span>
+                              </div> 
+                              <div class="col-sm-7">
+                                  <input class="form-control" type="password" formControlName="ConfirmPassword" placeholder="Confirm Password"/>                                  
+                              </div> 
+                            </div>
+                         </div> 
+                    </div>                      -->
+                    <div class="row">
+                            <div class="col-sm-6">
+                                   <div class="row">
+                                    <div class="col-sm-5">  
+                                     <label>Office:</label><span style="color:red">*</span>
+                                 </div> 
+                                 <div class="col-sm-7">
+                                            <p-dropdown [options]="officeId" class="form-control" formControlName="OfficeId"  placeholder="Select an Office" (onChange)="onChangeOffice($event.value)" required></p-dropdown>                                                                    
+                                 </div>
+                            </div> 
+                            </div>    
+                            <div class="col-sm-6">
+                                   <div class="row">
+                                    <div class="col-sm-5">  
+                                         <label>Department:</label><span style="color:red">*</span>
+                                     </div> 
+                                     <div class="col-sm-7">
+                                            <p-dropdown [options]="department" [(ngModel)]="setDepartmentValue" class="form-control" formControlName="Department"  placeholder="Select a Department"></p-dropdown>                                            
+                                     </div> 
+                                    </div> 
+                                </div>                
+                        </div>      
+            
+                        <div class="row">   
+                                    <div class="col-sm-6">
+                                           <div class="row">
+                                            <div class="col-sm-5">  
+                                                 <label>Status:</label>
+                                             </div> 
+                                             <div class="col-sm-7">
+                                                    <p-dropdown [options]="status" class="form-control" formControlName="Status"  placeholder="Select a Status"></p-dropdown>                                                    
+                                             </div> 
+                                            </div> 
+                                        </div>                
+                                </div> 
+             </div>
+             <div class="modal-footer gray-body">
+                    <div class="pull-right">
+                            <button type="submit" [disabled]="!userEditForm.valid" class="btn btn-default btn-primary add-btn-basic">Save</button>
+                            <a (click)="modalEditUserPermission.hide()" class="btn btn-default" >Cancel</a>
+                    </div>
+            </div>               
+            </form>
+            </ng-template>
 
 
 <!-- Modal Popup for Roles -->
@@ -218,7 +306,7 @@
                                          <label>Add Roles:</label>                                         
                                      </div> 
                                      <div class="col-sm-7">
-                                                <p-multiSelect [options]="roles" class="form-control" formControlName="Roles" defaultLabel="Select Roles"></p-multiSelect>                                                                                       
+                                                <p-multiSelect [options]="roles" [(ngModel)]="selectedValueInRoles" displaySelectedLabel="selectedValueInRoles" class="form-control" formControlName="Roles" defaultLabel="Select Roles" ></p-multiSelect>                                                                                       
                                      </div>
                                 </div> 
                                 </div>                                                     
@@ -253,8 +341,10 @@
                                                                          <label>Roles:</label>                                         
                                                                  </div> 
                                                                  <div class="col-sm-7">
+                                                                         <div class="multi-drop-custom">
                                                                         <p-dropdown [options]="roles" class="form-control" formControlName="Roles" (onChange)="onRoleChange($event)"  placeholder="Select a Role"></p-dropdown>                            
-                                                                 </div>
+                                                                          </div>      
+                                                                </div>
                                                          </div> 
                                         </div>
                                         <div class="col-sm-6">
@@ -263,8 +353,7 @@
                                                                 <label>Add Permissions:</label>                                         
                                                         </div> 
                                                         <div class="col-sm-7">
-                                                                        <p-multiSelect [options]="Permissions" [(ngModel)]="selectedValueInPermission" displaySelectedLabel="selectedValueInPermission" class="form-control"  formControlName="Permissions" (onChange)="onChangePermission($event)" defaultLabel="Select Permissions">
-                                                                                 
+                                                                        <p-multiSelect [options]="Permissions" [(ngModel)]="selectedValueInPermission" displaySelectedLabel="selectedValueInPermission" class="form-control"  formControlName="Permissions" (onChange)="onChangePermission($event)" defaultLabel="Select Permissions">                                                               
                                                                         </p-multiSelect>
                                                         </div>
                                                 </div> 
