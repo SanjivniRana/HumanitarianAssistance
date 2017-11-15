@@ -37,7 +37,7 @@ import {CheckboxModule} from 'primeng/primeng';
       //BrowserAnimationsModule,
       FormsModule,
       ReactiveFormsModule,
-    TranslateModule.forChild({    }),
+    TranslateModule.forChild({}),
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.threeBounce,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)', 

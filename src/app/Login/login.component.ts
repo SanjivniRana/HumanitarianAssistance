@@ -13,6 +13,7 @@ import { AuthenticationService } from './../Services/Authentication.Service';
 import { AppSettingsService } from '../Services/App-settings.Service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { GLOBAL } from '../shared/global';
   @Component({
     selector: "app-Login",
     templateUrl: './login.Component.html'
@@ -22,6 +23,12 @@ import { ToastrService } from 'ngx-toastr';
     rForm: FormGroup;
     returnUrl: string;
     messages: any = [];
+    userRolesArr : any [];
+    userRoles : any;
+
+    //UserPermissions
+    userPermission : any [];
+
     constructor(private toastr: ToastrService, private fb: FormBuilder,private router: Router,private appSettigs: AppSettingsService,private authenticationService: AuthenticationService,  private route: ActivatedRoute, ) { 
               
          this.rForm = fb.group({
@@ -39,22 +46,30 @@ import { ToastrService } from 'ngx-toastr';
       this.loading=true;
       this.returnUrl;
       this.loginModel.UserName = e.Username;
-      this.loginModel.Password = e.Password;
+      this.loginModel.Password = e.Password;      
       this.authenticationService.login(this.loginModel)
       .subscribe(
-        data => {          
+        data => { 
+          debugger;   
+          this.userRolesArr = [];
+          data.data.Roles.forEach(element => {
+            this.userRolesArr.push(element);            
+          });
+          this.userRoles = this.userRolesArr.join(',');                 
           if (data.Message == "Success" || data.StatusCode==200) {
             localStorage.setItem('authenticationtoken', data.data.Token);
-            localStorage.setItem('UserRoles', data.data.Roles[0]);
-            // localStorage.setItem('userRoles', data.RolesTicket);
-            //localStorage.setItem('userId', data.UserId);
-            if (data.data.Roles[0] == "SuperAdmin") {  
-                this.checkToken.emit();            
-                this.router.navigate(['admin']);              
-            }
-            else {
-              this.checkToken.emit();
-            }
+            localStorage.setItem('UserRoles', this.userRoles);            
+            localStorage.setItem('UserId', data.data.AspNetUserId);
+            localStorage.setItem('UserName',this.loginModel.UserName);
+            // if (data.data.Roles[0] == "SuperAdmin") {  
+            //     this.checkToken.emit();            
+            //     this.router.navigate(['admin']);              
+            // }
+            // else {
+            //   this.checkToken.emit();
+            // }
+            this.checkToken.emit();            
+            this.router.navigate(['admin']);            
           }
           else {
             this.loginModel.ErrorMessage = data.Result;
@@ -74,29 +89,5 @@ import { ToastrService } from 'ngx-toastr';
             this.messages.push({ severity: 'error', summary: 'Error Message', detail: 'Some error occured, Please contact your admin' });
           }
         });
-      // if((e.Username == "naval@yopmail.com") && (e.Password =="naval123"))
-      // {
-      //       notify({
-      //         message: "You have successfully login",
-      //         position: {
-      //             my: "center top",
-      //             at: "center top"
-      //         }
-      //     }, "success", 2000);
-      //     localStorage.setItem('token','sdfsdfdsfdsfdsfdsfdsf');
-      //     this.checkToken.emit();
-      //     this.router.navigate(['admin']);
-      // }
-      
-      // else{
-      //   notify({
-      //     message: "Invalid User",
-      //     position: {
-      //         my: "center top",
-      //         at: "center top"
-      //     }
-      // }, "error", 2000);
-      // }
-  }
-
+  }  
 } 

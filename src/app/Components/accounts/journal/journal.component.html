@@ -1,0 +1,358 @@
+<div class="row">
+ 
+    <div class="col-sm-12">
+      <h3 class="page-heading">Journal</h3>
+
+      <!-- Journal Filters -->   
+      <div>
+                <form action="your-action" (submit)="onFormSubmit($event)">
+                        <dx-form id="form"      
+                            [formData]="customer"      
+                            [readOnly]="false"
+                            [showColonAfterLabel]="true"
+                            [showValidationSummary]="true"
+                            validationGroup="customerData">
+
+                            <dxi-item dataField="Currency"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Office"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Record Type"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Journal"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Status"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item 
+                                dataField="Date"
+                                editorType="dxDateBox"
+                                [editorOptions]="{ 
+                                    invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
+                                <dxo-label
+                                    text="Report Date From">
+                                </dxo-label>
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Date of birth is required">
+                                </dxi-validation-rule>
+                                <dxi-validation-rule 
+                                    type="range"
+                                    [max]="maxDate"
+                                    message="You must be at least 21 years old">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item 
+                                dataField="Date"
+                                editorType="dxDateBox"
+                                [editorOptions]="{ 
+                                    invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
+                                <dxo-label
+                                    text="Report Date To">
+                                </dxo-label>
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Date of birth is required">
+                                </dxi-validation-rule>
+                                <dxi-validation-rule 
+                                    type="range"
+                                    [max]="maxDate"
+                                    message="You must be at least 21 years old">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="B/Line From">
+                                    <dxi-validation-rule 
+                                        type="required"
+                                        message="Login is required">
+                                    </dxi-validation-rule>
+                            </dxi-item>
+                            
+                            <dxi-item dataField="B/Line To">
+                                    <dxi-validation-rule 
+                                        type="required"
+                                        message="Login is required">
+                                    </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Account From"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Account To"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Job From"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Job To"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Project From"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            <dxi-item dataField="Project To"
+                                editorType="dxSelectBox"
+                                [editorOptions]="{ dataSource: countries }">
+                                <dxi-validation-rule 
+                                    type="required"
+                                    message="Country is required">
+                                </dxi-validation-rule>
+                            </dxi-item>
+
+                            
+                        </dx-form>
+                        <br />
+                        <dx-button
+                            text="Register"
+                            type="success"
+                            validationGroup="customerData"
+                            [useSubmitBehavior]="true">
+                        </dx-button>
+                    </form>        
+                </div>               
+      <!-- Journal Filters End -->
+
+    <div>
+        <hr>
+        <div>
+            <dx-button
+                text="Export To Excel"
+                type="success"
+                validationGroup="customerData"
+                [useSubmitBehavior]="true">
+            </dx-button>
+            <dx-button
+                text="Ledger Report"
+                type="success"
+                validationGroup="customerData"
+                [useSubmitBehavior]="true">
+            </dx-button>
+            <dx-button
+                text="Summary Report"
+                type="success"
+                validationGroup="customerData"
+                [useSubmitBehavior]="true">
+            </dx-button>
+            <dx-button
+                text="Trial Report"
+                type="success"
+                validationGroup="customerData"
+                [useSubmitBehavior]="true">
+            </dx-button>
+        </div>
+
+      <dx-select-box
+      [items]="statuses" 
+      [value]="statuses[0]" 
+      (onValueChanged)="selectStatus($event)"></dx-select-box>
+      <dx-data-grid 
+      id="gridContainer" 
+      [allowColumnReordering]="true"
+      [allowColumnResizing]="true"
+      [columnAutoWidth]="true"
+      [dataSource]="orders">
+      <dxo-filter-row 
+          [visible]="showFilterRow" 
+          [applyFilter]="applyFilter.value"></dxo-filter-row>
+      <dxo-header-filter 
+          [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-search-panel 
+          [visible]="true" 
+          [width]="240" 
+          placeholder="Search..."></dxo-search-panel>
+      <dxo-scrolling mode="virtual"></dxo-scrolling>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager 
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="[5, 10, 20]"
+          [showInfo]="true">
+      </dxo-pager>
+      <dxi-column 
+          dataField="Date" 
+          [width]="240" 
+          alignment="right" 
+          dataType="date">
+      </dxi-column>
+
+      <dxi-column 
+        dataField="Voucher"
+        [width]="240" 
+        alignment="right">
+      </dxi-column> 
+
+      <dxi-column 
+        dataField="A/C No."
+        [width]="240" 
+        alignment="right">
+      </dxi-column> 
+
+      <dxi-column 
+        dataField="JournalDescription"        
+        caption="Transaction Description"
+        alignment="right">
+      </dxi-column>
+
+      <dxi-column 
+          dataField="OrderNumber" 
+          [width]="130" 
+          caption="Debit">         
+      </dxi-column>
+
+      <dxi-column 
+        dataField="OrderNumber" 
+        [width]="130" 
+        caption="Credit">
+      </dxi-column>
+
+      <dxi-column 
+          dataField="Voucher Date"           
+          alignment="right" 
+          dataType="date">
+      </dxi-column>   
+
+        <dxi-column 
+            dataField="Voucher Ref No"            
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="VouchersOffice"             
+            caption="Office"
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="VouchersJournal"             
+            caption="Journal"
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="VouchersDescription"            
+            caption="Description"
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Currency"             
+            caption="Currency">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="B/L"             
+            caption="B/L">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Area"             
+            caption="Area">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Sector"              
+            caption="Sector">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Program" 
+            caption="Program">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Project" 
+            caption="Project">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Job" 
+            caption="Job">
+        </dxi-column>
+    
+  </dx-data-grid>
+  
+  <div class="options">
+      <div class="caption">Options</div>
+      <div 
+          class="apply-filter option" 
+          [style.display]="showFilterRow ? 'block' : 'none'">
+          <span>Apply Filter</span>
+          <dx-select-box #applyFilter 
+              id="useFilterApplyButton" 
+              [items]="applyFilterTypes" 
+              [value]="applyFilterTypes[0].key" 
+              valueExpr="key"
+              displayExpr="name"></dx-select-box>
+      </div>
+  </div>
+</div> 
+        <div class="pull-right mt20 clearfix">
+          <a href="javascript:void(0);" class="btn btn-default btn-green">Save</a>
+            <a href="javascript:void(0);" class="btn btn-default btn-gray">Cancel</a>
+        </div>
+    </div>
+</div>

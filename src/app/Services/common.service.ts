@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { GLOBAL } from '../shared/global';
 import { AppSettingsService } from '../Services/App-settings.Service';
@@ -39,6 +39,13 @@ export class commonService {
                 }
             });
     }
+
+    
+
+    private handleError(error: Response) {
+        
+            return Observable.throw(error.json().error || 'Server error');
+        }
 
 
     // GetPatients() {

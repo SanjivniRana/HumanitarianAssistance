@@ -9,11 +9,12 @@ import { Keepalive } from '@ng-idle/keepalive';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomValidation } from '../../Shared/customValidations';
+import { LoginComponent } from '../../Login/login.component';
 
 @Component({
     selector : "app-header",
-    templateUrl:'./appHeader.component.html'
-    // providers:[FormGroup]
+    templateUrl:'./appHeader.component.html',
+    providers:[LoginComponent]
 })
 
 export class AppHeaderComponent {
@@ -36,6 +37,8 @@ export class AppHeaderComponent {
         ignoreBackdropClick: false
       };
 
+      UserName : any;
+
     constructor(  
         private idle: Idle,
         private keepalive: Keepalive,
@@ -44,7 +47,8 @@ export class AppHeaderComponent {
         private router: Router,
         private zone: NgZone,
         private modalService: BsModalService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private logincomponent:LoginComponent
         
     ) { 
         let token=localStorage.getItem('authenticationtoken');
@@ -69,6 +73,13 @@ export class AppHeaderComponent {
             'NewPassword': [null,Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
             'ConfirmPassword':[null,Validators.compose([CustomValidation.ConfirmPassword,Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
         });    
+        
+ 
+    }
+
+    ngOnInit()
+    {
+        this.UserName = localStorage.getItem('UserName');        
     }
 
     changeLang(lang){
@@ -78,11 +89,10 @@ export class AppHeaderComponent {
 
      logout(){
         localStorage.removeItem('authenticationtoken');
-        localStorage.removeItem('languageID');
+        // localStorage.removeItem('languageID');
         localStorage.removeItem('ng2Idle.main.expiry');
-        localStorage.removeItem('ng2Idle.main.idling');
-        localStorage.removeItem('plainRolesText');        
-        localStorage.removeItem('userId');     
+        localStorage.removeItem('ng2Idle.main.idling');        
+        localStorage.removeItem('UserId');     
         localStorage.removeItem('UserRoles');
         this.commonService.menuVisibility=false;
         this.checkToken.emit();

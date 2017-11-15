@@ -26,6 +26,7 @@ import { commonService } from './Services/common.service';
 import { ModalModule } from 'ngx-bootstrap';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
   
@@ -36,6 +37,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppHeaderComponent,
     LoginComponent,
     AppSidebarComponent
+  
+    
   ],
   imports: [
     BrowserAnimationsModule,

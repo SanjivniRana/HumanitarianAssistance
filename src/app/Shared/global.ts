@@ -13,5 +13,5 @@ export class GLOBAL {
     public static API_Permissions_GetPermissions = 'Account/GetPermissions';
     public static API_Permissions_AddPermissionInRoles = 'Account/PermissionsInRoles';
     public static API_UserDetail_GetUserDetailsByUserId = 'Account/GetUserDetailsByUserId';
-    public static API_UserDetail_EditUser ='Account/EditUser';
+    public static API_UserDetail_EditUser ='Account/EditUser';    
 }

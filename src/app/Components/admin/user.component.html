@@ -204,7 +204,7 @@
                              <label>Email:</label><span style="color:red">*</span>
                          </div> 
                          <div class="col-sm-7">
-                             <input class="form-control" type="Email" formControlName="Email" placeholder="Email"/>                             
+                             <input class="form-control" type="Email" formControlName="Email" placeholder="Email" readonly/>                             
                          </div>
                     </div> 
                     </div>   
@@ -305,6 +305,9 @@
                                          <label>Add Roles:</label>                                         
                                      </div> 
                                      <div class="col-sm-7">
+                                            <div>
+                                                    <ngx-loading [show]="loadingRolesMultiselect" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                                        </div>
                                                 <p-multiSelect [options]="roles" [(ngModel)]="selectedValueInRoles" displaySelectedLabel="selectedValueInRoles" class="form-control" formControlName="Roles" defaultLabel="Select Roles" ></p-multiSelect>                                                                                       
                                      </div>
                                 </div> 
@@ -324,6 +327,9 @@
 <!-- Modal Popup for Permissions -->
  
 <ng-template #AddPermissionsTemplate>
+        <div>
+                <ngx-loading [show]="loadingPermission" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+        </div>
         <form name="AddPermissions" [formGroup]="AddPermissions" class="login-inner" (ngSubmit)="AddPermissions.valid && PermissionsInRoles(AddPermissions.value)" novalidate>
              <div class="modal-header gray-header ">
                <h4 class="modal-title pull-left">Add Permissions</h4>
@@ -340,6 +346,9 @@
                                                                  </div> 
                                                                  <div class="col-sm-7">
                                                                          <div class="multi-drop-custom">
+                                                                                <div>
+                                                                                        <ngx-loading [show]="loadingRoles" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                                                                                </div>
                                                                         <p-dropdown [options]="roles" class="form-control" formControlName="Roles" (onChange)="onRoleChange($event)"  placeholder="Select a Role"></p-dropdown>                            
                                                                           </div>      
                                                                 </div>
@@ -351,6 +360,9 @@
                                                                 <label>Add Permissions:</label>                                         
                                                         </div> 
                                                         <div class="col-sm-7">
+                                                                <div>
+                                                                        <ngx-loading [show]="loadingPermissionForRoles" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+                                                                </div>
                                                                         <p-multiSelect [options]="Permissions" [(ngModel)]="selectedValueInPermission" displaySelectedLabel="selectedValueInPermission" class="form-control"  formControlName="Permissions" (onChange)="onChangePermission($event)" defaultLabel="Select Permissions">                                                               
                                                                         </p-multiSelect>
                                                         </div>

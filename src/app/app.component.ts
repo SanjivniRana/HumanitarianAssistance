@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonService } from "../../src/app/app.common";
 import { NgxPermissionsService } from 'ngx-permissions';
 import { NgxRolesService } from 'ngx-permissions';
+import { CommonService } from './app.common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,14 +22,9 @@ export class AppComponent {
     
      this.roleService.addRoles(
        {
-         'SUPERADMIN':['canRead','canAdd']
-     
+         'SUPERADMIN':['canRead','canAdd']     
        });
- 
-
-
-     }
-    
+     }       
   }
   recheckToken(){
    var token = localStorage.getItem('authenticationtoken');
@@ -37,8 +32,8 @@ export class AppComponent {
       this.commonService.menuVisibility = true;
      // this.commonService.applyRoleOnMenu();
     } else {
-      this.commonService.menuVisibility = false;
-      
+      this.commonService.menuVisibility = false;      
     }
-  }
+  }  
+
 }
