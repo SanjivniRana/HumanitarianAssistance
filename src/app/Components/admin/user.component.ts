@@ -13,7 +13,11 @@ import { AddUsers, EditUsers } from '../../Models/AddUser';
 import { ToastrService } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CustomValidation } from '../../Shared/customValidations';
+import { Router } from '@angular/router';
+import { OnDestroy } from "@angular/core";
 
+import { Subject } from "rxjs/Subject";
+import { CurrentPasswordModel, RestPasswordModel } from '../../Models/CurrentPasswordModel';
 export interface UserDetails {
   FirstName;
   LastName;
@@ -31,9 +35,13 @@ export interface UserDetails {
   
 })
 
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit,OnDestroy {
+  
+  private unsubscribe: Subject<void> = new Subject<void>();
+ 
 
   // AddUser Modal Popup
+  
   loading=false;
   loadingPermission = false;
   loadingRolesMultiselect = false;
@@ -50,6 +58,8 @@ export class UserComponent implements OnInit {
   modalRef: BsModalRef;
   modalRefPermission: BsModalRef;
   modalPermission: BsModalRef;
+  modalResetPassword:BsModalRef;
+  
   modalEditUserPermission : BsModalRef;
   config = {
     animated: true,
@@ -68,6 +78,7 @@ export class UserComponent implements OnInit {
   roles: SelectItem[];
   RolesUser: SelectItem[];
   Permissions : SelectItem[];
+  private ChangePassword: FormGroup;
 
   //UserId For AddRoles
   UserId:any;               //Global UserId FROM Table is selected for controls
@@ -81,7 +92,7 @@ export class UserComponent implements OnInit {
 
   public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  constructor(private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
+  constructor(private router: Router, private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private userService: UserService) { 
 
     // AddUser Modal Popup    
     this.userForm = this.fb.group({
@@ -95,7 +106,11 @@ export class UserComponent implements OnInit {
       'Department' : [null, Validators.required],      
       'Status' : [null]
     });
-
+ 
+    this.ChangePassword = this.fb.group({
+        'NewPassword': ["",Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
+        'ConfirmPassword':["",Validators.compose([CustomValidation.ConfirmPassword,Validators.required, Validators.minLength(5), Validators.maxLength(20)])]
+    });   
     //Status Array
     this.status = [{label:'Active',value:1},
     {label:'InActive',value:0}];
@@ -133,12 +148,15 @@ export class UserComponent implements OnInit {
 
   getOffices()
   {
-    this.userService.getOffices(this.setting.getBaseUrl() +GLOBAL.API_AllOffice_URL).subscribe(data=>{      
+    this.userService.getOffices(this.setting.getBaseUrl() +GLOBAL.API_AllOffice_URL)
+    .takeUntil(this.unsubscribe)
+    .subscribe(data=>{      
       this.officeId=[];
       data.data.OfficeDetailsList.forEach(element => {
         this.officeId.push({label:element.OfficeName,value:element.OfficeCode});
       });    
     });
+    
   }
 
   getDepartment(officeCode)
@@ -253,8 +271,9 @@ export class UserComponent implements OnInit {
     this.addRoles = [];
     for(var i in Roles.Roles){
       this.addRoles.push(Roles.Roles[i].name);
-    }    
-    this.userService.assignRolesToUser(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_AssignRoleToUser, this.UserId , this.addRoles).subscribe(
+    }
+    this.userService.assignRolesToUser(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_AssignRoleToUser, this.UserId , this.addRoles)
+    .takeUntil(this.unsubscribe).subscribe(
       data => {
         
         if (data.StatusCode == 200) //Success
@@ -394,6 +413,31 @@ export class UserComponent implements OnInit {
     this.modalEditUserPermission.hide();
   }  
 
+   private userName :string;
+  onSubmitPasswordChange(model: RestPasswordModel){
+   console.log(this.userName);
+   model.UserName=this.userName;
+   
+ this.userService.
+ resetPassword(this.setting.getBaseUrl()+GLOBAL.API_ResetPassword,model)
+ //.takeUntil(this.unsubscribe)
+ .subscribe(data=>{
+   if(data.StatusCode==200){
+     this.toastr.success("Passowrd Reset Successfully!");
+     this.modalResetPassword.hide();
+   }else{
+     this.toastr.error("Ther is somme error");
+   }
+ });
+  }
+  openModelOnResetPassword(templateReset:TemplateRef<any>,covalue){
+    this.userName=covalue.Email;
+    this.modalResetPassword=this.modalService.show(
+      templateReset,
+      Object.assign({}, this.config, { class: 'gray modal-lg' })
+    );
+  }
+  //openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) { 
   getUserRolesByUserId(UserId)
   {    
     this.loadingRolesMultiselect = true;
@@ -415,6 +459,7 @@ export class UserComponent implements OnInit {
   openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) {
     this.getUserRolesByUserId(colvalue.Id);
     this.UserId = colvalue.Id;     
+    console.log(colvalue);
     this.modalRefPermission = this.modalService.show(
       templatePermissions,
       Object.assign({}, this.config, { class: 'gray modal-lg' })
@@ -443,12 +488,19 @@ export class UserComponent implements OnInit {
   getPermissions()
   {
     this.Permissions = [];
-    this.userService.getPermissions(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissions).subscribe(
+    this.userService.getPermissions(this.setting.getBaseUrl() + GLOBAL.API_Permissions_GetPermissions)
+    .takeUntil(this.unsubscribe)
+    .subscribe(
       data => {             
         data.data.PermissionsList.forEach(element => {          
           this.Permissions.push({label:element.Name,value:{PermissionId:element.Id,PermissionName:element.Name}});                  
         });
       }
     )
+  }
+  
+  ngOnDestroy(): void {
+   this.unsubscribe.next();
+   this.unsubscribe.complete(); 
   }
 }

@@ -3,6 +3,7 @@ import 'rxjs/add/observable/timer'
 
 import { Observable } from 'rxjs/Observable';
 export class CustomValidation {
+    static debounceTime=1000;
 
     static checkValidDate(control: FormControl) {
 
@@ -125,6 +126,7 @@ export class CustomValidation {
         return null;
     }
 
+    
    static checkCurrentPasswordForServer(ctrl:FormControl) {
     return (control: FormControl): Promise<any> => {
         return new Promise<any>((resolve, reject) => {            
