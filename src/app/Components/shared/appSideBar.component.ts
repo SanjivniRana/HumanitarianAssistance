@@ -5,6 +5,8 @@ import { SelectItem } from 'primeng/primeng';
 import { ChangeDetectionStrategy , ChangeDetectorRef} from '@angular/core';
 import { UserType } from "../../shared/enums";
 import { AuthenticationService } from '../../Services/Authentication.Service';
+import { NgxRolesService } from 'ngx-permissions';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
     selector: "app-sidebar",
@@ -21,7 +23,8 @@ export class AppSidebarComponent {
         private router: Router,
         private commonService : commonService,
         private changeDetector: ChangeDetectorRef,
-        private authService : AuthenticationService
+        private authService : AuthenticationService,
+        private ngxPermissionService:NgxPermissionsService
     ) {
 
     }
@@ -52,6 +55,10 @@ export class AppSidebarComponent {
         // }, Error =>{
 
         // })
+
+        
+        
+        
         
     }
 
