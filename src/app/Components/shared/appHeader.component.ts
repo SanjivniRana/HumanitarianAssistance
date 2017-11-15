@@ -48,6 +48,9 @@ export class AppHeaderComponent implements OnDestroy {
         backdrop: true,
         ignoreBackdropClick: false
       };
+
+      UserName : any;
+
  isValidPassword =true;
     constructor(  
         private idle: Idle,
@@ -92,6 +95,13 @@ export class AppHeaderComponent implements OnDestroy {
             'NewPassword': ["",Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
             'ConfirmPassword':["",Validators.compose([CustomValidation.ConfirmPassword,Validators.required, Validators.minLength(5), Validators.maxLength(20)])]
         });    
+        
+ 
+    }
+
+    ngOnInit()
+    {
+        this.UserName = localStorage.getItem('UserName');        
     }
     isConfirmPassword=true;
     isFormValid =false;
@@ -166,11 +176,10 @@ export class AppHeaderComponent implements OnDestroy {
 
      logout(){
         localStorage.removeItem('authenticationtoken');
-        localStorage.removeItem('languageID');
+        // localStorage.removeItem('languageID');
         localStorage.removeItem('ng2Idle.main.expiry');
-        localStorage.removeItem('ng2Idle.main.idling');
-        localStorage.removeItem('plainRolesText');        
-        localStorage.removeItem('userId');     
+        localStorage.removeItem('ng2Idle.main.idling');        
+        localStorage.removeItem('UserId');     
         localStorage.removeItem('UserRoles');
         this.commonService.menuVisibility=false;
         this.checkToken.emit();

@@ -11,11 +11,11 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse left-sidebar">
                 <ul class="nav navbar-nav">
-                    <li ><a [routerLink]="['/admin/user']"><span><i class="fa fa-user"></i></span> User</a></li>
+                    <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" ><a [routerLink]="['/admin/user']"><span><i class="fa fa-user"></i></span> User</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-code"></i></span> Code <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li ><a href="#">Charts Of Accounts</a></li>
+                            <li *ngxPermissionsOnly = "['CanAdd']"><a href="#">Charts Of Accounts</a></li>
                             <li ><a href="#">Journal Codes</a></li>
                             <li ><a href="#">Currency Codes</a></li>                                                        
                             <li><a href="#">Office Codes</a></li>
@@ -26,9 +26,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-money"></i></span> Accounts <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Vouchers</a></li>
+                            <li><a [routerLink]="['/accounts/vouchers']">Vouchers</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Journal</a></li>
+                            <li><a [routerLink]="['/accounts/journal']">Journal</a></li>
                             <li><a href="#">Ledger Statement</a></li>                            
                             <li><a href="#">Budget Balance</a></li>
                             <li><a href="#">Trial Balance</a></li>
@@ -38,7 +38,7 @@
                             <li><a href="#">Set Financial Year</a></li>                            
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-users"></i></span> HR <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Employees</a></li>
