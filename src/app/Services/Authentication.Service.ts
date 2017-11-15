@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { GLOBAL } from '../shared/global';
 import { AppSettingsService } from '../Services/App-settings.Service';
@@ -78,4 +78,23 @@ export class AuthenticationService {
         return this.httpClient
         .get(GLOBAL.API_Account_GetUserType);
     }
+
+    getRolesAndPermissionsByUserId(url: string, UserId) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url+"?userid="+UserId, options)
+            .map((response: Response) => {
+                let user = response.json();
+                if (user) {
+                    return user;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    private handleError(error: Response) {
+        
+            return Observable.throw(error.json().error || 'Server error');
+        }
 }

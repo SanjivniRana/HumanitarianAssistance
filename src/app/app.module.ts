@@ -26,6 +26,8 @@ import { commonService } from './Services/common.service';
 import { ModalModule } from 'ngx-bootstrap';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+import { UserService } from './Components/admin/user.service';
+//import { ChangePasswordComponent } from './Components/shared/changePassword.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
   
@@ -36,6 +38,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppHeaderComponent,
     LoginComponent,
     AppSidebarComponent
+   // ChangePasswordComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -66,7 +69,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     NgIdleKeepaliveModule.forRoot()
   ]
   ,
-  providers: [commonService,LanguageChange,TranslateService,TranslateStore,HttpClient,AuthenticationService,AppSettingsService,httpClientService,MessageService],
+  providers: [UserService,commonService,LanguageChange,TranslateService,TranslateStore,HttpClient,AuthenticationService,AppSettingsService,httpClientService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
