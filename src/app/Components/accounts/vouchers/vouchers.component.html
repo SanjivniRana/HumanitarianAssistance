@@ -8,14 +8,8 @@
                 class="button-info btn btn-default btn-green"
                 text="Add New"
                 (onClick)="showInfo()">
-                </dx-button>
-
-        </div>
-   
-      <dx-select-box
-      [items]="statuses" 
-      [value]="statuses[0]" 
-      (onValueChanged)="selectStatus($event)"></dx-select-box>
+                </dx-button>                
+        </div>        
       <dx-data-grid 
       id="gridContainer" 
       [dataSource]="orders">
@@ -29,43 +23,47 @@
           [width]="240" 
           placeholder="Search..."></dxo-search-panel>
       <dxi-column 
-          dataField="OrderNumber" 
+          dataField="VoucherNo" 
           [width]="130" 
-          caption="Voucher No">
-          <dxo-header-filter              
-              [groupInterval]="10000"></dxo-header-filter>
+          alignment="right"
+          caption="Voucher No">          
       </dxi-column>
       <dxi-column 
-          dataField="Voucher Date" 
+          dataField="VoucherDate" 
+          caption="Voucher Date"
           alignment="right" 
-          dataType="date">
-          <!-- <dxo-header-filter 
-              [dataSource]="orderHeaderFilter"></dxo-header-filter> -->
+          dataType="date">          
       </dxi-column>      
     <dxi-column 
-        dataField="Voucher Ref No"
+        dataField="VoucherRefNo"
+        caption="Voucher Ref No"
         alignment="right">
     </dxi-column>
     <dxi-column 
-        dataField="VouchersOffice" 
+        dataField="Office" 
         caption="Office"
         alignment="right">
     </dxi-column>
     <dxi-column 
-        dataField="VouchersJournal" 
+        dataField="Journal" 
         caption="Journal"
         alignment="right">
     </dxi-column>
     <dxi-column 
-        dataField="VouchersDescription"
+        dataField="Description"
         caption="Description"
+        alignment="right">
+    </dxi-column>
+    <dxi-column 
+        dataField="Currency"
         alignment="right">
     </dxi-column>
     <dxi-column dataField = "documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column>
     <dxi-column dataField = "editId" caption="Action" alignment="right" cellTemplate="CellTemplateOpen"></dxi-column>
     <!-- <dxi-column dataField = "deleteId" caption="Delete" alignment="right" cellTemplate="CellTemplateDelete"></dxi-column> -->
     <div *dxTemplate="let data of 'CellTemplateDocument'">         
-        <a href="javascript:void()" (click)="documentAdd()">Document</a>
+        <!-- <a href="javascript:void()" (click)="documentAdd()">Document</a> -->
+        <a [routerLink]="['/accounts/document']">Document</a>
     </div>
     <div *dxTemplate="let data of 'CellTemplateOpen'">         
             <a href="javascript:void()" (click)="editVoucher()">Edit</a>
@@ -88,10 +86,6 @@
               displayExpr="name"></dx-select-box>
       </div>      
   </div>
-        <div class="pull-right mt20 clearfix">
-          <a href="javascript:void(0);" class="btn btn-default btn-green">Save</a>
-            <a href="javascript:void(0);" class="btn btn-default btn-gray">Cancel</a>
-        </div>
     </div>
 </div>
 

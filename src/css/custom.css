@@ -272,3 +272,6 @@ input.dx-texteditor-input {border: 1px solid #e2e2e2; padding: 0 0;}
  tr.dx-row.dx-data-row.dx-column-lines td {color: #acacac;}
  .btn-grp-wrap {text-align: right;}
  .dx-popup-title.dx-toolbar .dx-toolbar-label {font-size: 17px;color: #acacac;}
+
+ .dx-popup-content { min-height: 142px; height: auto !important;}
+ .btn-grp-wrap { margin-top: 20px;}

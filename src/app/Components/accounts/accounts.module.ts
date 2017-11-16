@@ -12,15 +12,16 @@ import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
-import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
-
+import { DocumentComponent } from './document/document.component';
 
 @NgModule({
   declarations: [
     VouchersComponent,
     AccountsComponent,
-    JournalComponent    
+    JournalComponent,
+    DocumentComponent    
   ],
   imports: [
     CommonModule,   
@@ -31,7 +32,9 @@ import { JournalComponent } from './journal/journal.component';
     DxNumberBoxModule,
     DxButtonModule,
     DxFormModule,
-    DxPopupModule, DxTemplateModule,
+    DxPopupModule,
+    DxTemplateModule,
+    DxFileUploaderModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true, 
       rolesIsolate: true}),
