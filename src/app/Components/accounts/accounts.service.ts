@@ -11,6 +11,34 @@ export class Order {
     Employee: string;
 }
 
+export class Voucher {
+    ID: number;
+    Date: string;
+    ACNO: string;
+    TransactionDescription: string;
+    Debit: number;
+    Credit: number;
+    Currency: string;
+    BL: string;
+    Area:string;
+    Sector:string;
+    Program:string;
+    Project:string;
+    Job:string;
+}
+
+export class Employee1 {
+    ID: number;
+    Journal: string;
+    Office: string;
+    Currency:string;
+    RecordType: string;
+    Accounts: string;
+    Status: string;
+    ReportDate: string;
+    Vouchers: Voucher[];
+}
+
 export class Employee {
     ID: number;
     FirstName: string;
@@ -414,6 +442,90 @@ let customer : Customer = {
 let countries: string[] = [
     'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','The   Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burma','Burundi','Cambodia','Cameroon','Canada','Cape Verde','Central African Republic','Chad','Chile','China','Colombia','Comoros','Democratic Republic of the Congo','Republic of the Congo','Costa Rica','Ivory Coast','Croatia','Cuba','Cyprus','Czech Republic','Denmark','Djibouti','Dominica','Dominican Republic','East Timor','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Ethiopia','Fiji','Finland','France','Gabon','The Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Republic of Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','North Korea','South Korea','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Republic of Macedonia','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Federated States of Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Namibia','Nauru','Nepal','Kingdom of the Netherlands','New Zealand','Nicaragua','Niger','Nigeria','Norway','Oman','Pakistan','Palau','State of Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','São Tomé and Príncipe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Swaziland','Sweden','Switzerland','Syria','Tajikistan','Tanzania','Thailand','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'];
 
+    let employees: Employee1[] = [{
+        "ID": 1,
+        "Journal": "Journal",
+        "Office" :"A0001",
+        "RecordType": "Single Currency",
+        "Currency": "AFG-AFG",
+        "Accounts": "CEO",
+        "Status": "All",
+        "ReportDate": "1964/03/16",
+        "Vouchers": [{
+
+            "ID": 4,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+            
+        }, {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+        }]
+    },
+    {
+        "ID": 2,
+        "Journal": "Journal",
+        "Office" :"A0001",
+        "RecordType": "Single Currency",
+        "Currency": "AFG-AFG",
+        "Accounts": "CEO",
+        "Status": "All",
+        "ReportDate": "1964/03/16",
+        "Vouchers": [{
+
+            "ID": 8,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+            
+        }, {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+        }]
+    }
+];
+
 @Injectable()
 export class AccountsService {
     getOrders(): Order[] {
@@ -427,4 +539,8 @@ export class AccountsService {
     getCountries() {
         return countries;
     }
+    getEmployees() {
+        return employees;
+    }
+
 }
