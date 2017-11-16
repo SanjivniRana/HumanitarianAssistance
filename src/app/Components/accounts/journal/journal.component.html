@@ -162,9 +162,7 @@
                                     type="required"
                                     message="Country is required">
                                 </dxi-validation-rule>
-                            </dxi-item>
-
-                            
+                            </dxi-item>                            
                         </dx-form>
                         <br />
                         <dx-button
@@ -210,7 +208,124 @@
       [items]="statuses" 
       [value]="statuses[0]" 
       (onValueChanged)="selectStatus($event)"></dx-select-box>
+
       <dx-data-grid 
+      id="gridContainer" 
+      [allowColumnReordering]="true"
+      [allowColumnResizing]="true"
+      [columnAutoWidth]="true"
+      [dataSource]="orders">
+      <dxo-filter-row 
+          [visible]="showFilterRow" 
+          [applyFilter]="applyFilter.value"></dxo-filter-row>
+      <dxo-header-filter 
+          [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-search-panel 
+          [visible]="true" 
+          [width]="240" 
+          placeholder="Search..."></dxo-search-panel>
+          <dxi-column 
+          dataField="Date" 
+          [width]="240" 
+          alignment="right" 
+          dataType="date">
+      </dxi-column>
+
+      <dxi-column 
+        dataField="Voucher"
+        [width]="240" 
+        alignment="right">
+      </dxi-column> 
+
+      <dxi-column 
+        dataField="A/C No."
+        [width]="240" 
+        alignment="right">
+      </dxi-column> 
+
+      <dxi-column 
+        dataField="JournalDescription"        
+        caption="Transaction Description"
+        alignment="right">
+      </dxi-column>
+
+      <dxi-column 
+          dataField="OrderNumber" 
+          [width]="130" 
+          caption="Debit">         
+      </dxi-column>
+
+      <dxi-column 
+        dataField="OrderNumber" 
+        [width]="130" 
+        caption="Credit">
+      </dxi-column>
+
+      <dxi-column 
+          dataField="Voucher Date"
+          alignment="right" 
+          dataType="date">
+      </dxi-column>   
+
+        <dxi-column 
+            dataField="Voucher Ref No"            
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="VouchersOffice"             
+            caption="Office"
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="VouchersJournal"             
+            caption="Journal"
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="VouchersDescription"            
+            caption="Description"
+            alignment="right">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Currency"             
+            caption="Currency">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="B/L"             
+            caption="B/L">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Area"             
+            caption="Area">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Sector"              
+            caption="Sector">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Program" 
+            caption="Program">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Project" 
+            caption="Project">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="Job" 
+            caption="Job">
+        </dxi-column>    
+  </dx-data-grid>
+      <!-- <dx-data-grid 
       id="gridContainer" 
       [allowColumnReordering]="true"
       [allowColumnResizing]="true"
@@ -270,7 +385,7 @@
       </dxi-column>
 
       <dxi-column 
-          dataField="Voucher Date"           
+          dataField="Voucher Date"
           alignment="right" 
           dataType="date">
       </dxi-column>   
@@ -333,7 +448,7 @@
             caption="Job">
         </dxi-column>
     
-  </dx-data-grid>
+  </dx-data-grid> -->
   
   <div class="options">
       <div class="caption">Options</div>

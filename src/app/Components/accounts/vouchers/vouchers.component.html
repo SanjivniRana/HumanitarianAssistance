@@ -1,12 +1,17 @@
-<dx-button
-class="button-info"
-text="Add New"
-(onClick)="showInfo()">
-</dx-button>
+
 
 <div class="row">
     <div class="col-sm-12">
-      <h3 class="page-heading">Vouchers</h3>
+        <div class="main-heading clearfix">
+                <h3 class="page-heading">Vouchers</h3>
+                <dx-button
+                class="button-info btn btn-default btn-green"
+                text="Add New"
+                (onClick)="showInfo()">
+                </dx-button>
+
+        </div>
+   
       <dx-select-box
       [items]="statuses" 
       [value]="statuses[0]" 
@@ -27,8 +32,8 @@ text="Add New"
           dataField="OrderNumber" 
           [width]="130" 
           caption="Voucher No">
-          <!-- <dxo-header-filter 
-              [groupInterval]="10000"></dxo-header-filter> -->
+          <dxo-header-filter              
+              [groupInterval]="10000"></dxo-header-filter>
       </dxi-column>
       <dxi-column 
           dataField="Voucher Date" 
@@ -57,34 +62,16 @@ text="Add New"
         alignment="right">
     </dxi-column>
     <dxi-column dataField = "documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column>
-    <dxi-column dataField = "editId" caption="Open" alignment="right" cellTemplate="CellTemplateOpen"></dxi-column>
-    <dxi-column dataField = "deleteId" caption="Delete" alignment="right" cellTemplate="CellTemplateDelete"></dxi-column>
+    <dxi-column dataField = "editId" caption="Action" alignment="right" cellTemplate="CellTemplateOpen"></dxi-column>
+    <!-- <dxi-column dataField = "deleteId" caption="Delete" alignment="right" cellTemplate="CellTemplateDelete"></dxi-column> -->
     <div *dxTemplate="let data of 'CellTemplateDocument'">         
-        <a href="javascript:void()" (click)="showInfo()">Document</a>
+        <a href="javascript:void()" (click)="documentAdd()">Document</a>
     </div>
     <div *dxTemplate="let data of 'CellTemplateOpen'">         
-            <a href="javascript:void()" (click)="showInfo()">Open</a>
-            <a href="javascript:void()" (click)="showInfo()">Delete</a>
+            <a href="javascript:void()" (click)="editVoucher()">Edit</a>
+            <span style="color:#acacac;">&nbsp;|&nbsp;</span>   
+            <a href="javascript:void()" (click)="deleteVoucher()">Delete</a>
     </div>    
-
-    <!-- <dxo-editing 
-        mode="popup"
-        [allowUpdating]="true">
-        <dxo-popup
-            title="Employee Info"
-            [showTitle]="true"
-            [width]="700"
-            [height]="345"
-            [position]="{ my: 'top', at: 'top', of: window }">
-        </dxo-popup>
-    </dxo-editing> -->
-      <!-- <dxi-column dataField="Employee"></dxi-column>
-      <dxi-column 
-          dataField="CustomerStoreCity" 
-          caption="City"></dxi-column>
-      <dxi-column 
-          dataField="CustomerStoreState" 
-          caption="State"></dxi-column> -->
   </dx-data-grid>
   
   <div class="options">
@@ -99,19 +86,7 @@ text="Add New"
               [value]="applyFilterTypes[0].key" 
               valueExpr="key"
               displayExpr="name"></dx-select-box>
-      </div>
-      <!-- <div class="option">
-      <dx-check-box 
-          text="Filter Row" 
-          [(value)]="showFilterRow" 
-          (onValueChanged)="clearFilter()"></dx-check-box>
-      </div>
-      <div class="option">
-      <dx-check-box 
-          text="Header Filter" 
-          [(value)]="showHeaderFilter" 
-          (onValueChanged)="clearFilter()"></dx-check-box>
-      </div> -->
+      </div>      
   </div>
         <div class="pull-right mt20 clearfix">
           <a href="javascript:void(0);" class="btn btn-default btn-green">Save</a>
@@ -119,6 +94,8 @@ text="Add New"
         </div>
     </div>
 </div>
+
+<!-- Add Vouchers -->
 
 <dx-popup
 class="popup"
@@ -138,137 +115,260 @@ title="Information"
                     [showColonAfterLabel]="true"
                     [showValidationSummary]="true"
                     validationGroup="customerData">
-                    <dxi-item itemType="group" caption="Credentials">
-                        <dxi-item dataField="Login">
+
+                    <dxi-item dataField="Currency"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>       
+                    
+                    <dxi-item dataField="Office"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item 
+                        dataField="Date"
+                        editorType="dxDateBox"
+                        [editorOptions]="{ 
+                            invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
+                        <dxo-label
+                            text="Voucher Date">
+                        </dxo-label>
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Date of birth is required">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule 
+                            type="range"
+                            [max]="maxDate"
+                            message="You must be at least 21 years old">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Cheque No">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Login is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Voucher Reference No">
                             <dxi-validation-rule 
                                 type="required"
                                 message="Login is required">
                             </dxi-validation-rule>
-                        </dxi-item>
-                        <dxi-item dataField="Password"
-                            [editorOptions]="{ mode: 'password' }">
-                            <dxi-validation-rule 
-                                type="required"
-                                message="Password is required">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                        <dxi-item 
-                            editorType="dxTextBox"
-                            [editorOptions]="{ mode: 'password' }">
-                            <dxo-label
-                                text="Confirm Password">
-                            </dxo-label>
-                            <dxi-validation-rule 
-                                type="required"
-                                message="Confirm Password is required">
-                            </dxi-validation-rule>
-                            <dxi-validation-rule 
-                                type="compare" 
-                                [comparisonTarget]="passwordComparison"
-                                message="Password and Confirm Password do not match">
-                            </dxi-validation-rule>
-                        </dxi-item>
                     </dxi-item>
-                    <dxi-item itemType="group" caption="Personal Data">
-                        <dxi-item dataField="Name">
-                            <dxi-validation-rule 
-                                type="required"
-                                message="Name is required">
-                            </dxi-validation-rule>
-                            <dxi-validation-rule 
-                                type="pattern"
-                                [pattern]="namePattern"
-                                message="Do not use digits in the Name">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                        <dxi-item 
-                            dataField="Date"
-                            editorType="dxDateBox"
-                            [editorOptions]="{ 
-                                invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
-                            <dxo-label
-                                text="Date of birth">
-                            </dxo-label>
-                            <dxi-validation-rule 
-                                type="required"
-                                message="Date of birth is required">
-                            </dxi-validation-rule>
-                            <dxi-validation-rule 
-                                type="range"
-                                [max]="maxDate"
-                                message="You must be at least 21 years old">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                    </dxi-item>
-                    <dxi-item itemType="group" caption="Billing address">
-                        <dxi-item dataField="Country"
-                            editorType="dxSelectBox"
-                            [editorOptions]="{ dataSource: countries }">
-                            <dxi-validation-rule 
-                                type="required"
-                                message="Country is required">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                        <dxi-item dataField="City">
-                            <dxi-validation-rule 
-                                type="pattern"
-                                [pattern]="cityPattern"
-                                message="Do not use digits in the City name">
-                            </dxi-validation-rule>
-                            <dxi-validation-rule
-                                type="stringLength"
-                                [min]="2"
-                                message="Name must have at least 2 symbols">
-                            </dxi-validation-rule>
-                            <dxi-validation-rule 
-                                type="required"
-                                message="City is required">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                        <dxi-item dataField="Address">
-                            <dxi-validation-rule 
-                                type="required"
-                                message="Address is required">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                        <dxi-item dataField="Phone" helpText="Enter the phone number in USA phone format"
-                            [editorOptions]="{ 
-                                mask: '+1 (X00) 000-0000',
-                                maskRules: phoneRules,
-                                useMaskedValue: true,
-                                maskInvalidMessage: 'The phone must have a correct USA phone format'
-                            }">
-                            <dxi-validation-rule 
-                                type="pattern"
-                                [pattern]="phonePattern"
-                                message="The phone must have a correct USA phone format">
-                            </dxi-validation-rule>
-                        </dxi-item>
-                    </dxi-item>
-                    <dxi-item itemType="simple"
-                        dataField="Accepted"
-                        editorType="dxCheckBox"
-                        [editorOptions]="{ 
-                            text: 'I agree to the Terms and Conditions',
-                            value: false
-                        }">
-                        <dxo-label
-                            [visible]="false">
-                        </dxo-label>
+
+                    <dxi-item dataField="Journal"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="compare"
-                            [comparisonTarget]="checkComparison"
-                            message="You must agree to the Terms and Conditions">
+                            type="required"
+                            message="Country is required">
                         </dxi-validation-rule>
                     </dxi-item>
+
+                    <dxi-item dataField="Voucher Type"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Voucher Description">
+                            <dxi-validation-rule 
+                                type="required"
+                                message="Login is required">
+                            </dxi-validation-rule>
+                    </dxi-item>
+
                 </dx-form>
                 <br />
+                <div class="btn-grp-wrap">
+                        <dx-button
+                        text="Add"
+                        type="success"
+                        validationGroup="customerData"
+                        [useSubmitBehavior]="true">
+                    </dx-button>
+    
+                    <dx-button
+                        text="Cancel"
+                        (onClick)="cancelDeleteVoucher()">
+                    </dx-button>
+
+                </div>
+                
+            </form>
+</div>
+</dx-popup>
+
+
+<!-- Edit Voucher -->
+
+<dx-popup
+class="popup"
+[width]="800"
+[height]="800"
+[showTitle]="true"
+title="Edit Voucher"
+[dragEnabled]="false"
+[closeOnOutsideClick]="true"
+[(visible)]="popupVisibleEditVoucher">
+<div *dxTemplate="let data of 'content'">
+    
+        <form action="your-action" (submit)="onFormSubmit($event)">
+                <dx-form id="form"      
+                    [formData]="customer"      
+                    [readOnly]="false"
+                    [showColonAfterLabel]="true"
+                    [showValidationSummary]="true"
+                    validationGroup="customerData">
+
+                    <dxi-item dataField="Currency"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>       
+                    
+                    <dxi-item dataField="Office"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item 
+                        dataField="Date"
+                        editorType="dxDateBox"
+                        [editorOptions]="{ 
+                            invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
+                        <dxo-label
+                            text="Voucher Date">
+                        </dxo-label>
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Date of birth is required">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule 
+                            type="range"
+                            [max]="maxDate"
+                            message="You must be at least 21 years old">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Cheque No">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Login is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Voucher Reference No">
+                            <dxi-validation-rule 
+                                type="required"
+                                message="Login is required">
+                            </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Journal"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Voucher Type"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries }">
+                        <dxi-validation-rule 
+                            type="required"
+                            message="Country is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="Voucher Description">
+                            <dxi-validation-rule 
+                                type="required"
+                                message="Login is required">
+                            </dxi-validation-rule>
+                    </dxi-item>
+
+                </dx-form>
+                <br />
+                <div class="btn-grp-wrap">
                 <dx-button
-                    text="Register"
+                    text="Edit"
                     type="success"
                     validationGroup="customerData"
                     [useSubmitBehavior]="true">
                 </dx-button>
+
+                <dx-button
+                    text="Cancel"
+                    (onClick)="cancelDeleteVoucher()">
+                </dx-button>
+            </div>
             </form>
+</div>
+</dx-popup>
+
+
+<!-- Delete Voucher -->
+
+<dx-popup
+class="popup"
+[width]="800"
+[height]="800"
+[showTitle]="true"
+title="Delete Voucher"
+[dragEnabled]="false"
+[closeOnOutsideClick]="true"
+[(visible)]="popupVisibleDeleteVoucher">
+<div *dxTemplate="let data of 'content'">
+    
+        <form action="your-action" (submit)="onFormSubmit($event)">
+                <dx-form id="form"                          
+                    [readOnly]="false"
+                    [showColonAfterLabel]="true"
+                    [showValidationSummary]="true"
+                    validationGroup="customerData">
+                    <dxi-item itemType="group" >
+                            <dxo-label
+                                text="Are you sure to delete the voucher?">
+                            </dxo-label>
+                    </dxi-item>
+                </dx-form>
+                <br />
+                <div class="btn-grp-wrap">
+                <dx-button
+                    text="Delete"
+                    type="success"
+                    validationGroup="customerData"
+                    [useSubmitBehavior]="true">
+                </dx-button>
+                <dx-button
+                    text="Cancel"                    
+                    (onClick)="cancelDeleteVoucher()">
+                </dx-button>
+            </div>
+        </form>
 </div>
 </dx-popup>
