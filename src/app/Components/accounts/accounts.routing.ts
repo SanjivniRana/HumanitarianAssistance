@@ -3,6 +3,7 @@ import { AccountsComponent } from './accounts.component';
 import { UserComponent } from '../admin/user.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { JournalComponent } from './journal/journal.component';
+import { DocumentComponent } from './document/document.component';
 
 
 
@@ -23,6 +24,10 @@ const Account_Router : Routes =
     { 
         path: 'journal', 
         component: JournalComponent        
+    },
+    { 
+        path: 'document', 
+        component: DocumentComponent        
     }
 ];
 
