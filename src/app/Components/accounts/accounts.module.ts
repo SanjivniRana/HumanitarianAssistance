@@ -14,13 +14,15 @@ import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
 import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
+import { LedgerComponent } from './ledger/ledger.component';
 
 
 @NgModule({
   declarations: [
     VouchersComponent,
     AccountsComponent,
-    JournalComponent    
+    JournalComponent,
+    LedgerComponent    
   ],
   imports: [
     CommonModule,   

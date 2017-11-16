@@ -1,19 +1,33 @@
 <div class="row">
- 
     <div class="col-sm-12">
-      <h3 class="page-heading">Journal</h3>
-
+        <div class="main-heading clearfix">
+                <h3 class="page-heading">Journal</h3>
+        </div>
+        </div>
+    <div class="col-sm-12">
+     
       <!-- Journal Filters -->   
       <div>
-        <dx-data-grid id="gridContainer"
+        <dx-data-grid id="gridContainer" 
         [dataSource]="dataSource"
+        [columnHidingEnabled]="true"
         [masterDetail]="{ enabled: true, template: 'detail' }">
+        <dxo-export [enabled]="true" fileName="Orders"></dxo-export>
+        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+        <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+        <dxo-selection
+            [selectAllMode]="selectAllMode.value"
+            [showCheckBoxesMode]="showCheckBoxesMode.value"
+            mode="multiple">
+        </dxo-selection>
         <dxo-header-filter 
         [visible]="true"></dxo-header-filter>
-        <dxo-search-panel 
-        [visible]="true" 
-        [width]="240" 
-        placeholder="Search..."></dxo-search-panel>
+        <dxo-selection
+            [selectAllMode]="selectAllMode.value"
+            [showCheckBoxesMode]="showCheckBoxesMode.value"     
+            mode="multiple">
+        </dxo-selection>        
         <dxi-column dataField="Journal"></dxi-column>
         <dxi-column dataField="Office"></dxi-column>
         <dxi-column dataField="RecordType" [width]="170"></dxi-column>
@@ -21,14 +35,30 @@
         <dxi-column dataField="Accounts"></dxi-column>
         <dxi-column dataField="ReportDate" dataType="date"></dxi-column>
         <dxi-column dataField="Status"></dxi-column>
-    
+     <dxo-pager
+        [allowedPageSizes]="[5, 8, 15, 30]"
+        [showInfo]="true"
+        [showNavigationButtons]="true"
+        [showPageSizeSelector]="true"
+        [visible]="true">
+    </dxo-pager>
+
+    <dxo-paging [pageSize]="8"></dxo-paging>
+    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
         <div *dxTemplate="let employee of 'detail'">
             <div class="internal-grid-container">
                 <!-- <div>{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div> -->
+                
                 <dx-data-grid class="internal-grid"
                     [dataSource]="employee.data.Vouchers"
                     [showBorders]="true"
                     [columnAutoWidth]="true">
+                    <dxo-export [enabled]="true" fileName="Orders"></dxo-export>
+                    <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
+                    <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
+                    <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
+                    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+                    
                     <dxo-header-filter 
                     [visible]="true"></dxo-header-filter>
                     
@@ -46,10 +76,35 @@
                         <dxi-column dataField="Job"></dxi-column>
 
                         <!-- <dxi-column  dataType="Credit" caption="Completed" [calculateCellValue]="completedValue"></dxi-column> -->
+
+                        
                 </dx-data-grid>
             </div>
         </div>
     </dx-data-grid>  
+    
+    <div class="options">
+        <div class="caption">Options</div>
+        <div class="option">
+            <span>Select All Mode</span>
+            <dx-select-box
+                id="select-all-mode"
+                #selectAllMode
+                [dataSource]="['allPages', 'page']"
+                value="allPages"
+                [disabled]="showCheckBoxesMode ? showCheckBoxesMode.value === 'none' : true"
+            ></dx-select-box>
+        </div>
+        <div class="option checkboxes-mode">
+            <span>Show Checkboxes Mode</span>
+            <dx-select-box
+                id="show-checkboxes-mode"
+                #showCheckBoxesMode
+                [dataSource]="['none', 'onClick', 'onLongTap', 'always']"
+                value="onClick"
+            ></dx-select-box>
+        </div>
+    </div>
     
     </div>
 </div>
