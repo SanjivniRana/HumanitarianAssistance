@@ -14,6 +14,8 @@ import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
 import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
+import { LedgerComponent } from './ledger/ledger.component';
+
 import { DocumentComponent } from './document/document.component';
 
 @NgModule({
@@ -21,6 +23,7 @@ import { DocumentComponent } from './document/document.component';
     VouchersComponent,
     AccountsComponent,
     JournalComponent,
+    LedgerComponent,    
     DocumentComponent    
   ],
   imports: [

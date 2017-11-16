@@ -52,6 +52,28 @@ export class Employee {
     Address: string;
 }
 
+export class LedgerClass {
+    ID: number;
+    Currency: string;
+    Account: string;
+    RecordType: string;
+    Status: string;
+    VoucherDate: string;
+    LedgerVouchers: LedgerVoucher[];    
+}
+
+export class LedgerVoucher {    
+    ID: number;
+    Date: string;
+    Voucher: string;
+    LineItemDescription: string;
+    Debit: number;
+    Credit: number;
+    Currency: string;
+    Status: string;    
+}
+
+
 let orders: Order[] = [{
     "ID": 1,
     "VoucherNo": "35703",
@@ -229,6 +251,124 @@ let companies: Company[] = [{
     }
 ];
 
+//Data for LEDGER STATEMENT
+
+let ledgers: LedgerClass[] = [{
+    "ID": 1,
+    "Currency": "Journal",
+    "Account" :"410101 - Clinic Income",
+    "RecordType": "Single Currency",
+    "Status": "All",
+    "VoucherDate": "1966/03/16",
+    "LedgerVouchers": [{
+        "ID": 4,
+        "Date": "11/03/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/04/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/05/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/06/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    }]
+},{
+    "ID": 2,
+    "Currency": "Journal1",
+    "Account" :"410102 - Sports Income",
+    "RecordType": "Single Currency",
+    "Status": "All",
+    "VoucherDate": "1968/03/16",
+    "LedgerVouchers": [{
+        "ID": 4,
+        "Date": "13/02/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 50000,
+        "Credit": 40000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    }]
+},
+{
+    "ID": 3,
+    "Currency": "Journal2",
+    "Account" :"410102 - Medical Income",
+    "RecordType": "Single Currency",
+    "Status": "All",
+    "VoucherDate": "2000/03/16",
+    "LedgerVouchers": [{
+        "ID": 4,
+        "Date": "15/02/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000645,
+        "Credit": 4000645,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 5,
+        "Date": "11/03/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 6,
+        "Date": "11/03/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 4000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    }]
+}
+];
+
+
 @Injectable()
 export class AccountsService {
     getOrders(): Order[] {
@@ -250,5 +390,7 @@ export class AccountsService {
     getEmployees() {
         return employees;
     }
-
+    getLedger(){
+        return ledgers;
+    }
 }

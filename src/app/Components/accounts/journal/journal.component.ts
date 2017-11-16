@@ -17,7 +17,7 @@ import { DxDataGridComponent,
   templateUrl: './journal.component.html'
 })
 export class JournalComponent implements OnInit {  
-    dataSource: any;
+  dataSource: any;
   constructor(private accountservice:AccountsService) { 
     this.dataSource = {
         store: {
