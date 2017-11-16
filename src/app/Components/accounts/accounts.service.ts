@@ -11,6 +11,34 @@ export class Order {
     Currency: string;
 }
 
+export class Voucher {
+    ID: number;
+    Date: string;
+    ACNO: string;
+    TransactionDescription: string;
+    Debit: number;
+    Credit: number;
+    Currency: string;
+    BL: string;
+    Area:string;
+    Sector:string;
+    Program:string;
+    Project:string;
+    Job:string;
+}
+
+export class Employee1 {
+    ID: number;
+    Journal: string;
+    Office: string;
+    Currency:string;
+    RecordType: string;
+    Accounts: string;
+    Status: string;
+    ReportDate: string;
+    Vouchers: Voucher[];
+}
+
 export class Employee {
     ID: number;
     FirstName: string;
@@ -117,6 +145,90 @@ let companies: Company[] = [{
 }];
 //DATA FOR DOCUMENT PAGE ENDS
     
+    let employees: Employee1[] = [{
+        "ID": 1,
+        "Journal": "Journal",
+        "Office" :"A0001",
+        "RecordType": "Single Currency",
+        "Currency": "AFG-AFG",
+        "Accounts": "CEO",
+        "Status": "All",
+        "ReportDate": "1964/03/16",
+        "Vouchers": [{
+
+            "ID": 4,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+            
+        }, {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+        }]
+    },
+    {
+        "ID": 2,
+        "Journal": "Journal",
+        "Office" :"A0001",
+        "RecordType": "Single Currency",
+        "Currency": "AFG-AFG",
+        "Accounts": "CEO",
+        "Status": "All",
+        "ReportDate": "1964/03/16",
+        "Vouchers": [{
+
+            "ID": 8,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+            
+        }, {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 4000,
+            "Currency" :"AFG-AFG",
+            "BL": "",
+            "Area":"",
+            "Sector":"",
+            "Program":"",
+            "Project":"",
+            "Job":""
+        }]
+    }
+];
+
 @Injectable()
 export class AccountsService {
     getOrders(): Order[] {
@@ -135,4 +247,8 @@ export class AccountsService {
     getCompanies() {
         return companies;
     }
+    getEmployees() {
+        return employees;
+    }
+
 }

@@ -26,6 +26,7 @@ export class AppSidebarComponent {
         private commonService : commonService,
         private changeDetector: ChangeDetectorRef,
         private authService : AuthenticationService,
+        private ngxPermissionService:NgxPermissionsService,
         private appSettigs: AppSettingsService,
         private ngxroleservice : NgxRolesService
     ) {

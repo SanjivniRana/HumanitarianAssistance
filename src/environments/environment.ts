@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   //baseUrl: "http://172.24.4.124:9091/api/",
   baseUrl: "http://localhost:5000/api/",
+ //baseUrl:"http://5348947c.ngrok.io/api/",
   loginUrl: ""
 };
