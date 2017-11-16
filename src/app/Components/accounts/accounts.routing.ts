@@ -27,13 +27,10 @@ const Account_Router : Routes =
         component: JournalComponent        
     },
     { 
-<<<<<<< HEAD
         path: 'ledger', 
-        component: LedgerComponent        
-=======
+        component: LedgerComponent},{        
         path: 'document', 
         component: DocumentComponent        
->>>>>>> develop
     }
 ];
 
