@@ -27,6 +27,10 @@ export class VouchersComponent implements OnInit {
   tasks:any;
 
   popupVisible = false;
+  popupVisibleEditVoucher = false;
+  popupVisibleDeleteVoucher = false;
+
+  voucherNO:any;
 
   @ViewChild(DxFormComponent) form:DxFormComponent
   password = "";
@@ -52,6 +56,9 @@ export class VouchersComponent implements OnInit {
   colCountByScreen: Object;
   
   constructor(private accountservice:AccountsService) { 
+
+    this.voucherNO = [{
+    }];
 
     this.colCountByScreen = {
       md: 4,
@@ -104,8 +111,28 @@ export class VouchersComponent implements OnInit {
   screen(width) {
     return width < 720 ? "sm" : "md";
 }
-  showInfo() {    
+
+showInfo() {    
     this.popupVisible = true;
+}
+
+editVoucher() {    
+    this.popupVisibleEditVoucher = true;
+}
+
+deleteVoucher() {    
+    this.popupVisibleDeleteVoucher = true;
+}
+cancelDeleteVoucher()
+{
+    this.popupVisible = false;
+    this.popupVisibleEditVoucher = false;
+    this.popupVisibleDeleteVoucher = false;
+}
+
+documentAdd()
+{
+    
 }
 
   selectStatus(data) {
