@@ -4,6 +4,7 @@ import { UserComponent } from '../admin/user.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { JournalComponent } from './journal/journal.component';
 import { LedgerComponent } from './ledger/ledger.component';
+import { DocumentComponent } from './document/document.component';
 
 
 
@@ -26,8 +27,13 @@ const Account_Router : Routes =
         component: JournalComponent        
     },
     { 
+<<<<<<< HEAD
         path: 'ledger', 
         component: LedgerComponent        
+=======
+        path: 'document', 
+        component: DocumentComponent        
+>>>>>>> develop
     }
 ];
 

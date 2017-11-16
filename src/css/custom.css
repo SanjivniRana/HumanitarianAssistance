@@ -295,3 +295,5 @@ h3.page-heading {font-size: 21px; color: #acacac;}
 .dx-button-content i{color:#acacac !important;}
 .dx-datagrid-rowsview .dx-select-checkboxes-hidden > tbody > tr > td > .dx-select-checkbox {
   display: block;}
+ .dx-popup-content { min-height: 142px; height: auto !important;}
+ .btn-grp-wrap { margin-top: 20px;}

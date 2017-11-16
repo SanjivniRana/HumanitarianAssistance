@@ -56,7 +56,7 @@ export class VouchersComponent implements OnInit {
   colCountByScreen: Object;
   
   constructor(private accountservice:AccountsService) { 
-
+    
     this.voucherNO = [{
     }];
 
@@ -80,32 +80,6 @@ export class VouchersComponent implements OnInit {
         key: "onClick",
         name: "On Button Click"
     }];
-    this.saleAmountHeaderFilter = [{
-        text: "Less than $3000",
-        value: ["SaleAmount", "<", 3000]
-    }, {
-        text: "$3000 - $5000",
-        value: [
-            ["SaleAmount", ">=", 3000],
-            ["SaleAmount", "<", 5000]
-        ]
-    }, {
-        text: "$5000 - $10000",
-        value: [
-            ["SaleAmount", ">=", 5000],
-            ["SaleAmount", "<", 10000]
-        ]
-    }, {
-        text: "$10000 - $20000",
-        value: [
-            ["SaleAmount", ">=", 10000],
-            ["SaleAmount", "<", 20000]
-        ]
-    }, {
-        text: "Greater than $20000",
-        value: ["SaleAmount", ">=", 20000]
-    }];
-    this.orderHeaderFilter = this.orderHeaderFilter.bind(this);
   }
 
   screen(width) {
