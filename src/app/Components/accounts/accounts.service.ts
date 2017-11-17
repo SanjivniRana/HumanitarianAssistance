@@ -73,7 +73,6 @@ export class LedgerVoucher {
     Status: string;    
 }
 
-
 let orders: Order[] = [{
     "ID": 1,
     "VoucherNo": "35703",
@@ -255,7 +254,7 @@ let companies: Company[] = [{
 
 let ledgers: LedgerClass[] = [{
     "ID": 1,
-    "Currency": "Journal",
+    "Currency": "USD-USD",
     "Account" :"410101 - Clinic Income",
     "RecordType": "Single Currency",
     "Status": "All",
@@ -312,7 +311,7 @@ let ledgers: LedgerClass[] = [{
     }]
 },{
     "ID": 2,
-    "Currency": "Journal1",
+    "Currency": "USD-USD",
     "Account" :"410102 - Sports Income",
     "RecordType": "Single Currency",
     "Status": "All",
@@ -330,7 +329,7 @@ let ledgers: LedgerClass[] = [{
 },
 {
     "ID": 3,
-    "Currency": "Journal2",
+    "Currency": "USD-USD",
     "Account" :"410102 - Medical Income",
     "RecordType": "Single Currency",
     "Status": "All",
@@ -368,6 +367,103 @@ let ledgers: LedgerClass[] = [{
 }
 ];
 
+//FOr TRAIL BALANCE 
+
+export class TrailBalanceClass {
+    ID: number;
+    Currency: string;
+    Account: string;
+    Office: string;
+    RecordType: string;    
+    VoucherDate: string;
+    TrailBalanceVouchers: TrailBalanceVoucher[];    
+}
+
+export class TrailBalanceVoucher {    
+    ID: number;
+    AccountName: string;
+    Debit: number;
+    Credit: number;    
+}
+
+let trial: TrailBalanceClass[] = [{
+    "ID": 1,
+    "Currency": "AFG-AFG",
+    "Account" :"410101 - Clinic Income",
+    "Office" : "TestOffice",
+    "RecordType": "Single Currency",    
+    "VoucherDate": "1966/03/16",
+    "TrailBalanceVouchers": [{
+        "ID": 4,        
+        "AccountName": "410201",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 5,        
+        "AccountName": "410101 - Clinical Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 6,        
+        "AccountName": "410102 - Sports Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 7,        
+        "AccountName": "410103 - Medical Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 8,        
+        "AccountName": "410103 - Director Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    }]
+
+},
+{
+    "ID": 2,
+    "Currency": "USD-USD",
+    "Account" :"410101 - Medical Income",
+    "Office" : "TestOffice",
+    "RecordType": "Single Currency",    
+    "VoucherDate": "1964/03/16",
+    "TrailBalanceVouchers": [{
+        "ID": 4,        
+        "AccountName": "410201",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 5,        
+        "AccountName": "410101 - Clinical Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 6,        
+        "AccountName": "410102 - Sports Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 7,        
+        "AccountName": "410103 - Medical Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    },
+    {
+        "ID": 8,        
+        "AccountName": "410103 - Director Income",        
+        "Debit": 5000,
+        "Credit": 4000             
+    }]
+
+}];
 
 @Injectable()
 export class AccountsService {
@@ -392,5 +488,9 @@ export class AccountsService {
     }
     getLedger(){
         return ledgers;
+    }
+
+    getTrailBalance(){
+        return trial;
     }
 }
