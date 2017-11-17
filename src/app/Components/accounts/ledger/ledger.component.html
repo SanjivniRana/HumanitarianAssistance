@@ -29,15 +29,14 @@
            <dxi-column dataField="RecordType" [width]="170"></dxi-column>
            <dxi-column dataField="Status" [width]="125"></dxi-column>
            <dxi-column dataField="VoucherDate"  dataType="date"></dxi-column>           
-        <dxo-pager
-           [allowedPageSizes]="[5, 8, 15, 30]"
-           [showInfo]="true"
-           [showNavigationButtons]="true"
-           [showPageSizeSelector]="true"
-           [visible]="true">
-       </dxo-pager>
-   
-       <dxo-paging [pageSize]="8"></dxo-paging>
+           <dxo-paging [pageSize]="10"></dxo-paging>
+           <!-- <dxo-pager
+              [allowedPageSizes]="[5, 8, 15, 30]"
+              [showInfo]="true"
+              [showNavigationButtons]="true"
+              [showPageSizeSelector]="true"
+              [visible]="true">
+          </dxo-pager>  -->
        <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>
            <div *dxTemplate="let ledgers of 'detail'">
                <div class="internal-grid-container">
@@ -70,7 +69,17 @@
                            <dxi-column dataField="Status"></dxi-column>
    
                            <!-- <dxi-column  dataType="Credit" caption="Completed" [calculateCellValue]="completedValue"></dxi-column> -->
-   
+
+                           <dxo-summary>
+                                <dxi-total-item
+                                        column="Debit"
+                                        summaryType="sum">
+                                </dxi-total-item>
+                                <dxi-total-item
+                                        column="Credit"
+                                        summaryType="sum">
+                                </dxi-total-item>
+                            </dxo-summary>
                            
                    </dx-data-grid>
                </div>
