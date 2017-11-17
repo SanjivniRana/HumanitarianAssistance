@@ -37,8 +37,7 @@ import { DxDataGridComponent,
         this.popupVisible = false;        
     }
     backToVouchers()
-    {
-        debugger;
+    {        
         this.router.navigate(['/accounts/vouchers']);
     }
   }

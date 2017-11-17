@@ -241,8 +241,7 @@ export class UserComponent implements OnInit,OnDestroy {
   {    
     this.loadingRoles = true;
     this.userService.getUserRoles(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetRolesList).subscribe(
-      data => { 
-        debugger;       
+      data => {               
         if(data.StatusCode == 200)
         {
           this.loadingRoles = false;
@@ -266,8 +265,7 @@ export class UserComponent implements OnInit,OnDestroy {
 
 
   assignRolesToUser(Roles)
-  {            
-    debugger;
+  {                
     this.addRoles = [];
     for(var i in Roles.Roles){
       this.addRoles.push(Roles.Roles[i].name);

@@ -18,7 +18,9 @@ import { DxDataGridComponent,
   })
   export class LedgerComponent implements OnInit { 
     dataSource: any;
+    showFilterRow: boolean;
     constructor(private accountservice:AccountsService){
+      this.showFilterRow = true;
         this.dataSource = {
             store: {
                 type: 'array',

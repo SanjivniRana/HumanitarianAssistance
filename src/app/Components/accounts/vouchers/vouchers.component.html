@@ -14,8 +14,8 @@
       id="gridContainer" 
       [dataSource]="orders">
       <dxo-filter-row 
-          [visible]="showFilterRow" 
-          [applyFilter]="applyFilter.value"></dxo-filter-row>
+          [visible]="showFilterRow">
+      </dxo-filter-row>
       <dxo-header-filter 
           [visible]="showHeaderFilter"></dxo-header-filter>
       <dxo-search-panel 
@@ -80,9 +80,7 @@
           <span>Apply Filter</span>
           <dx-select-box #applyFilter 
               id="useFilterApplyButton" 
-              [items]="applyFilterTypes" 
-              [value]="applyFilterTypes[0].key" 
-              valueExpr="key"
+              [items]="applyFilterTypes"                             
               displayExpr="name"></dx-select-box>
       </div>      
   </div>

@@ -237,7 +237,7 @@ p-dropdown.form-control.ng-tns-c2-1 { height: 34px;  padding: 2px 7px !important
 .multi-drop-custom  .ui-dropdown { width: 100% !important;}
 
 /** css update **/
-.dx-row.dx-column-lines.dx-header-row{background: #3dc5ab; color: #fff; text-align: center;}
+/* .dx-row.dx-column-lines.dx-header-row{background: #3dc5ab; color: #fff; text-align: center;}
 .dx-header-filter.dx-header-filter-empty{color:#fff;}
 .dx-row td {border-bottom: 1px solid #e2e2e2; padding: 6px 4px !important;}
 td { text-align: center !important;}
@@ -248,10 +248,10 @@ input.dx-texteditor-input {border: 1px solid #e2e2e2; padding: 0 0;}
   .dx-datagrid-content{border: 1px solid #e2e2e2; border-top: 0px;}
   td.dx-editor-cell { border-bottom: 0px !important;}
   .dx-datagrid .dx-column-lines > td { border-left: 1px solid #ddd; border-right: 0px;}
-  td.dx-editor-cell {border-bottom: 0px !important; border-right: 1px solid #e2e2e2 !important;}
+  td.dx-editor-cell {border-bottom: 0px !important; border-right: 1px solid #e2e2e2 !important;} */
 
   /*css update*/
-  .dx-widget{font-family:'Poppins', sans-serif !important;}
+   .dx-widget{font-family:'Poppins', sans-serif !important;}
   .dx-template-wrapper a{text-decoration: none !important;}
   .dx-pager .dx-pages .dx-selection, .dx-pager .dx-page-sizes .dx-selection {
     color: #333;    border-color: transparent;    background-color: #3dc5ab;    color: #fff;    border-radius: 100px;    height: 24px;    width: 24px;    padding: 2px 9px;}
@@ -271,15 +271,15 @@ input.dx-texteditor-input {border: 1px solid #e2e2e2; padding: 0 0;}
  .dx-closebutton { background: none !important;  border: 0px !important;  color:#acacac !important;  width: 50px !important;  min-width: auto !important;  margin-top: 4px !important;}
  tr.dx-row.dx-data-row.dx-column-lines td {color: #acacac;}
  .btn-grp-wrap {text-align: right;}
- .dx-popup-title.dx-toolbar .dx-toolbar-label {font-size: 17px;color: #acacac;}
+ .dx-popup-title.dx-toolbar .dx-toolbar-label {font-size: 17px;color: #acacac;} 
 
  /* css update on nkb */
- .dx-toolbar-after .dx-dropdownmenu {
+ /* .dx-toolbar-after .dx-dropdownmenu {
   background: transparent !important;
   border: none !important;
   min-width: 50px !important;
 }
-span.dx-button-text {color: #acacac !important;}
+span.dx-button-text {color: #fff !important;}
 .dx-overlay-content.dx-popup-normal.dx-popup-draggable.dx-resizable {
   top: 224px !important;
 }
@@ -287,7 +287,7 @@ span.dx-button-text {color: #acacac !important;}
   top: 107px !important;}
   .dx-overlay-wrapper.dx-datagrid-column-chooser.dx-popup-wrapper.dx-datagrid-column-chooser-mode-select {
     top: 330px !important;
-}
+}  */
 header {position: fixed;  left: 232px;  top: 0;  right: 0;  background-color: #ffffff;  padding: 9px;  z-index: 888; box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);}
 .main-heading.clearfix {border-bottom: 1px solid #e2e2e2;margin-bottom: 13px;}
 h3.page-heading {font-size: 21px; color: #acacac;}
@@ -297,3 +297,6 @@ h3.page-heading {font-size: 21px; color: #acacac;}
   display: block;}
  .dx-popup-content { min-height: 142px; height: auto !important;}
  .btn-grp-wrap { margin-top: 20px;}
+ .dx-toolbar {
+   background-color:#fafafa;
+ }

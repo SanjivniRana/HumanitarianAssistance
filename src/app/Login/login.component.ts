@@ -49,8 +49,7 @@ import { GLOBAL } from '../shared/global';
       this.loginModel.Password = e.Password;      
       this.authenticationService.login(this.loginModel)
       .subscribe(
-        data => { 
-          debugger;   
+        data => {            
           this.userRolesArr = [];
           data.data.Roles.forEach(element => {
             this.userRolesArr.push(element);            

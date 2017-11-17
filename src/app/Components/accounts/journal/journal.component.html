@@ -15,17 +15,14 @@
         <dxo-export [enabled]="true" fileName="Orders"></dxo-export>
         <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
         <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
-        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
-        <dxo-selection
-            [selectAllMode]="selectAllMode.value"
-            [showCheckBoxesMode]="showCheckBoxesMode.value"
-            mode="multiple">
-        </dxo-selection>
+        <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>        
         <dxo-header-filter 
-        [visible]="true"></dxo-header-filter>
-        <dxo-selection
-            [selectAllMode]="selectAllMode.value"
-            [showCheckBoxesMode]="showCheckBoxesMode.value"     
+            [visible]="true">
+        </dxo-header-filter>
+        <dxo-filter-row 
+            [visible]="showFilterRow">
+        </dxo-filter-row>
+        <dxo-selection               
             mode="multiple">
         </dxo-selection>        
         <dxi-column dataField="Journal"></dxi-column>
@@ -44,7 +41,7 @@
     </dxo-pager>
 
     <dxo-paging [pageSize]="8"></dxo-paging>
-    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
         <div *dxTemplate="let employee of 'detail'">
             <div class="internal-grid-container">
                 <!-- <div>{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div> -->
@@ -57,10 +54,15 @@
                     <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
                     <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
                     <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
-                    <dxo-column-chooser [enabled]="true" mode="select"></dxo-column-chooser>
-                    
+                    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+                    <dxo-selection                        
+                        mode="multiple">
+                    </dxo-selection>
                     <dxo-header-filter 
-                    [visible]="true"></dxo-header-filter>
+                        [visible]="true"></dxo-header-filter>
+                    <dxo-filter-row 
+                        [visible]="showFilterRow">
+                    </dxo-filter-row>
                     
                         <dxi-column dataField="Date" dataType="date"></dxi-column>
                         <dxi-column dataField="ACNO"></dxi-column>
@@ -68,12 +70,12 @@
                         <dxi-column dataField="Debit"></dxi-column>
                         <dxi-column dataField="Credit"></dxi-column>
                         <dxi-column dataField="Currency"></dxi-column>
-                        <dxi-column dataField="BL"></dxi-column>
-                        <dxi-column dataField="Area"></dxi-column>
-                        <dxi-column dataField="Sector"></dxi-column>
-                        <dxi-column dataField="Program"></dxi-column>
-                        <dxi-column dataField="Project"></dxi-column>
-                        <dxi-column dataField="Job"></dxi-column>
+                        <dxi-column dataField="BL" [visible]="false"></dxi-column>
+                        <dxi-column dataField="Area" [visible]="false"></dxi-column>
+                        <dxi-column dataField="Sector" [visible]="false"></dxi-column>
+                        <dxi-column dataField="Program" [visible]="false"></dxi-column>
+                        <dxi-column dataField="Project" [visible]="false"></dxi-column>
+                        <dxi-column dataField="Job" [visible]="false"></dxi-column>
 
                         <!-- <dxi-column  dataType="Credit" caption="Completed" [calculateCellValue]="completedValue"></dxi-column> -->
 
@@ -90,8 +92,7 @@
             <dx-select-box
                 id="select-all-mode"
                 #selectAllMode
-                [dataSource]="['allPages', 'page']"
-                value="allPages"
+                [dataSource]="['allPages', 'page']"            
                 [disabled]="showCheckBoxesMode ? showCheckBoxesMode.value === 'none' : true"
             ></dx-select-box>
         </div>

@@ -124,8 +124,7 @@ export class AppHeaderComponent implements OnDestroy {
     }
    
     }
-    confirmPasswordCheck(value,newpass){
-        debugger;
+    confirmPasswordCheck(value,newpass){        
         if(value!=newpass){
             this.isConfirmPassword=false;
             this.isFormValid=false;
@@ -135,9 +134,7 @@ export class AppHeaderComponent implements OnDestroy {
         }
     }
 
-    passwordIsValid(value){
-        debugger;
-        console.log(value);
+    passwordIsValid(value){                
         if(value!=undefined && value!=null && value!=''){
         this.userService.
         checkCurrentPassword(this.setting.getBaseUrl()+GLOBAL.API_CheckCurrentPassword,value)
