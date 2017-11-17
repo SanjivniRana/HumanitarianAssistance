@@ -2,7 +2,6 @@ import {Routes, RouterModule } from '@angular/router'
 import { AccountsComponent } from './accounts.component';
 import { UserComponent } from '../admin/user.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
-import { JournalComponent } from './journal/journal.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
@@ -12,7 +11,7 @@ import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 const Account_Router : Routes = 
 [
     { 
-        path: ' ', 
+        path: '', 
         component: AccountsComponent,
         // children : [{
         //     path : 'vouchers',
@@ -23,10 +22,7 @@ const Account_Router : Routes =
         path: 'vouchers', 
         component: VouchersComponent        
     },
-    { 
-        path: 'journal', 
-        component: JournalComponent        
-    },
+   
     { 
         path: 'ledger', 
         component: LedgerComponent

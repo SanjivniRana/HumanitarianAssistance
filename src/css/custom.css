@@ -340,3 +340,4 @@ tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transpar
    border-right: 1px solid #e2e2e2 !important;}
    td.dx-datagrid-action.dx-cell-focus-disabled { text-align: left !important;}
    .dx-row.dx-column-lines.dx-header-row{border-top: 1px solid #e2e2e2;}
+   .dx-validationsummary-item-content { display: none;}

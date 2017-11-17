@@ -1,5 +1,14 @@
+<div style="color: red">
 
-<div *ngIf="commonService.menuVisibility">
+<router-outlet></router-outlet>       
+ 
+</div>
+
+
+
+
+
+<!-- <div *ngIf="commonService.menuVisibility">
     <app-header (checkToken)="recheckToken()" *ngIf="commonService.menuVisibility"></app-header>
 </div>
 
@@ -8,15 +17,15 @@
     <div  class="container">
         <router-outlet></router-outlet>        
     </div>
-</section>
+</section> -->
 
 <!-- <change-password> </change-password> -->
-<div *ngIf="commonService.menuVisibility==false">
+<!-- <div *ngIf="commonService.menuVisibility==false"> -->
     <!-- <router-outlet></router-outlet> -->
     <!-- <app-Login (checkToken)="recheckToken()"></app-Login> -->
-    <app-Login (checkToken)="recheckToken()"></app-Login>
+    <!-- <app-Login routerLink="/login" (checkToken)="recheckToken()"></app-Login> -->
     <!-- <reset-password></reset-password> -->
-</div>
+<!-- </div> -->
 
 <!-- <p-confirmDialog width="425"></p-confirmDialog>
 <p-growl life="2000"></p-growl> -->
