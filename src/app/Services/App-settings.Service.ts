@@ -7,9 +7,9 @@ export class AppSettingsService {
     return environment.baseUrl;
   }
 
-  public getLoginUrl(locationHref: string): string {
-    return environment.loginUrl + locationHref;
-  }
+  // public getLoginUrl(locationHref: string): string {
+  //   return environment.loginUrl + locationHref;
+  // }
 
 }
 
