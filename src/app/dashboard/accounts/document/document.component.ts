@@ -38,6 +38,6 @@ import { DxDataGridComponent,
     }
     backToVouchers()
     {        
-        //this.router.navigate(['/accounts/vouchers']);
+        this.router.navigate(['../vouchers']);
     }
   }

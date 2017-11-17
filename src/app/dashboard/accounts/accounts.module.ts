@@ -13,32 +13,34 @@ import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
 import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
-
-import { LedgerComponent } from './ledger/ledger.component';
-
+import { JournalComponent } from './journal/journal.component';
 import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
+import { LedgerComponent } from './ledger/ledger.component';
+
+
 
 @NgModule({
   declarations: [
     VouchersComponent,
     AccountsComponent,
-    LedgerComponent,    
+    JournalComponent,
     DocumentComponent,
-    TrailBalanceComponent    
+    TrailBalanceComponent,
+    LedgerComponent
+      
   ],
   imports: [
     CommonModule,   
     accountRoute,
+    DxFileUploaderModule,
     DxDataGridModule,
     DxSelectBoxModule,
     DxCheckBoxModule,
     DxNumberBoxModule,
     DxButtonModule,
     DxFormModule,
-    DxPopupModule,
-    DxTemplateModule,
-    DxFileUploaderModule,
+    DxPopupModule, DxTemplateModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true, 
       rolesIsolate: true}),

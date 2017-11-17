@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 import { GLOBAL } from '../shared/global';
   @Component({
     selector: "app-Login",
-    templateUrl: './login.Component.html'
+    templateUrl: './login.component.html'
   })
   export class LoginComponent {
     @Output() checkToken: EventEmitter<any> = new EventEmitter<any>();
@@ -49,7 +49,8 @@ import { GLOBAL } from '../shared/global';
       this.loginModel.Password = e.Password;      
       this.authenticationService.login(this.loginModel)
       .subscribe(
-        data => {            
+        data => { 
+          debugger;   
           this.userRolesArr = [];
           data.data.Roles.forEach(element => {
             this.userRolesArr.push(element);            
@@ -68,7 +69,8 @@ import { GLOBAL } from '../shared/global';
             //   this.checkToken.emit();
             // }
             this.checkToken.emit();            
-            this.router.navigate(['admin']);            
+            // this.router.navigate(['admin']);            
+            this.router.navigate(['dashboard']);            
           }
           else {
             this.loginModel.ErrorMessage = data.Result;
