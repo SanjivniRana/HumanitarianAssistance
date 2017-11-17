@@ -5,6 +5,7 @@ import { VouchersComponent } from './vouchers/vouchers.component';
 import { JournalComponent } from './journal/journal.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { DocumentComponent } from './document/document.component';
+import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 
 
 
@@ -28,9 +29,15 @@ const Account_Router : Routes =
     },
     { 
         path: 'ledger', 
-        component: LedgerComponent},{        
+        component: LedgerComponent
+    },
+    {        
         path: 'document', 
         component: DocumentComponent        
+    },
+    {        
+        path: 'trialbalance', 
+        component: TrailBalanceComponent        
     }
 ];
 

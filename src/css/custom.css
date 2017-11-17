@@ -297,6 +297,9 @@ h3.page-heading {font-size: 21px; color: #acacac;}
   display: block;}
  .dx-popup-content { min-height: 142px; height: auto !important;}
  .btn-grp-wrap { margin-top: 20px;}
- .dx-toolbar {
-   background-color:#fafafa;
- }
+ .dx-datagrid-rowsview .dx-master-detail-row:not(.dx-datagrid-edit-form) .dx-master-detail-cell {
+  background-color: #fff;
+}
+.dx-datagrid-rowsview .dx-master-detail-row:not(.dx-datagrid-edit-form) > .dx-datagrid-group-space{
+  background-color: #fff;
+}

@@ -17,6 +17,7 @@ import { JournalComponent } from './journal/journal.component';
 import { LedgerComponent } from './ledger/ledger.component';
 
 import { DocumentComponent } from './document/document.component';
+import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DocumentComponent } from './document/document.component';
     AccountsComponent,
     JournalComponent,
     LedgerComponent,    
-    DocumentComponent    
+    DocumentComponent,
+    TrailBalanceComponent    
   ],
   imports: [
     CommonModule,   

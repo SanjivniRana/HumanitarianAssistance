@@ -12,7 +12,7 @@
         [dataSource]="dataSource"
         [columnHidingEnabled]="true"
         [masterDetail]="{ enabled: true, template: 'detail' }">
-        <dxo-export [enabled]="true" fileName="Orders"></dxo-export>
+        <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
         <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
         <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
         <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>        
@@ -41,7 +41,7 @@
     </dxo-pager>
 
     <dxo-paging [pageSize]="8"></dxo-paging>
-    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>
         <div *dxTemplate="let employee of 'detail'">
             <div class="internal-grid-container">
                 <!-- <div>{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div> -->
@@ -50,7 +50,7 @@
                     [dataSource]="employee.data.Vouchers"
                     [showBorders]="true"
                     [columnAutoWidth]="true">
-                    <dxo-export [enabled]="true" fileName="Orders"></dxo-export>
+                    <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
                     <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
                     <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
                     <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
@@ -85,7 +85,7 @@
         </div>
     </dx-data-grid>  
     
-    <div class="options">
+    <!-- <div class="options">
         <div class="caption">Options</div>
         <div class="option">
             <span>Select All Mode</span>
@@ -105,7 +105,7 @@
                 value="onClick"
             ></dx-select-box>
         </div>
-    </div>
+    </div> -->
     
     </div>
 </div>
