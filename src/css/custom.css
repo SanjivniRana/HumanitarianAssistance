@@ -258,7 +258,7 @@ input.dx-texteditor-input {border: 1px solid #e2e2e2; padding: 0 0;}
     .options[_ngcontent-c2] { padding: 20px; margin-top: 20px;  background-color: #f5f5f5; color: #898989;}
     .dx-selectbox .dx-texteditor-input:read-only {cursor: pointer; padding: 0px 13px; border: none;} 
    
-    .dx-popup-wrapper > .dx-overlay-content { top: 727px !important; height: auto !important;}
+    .dx-popup-wrapper > .dx-overlay-content { height: auto !important;}
  
    input.dx-texteditor-input { border: 0px !important;}
    .dx-field-item-label-text {color: #acacac;  font-weight: 500;}
@@ -303,3 +303,40 @@ h3.page-heading {font-size: 21px; color: #acacac;}
 .dx-datagrid-rowsview .dx-master-detail-row:not(.dx-datagrid-edit-form) > .dx-datagrid-group-space{
   background-color: #fff;
 }
+
+/* css update */
+table.dx-datagrid-table.dx-datagrid-table-fixed {border-right: 1px solid #e2e2e2; border-left: 1px solid #e2e2e2;}
+.dx-datagrid-rowsview {border-top: 1px solid #ddd;border-bottom: 1px solid #e2e2e2;}
+tr.dx-row.dx-data-row.dx-column-lines td {color: #acacac; }
+.dx-datagrid-rowsview .dx-row > .dx-master-detail-cell {
+  padding: 11px;
+  padding-left: 0;
+}
+.ui-widget-content {
+  border: 1px solid #D5D5D5;
+  background: #ffffff;
+  color: #acacac;
+}
+.ui-widget-content a {
+  color: #acacac;
+}
+.ui-datatable th.ui-state-default {
+  background: transparent;
+  border-color: #d9d9d9;
+  color: #fff;
+  padding: 9px 2px !important;
+  color: #acacac;
+ 
+}
+tr.ui-state-default {
+  border: 1px solid #e2e2e2 !important;
+}
+.ui-state-default{border-right: 1px solid #e2e2e2 !important;}
+th.ui-state-default.ui-unselectable-text.ui-sortable-column {border-right: 1px solid #e2e2e2 !important;}
+.ui-datatable-even.ui-widget-content{border:1px solid #e2e2e2!important;}
+.ui-datatable-even.ui-widget-content { border: 0px solid #e2e2e2!important;}
+tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transparent !important;}
+.ui-datatable .ui-datatable-thead > tr > th, .ui-datatable .ui-datatable-tfoot > tr > td, .ui-datatable .ui-datatable-data > tr > td {
+   border-right: 1px solid #e2e2e2 !important;}
+   td.dx-datagrid-action.dx-cell-focus-disabled { text-align: left !important;}
+   .dx-row.dx-column-lines.dx-header-row{border-top: 1px solid #e2e2e2;}

@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, NavigationEnd , NavigationStart } from '@angula
 import { commonService  } from '../../Services/common.service';
 import { SelectItem } from 'primeng/primeng';
 import { ChangeDetectionStrategy , ChangeDetectorRef} from '@angular/core';
-import { UserType } from "../../shared/enums";
 import { AuthenticationService } from '../../Services/Authentication.Service';
 import { NgxRolesService } from 'ngx-permissions';
 import { NgxPermissionsService } from 'ngx-permissions';

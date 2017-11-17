@@ -181,8 +181,8 @@ let companies: Company[] = [{
             "Date": "11/02/2017",
             "ACNO": "410201",
             "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 5000,
-            "Credit": 4000,
+            "Debit": 0.00,
+            "Credit": 10000,
             "Currency" :"AFG-AFG",
             "BL": "",
             "Area":"",
@@ -191,13 +191,14 @@ let companies: Company[] = [{
             "Project":"",
             "Job":""
             
-        }, {
+        },
+        {
             "ID": 5,
             "Date": "11/02/2017",
             "ACNO": "410201",
             "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 5000,
-            "Credit": 4000,
+            "Debit": 10000,
+            "Credit": 0.00,
             "Currency" :"AFG-AFG",
             "BL": "",
             "Area":"",
@@ -205,48 +206,204 @@ let companies: Company[] = [{
             "Program":"",
             "Project":"",
             "Job":""
-        }]
+        },
+        {
+            
+                        "ID": 4,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 0.00,
+                        "Credit": 50000,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                        
+                    },
+                    {
+                        "ID": 5,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 50000,
+                        "Credit": 0.00,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                    },
+                    {
+                        "ID": 5,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 5000,
+                        "Credit": 0.00,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                    },
+                    {
+                        "ID": 5,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 3000,
+                        "Credit": 0.00,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                    },
+                    {
+                        "ID": 5,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 0.00,
+                        "Credit": 8000,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                    }]
     },
     {
         "ID": 2,
-        "Journal": "Journal",
+        "Journal": "Journal2",
         "Office" :"A0001",
         "RecordType": "Single Currency",
-        "Currency": "AFG-AFG",
+        "Currency": "USD-USD",
         "Accounts": "CEO",
         "Status": "All",
         "ReportDate": "1964/03/16",
         "Vouchers": [{
-
-            "ID": 8,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 5000,
-            "Credit": 4000,
-            "Currency" :"AFG-AFG",
-            "BL": "",
-            "Area":"",
-            "Sector":"",
-            "Program":"",
-            "Project":"",
-            "Job":""
             
-        }, {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 5000,
-            "Credit": 4000,
-            "Currency" :"AFG-AFG",
-            "BL": "",
-            "Area":"",
-            "Sector":"",
-            "Program":"",
-            "Project":"",
-            "Job":""
-        }]
+                        "ID": 4,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 0.00,
+                        "Credit": 10000,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                        
+                    },
+                    {
+                        "ID": 5,
+                        "Date": "11/02/2017",
+                        "ACNO": "410201",
+                        "TransactionDescription": "Kabul Clinic Income",
+                        "Debit": 10000,
+                        "Credit": 0.00,
+                        "Currency" :"AFG-AFG",
+                        "BL": "",
+                        "Area":"",
+                        "Sector":"",
+                        "Program":"",
+                        "Project":"",
+                        "Job":""
+                    },
+                    {
+                        
+                                    "ID": 4,
+                                    "Date": "11/02/2017",
+                                    "ACNO": "410201",
+                                    "TransactionDescription": "Kabul Clinic Income",
+                                    "Debit": 0.00,
+                                    "Credit": 50000,
+                                    "Currency" :"AFG-AFG",
+                                    "BL": "",
+                                    "Area":"",
+                                    "Sector":"",
+                                    "Program":"",
+                                    "Project":"",
+                                    "Job":""
+                                    
+                                },
+                                {
+                                    "ID": 5,
+                                    "Date": "11/02/2017",
+                                    "ACNO": "410201",
+                                    "TransactionDescription": "Kabul Clinic Income",
+                                    "Debit": 50000,
+                                    "Credit": 0.00,
+                                    "Currency" :"AFG-AFG",
+                                    "BL": "",
+                                    "Area":"",
+                                    "Sector":"",
+                                    "Program":"",
+                                    "Project":"",
+                                    "Job":""
+                                },
+                                {
+                                    "ID": 5,
+                                    "Date": "11/02/2017",
+                                    "ACNO": "410201",
+                                    "TransactionDescription": "Kabul Clinic Income",
+                                    "Debit": 5000,
+                                    "Credit": 0.00,
+                                    "Currency" :"AFG-AFG",
+                                    "BL": "",
+                                    "Area":"",
+                                    "Sector":"",
+                                    "Program":"",
+                                    "Project":"",
+                                    "Job":""
+                                },
+                                {
+                                    "ID": 5,
+                                    "Date": "11/02/2017",
+                                    "ACNO": "410201",
+                                    "TransactionDescription": "Kabul Clinic Income",
+                                    "Debit": 3000,
+                                    "Credit": 0.00,
+                                    "Currency" :"AFG-AFG",
+                                    "BL": "",
+                                    "Area":"",
+                                    "Sector":"",
+                                    "Program":"",
+                                    "Project":"",
+                                    "Job":""
+                                },
+                                {
+                                    "ID": 5,
+                                    "Date": "11/02/2017",
+                                    "ACNO": "410201",
+                                    "TransactionDescription": "Kabul Clinic Income",
+                                    "Debit": 0.00,
+                                    "Credit": 8000,
+                                    "Currency" :"AFG-AFG",
+                                    "BL": "",
+                                    "Area":"",
+                                    "Sector":"",
+                                    "Program":"",
+                                    "Project":"",
+                                    "Job":""
+                                }
+    ]
     }
 ];
 
@@ -264,8 +421,8 @@ let ledgers: LedgerClass[] = [{
         "Date": "11/03/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 4000,
+        "Debit": 0.00,
+        "Credit": 10000,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     },
@@ -274,8 +431,8 @@ let ledgers: LedgerClass[] = [{
         "Date": "11/04/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 4000,
+        "Debit": 10000,
+        "Credit": 0.00,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     },
@@ -284,8 +441,8 @@ let ledgers: LedgerClass[] = [{
         "Date": "11/05/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 4000,
+        "Debit": 0.00,
+        "Credit": 50000,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     },
@@ -294,8 +451,8 @@ let ledgers: LedgerClass[] = [{
         "Date": "11/06/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 4000,
+        "Debit": 50000,
+        "Credit": 0.00,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     },
@@ -305,7 +462,27 @@ let ledgers: LedgerClass[] = [{
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
         "Debit": 5000,
-        "Credit": 4000,
+        "Credit": 0.00,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 3000,
+        "Credit": 0.00,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 0.00,
+        "Credit": 8000,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     }]
@@ -318,11 +495,71 @@ let ledgers: LedgerClass[] = [{
     "VoucherDate": "1968/03/16",
     "LedgerVouchers": [{
         "ID": 4,
-        "Date": "13/02/2017",
+        "Date": "11/03/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 0.00,
+        "Credit": 10000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/04/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 10000,
+        "Credit": 0.00,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/05/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 0.00,
+        "Credit": 50000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/06/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
         "Debit": 50000,
-        "Credit": 40000,
+        "Credit": 0.00,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 5000,
+        "Credit": 0,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 3000,
+        "Credit": 0,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 0,
+        "Credit": 8000,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     }]
@@ -336,31 +573,71 @@ let ledgers: LedgerClass[] = [{
     "VoucherDate": "2000/03/16",
     "LedgerVouchers": [{
         "ID": 4,
-        "Date": "15/02/2017",
+        "Date": "11/03/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000645,
-        "Credit": 4000645,
+        "Debit": 0,
+        "Credit": 10000,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     },
     {
-        "ID": 5,
-        "Date": "11/03/2017",
+        "ID": 4,
+        "Date": "11/04/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 4000,
+        "Debit": 10000,
+        "Credit": 0,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     },
     {
-        "ID": 6,
-        "Date": "11/03/2017",
+        "ID": 4,
+        "Date": "11/05/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 0,
+        "Credit": 50000,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/06/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 50000,
+        "Credit": 0,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
         "Voucher": "410201",
         "LineItemDescription": "Kabul Clinic Income",
         "Debit": 5000,
-        "Credit": 4000,
+        "Credit": 0,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 3000,
+        "Credit": 0,
+        "Currency" :"AFG-AFG",
+        "Status": "Active"                
+    },
+    {
+        "ID": 4,
+        "Date": "11/07/2017",
+        "Voucher": "410201",
+        "LineItemDescription": "Kabul Clinic Income",
+        "Debit": 0,
+        "Credit": 8000,
         "Currency" :"AFG-AFG",
         "Status": "Active"                
     }]
@@ -396,32 +673,44 @@ let trial: TrailBalanceClass[] = [{
     "TrailBalanceVouchers": [{
         "ID": 4,        
         "AccountName": "410201",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 0,
+        "Credit": 10000             
     },
     {
         "ID": 5,        
         "AccountName": "410101 - Clinical Income",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 0,
+        "Credit": 50000             
     },
     {
         "ID": 6,        
         "AccountName": "410102 - Sports Income",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 0,
+        "Credit": 8000             
     },
     {
         "ID": 7,        
         "AccountName": "410103 - Medical Income",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 10000,
+        "Credit": 0             
+    },
+    {
+        "ID": 8,        
+        "AccountName": "410103 - Director Income",        
+        "Debit": 50000,
+        "Credit": 0             
+    },
+    {
+        "ID": 7,        
+        "AccountName": "410103 - Medical Income",        
+        "Debit": 3000,
+        "Credit": 0             
     },
     {
         "ID": 8,        
         "AccountName": "410103 - Director Income",        
         "Debit": 5000,
-        "Credit": 4000             
+        "Credit": 0             
     }]
 
 },
@@ -435,32 +724,44 @@ let trial: TrailBalanceClass[] = [{
     "TrailBalanceVouchers": [{
         "ID": 4,        
         "AccountName": "410201",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 0,
+        "Credit": 10000             
     },
     {
         "ID": 5,        
         "AccountName": "410101 - Clinical Income",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 0,
+        "Credit": 50000             
     },
     {
         "ID": 6,        
         "AccountName": "410102 - Sports Income",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 0,
+        "Credit": 8000             
     },
     {
         "ID": 7,        
         "AccountName": "410103 - Medical Income",        
-        "Debit": 5000,
-        "Credit": 4000             
+        "Debit": 10000,
+        "Credit": 0             
+    },
+    {
+        "ID": 8,        
+        "AccountName": "410103 - Director Income",        
+        "Debit": 50000,
+        "Credit": 0             
+    },
+    {
+        "ID": 7,        
+        "AccountName": "410103 - Medical Income",        
+        "Debit": 3000,
+        "Credit": 0             
     },
     {
         "ID": 8,        
         "AccountName": "410103 - Director Income",        
         "Debit": 5000,
-        "Credit": 4000             
+        "Credit": 0             
     }]
 
 }];

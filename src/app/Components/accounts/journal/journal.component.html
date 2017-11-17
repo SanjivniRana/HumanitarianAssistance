@@ -32,15 +32,14 @@
         <dxi-column dataField="Accounts"></dxi-column>
         <dxi-column dataField="ReportDate" dataType="date"></dxi-column>
         <dxi-column dataField="Status"></dxi-column>
-     <dxo-pager
-        [allowedPageSizes]="[5, 8, 15, 30]"
-        [showInfo]="true"
-        [showNavigationButtons]="true"
-        [showPageSizeSelector]="true"
-        [visible]="true">
-    </dxo-pager>
-
-    <dxo-paging [pageSize]="8"></dxo-paging>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+         <!-- <dxo-pager
+            [allowedPageSizes]="[5, 8, 15, 30]"
+            [showInfo]="true"
+            [showNavigationButtons]="true"
+            [showPageSizeSelector]="true"
+            [visible]="true">
+        </dxo-pager>            -->
     <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>
         <div *dxTemplate="let employee of 'detail'">
             <div class="internal-grid-container">
@@ -67,8 +66,8 @@
                         <dxi-column dataField="Date" dataType="date"></dxi-column>
                         <dxi-column dataField="ACNO"></dxi-column>
                         <dxi-column dataField="TransactionDescription"></dxi-column>
-                        <dxi-column dataField="Debit"></dxi-column>
-                        <dxi-column dataField="Credit"></dxi-column>
+                        <dxi-column dataField="Debit" ></dxi-column>
+                        <dxi-column dataField="Credit" ></dxi-column>
                         <dxi-column dataField="Currency"></dxi-column>
                         <dxi-column dataField="BL" [visible]="false"></dxi-column>
                         <dxi-column dataField="Area" [visible]="false"></dxi-column>
@@ -79,6 +78,16 @@
 
                         <!-- <dxi-column  dataType="Credit" caption="Completed" [calculateCellValue]="completedValue"></dxi-column> -->
 
+                        <dxo-summary>
+                                <dxi-total-item
+                                        column="Debit"
+                                        summaryType="sum">
+                                </dxi-total-item>
+                                <dxi-total-item
+                                        column="Credit"
+                                        summaryType="sum">
+                                </dxi-total-item>
+                            </dxo-summary>
                         
                 </dx-data-grid>
             </div>

@@ -13,6 +13,14 @@
       <dx-data-grid 
       id="gridContainer" 
       [dataSource]="orders">
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <!-- <dxo-pager
+         [allowedPageSizes]="[5, 8, 15, 30]"
+         [showInfo]="true"
+         [showNavigationButtons]="true"
+         [showPageSizeSelector]="true"
+         [visible]="true">
+     </dxo-pager>  -->
       <dxo-filter-row 
           [visible]="showFilterRow">
       </dxo-filter-row>
@@ -112,8 +120,7 @@ title="Information"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>       
                     
@@ -121,8 +128,7 @@ title="Information"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
@@ -135,27 +141,23 @@ title="Information"
                             text="Voucher Date">
                         </dxo-label>
                         <dxi-validation-rule 
-                            type="required"
-                            message="Date of birth is required">
+                            type="required">
                         </dxi-validation-rule>
                         <dxi-validation-rule 
                             type="range"
-                            [max]="maxDate"
-                            message="You must be at least 21 years old">
+                            [max]="maxDate">
                         </dxi-validation-rule>
                     </dxi-item>
 
                     <dxi-item dataField="Cheque No">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Login is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
                     <dxi-item dataField="Voucher Reference No">
                             <dxi-validation-rule 
-                                type="required"
-                                message="Login is required">
+                                type="required">
                             </dxi-validation-rule>
                     </dxi-item>
 
@@ -163,8 +165,7 @@ title="Information"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
@@ -172,15 +173,13 @@ title="Information"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
                     <dxi-item dataField="Voucher Description">
                             <dxi-validation-rule 
-                                type="required"
-                                message="Login is required">
+                                type="required">
                             </dxi-validation-rule>
                     </dxi-item>
 
@@ -231,8 +230,7 @@ title="Edit Voucher"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>       
                     
@@ -240,8 +238,7 @@ title="Edit Voucher"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
@@ -254,27 +251,23 @@ title="Edit Voucher"
                             text="Voucher Date">
                         </dxo-label>
                         <dxi-validation-rule 
-                            type="required"
-                            message="Date of birth is required">
+                            type="required">
                         </dxi-validation-rule>
                         <dxi-validation-rule 
                             type="range"
-                            [max]="maxDate"
-                            message="You must be at least 21 years old">
+                            [max]="maxDate">
                         </dxi-validation-rule>
                     </dxi-item>
 
                     <dxi-item dataField="Cheque No">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Login is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
                     <dxi-item dataField="Voucher Reference No">
                             <dxi-validation-rule 
-                                type="required"
-                                message="Login is required">
+                                type="required">
                             </dxi-validation-rule>
                     </dxi-item>
 
@@ -282,8 +275,7 @@ title="Edit Voucher"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
@@ -291,15 +283,13 @@ title="Edit Voucher"
                         editorType="dxSelectBox"
                         [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule 
-                            type="required"
-                            message="Country is required">
+                            type="required">
                         </dxi-validation-rule>
                     </dxi-item>
 
                     <dxi-item dataField="Voucher Description">
                             <dxi-validation-rule 
-                                type="required"
-                                message="Login is required">
+                                type="required">
                             </dxi-validation-rule>
                     </dxi-item>
 
