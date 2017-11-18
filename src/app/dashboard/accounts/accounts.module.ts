@@ -12,11 +12,13 @@ import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
-import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
 import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { LedgerComponent } from './ledger/ledger.component';
+import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
+import { FinancialReportComponent } from './financial-report/financial-report.component';
 
 
 
@@ -27,8 +29,9 @@ import { LedgerComponent } from './ledger/ledger.component';
     JournalComponent,
     DocumentComponent,
     TrailBalanceComponent,
-    LedgerComponent
-      
+    LedgerComponent,
+    AdvanceDeductionComponent,
+    FinancialReportComponent      
   ],
   imports: [
     CommonModule,   
@@ -41,6 +44,7 @@ import { LedgerComponent } from './ledger/ledger.component';
     DxButtonModule,
     DxFormModule,
     DxPopupModule, DxTemplateModule,
+    DxTabsModule, DxSelectBoxModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true, 
       rolesIsolate: true}),

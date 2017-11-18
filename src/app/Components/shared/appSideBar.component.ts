@@ -36,12 +36,12 @@ export class AppSidebarComponent {
     RolesAndPermissionsList:any;
     
     getRolesAndPermissionsByUserId(UserId)
-    {
+    {        
       this.authService.getRolesAndPermissionsByUserId(this.appSettigs.getBaseUrl() + GLOBAL.API_UserRoles_GetUserRolesByUserId,UserId).subscribe(
-        data=>{              
+        data=>{                 
           this.PermissionsArr = [];
           this.permissionwithRole={};
-          for(var i=0; i<data.data.RoleList.length ;i++)
+          for(var i=0; i<data.data.RoleList.length;i++)
           {                    
             let rolename= data.data.RoleList[i].RoleName;
             this.RolesAndPermissionsList = [];
@@ -56,7 +56,7 @@ export class AppSidebarComponent {
           var permissionStr =  this.PermissionsArr.join(',');
 
           this.ngxroleservice.addRoles(this.permissionwithRole);
-          console.log(this.permissionwithRole)
+          console.log(this.permissionwithRole);
           localStorage.setItem('UserPermissions',this.permissionwithRole);
       });
       

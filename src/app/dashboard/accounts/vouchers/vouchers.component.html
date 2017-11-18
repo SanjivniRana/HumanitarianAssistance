@@ -118,11 +118,19 @@ title="Information"
 
                     <dxi-item dataField="Currency"
                         editorType="dxSelectBox"
-                        [editorOptions]="{ dataSource: countries }">
+                        [editorOptions]="{ dataSource: countries1.Country }">
                         <dxi-validation-rule 
                             type="required">
                         </dxi-validation-rule>
                     </dxi-item>       
+<!-- 
+                    <dxi-item dataField="Currency"
+                        editorType="dxSelectBox"
+                        [editorOptions]="{ dataSource: countries1.Country }">
+                        <dxi-validation-rule 
+                            type="required">
+                        </dxi-validation-rule>
+                    </dxi-item>                            -->
                     
                     <dxi-item dataField="Office"
                         editorType="dxSelectBox"

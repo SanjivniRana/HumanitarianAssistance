@@ -15,7 +15,6 @@ import { AccountsService } from './accounts.service';
 import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
 
 import { LedgerComponent } from './ledger/ledger.component';
-
 import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 
@@ -25,7 +24,7 @@ import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
     AccountsComponent,
     LedgerComponent,    
     DocumentComponent,
-    TrailBalanceComponent    
+    TrailBalanceComponent
   ],
   imports: [
     CommonModule,   

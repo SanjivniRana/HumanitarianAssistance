@@ -10,6 +10,7 @@ import { DxDataGridComponent,
   DxPopupModule, DxTemplateModule
  } from 'devextreme-angular';
   import { Order, AccountsService, Employee, Customer } from '../accounts.service';
+  import ArrayStore from 'devextreme/data/array_store';
 
 @Component({
   selector: 'app-vouchers',
@@ -40,6 +41,7 @@ export class VouchersComponent implements OnInit {
   };
   customer: Customer;
   countries: string[];
+  countries1: any[];
   maxDate: Date = new Date();
   cityPattern = "^[^0-9]+$";
   namePattern: any = /^[^0-9]+$/;
@@ -54,8 +56,10 @@ export class VouchersComponent implements OnInit {
       return true;
   }
   colCountByScreen: Object;
-  
+  simpleProducts: string[];
+  data: any;
   constructor(private accountservice:AccountsService) { 
+    
     
     this.voucherNO = [{
     }];
@@ -66,6 +70,12 @@ export class VouchersComponent implements OnInit {
   };
     this.maxDate = new Date(this.maxDate.setFullYear(this.maxDate.getFullYear() - 21));
     this.countries = this.accountservice.getCountries();
+    this.countries1 = this.accountservice.getCountries1();
+    this.data = new ArrayStore({
+        data: this.countries1,
+        key: "ID"
+    });
+    debugger;
     this.customer = this.accountservice.getCustomer();
     console.log(this.customer);
     this.statuses = ["All", "California", "Nevada", "Colorado", "Deferred", "Completed"];

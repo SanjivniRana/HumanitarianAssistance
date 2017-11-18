@@ -27,8 +27,7 @@ export class AdminComponent implements OnInit {
   getRolesAndPermissionsByUserId(UserId)
   {
     this.authenticationService.getRolesAndPermissionsByUserId(this.appSettigs.getBaseUrl() + GLOBAL.API_UserRoles_GetUserRolesByUserId,UserId).subscribe(
-      data=>{    
-        debugger; 
+      data=>{            
         this.PermissionsArr = [];
         this.permissionwithRole={};
         for(var i=0; i<data.data.RoleList.length ;i++)

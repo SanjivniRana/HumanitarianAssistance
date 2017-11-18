@@ -11,7 +11,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse left-sidebar">
                 <ul class="nav navbar-nav">
-                    <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" ><a [routerLink]="['/admin/user']"><span><i class="fa fa-user"></i></span> User</a></li>
+                    <li ><a [routerLink]="['./admin/user']"><span><i class="fa fa-user"></i></span> User</a></li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-code"></i></span> Code <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
@@ -32,9 +32,9 @@
                             <li><a [routerLink]="['./accounts/ledger']">Ledger Statement</a></li>                            
                             <li><a href="javascript:void(0)">Budget Balance</a></li>
                             <li><a [routerLink]="['./accounts/trialbalance']">Trial Balance</a></li>
-                            <li><a href="javascript:void(0)">Advance Deduction</a></li>
+                            <li><a [routerLink]="['./accounts/advanceDeduction']">Advance Deduction</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0)">Financial Report</a></li>
+                            <li><a [routerLink]="['./accounts/financialreport']">Financial Report</a></li>
                             <li><a href="javascript:void(0)">Set Financial Year</a></li>                            
                         </ul>
                     </li>

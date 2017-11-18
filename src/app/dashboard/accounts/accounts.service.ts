@@ -147,7 +147,19 @@ let customer : Customer = {
 
 let countries: string[] = [
     'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','The   Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burma','Burundi','Cambodia','Cameroon','Canada','Cape Verde','Central African Republic','Chad','Chile','China','Colombia','Comoros','Democratic Republic of the Congo','Republic of the Congo','Costa Rica','Ivory Coast','Croatia','Cuba','Cyprus','Czech Republic','Denmark','Djibouti','Dominica','Dominican Republic','East Timor','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Ethiopia','Fiji','Finland','France','Gabon','The Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Republic of Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','North Korea','South Korea','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Republic of Macedonia','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Federated States of Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Namibia','Nauru','Nepal','Kingdom of the Netherlands','New Zealand','Nicaragua','Niger','Nigeria','Norway','Oman','Pakistan','Palau','State of Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','São Tomé and Príncipe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Swaziland','Sweden','Switzerland','Syria','Tajikistan','Tanzania','Thailand','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'];
-
+    let countries1: any[] = [{
+        "Id": 1,
+        "Country": "India"
+    },
+    {
+        "Id": 2,
+        "Country": "USA"
+    },
+    {
+        "Id": 3,
+        "Country": "UK"
+    }];
+    
 //DATA FOR DOCUMENT PAGE
 export class Company {
     ID: number;
@@ -765,6 +777,264 @@ let trial: TrailBalanceClass[] = [{
     }]
 
 }];
+// TRIAL BALANCE ENDS 
+
+
+
+//FOR ADVANCE DEDUCTION 
+
+export class AdvanceDeductionClass {
+    ID: number;
+    Currency: string;    
+    Office: string;     
+    Month: string;
+    AdvanceDeductionSalarys: AdvanceDeductionSalary[];    
+}
+
+export class AdvanceDeductionSalary {    
+    ID: number;
+    EmployeeName: string;
+    NetSalaryAdvance: number;
+    AdvanceDeduction: number;
+    NetSalary: number;    
+}
+
+let advanceDeduction: AdvanceDeductionClass[] = [{
+    "ID": 1,
+    "Currency": "AFG-AFG",    
+    "Office" : "TestOffice",    
+    "Month": "2017/11/17",
+    "AdvanceDeductionSalarys": [{
+        "ID": 4,        
+        "EmployeeName": "Naval Bhatt",        
+        "NetSalaryAdvance": 50000,
+        "AdvanceDeduction": 10000,            
+        "NetSalary": 40000,
+    },
+    {
+        "ID": 4,        
+        "EmployeeName": "Fuster Cluck",     
+        "NetSalaryAdvance": 60000,
+        "AdvanceDeduction": 10000,            
+        "NetSalary": 50000,            
+    },
+    {
+        "ID": 4,        
+        "EmployeeName": "Hamza",        
+        "NetSalaryAdvance": 70000,
+        "AdvanceDeduction": 40000,            
+        "NetSalary": 30000,             
+    }]
+
+},
+{
+    "ID": 2,
+    "Currency": "USD-USD",    
+    "Office" : "TestOffice1",    
+    "Month": "2017/11/18",
+    "AdvanceDeductionSalarys": [{
+        "ID": 5,        
+        "EmployeeName": "Rohit Grover",        
+        "NetSalaryAdvance": 50000,
+        "AdvanceDeduction": 10000,            
+        "NetSalary": 40000,
+    },
+    {
+        "ID": 5,        
+        "EmployeeName": "Bipul",        
+        "NetSalaryAdvance": 60000,
+        "AdvanceDeduction": 10000,            
+        "NetSalary": 50000,            
+    },
+    {
+        "ID": 5,        
+        "EmployeeName": "Shubham",        
+        "NetSalaryAdvance": 70000,
+        "AdvanceDeduction": 40000,            
+        "NetSalary": 30000,             
+    },
+    {
+        "ID": 5,        
+        "EmployeeName": "Alpit",        
+        "NetSalaryAdvance": 70000,
+        "AdvanceDeduction": 40000,            
+        "NetSalary": 30000,             
+    }]
+
+}];
+
+//END ADVANCE DEDUCTION
+
+
+//FOR Financial-Report 
+export class Tab {
+    id: number;
+    text: string;
+}
+
+export class FinancialReport_Notes_of_COAClass {
+    ID: number;
+    Code: number;    
+    AccountName: string;     
+    Notes: number;    
+}
+
+let financial_notes_of_COAClass: FinancialReport_Notes_of_COAClass[] = [{
+    "ID": 1,
+    "Code": 3123,    
+    "AccountName" : "Income D",    
+    "Notes": 18,
+},
+{
+    "ID": 2,
+    "Code": 3123,    
+    "AccountName" : "Income D",    
+    "Notes": 18,
+},
+{
+    "ID": 3,
+    "Code": 3123,    
+    "AccountName" : "Income D",    
+    "Notes": 18,
+}];
+
+export class FinancialReport_NotesClass {
+    ID: number;
+    Code: number;    
+    Narration: string;     
+    Notes: number;
+    BalanceType:string;    
+}
+
+let financial_notes: FinancialReport_NotesClass[] = [{
+    "ID": 4,
+    "Code": 11,    
+    "Narration" : "Reserve Account",    
+    "Notes": 12,
+    "BalanceType" : "SUM"
+},
+{
+    "ID": 5,
+    "Code": 11,    
+    "Narration" : "Reserve Account",    
+    "Notes": 12,
+    "BalanceType" : "SUM"
+},
+{
+    "ID": 6,
+    "Code": 11,    
+    "Narration" : "Reserve Account",    
+    "Notes": 12,
+    "BalanceType" : "SUM"
+}];
+
+export class FinancialReport_BalanceSheetClass {
+    ID: number;
+    Description: string;            
+    Notes: number;
+    Balance:number;    
+}
+
+let financial_balancesheet: FinancialReport_BalanceSheetClass[] = [{
+    "ID": 7,
+    "Description": "Donor Funds",    
+    "Notes" : 4,    
+    "Balance": 9000,
+},
+{
+    "ID": 8,
+    "Description": "Donor Funds",    
+    "Notes" : 4,    
+    "Balance": 9000,
+},
+{
+    "ID": 9,
+    "Description": "Donor Funds",    
+    "Notes" : 4,    
+    "Balance": 9000,
+}];
+
+export class FinancialReport_IncomeClass {
+    ID: number;
+    Description: string;            
+    Notes: number;
+    Balance:number;    
+}
+
+let financial_Income: FinancialReport_IncomeClass[] = [{
+    "ID": 10,
+    "Description": "Currency Exchange Loss",            
+    "Notes": 15,
+    "Balance":480
+},
+{
+    "ID": 11,
+    "Description": "Currency Exchange Loss",            
+    "Notes": 15,
+    "Balance":480
+},
+{
+    "ID": 12,
+    "Description": "Currency Exchange Loss",            
+    "Notes": 15,
+    "Balance":480
+}];
+
+export class FinancialReport_Details_of_NotesClass {
+    ID: number;
+    AccountCode : number;            
+    AccountName : string;
+    Notes:number;    
+    Balance: number;
+}
+
+let financial_details: FinancialReport_Details_of_NotesClass[] = [{
+    "ID": 13,
+    "AccountCode": 410201,    
+    "AccountName" : "Sports Income",    
+    "Notes": 15,
+    "Balance":6000
+},
+{
+    "ID": 14,
+    "AccountCode": 410201,    
+    "AccountName" : "Sports Income",    
+    "Notes": 15,
+    "Balance":6000
+},
+{
+    "ID": 15,
+    "AccountCode": 410201,    
+    "AccountName" : "Sports Income",    
+    "Notes": 15,
+    "Balance":6000
+}];
+
+
+let tabs: Tab[] = [
+    {     
+        id: 0,
+        text: "Notes in COA"        
+    },
+    { 
+        id: 1,
+        text: "Notes"
+    },
+    { 
+        id: 2,
+        text: "Balance Sheet"
+    },
+    { 
+        id: 3,
+        text: "Income/Exp AC"
+    },
+    { 
+        id: 4,
+        text: "Details Of Notes"
+    }
+];
+
+//End Financial-Report
 
 @Injectable()
 export class AccountsService {
@@ -780,6 +1050,10 @@ export class AccountsService {
         return countries;
     }
 
+    getCountries1() {
+        return countries1;
+    }
+
     //Document Function 
     getCompanies() {
         return companies;
@@ -793,5 +1067,33 @@ export class AccountsService {
 
     getTrailBalance(){
         return trial;
+    }
+
+    getAdvanceDeduction(){
+        return advanceDeduction;
+    }
+
+    getTabs(): Tab[] {
+        return tabs;
+    }
+
+    getFinancial_COA(){
+        return financial_notes_of_COAClass;
+    }
+
+    getFinancial_Notes(){
+        return financial_notes;
+    }
+
+    getFinancial_BalanceSheet(){
+        return financial_balancesheet;
+    }
+
+    getFinancial_Income(){
+        return financial_Income;
+    }
+
+    getFinancial_DetailsNotes(){
+        return financial_details
     }
 }
