@@ -342,3 +342,4 @@ tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transpar
    .dx-row.dx-column-lines.dx-header-row{border-top: 1px solid #e2e2e2;}
    .dx-validationsummary-item-content { display: none;}
    .dx-template-wrapper{text-align: center;}
+   .dx-popup-content {   min-height: 58px;    height: auto !important;}

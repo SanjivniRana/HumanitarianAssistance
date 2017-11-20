@@ -23,19 +23,17 @@ import { CodeService, ChartOfAccount } from '../code.service';
 export class ChartOfAccountsComponent implements OnInit {
   dataSource: any;
   showFilterRow: boolean;
+  data: any;
 
   //Edit popup
   popupVisibleEditChartOfAccount = false;
 
-  //edit form
-  //chartOfAccounts: ChartOfAccount;
+  //Edit form
   chartOfAccounts: ChartOfAccount[];
-
   accountType: string[];
   accountLevel: string[];
   // accountLevel: AccountLevelDropdowns[];
 
-  data: any;
   constructor(private codeService: CodeService) {
     this.showFilterRow = true;
 
@@ -58,10 +56,10 @@ export class ChartOfAccountsComponent implements OnInit {
 
     }
     // this.accountLevel    
-    this.data = {
-      data: this.accountLevel,
-      key: "ID"
-    };
+    // this.data = {
+    //   data: this.accountLevel,
+    //   key: "ID"
+    // };
   }
 
 

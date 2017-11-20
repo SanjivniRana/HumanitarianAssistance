@@ -17,7 +17,6 @@ const routes: Routes = [
                 //         except : ['Guest']
                 //     }
                 // },
-
             },
 
             { path: 'code', loadChildren: './code/code.module#CodeModule' },
