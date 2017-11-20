@@ -7,7 +7,6 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { accountRoute } from './accounts.routing';
 import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
@@ -19,6 +18,7 @@ import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
+import { AccountsRoutingModule } from './accounts-routing.module';
 
 
 
@@ -35,7 +35,7 @@ import { FinancialReportComponent } from './financial-report/financial-report.co
   ],
   imports: [
     CommonModule,   
-    accountRoute,
+    AccountsRoutingModule,
     DxFileUploaderModule,
     DxDataGridModule,
     DxSelectBoxModule,

@@ -58,8 +58,7 @@ export class VouchersComponent implements OnInit {
   colCountByScreen: Object;
   simpleProducts: string[];
   data: any;
-  constructor(private accountservice:AccountsService) { 
-    
+  constructor(private accountservice:AccountsService) {     
     
     this.voucherNO = [{
     }];
@@ -76,10 +75,8 @@ export class VouchersComponent implements OnInit {
         key: "ID"
     });
     debugger;
-    this.customer = this.accountservice.getCustomer();
-    console.log(this.customer);
+    this.customer = this.accountservice.getCustomer();    
     this.statuses = ["All", "California", "Nevada", "Colorado", "Deferred", "Completed"];
-
     this.orders = accountservice.getOrders();
     this.showFilterRow = true;
     this.showHeaderFilter = true;

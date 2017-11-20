@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 
 const Admin_Router: Routes =
     [{
-        path: '', component: AdminComponent,
+        path: '', component: UserComponent,
         children:
             [
                 { path: 'admin', component: AdminComponent },

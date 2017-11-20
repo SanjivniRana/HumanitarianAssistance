@@ -1036,6 +1036,30 @@ let tabs: Tab[] = [
 
 //End Financial-Report
 
+//Start Financial Year DropDown
+export class FinancialYear {
+    ID: number;
+    Year: string;
+}
+
+let years: FinancialYear[] = [{
+    "ID": 1,
+    "Year": "2014"
+},
+{
+    "ID": 2,
+    "Year": "2015"  
+},
+{
+    "ID": 3,
+    "Year": "2016"
+},
+{
+    "ID": 4,
+    "Year": "2017"
+}];
+//End Financial Year DropDown
+
 @Injectable()
 export class AccountsService {
     getOrders(): Order[] {
@@ -1096,4 +1120,9 @@ export class AccountsService {
     getFinancial_DetailsNotes(){
         return financial_details
     }
+
+    getFinancialYear_Report(){
+        return years;
+    }
+
 }

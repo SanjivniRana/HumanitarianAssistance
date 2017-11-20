@@ -57,7 +57,7 @@ import { AccountsService } from "../Components/accounts/accounts.service";
     declarations: [
         DashboardComponent,
         AppHeaderComponent,
-        AppSidebarComponent
+        AppSidebarComponent        
     ],
 
     providers: [

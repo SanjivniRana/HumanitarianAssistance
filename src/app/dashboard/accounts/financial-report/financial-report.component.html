@@ -2,10 +2,22 @@
     <div class="col-sm-12">
         <div class="main-heading clearfix">
                 <h3 class="page-heading">Financial Report</h3>
+        </div>        
+    </div>
+    <div class="dx-field">        
+        <div class="dx-field-value">
+            <dx-select-box
+                [dataSource]="data"
+                displayExpr="Year"
+                valueExpr="ID"                
+                placeholder="Select Financial Year"
+                [showClearButton]="true"                
+                (onValueChanged)="selectedFinancialYear($event)"
+            ></dx-select-box>
         </div>
     </div>
     <div class="col-sm-12">
-        
+            
          
 
          <div >
@@ -154,7 +166,7 @@
                 </div>
 
                 <!-- tab 5 -->
-                <div *ngIf="showSelectedTab==4">
+                <div *ngIf="showSelectedTab==4  ">
                         <dx-data-grid id="gridContainer" 
                         [dataSource]="tab5"
                         [columnHidingEnabled]="true">

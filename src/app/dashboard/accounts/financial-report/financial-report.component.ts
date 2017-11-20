@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DxTabsModule, DxSelectBoxModule } from 'devextreme-angular';
-import { AccountsService, Tab } from '../accounts.service';
+import { AccountsService, Tab, FinancialYear } from '../accounts.service';
+import ArrayStore from 'devextreme/data/array_store';
 
 @Component({
   selector: 'app-financial-report',
@@ -17,7 +18,18 @@ export class FinancialReportComponent implements OnInit {
   tab3: any;
   tab4: any;
   tab5: any;
+
+  financialYear: FinancialYear[];
+  data: any;
+
   constructor(private accountservice:AccountsService) { 
+    
+    this.financialYear = this.accountservice.getFinancialYear_Report();
+    this.data = new ArrayStore({
+        data: this.financialYear,
+        key: "ID"
+    });
+
     this.tabs = this.accountservice.getTabs();
     this.showFilterRow = true;
     this.tab1 = {
@@ -61,6 +73,11 @@ export class FinancialReportComponent implements OnInit {
     this.showSelectedTab = e.itemIndex;
     debugger;
       // this.tabContent = this.tabs[e.itemIndex].content;
+  }
+
+  selectedFinancialYear(value)
+  {
+    debugger;
   }
 
   ngOnInit() {

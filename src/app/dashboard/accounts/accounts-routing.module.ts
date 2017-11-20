@@ -8,6 +8,7 @@ import { LedgerComponent } from './ledger/ledger.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
+import { NgModule } from '@angular/core';
 
 
 
@@ -38,5 +39,8 @@ const Account_Router: Routes =
             }
         ]
     }];
-
-export const accountRoute = RouterModule.forChild(Account_Router);
+@NgModule({
+    imports: [RouterModule.forChild(Account_Router)],
+    exports: [RouterModule]
+})
+export class AccountsRoutingModule { }

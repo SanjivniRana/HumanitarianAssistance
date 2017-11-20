@@ -76,4 +76,9 @@ export class ChartOfAccountsComponent implements OnInit {
     this.popupVisibleEditChartOfAccount = true;
   }
 
+  cancelDeleteVoucher()
+  {
+      this.popupVisibleEditChartOfAccount = false;      
+  }
+
 }
