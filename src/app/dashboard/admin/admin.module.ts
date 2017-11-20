@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { UserComponent } from './user.component'
-import {adminRoute } from './admin.routing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {DialogModule} from 'primeng/primeng';
@@ -16,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { TextMaskModule } from 'angular2-text-mask';
 import {CheckboxModule} from 'primeng/primeng';
+import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import {CheckboxModule} from 'primeng/primeng';
   ],
   imports: [
     CommonModule,
-    adminRoute,
+    AdminRoutingModule,
     DialogModule,
     MultiSelectModule,
     TextMaskModule,

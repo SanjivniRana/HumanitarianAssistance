@@ -15,7 +15,7 @@
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-code"></i></span> Code <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li *ngxPermissionsOnly = "['CanAdd']"><a href="javascript:void(0)">Charts Of Accounts</a></li>
+                            <li><a [routerLink]="['./code/chart-of-accounts']">Charts Of Accounts</a></li>  
                             <li ><a  [routerLink]="['./code/journal-code']">Journal Codes</a></li>
                             <li ><a href="javascript:void(0)">Currency Codes</a></li>                                                        
                             <li><a href="javascript:void(0)">Office Codes</a></li>
