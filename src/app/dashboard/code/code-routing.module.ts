@@ -3,6 +3,7 @@ import { CodeComponent } from "./code.component";
 import { JournalCodeComponent } from "./journal-code/journal-code.component";
 import { NgModule } from "@angular/core";
 import { ChartOfAccountsComponent } from "./chart-of-accounts/chart-of-accounts.component";
+import { AnalyticalCodesComponent } from "./analytical-codes/analytical-codes.component";
 
 
 const appRouter: Routes =
@@ -12,6 +13,9 @@ const appRouter: Routes =
             [
                 { path: 'journal-code', component: JournalCodeComponent },
                 { path: 'chart-of-accounts', component: ChartOfAccountsComponent },
+                { path: 'analytical-codes', component: AnalyticalCodesComponent },
+
+                
             ]
     }];
 

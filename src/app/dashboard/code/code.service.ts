@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+//chartOfAccounts
 export class ChartOfAccount {
     ID: number;
     AccountCode: number;
@@ -8,55 +9,36 @@ export class ChartOfAccount {
     AccountLevel: string;
 }
 
+//analyticalCodes
+export class AnalyticalCode {
+    ID: number;
+    Code: string;
+    Donor: string;
+    Program: string;
+    Project: string;
+    Area: string;
+    Sector: string;
+    Job: string;
+    Description: string;
+    Amount: string;
+    Currency: string;
+    Book: string;
+    DonorCode: string;
+    Status: boolean;
+}
 
-// export class AccountLevelDropdowns {
-//     ID: number;
-//     AccountLevel: string;
-// }
+//JournalCode
+export class JournalCode {
+    ID: number;
+    JournalName: string;
+}
 
-
-
-// let accountTypeDropdowns: AccountTypeDropdown[] = [
-//     {
-//         "ID": 1,
-//         "AccountType": "Expandable"
-//     },
-//     {
-//         "ID": 2,
-//         "AccountType": "Non Expandable"
-//     },
-//     {
-//         "ID": 3,
-//         "AccountType": "Other"
-//     }
-// ];
-
-
-// let accountLevelDropdowns: AccountLevelDropdowns[] = [
-//     {
-//         "ID": 1,
-//         "AccountLevel": "Main level"
-//     },
-//     {
-//         "ID": 2,
-//         "AccountLevel": "Control level"
-//     },
-//     {
-//         "ID": 3,
-//         "AccountLevel": "Sub level"
-//     },
-//     {
-//         "ID": 4,
-//         "AccountLevel": "Input level"
-//     }
-// ];
-
+//chartOfAccounts
 let accountTypeDropdowns: string[] = [
     'Expandable', 'Non Expandable', 'Other'];
 
 let accountLevelDropdowns: string[] = [
     'Main level', 'Control level', 'Sub level', 'Input level'];
-
 
 let chartOfAccounts: ChartOfAccount[] = [
     {
@@ -90,9 +72,99 @@ let chartOfAccounts: ChartOfAccount[] = [
 
 ];
 
+//analyticalCodes
+let analyticalCodes: AnalyticalCode[] = [
+    {
+        "ID": 1,
+        "Code": "Main",
+        "Donor": "Main",
+        "Program": "Main",
+        "Project": "Main",
+        "Area": "Main",
+        "Sector": "Main",
+        "Job": "Main",
+        "Description": "Main",
+        "Amount": "Main",
+        "Currency": "Afg",
+        "Book": "Main",
+        "DonorCode": "Main",
+        "Status": true
+    },
+    {
+        "ID": 2,
+        "Code": "Main",
+        "Donor": "Main",
+        "Program": "Main",
+        "Project": "Main",
+        "Area": "Main",
+        "Sector": "Main",
+        "Job": "Main",
+        "Description": "Main",
+        "Amount": "Main",
+        "Currency": "Afg",
+        "Book": "Main",
+        "DonorCode": "Main",
+        "Status": true
+    },
+    {
+        "ID": 3,
+        "Code": "Main",
+        "Donor": "Main",
+        "Program": "Main",
+        "Project": "Main",
+        "Area": "Main",
+        "Sector": "Main",
+        "Job": "Main",
+        "Description": "Main",
+        "Amount": "Main",
+        "Currency": "USD",
+        "Book": "Main",
+        "DonorCode": "Main",
+        "Status": false
+    },
+    {
+        "ID": 4,
+        "Code": "Main",
+        "Donor": "Main",
+        "Program": "Main",
+        "Project": "Main",
+        "Area": "Main",
+        "Sector": "Main",
+        "Job": "Main",
+        "Description": "Main",
+        "Amount": "Main",
+        "Currency": "USD",
+        "Book": "Main",
+        "DonorCode": "Main",
+        "Status": true
+    }
+];
+
+//JournalCode
+let journalCodes: JournalCode[] = [
+    {
+        "ID": 1,
+        "JournalName": "Journal 1"
+    },
+    {
+        "ID": 2,
+        "JournalName": "Journal 2"
+    },
+    {
+        "ID": 3,
+        "JournalName": "Journal 3"
+    },
+    {
+        "ID": 4,
+        "JournalName": "Journal 4"
+    },
+];
+
 @Injectable()
 export class CodeService {
     //Manage Chat of account
+
+    //chartOfAccounts
     getChartOfAccounts() {
         return chartOfAccounts;
     }
@@ -101,5 +173,13 @@ export class CodeService {
     }
     getAccountLevelDropdowns() {
         return accountLevelDropdowns;
+    }
+
+    //analyticalCodes
+    getAnalyticalCodes() {
+        return analyticalCodes;
+    }
+    getJournalCodes() {
+        return journalCodes;
     }
 }

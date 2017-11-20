@@ -10,6 +10,7 @@ import { NgxPermissionsModule } from "ngx-permissions";
 import { TranslateModule } from "@ngx-translate/core";
 import { LoadingModule, ANIMATION_TYPES } from "ngx-loading";
 import { CodeService } from "./code.service";
+import { AnalyticalCodesComponent } from './analytical-codes/analytical-codes.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { CodeService } from "./code.service";
     declarations: [
         CodeComponent,
         JournalCodeComponent,
-        ChartOfAccountsComponent
+        ChartOfAccountsComponent,
+        AnalyticalCodesComponent
     ],
     providers: [CodeService],
 })

@@ -16,14 +16,25 @@
         <dxo-header-filter [visible]="true">
         </dxo-header-filter>
         <dxo-filter-row [visible]="showFilterRow">
+
+
         </dxo-filter-row>
         <dxo-selection mode="multiple">
         </dxo-selection>
+
+        <!-- editing -->
+
+        <dxo-editing mode="popup" [allowUpdating]="true">
+          <dxo-popup title="Edit" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
+          </dxo-popup>
+        </dxo-editing>
+
+        <!-- editing -->
         <dxi-column dataField="AccountCode" [width]="150"></dxi-column>
         <dxi-column dataField="AccountName"></dxi-column>
         <dxi-column dataField="AccountType"></dxi-column>
         <dxi-column dataField="AccountLevel"></dxi-column>
-        <dxi-column dataField="Edit" caption="Edit" alignment="left" cellTemplate="CellTemplateOpen"></dxi-column>
+        <!-- <dxi-column dataField="Edit" caption="Edit" alignment="left" cellTemplate="CellTemplateOpen"></dxi-column> -->
 
         <div class="text-center" *dxTemplate="let data of 'CellTemplateOpen'">
           <a href="javascript:void()" (click)="editChartOfAccount()">Edit</a>
@@ -69,8 +80,8 @@
         <dxi-item dataField="AccountLevel" editorType="dxSelectBox" [editorOptions]="{ dataSource: accountLevel }">
           <dxi-validation-rule type="required">
           </dxi-validation-rule>
-        </dxi-item> 
-        
+        </dxi-item>
+
         <!-- <dxi-item dataField="AccountLevel"
                   editorType="dxSelectBox" 
                   [editorOptions]="{ data: accountType }"
@@ -98,3 +109,4 @@
 
   </div>
 </dx-popup>
+<!-- Edit Voucher -->
