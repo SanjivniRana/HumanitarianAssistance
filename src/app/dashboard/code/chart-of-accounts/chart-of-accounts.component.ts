@@ -12,7 +12,7 @@ import {
   DxTemplateHost
 } from 'devextreme-angular';
 
-import { CodeService, ChartOfAccount } from '../code.service';
+import { CodeService, ChartOfAccountLevel, AccountType } from '../code.service';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -29,28 +29,25 @@ export class ChartOfAccountsComponent implements OnInit {
   popupVisibleEditChartOfAccount = false;
 
   //Edit form
-  chartOfAccounts: ChartOfAccount[];
-  accountType: string[];
-  accountLevel: string[];
+  chartOfAccounts: ChartOfAccountLevel[];
+  accountType: AccountType[];
+  //accountLevel: string[];
   // accountLevel: AccountLevelDropdowns[];
 
   constructor(private codeService: CodeService) {
     this.showFilterRow = true;
 
     //TODO: Edit popup
-    this.chartOfAccounts = this.codeService.getChartOfAccounts();
-    this.accountType = this.codeService.getAccountTypeDropdown();
+    this.chartOfAccounts = this.codeService.getChartOfAccountLevels();
+    this.accountType = this.codeService.getAccountTypes();
 
-    this.accountLevel = this.codeService.getAccountLevelDropdowns();
-
-    console.log(this.accountLevel);
-
+    //this.accountLevel = this.codeService.getAccountLevelDropdowns();
 
     this.dataSource = {
       store: {
         type: 'array',
         key: 'ID',
-        data: this.codeService.getChartOfAccounts()
+        data: this.codeService.getChartOfAccountLevels()
       }
 
 
@@ -74,9 +71,8 @@ export class ChartOfAccountsComponent implements OnInit {
     this.popupVisibleEditChartOfAccount = true;
   }
 
-  cancelDeleteVoucher()
-  {
-      this.popupVisibleEditChartOfAccount = false;      
+  cancelDeleteVoucher() {
+    this.popupVisibleEditChartOfAccount = false;
   }
 
 }

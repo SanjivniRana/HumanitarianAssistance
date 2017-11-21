@@ -2,6 +2,8 @@
   <div class="col-sm-12">
     <div class="main-heading clearfix">
       <h3 class="page-heading"> Journal Code </h3>
+      <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="AddJournal()">
+      </dx-button>
     </div>
   </div>
   <div class="col-sm-12">
@@ -10,8 +12,6 @@
     <div>
       <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnHidingEnabled]="true">
         <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
-
-        <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
         
         <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
         <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
@@ -24,7 +24,7 @@
 
         <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" ></dxo-editing>
         
-        <dxi-column dataField="ID" [allowEditing]="false" [width]="50"></dxi-column>
+        <dxi-column dataField="ID" [allowEditing]="false" [width]="100"></dxi-column>
         <dxi-column dataField="JournalName" ></dxi-column>
         <!-- <dxi-column dataField="Edit" caption="" alignment="left" cellTemplate="CellTemplateOpen"></dxi-column> -->
 
@@ -51,8 +51,42 @@
 </div>
 
 
+
+
+<!-- Add Vouchers -->
+<dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Information" [dragEnabled]="false" [closeOnOutsideClick]="true"
+[(visible)]="popupAddJournalVisible">
+<div *dxTemplate="let data of 'content'">
+
+    <form action="your-action" (submit)="onFormSubmit($event)">
+        <dx-form id="form" [formData]="dataSource" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
+
+              
+            <dxi-item dataField="JournalName" >
+                <dxi-validation-rule type="required">
+                </dxi-validation-rule>
+            </dxi-item>
+
+
+        </dx-form>
+        <br />
+        <div class="btn-grp-wrap">
+            <dx-button text="Add" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
+            </dx-button>
+
+            <dx-button text="Cancel" (onClick)="cancelDeleteVoucher()">
+            </dx-button>
+
+        </div>
+
+    </form>
+</div>
+</dx-popup>
+<!-- Add Vouchers -->
+
+
 <!-- Edit JournalCode -->
-<dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Edit Chart Of Account" [dragEnabled]="false"
+<!-- <dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Edit Chart Of Account" [dragEnabled]="false"
   [closeOnOutsideClick]="true" [(visible)]="popupVisibleEditJournalCode">
   <div *dxTemplate="let data of 'content'">
 
@@ -81,14 +115,14 @@
 
 
   </div>
-</dx-popup>
+</dx-popup> -->
 <!-- Edit JournalCode -->
 
 
 
 
 <!-- Delete JournalCode -->
-<dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Delete Voucher" [dragEnabled]="false" [closeOnOutsideClick]="true"
+<!-- <dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Delete Voucher" [dragEnabled]="false" [closeOnOutsideClick]="true"
   [(visible)]="popupVisibleDeleteJournalCode">
   <div *dxTemplate="let data of 'content'">
 
@@ -108,5 +142,5 @@
       </div>
     </form>
   </div>
-</dx-popup>
+</dx-popup> -->
 <!-- Delete JournalCode -->
