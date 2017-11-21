@@ -20,7 +20,6 @@ export class AccountType {
 }
 //chartOfAccounts------------------------------------>
 
-
 //analyticalCodes
 export class AnalyticalCode {
     ID: number;
@@ -36,6 +35,20 @@ export class AnalyticalCode {
     Currency: string;
     Book: string;
     DonorCode: string;
+    Status: boolean;
+}
+
+//analyticalCodes ---> Projects Tab-5
+export class ProjectTab {
+    ID: number;
+    Code: string;
+    Description: string;
+    Program: string;
+    Budget: number;
+    ProjectStartDate: string;
+    ProjectEndDate: string;
+    ReceivedAmount: number;
+    ProjectCurrency: string;
     Status: boolean;
 }
 
@@ -208,6 +221,47 @@ let analyticalCodes: AnalyticalCode[] = [
     }
 ];
 
+//analyticalCodes --> Projects Tab-5
+let projectTabs: ProjectTab[] = [
+    {
+        "ID": 1,
+        "Code": "12232",
+        "Description": "ERP",
+        "Program": "ERP-Tech",
+        "Budget": 500000,
+        "ProjectStartDate": "01/20/2017",
+        "ProjectEndDate": "03/29/2017",
+        "ReceivedAmount": 152100,
+        "ProjectCurrency": "USD",
+        "Status": true
+    },
+    {
+        "ID": 2,
+        "Code": "23412",
+        "Description": "ERP",
+        "Program": "ERP-Tech",
+        "Budget": 625124,
+        "ProjectStartDate": "01/20/2017",
+        "ProjectEndDate": "05/29/2017",
+        "ReceivedAmount": 25000,
+        "ProjectCurrency": "AFG",
+        "Status": true
+    },
+    {
+        "ID": 3,
+        "Code": "12232",
+        "Description": "Health Care",
+        "Program": "ERP-Tech",
+        "Budget": 2000000,
+        "ProjectStartDate": "04/19/2017",
+        "ProjectEndDate": "07/30/2017",
+        "ReceivedAmount": 120000,
+        "ProjectCurrency": "USD",
+        "Status": true
+    }
+];
+
+
 //JournalCode
 let journalCodes: JournalCode[] = [
     {
@@ -263,6 +317,13 @@ export class CodeService {
     getAnalyticalCodes() {
         return analyticalCodes;
     }
+    //analyticalCodes --> Project Tab-5
+    getProjectTabs() {
+        return projectTabs;
+    }
+
+
+    //JournalCodes
     getJournalCodes() {
         return journalCodes;
     }

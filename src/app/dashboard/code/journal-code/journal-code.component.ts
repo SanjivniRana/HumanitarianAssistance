@@ -64,4 +64,9 @@ export class JournalCodeComponent implements OnInit {
   deleteJournalCode() {
     this.popupVisibleDeleteJournalCode = true;
   }
+  cancelJournalCode() {
+    this.popupAddJournalVisible = false;
+  }
+
+
 }

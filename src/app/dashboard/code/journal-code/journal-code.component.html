@@ -28,11 +28,11 @@
         <dxi-column dataField="JournalName" ></dxi-column>
         <!-- <dxi-column dataField="Edit" caption="" alignment="left" cellTemplate="CellTemplateOpen"></dxi-column> -->
 
-        <div class="text-center" *dxTemplate="let data of 'CellTemplateOpen'">
+        <!-- <div class="text-center" *dxTemplate="let data of 'CellTemplateOpen'">
           <a href="javascript:void()" (click)="editJournalCode()">Edit</a>
           <span style="color:#acacac;">&nbsp;|&nbsp;</span>
           <a href="javascript:void()" (click)="deleteJournalCode()">Delete</a>
-        </div>
+        </div> -->
 
         <dxo-paging [pageSize]="10"></dxo-paging>
         <!-- <dxo-pager
@@ -74,7 +74,7 @@
             <dx-button text="Add" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
             </dx-button>
 
-            <dx-button text="Cancel" (onClick)="cancelDeleteVoucher()">
+            <dx-button text="Cancel" (onClick)="cancelJournalCode()">
             </dx-button>
 
         </div>
