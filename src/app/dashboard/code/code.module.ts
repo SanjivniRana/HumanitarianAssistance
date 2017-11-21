@@ -11,6 +11,9 @@ import { TranslateModule } from "@ngx-translate/core";
 import { LoadingModule, ANIMATION_TYPES } from "ngx-loading";
 import { CodeService } from "./code.service";
 import { AnalyticalCodesComponent } from './analytical-codes/analytical-codes.component';
+import { CurrencyCodeComponent } from './currency-code/currency-code.component';
+import { OfficeCodeComponent } from './office-code/office-code.component';
+import { EmailSettingComponent } from './email-setting/email-setting.component';
 
 
 @NgModule({
@@ -48,7 +51,10 @@ import { AnalyticalCodesComponent } from './analytical-codes/analytical-codes.co
         CodeComponent,
         JournalCodeComponent,
         ChartOfAccountsComponent,
-        AnalyticalCodesComponent
+        AnalyticalCodesComponent,
+        CurrencyCodeComponent,
+        OfficeCodeComponent,
+        EmailSettingComponent
     ],
     providers: [CodeService],
 })
