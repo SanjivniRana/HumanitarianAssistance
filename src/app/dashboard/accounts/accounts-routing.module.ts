@@ -9,9 +9,7 @@ import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
 import { NgModule } from '@angular/core';
-
-
-
+import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
 
 const Account_Router: Routes =
     [{
@@ -24,6 +22,10 @@ const Account_Router: Routes =
             { 
                 path: 'ledger', 
                 component: LedgerComponent
+            },
+            { 
+                path: 'budgetbalance', 
+                component: BudgetBalanceComponent
             },
             {        
                 path: 'trialbalance', 

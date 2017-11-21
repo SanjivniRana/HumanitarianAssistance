@@ -19,8 +19,7 @@ import { LedgerComponent } from './ledger/ledger.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
 import { AccountsRoutingModule } from './accounts-routing.module';
-
-
+import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,8 @@ import { AccountsRoutingModule } from './accounts-routing.module';
     TrailBalanceComponent,
     LedgerComponent,
     AdvanceDeductionComponent,
-    FinancialReportComponent      
+    FinancialReportComponent,
+    BudgetBalanceComponent      
   ],
   imports: [
     CommonModule,   

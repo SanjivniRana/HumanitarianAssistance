@@ -971,6 +971,7 @@ export class FinancialReport_BalanceSheetClass {
     Description: string;
     Notes: number;
     Balance: number;
+    Currency:string;
 }
 
 let financial_balancesheet: FinancialReport_BalanceSheetClass[] = [{
@@ -978,18 +979,21 @@ let financial_balancesheet: FinancialReport_BalanceSheetClass[] = [{
     "Description": "Donor Funds",
     "Notes": 4,
     "Balance": 9000,
+    "Currency": "USD-USD"
 },
 {
     "ID": 8,
     "Description": "Donor Funds",
     "Notes": 4,
     "Balance": 9000,
+    "Currency": "USD-USD"
 },
 {
     "ID": 9,
     "Description": "Donor Funds",
     "Notes": 4,
     "Balance": 9000,
+    "Currency": "AFG-AFG"
 }];
 
 export class FinancialReport_IncomeClass {
@@ -997,25 +1001,29 @@ export class FinancialReport_IncomeClass {
     Description: string;
     Notes: number;
     Balance: number;
+    Currency: string;
 }
 
 let financial_Income: FinancialReport_IncomeClass[] = [{
     "ID": 10,
     "Description": "Currency Exchange Loss",
     "Notes": 15,
-    "Balance": 480
+    "Balance": 480,
+    "Currency": "USD-USD"
 },
 {
     "ID": 11,
     "Description": "Currency Exchange Loss",
     "Notes": 15,
-    "Balance": 480
+    "Balance": 480,
+    "Currency": "AFG-AFG"
 },
 {
     "ID": 12,
     "Description": "Currency Exchange Loss",
     "Notes": 15,
-    "Balance": 480
+    "Balance": 480,
+    "Currency": "AFG-AFG"
 }];
 
 export class FinancialReport_Details_of_NotesClass {
@@ -1024,6 +1032,7 @@ export class FinancialReport_Details_of_NotesClass {
     AccountName: string;
     Notes: number;
     Balance: number;
+    Currency: string;
 }
 
 let financial_details: FinancialReport_Details_of_NotesClass[] = [{
@@ -1031,21 +1040,24 @@ let financial_details: FinancialReport_Details_of_NotesClass[] = [{
     "AccountCode": 410201,
     "AccountName": "Sports Income",
     "Notes": 15,
-    "Balance": 6000
+    "Balance": 6000,
+    "Currency": "USD-USD"
 },
 {
     "ID": 14,
     "AccountCode": 410201,
     "AccountName": "Sports Income",
     "Notes": 15,
-    "Balance": 6000
+    "Balance": 6000,
+    "Currency": "USD-USD"
 },
 {
     "ID": 15,
     "AccountCode": 410201,
     "AccountName": "Sports Income",
     "Notes": 15,
-    "Balance": 6000
+    "Balance": 6000,
+    "Currency": "AFG-AFG"
 }];
 
 
@@ -1097,6 +1109,201 @@ let years: FinancialYear[] = [{
     "Year": "2017"
 }];
 //End Financial Year DropDown
+
+//Start of Budget Balance
+
+export class BudgetBalanceClass {
+    ID: number;
+    Currency: string;
+    Budget: number;
+    RecordType: string;
+    Date: string;
+    BudgetBalance: BudgetBalanceInnerClass[];
+}
+
+export class BudgetBalanceInnerClass {
+    ID: number;
+    BLine: string;
+    BLineDescription: string;
+    Currency: string;
+    Budget: number;
+    Expenditure: number;
+    Balance: number;
+    Percentage:string;
+}
+
+let budget: BudgetBalanceClass[] = [{
+    "ID": 1,
+    "Currency": "USD-USD",
+    "Budget": 12000,
+    "RecordType": "Single Currency",    
+    "Date": "2015/03/16",
+    "BudgetBalance": [{
+        "ID": 4,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "USD-USD",
+        "Budget": 12000,
+        "Expenditure": 2000,
+        "Balance": 10000,        
+        "Percentage": "83.3333%"
+    },
+    {
+        "ID": 5,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "USD-USD",
+        "Budget": 12000,
+        "Expenditure": 2000,
+        "Balance": 10000,        
+        "Percentage": "83.3333%"
+    },
+    {
+        "ID": 6,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "USD-USD",
+        "Budget": 12000,
+        "Expenditure": 2000,
+        "Balance": 10000,        
+        "Percentage": "83.3333%"
+    },
+    {
+        "ID": 7,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "USD-USD",
+        "Budget": 12000,
+        "Expenditure": 2000,
+        "Balance": 10000,        
+        "Percentage": "83.3333%"
+    },
+    {
+        "ID": 8,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "USD-USD",
+        "Budget": 12000,
+        "Expenditure": 2000,
+        "Balance": 10000,        
+        "Percentage": "83.3333%"
+    }]
+}, {
+    "ID": 2,
+    "Currency": "AFG-AFG",
+    "Budget": 10000,
+    "RecordType": "Single Currency",    
+    "Date": "2016/03/16",
+    "BudgetBalance": [{
+        "ID": 9,        
+        "BLine": "410201",
+        "BLineDescription": "Sports Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 10000,
+        "Expenditure": 1000,
+        "Balance": 9000,        
+        "Percentage": "90%"
+    },
+    {
+        "ID": 10,        
+        "BLine": "410201",
+        "BLineDescription": "Sports Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 10000,
+        "Expenditure": 1000,
+        "Balance": 9000,        
+        "Percentage": "90%"
+    },
+    {
+        "ID": 11,        
+        "BLine": "410201",
+        "BLineDescription": "Sports Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 10000,
+        "Expenditure": 1000,
+        "Balance": 9000,        
+        "Percentage": "90%"
+    },
+    {
+        "ID": 12,        
+        "BLine": "410201",
+        "BLineDescription": "Sports Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 10000,
+        "Expenditure": 1000,
+        "Balance": 9000,        
+        "Percentage": "90%"
+    },
+    {
+        "ID": 13,        
+        "BLine": "410201",
+        "BLineDescription": "Sports Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 10000,
+        "Expenditure": 1000,
+        "Balance": 9000,        
+        "Percentage": "90%"
+    }]
+},
+{
+    "ID": 3,
+    "Currency": "USD-USD",
+    "Budget": 30000,
+    "RecordType": "Single Currency",    
+    "Date": "2017/03/16",
+    "BudgetBalance": [{
+        "ID": 14,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 30000,
+        "Expenditure": 10000,
+        "Balance": 20000,        
+        "Percentage": "66.666%"
+    },
+    {
+        "ID": 15,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 30000,
+        "Expenditure": 10000,
+        "Balance": 20000,        
+        "Percentage": "66.666%"
+    },
+    {
+        "ID": 16,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 30000,
+        "Expenditure": 10000,
+        "Balance": 20000,        
+        "Percentage": "66.666%"
+    },
+    {
+        "ID": 17,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 30000,
+        "Expenditure": 10000,
+        "Balance": 20000,        
+        "Percentage": "66.666%"
+    },
+    {
+        "ID": 18,        
+        "BLine": "410201",
+        "BLineDescription": "Kabul Clinic Income",
+        "Currency": "AFG-AFG",
+        "Budget": 30000,
+        "Expenditure": 10000,
+        "Balance": 20000,        
+        "Percentage": "66.666%"
+    }]
+}];
+
+//End of Budget Balance
 
 @Injectable()
 export class AccountsService {
@@ -1165,6 +1372,11 @@ export class AccountsService {
 
     getFinancialYear_Report(){
         return years;
+    }
+
+    getBudgetBalance()
+    {
+        return budget;
     }
 
 }

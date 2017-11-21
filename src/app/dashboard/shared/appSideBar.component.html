@@ -30,12 +30,12 @@
                             <li role="separator" class="divider"></li>
                             <li><a [routerLink]="['./accounts/journal']">Journal</a></li>
                             <li><a [routerLink]="['./accounts/ledger']">Ledger Statement</a></li>                            
-                            <li><a href="javascript:void(0)">Budget Balance</a></li>
+                            <li><a [routerLink]="['./accounts/budgetbalance']">Budget Balance</a></li>
                             <li><a [routerLink]="['./accounts/trialbalance']">Trial Balance</a></li>
                             <li><a [routerLink]="['./accounts/advanceDeduction']">Advance Deduction</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a [routerLink]="['./accounts/financialreport']">Financial Report</a></li>
-                            <li><a href="javascript:void(0)">Set Financial Year</a></li>                            
+                            <!-- <li><a href="javascript:void(0)">Set Financial Year</a></li> -->
                         </ul>
                     </li>
                     <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" class="dropdown">
