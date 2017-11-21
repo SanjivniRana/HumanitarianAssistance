@@ -16,8 +16,15 @@
      </dxo-pager>  -->
 
             <!-- editing -->
-            <dxo-editing mode="popup" [allowDeleting]="true" [allowUpdating]="true">
-
+            <dxo-editing mode="popup" 
+                        [allowDeleting]="true"
+                        [allowUpdating]="true"
+                        [allowAdding]="true"
+                        [form]="{
+                                items: ['VoucherNo','VoucherDate','VoucherRefNo','Office','Journal','Description','Currency']
+                            }">
+                <a [routerLink]="['../document']">Document</a>
+                
                 <dxo-popup title="Edit Voucher" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
                 </dxo-popup>
 

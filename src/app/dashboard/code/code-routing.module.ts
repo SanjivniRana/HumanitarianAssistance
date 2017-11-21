@@ -13,9 +13,7 @@ const appRouter: Routes =
             [
                 { path: 'journal-code', component: JournalCodeComponent },
                 { path: 'chart-of-accounts', component: ChartOfAccountsComponent },
-                { path: 'analytical-codes', component: AnalyticalCodesComponent },
-
-                
+                { path: 'analytical-codes', component: AnalyticalCodesComponent }                
             ]
     }];
 

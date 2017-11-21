@@ -15,7 +15,7 @@ export class JournalCodeComponent implements OnInit {
   //Edit / Delete POPUP
   popupVisibleEditJournalCode = false;
   popupVisibleDeleteJournalCode = false;
-
+  popupAddJournalVisible = false;
   //Edit form
   journalCode: JournalCode[];
   // accountLevel: AccountLevelDropdowns[];
@@ -26,7 +26,7 @@ export class JournalCodeComponent implements OnInit {
     //TODO: Edit popup  
     //NOTE: cahnge form data name
     this.journalCode = this.codeService.getJournalCodes();
-   
+
     console.log(this.journalCode);
 
     this.dataSource = {
@@ -47,6 +47,10 @@ export class JournalCodeComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  AddJournal() {
+    this.popupAddJournalVisible = true;
   }
 
   completedValue(rowData) {

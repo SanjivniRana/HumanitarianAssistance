@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 
-//chartOfAccounts
-export class ChartOfAccount {
+//chartOfAccounts------------------------------------>
+export class ChartOfAccountLevel {
+    ID: number;
+    AccountLevel: string;
+    ChartOfAccountLevelDetails: ChartOfAccountLevelDetail[];
+}
+
+export class ChartOfAccountLevelDetail {
     ID: number;
     AccountCode: number;
     AccountName: string;
-    AccountType: string;
-    AccountLevel: string;
+    AccountType: number;
 }
+
+export class AccountType {
+    ID: number;
+    AccountTypeName: string;
+}
+//chartOfAccounts------------------------------------>
+
 
 //analyticalCodes
 export class AnalyticalCode {
@@ -40,36 +52,92 @@ let accountTypeDropdowns: string[] = [
 let accountLevelDropdowns: string[] = [
     'Main level', 'Control level', 'Sub level', 'Input level'];
 
-let chartOfAccounts: ChartOfAccount[] = [
+
+
+let chartOfAccountLevels: ChartOfAccountLevel[] = [
     {
         "ID": 1,
-        "AccountCode": 1,
-        "AccountName": "Saving",
-        "AccountType": "Other Account",
-        "AccountLevel": "Main Level"
+        "AccountLevel": "Main Level",
+        "ChartOfAccountLevelDetails": [
+            {
+                "ID": 1,
+                "AccountCode": 1,
+                "AccountName": "Saving",
+                "AccountType": 1
+            },
+            {
+                "ID": 2,
+                "AccountCode": 2,
+                "AccountName": "Current",
+                "AccountType": 2,
+            }
+        ]
+
     },
     {
         "ID": 2,
-        "AccountCode": 2,
-        "AccountName": "Current",
-        "AccountType": "Expandable",
-        "AccountLevel": "Control Level"
+        "AccountLevel": "Control Level",
+        "ChartOfAccountLevelDetails": [
+            {
+                "ID": 1,
+                "AccountCode": 1,
+                "AccountName": "Saving",
+                "AccountType": 2
+            },
+            {
+
+                "ID": 3,
+                "AccountCode": 3,
+                "AccountName": "Other",
+                "AccountType": 1
+            }
+        ]
+
     },
     {
         "ID": 3,
-        "AccountCode": 3,
-        "AccountName": "Other",
-        "AccountType": "Expandable",
-        "AccountLevel": "Sub Level"
+        "AccountLevel": "Sub Level",
+        "ChartOfAccountLevelDetails": [
+            {
+                "ID": 1,
+                "AccountCode": 1,
+                "AccountName": "Saving",
+                "AccountType": 2
+            }
+        ]
+
     },
     {
         "ID": 4,
-        "AccountCode": 4,
-        "AccountName": "Current",
-        "AccountType": "Non Expandable",
-        "AccountLevel": "Input Level"
-    },
+        "AccountLevel": "Input Level",
+        "ChartOfAccountLevelDetails": [
+            {
+                "ID": 1,
+                "AccountCode": 1,
+                "AccountName": "Saving",
+                "AccountType": 3
+            },
+            {
+                "ID": 2,
+                "AccountCode": 1,
+                "AccountName": "Saving",
+                "AccountType": 1
+            },
+            {
+                "ID": 3,
+                "AccountCode": 1,
+                "AccountName": "Current",
+                "AccountType": 2
+            },
+            {
+                "ID": 4,
+                "AccountCode": 4,
+                "AccountName": "Current",
+                "AccountType": 3
+            }
+        ]
 
+    }
 ];
 
 //analyticalCodes
@@ -160,13 +228,29 @@ let journalCodes: JournalCode[] = [
     },
 ];
 
+//AccountType
+let accountTypes: AccountType[] = [
+    {
+        "ID": 1,
+        "AccountTypeName": "Other Account"
+    },
+    {
+        "ID": 2,
+        "AccountTypeName": "Expandable"
+    },
+    {
+        "ID": 3,
+        "AccountTypeName": "Non Expandable"
+    },
+];
+
 @Injectable()
 export class CodeService {
     //Manage Chat of account
 
     //chartOfAccounts
-    getChartOfAccounts() {
-        return chartOfAccounts;
+    getChartOfAccountLevels() {
+        return chartOfAccountLevels;
     }
     getAccountTypeDropdown() {
         return accountTypeDropdowns;
@@ -181,5 +265,9 @@ export class CodeService {
     }
     getJournalCodes() {
         return journalCodes;
+    }
+    //Accoutn Type
+    getAccountTypes() {
+        return accountTypes;
     }
 }

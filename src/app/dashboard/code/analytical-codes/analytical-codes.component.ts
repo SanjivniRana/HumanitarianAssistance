@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartOfAccount, CodeService, AnalyticalCode } from '../code.service';
+import {  CodeService, AnalyticalCode } from '../code.service';
 
 @Component({
   selector: 'app-analytical-codes',

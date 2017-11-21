@@ -178,7 +178,8 @@ export class AppHeaderComponent implements OnDestroy {
         localStorage.removeItem('ng2Idle.main.expiry');
         localStorage.removeItem('ng2Idle.main.idling');        
         localStorage.removeItem('UserId');     
-        localStorage.removeItem('UserRoles');
+        localStorage.removeItem('UserId');     
+        localStorage.removeItem('UserName');
         // this.router.navigateByUrl("/login");
         
         this.commonService.menuVisibility=false;
