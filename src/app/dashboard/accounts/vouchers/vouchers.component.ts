@@ -79,8 +79,7 @@ export class VouchersComponent implements OnInit {
             key: "ID"
         });
         debugger;
-        this.customer = this.accountservice.getCustomer();
-        console.log(this.customer);
+        this.customer = this.accountservice.getCustomer();        
         this.statuses = ["All", "California", "Nevada", "Colorado", "Deferred", "Completed"];
 
         this.orders = accountservice.getOrders();
@@ -108,9 +107,7 @@ export class VouchersComponent implements OnInit {
     }
 
     editVoucher(data: any) {
-        this.popupVisibleEditVoucher = true;
-        debugger;
-        console.log(data);
+        this.popupVisibleEditVoucher = true;                
     }
 
     deleteVoucher() {

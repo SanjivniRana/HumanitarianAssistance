@@ -314,8 +314,7 @@ export class UserComponent implements OnInit,OnDestroy {
   {   
     this.loadingPermission = true;
     this.userService.PermissionsInRoles(this.setting.getBaseUrl() + GLOBAL.API_Permissions_AddPermissionInRoles, this.permissionsAndRoleModel).subscribe(
-      data => { 
-        console.log(data); 
+      data => {        
         if(data.StatusCode == 200) 
         {
           this.loadingPermission = false;
@@ -413,8 +412,7 @@ export class UserComponent implements OnInit,OnDestroy {
   }  
 
    private userName :string;
-  onSubmitPasswordChange(model: RestPasswordModel){
-   console.log(this.userName);
+  onSubmitPasswordChange(model: RestPasswordModel){   
    model.UserName=this.userName;
    
  this.userService.
@@ -441,8 +439,7 @@ export class UserComponent implements OnInit,OnDestroy {
   {    
     this.loadingRolesMultiselect = true;
     this.userService.getUserRolesByUserId(this.setting.getBaseUrl() + GLOBAL.API_UserRoles_GetUserRolesByUserId, UserId).subscribe(
-      data => {  
-        console.log(data);
+      data => {          
         if(data.StatusCode == 200)                      
         {
           this.loadingRolesMultiselect = false;
@@ -457,8 +454,7 @@ export class UserComponent implements OnInit,OnDestroy {
 
   openModalPermissions(templatePermissions: TemplateRef<any>,colvalue) {
     this.getUserRolesByUserId(colvalue.Id);
-    this.UserId = colvalue.Id;     
-    console.log(colvalue);
+    this.UserId = colvalue.Id;         
     this.modalRefPermission = this.modalService.show(
       templatePermissions,
       Object.assign({}, this.config, { class: 'gray modal-lg' })

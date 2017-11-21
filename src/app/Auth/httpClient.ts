@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { RequestStatus } from '../shared/enums';
 import { Observable } from 'rxjs/Rx';
 import { SelectItem, ConfirmationService, Message } from 'primeng/primeng';
 import { AppSettingsService } from '../Services/App-settings.Service';
 import { MessageService } from "primeng/components/common/messageservice";
+import { RequestStatus } from '../Shared/enums';
 
 @Injectable()
 export class httpClientService {

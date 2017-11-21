@@ -26,9 +26,6 @@ export class JournalCodeComponent implements OnInit {
     //TODO: Edit popup  
     //NOTE: cahnge form data name
     this.journalCode = this.codeService.getJournalCodes();
-
-    console.log(this.journalCode);
-
     this.dataSource = {
       store: {
         type: 'array',

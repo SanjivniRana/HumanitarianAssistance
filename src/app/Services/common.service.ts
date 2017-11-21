@@ -3,8 +3,8 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { GLOBAL } from '../shared/global';
 import { AppSettingsService } from '../Services/App-settings.Service';
-import { RequestStatus } from '../shared/enums'
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
+import { RequestStatus } from '../Shared/enums';
 
 @Injectable()
 
@@ -53,8 +53,7 @@ export class commonService {
             //let obj={Password:control.value.toString()};
             return this.http.get(
                 url+"?pwd="+control.value,options).map(response=>response.json())
-                .subscribe(data=>{
-                    console.log(data);
+                .subscribe(data=>{                    
                     if(data.StausCode==200) {
                         resolve({validateCurrentPassword:true});
                         

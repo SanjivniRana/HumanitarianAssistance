@@ -55,8 +55,7 @@ export class AppSidebarComponent {
           }
           var permissionStr =  this.PermissionsArr.join(',');
 
-          this.ngxroleservice.addRoles(this.permissionwithRole);
-          console.log(this.permissionwithRole)
+          this.ngxroleservice.addRoles(this.permissionwithRole);          
           localStorage.setItem('UserPermissions',this.permissionwithRole);
       });
       

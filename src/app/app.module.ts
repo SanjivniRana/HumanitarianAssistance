@@ -2,12 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-// import { LoginComponent } from "./Login/login.component"
 import { CommonService } from "../../src/app/app.common";
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { HttpModule } from '@angular/http';
-import { LanguageChange } from './Shared/languageChange';
 import { TranslateModule, TranslateService, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateStore } from '@ngx-translate/core/src/translate.store';
@@ -28,8 +26,8 @@ import { CodeComponent } from './dashboard/code/code.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './Auth/Authentication';
+import { LanguageChange } from './Shared/languageChange';
 
-//import { ChangePasswordComponent } from './Components/shared/changePassword.component';
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 

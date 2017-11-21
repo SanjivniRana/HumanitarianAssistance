@@ -68,15 +68,6 @@ export class AnalyticalCodesComponent implements OnInit {
 
     //TODO: Edit popup dropdown
     this.analyticalCodes = this.codeService.getAnalyticalCodes();
-
-    console.log(this.accountLevel);
-
-    // this.data = new ArrayStore({
-    //     data: this.analyticalCodes,
-    //     key: "ID"
-    // });
-
-
     this.dataSource = {
       store: {
         type: 'array',

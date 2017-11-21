@@ -3,9 +3,9 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { GLOBAL } from '../shared/global';
 import { AppSettingsService } from '../Services/App-settings.Service';
-import { RequestStatus } from '../shared/enums'
 import { UserLogin } from "../Models/User";
 import { httpClientService } from "../Auth/httpClient";
+import { RequestStatus } from '../Shared/enums';
 
 @Injectable()
 export class AuthenticationService {
