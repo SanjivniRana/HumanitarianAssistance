@@ -135,20 +135,6 @@ export class CustomValidation {
                     resolve({ checkCurrentPasswordForServer: true });
                     
                  }
-        //         userservice.isUserNameExisting(currentPassword, control.value).subscribe(
-        //             (res) => {
-        //                 if (res.isUserNameExisting) {
-        //                     console.log("existing");
-        //                     resolve({ 'existing': true });
-        //                 } else {
-        //                     console.log("NOT existing");
-        //                     resolve(null);
-        //                 }
-        //             },
-        //             (error) => {
-        //                 console.log(error);
-        //             }
-        //         );
              } else {
                  resolve(null);
              }

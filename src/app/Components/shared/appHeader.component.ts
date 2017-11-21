@@ -107,7 +107,6 @@ export class AppHeaderComponent implements OnDestroy {
     isFormValid =false;
 
     onSubmitPasswordChange(value:CurrentPasswordModel){
-    console.log(value);
     if(value!=null){
         this.loading=true;
         this.userService.changePassword(this.setting.getBaseUrl()+GLOBAL.API_ChangePassword,value)
@@ -139,8 +138,7 @@ export class AppHeaderComponent implements OnDestroy {
         this.userService.
         checkCurrentPassword(this.setting.getBaseUrl()+GLOBAL.API_CheckCurrentPassword,value)
         .takeUntil(this.unsubscribe)
-        .subscribe(data=>{
-            console.log(data);
+        .subscribe(data=>{        
            if(data.StatusCode==200){
             this.isValidPassword=true;
             this.isFormValid=true;
@@ -148,8 +146,7 @@ export class AppHeaderComponent implements OnDestroy {
             this.isFormValid=false;
             this.isValidPassword=false;
            }
-        },error=>{
-            console.log(error);
+        },error=>{            
         });
     }else{
         this.isValidPassword=true;
@@ -163,8 +160,7 @@ export class AppHeaderComponent implements OnDestroy {
     {
         return this.ChangePassword.controls["CurrentPassword"];
     }
-    onblur(e){
-        console.log(e);
+    onblur(e){        
     }
     changeLang(lang){
         this.languageChange.changeLang(lang)

@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
-import { LanguageID } from "./enums"
+import { LanguageID } from './enums';
 
 @Injectable()
 

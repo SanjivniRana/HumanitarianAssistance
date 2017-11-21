@@ -66,8 +66,7 @@ export class VouchersComponent implements OnInit {
   };
     this.maxDate = new Date(this.maxDate.setFullYear(this.maxDate.getFullYear() - 21));
     this.countries = this.accountservice.getCountries();
-    this.customer = this.accountservice.getCustomer();
-    console.log(this.customer);
+    this.customer = this.accountservice.getCustomer();    
     this.statuses = ["All", "California", "Nevada", "Colorado", "Deferred", "Completed"];
 
     this.orders = accountservice.getOrders();

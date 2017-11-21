@@ -237,8 +237,7 @@ export class UserService {
  }
      
  resetPassword(url:string,model:RestPasswordModel){
-     
-     console.log(model);
+          
     let Myheaders=new  Headers();
     
        Myheaders.append("Authorization","Bearer "+localStorage.getItem("authenticationtoken"));
@@ -281,9 +280,7 @@ export class UserService {
             } 
         }).catch(this.handleError);
    } 
-   private handleError(error: Response) {
-    
-    console.log(error.json());
+   private handleError(error: Response) {    
         return Observable.throw(error.json().error || 'Server error');
     }    
 }
