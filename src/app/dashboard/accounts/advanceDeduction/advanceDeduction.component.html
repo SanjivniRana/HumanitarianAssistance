@@ -35,7 +35,18 @@
                     <div class="internal-grid-container">
                         <!-- <div>{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div> -->
 
-                        <dx-data-grid class="internal-grid" [dataSource]="adnvanceDeduction.data.AdvanceDeductionSalarys" [showBorders]="true" [columnAutoWidth]="true">
+                        <dx-data-grid class="internal-grid" 
+                                    [dataSource]="adnvanceDeduction.data.AdvanceDeductionSalarys"
+                                    [showBorders]="true"
+                                    [columnAutoWidth]="true"
+                                    (onEditingStart)="logEvent('EditingStart')"
+                                    (onInitNewRow)="logEvent('InitNewRow')"
+                                    (onRowInserting)="logEvent('RowInserting')"
+                                    (onRowInserted)="logEvent('RowInserted')"
+                                    (onRowUpdating)="logEvent('RowUpdating')"
+                                    (onRowUpdated)="logEvent('RowUpdated')"
+                                    (onRowRemoving)="logEvent('RowRemoving')"
+                                    (onRowRemoved)="logEvent('RowRemoved')">
                             <dxo-selection mode="multiple">
                             </dxo-selection>
                             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->

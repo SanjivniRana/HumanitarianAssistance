@@ -30,6 +30,9 @@ export class VouchersComponent implements OnInit {
 
     currency: Currency[];
 
+    //Use for event handling 
+    events: Array<string> = [];
+
     popupVisible = false;
     popupVisibleEditVoucher = false;
     popupVisibleDeleteVoucher = false;
@@ -79,7 +82,7 @@ export class VouchersComponent implements OnInit {
             key: "ID"
         });
         debugger;
-        this.customer = this.accountservice.getCustomer();        
+        this.customer = this.accountservice.getCustomer();
         this.statuses = ["All", "California", "Nevada", "Colorado", "Deferred", "Completed"];
 
         this.orders = accountservice.getOrders();
@@ -107,7 +110,7 @@ export class VouchersComponent implements OnInit {
     }
 
     editVoucher(data: any) {
-        this.popupVisibleEditVoucher = true;                
+        this.popupVisibleEditVoucher = true;
     }
 
     deleteVoucher() {
@@ -154,7 +157,7 @@ export class VouchersComponent implements OnInit {
     }
 
 
-    
+
 
     // TODO: Edit , Delete  ---------------------------
 
@@ -193,9 +196,13 @@ export class VouchersComponent implements OnInit {
     }
     // TODO: Edit , Delete  ---------------------------
 
-
-
     ngOnInit() {
+    }
+
+    //TODO: Event for ADD, UPDATE, DELETE
+    logEvent(eventName) {
+        debugger;
+        this.events.unshift(eventName);
     }
 
 }

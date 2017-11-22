@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DxDataGridComponent,
+import {
+  DxDataGridComponent,
   DxDataGridModule,
   DxSelectBoxModule,
   DxCheckBoxModule,
@@ -8,27 +9,40 @@ import { DxDataGridComponent,
   DxFormModule,
   DxFormComponent,
   DxPopupModule, DxTemplateModule,
-  DxTemplateHost 
- } from 'devextreme-angular';
-  import { Order, AccountsService, Employee, Customer } from '../accounts.service';
+  DxTemplateHost
+} from 'devextreme-angular';
+import { Order, AccountsService, Employee, Customer } from '../accounts.service';
 
-  @Component({
-    selector: 'app-advanceDeduction',
-    templateUrl: './advanceDeduction.component.html'
-  })
-  export class AdvanceDeductionComponent implements OnInit { 
-    dataSource: any;
-    showFilterRow: boolean;
-    constructor(private accountservice:AccountsService){
-      this.showFilterRow = true;
-        this.dataSource = {
-            store: {
-                type: 'array',
-                key: 'ID',
-                data: this.accountservice.getAdvanceDeduction()
-            }
-        }
-    }
-    ngOnInit() {
+@Component({
+  selector: 'app-advanceDeduction',
+  templateUrl: './advanceDeduction.component.html'
+})
+export class AdvanceDeductionComponent implements OnInit {
+  dataSource: any;
+  showFilterRow: boolean;
+
+  //Use for event handling 
+  events: Array<string> = [];
+
+
+  constructor(private accountservice: AccountsService) {
+    this.showFilterRow = true;
+    this.dataSource = {
+      store: {
+        type: 'array',
+        key: 'ID',
+        data: this.accountservice.getAdvanceDeduction()
+      }
     }
   }
+  ngOnInit() {
+  }
+
+
+  //TODO: Event for ADD, UPDATE, DELETE
+  logEvent(eventName) {
+    debugger;
+    this.events.unshift(eventName);
+  }
+
+}

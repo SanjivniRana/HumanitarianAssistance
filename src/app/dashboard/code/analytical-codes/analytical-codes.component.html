@@ -13,7 +13,19 @@
         <!-- Tab 1  Donor Budget Line -->
         <div *ngIf="showSelectedTab==0">
 
-          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer" 
+                        [dataSource]="dataSource" 
+                        [allowColumnReordering]="true" 
+                        [allowColumnResizing]="true" 
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')" >
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
@@ -63,7 +75,19 @@
         <!-- Tab 2  Areas -->
         <div *ngIf="showSelectedTab==1">
 
-          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer"
+                        [dataSource]="dataSource"
+                        [allowColumnReordering]="true"
+                        [allowColumnResizing]="true"
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')"  >
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
@@ -116,7 +140,19 @@
         <!-- Tab 3  Sectors -->
         <div *ngIf="showSelectedTab==2">
 
-          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer" 
+                        [dataSource]="dataSource" 
+                        [allowColumnReordering]="true" 
+                        [allowColumnResizing]="true" 
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')" >
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
@@ -168,7 +204,19 @@
         <!-- Tab 4  Programs -->
         <div *ngIf="showSelectedTab==3">
 
-          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer" 
+                        [dataSource]="dataSource" 
+                        [allowColumnReordering]="true" 
+                        [allowColumnResizing]="true" 
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')" >
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
@@ -220,7 +268,19 @@
         <!-- Tab 5  Projects -->
         <div *ngIf="showSelectedTab==4">
 
-          <dx-data-grid id="gridContainer" [dataSource]="tab5" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer" 
+                        [dataSource]="tab5"   
+                        [allowColumnReordering]="true" 
+                        [allowColumnResizing]="true" 
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')" >
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
@@ -267,7 +327,19 @@
         <!-- Tab 6  Jobs -->
         <div *ngIf="showSelectedTab==5">
 
-          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer" 
+                        [dataSource]="dataSource" 
+                        [allowColumnReordering]="true" 
+                        [allowColumnResizing]="true" 
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')">
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
@@ -319,7 +391,19 @@
         <!-- Tab 7  Cost Books -->
         <div *ngIf="showSelectedTab==6">
 
-          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+          <dx-data-grid id="gridContainer" 
+                        [dataSource]="dataSource" 
+                        [allowColumnReordering]="true" 
+                        [allowColumnResizing]="true" 
+                        [columnAutoWidth]="true"
+                        (onEditingStart)="logEvent('EditingStart')"
+                        (onInitNewRow)="logEvent('InitNewRow')"
+                        (onRowInserting)="logEvent('RowInserting')"
+                        (onRowInserted)="logEvent('RowInserted')"
+                        (onRowUpdating)="logEvent('RowUpdating')"
+                        (onRowUpdated)="logEvent('RowUpdated')"
+                        (onRowRemoving)="logEvent('RowRemoving')"
+                        (onRowRemoved)="logEvent('RowRemoved')" >
             <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
 
             <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
