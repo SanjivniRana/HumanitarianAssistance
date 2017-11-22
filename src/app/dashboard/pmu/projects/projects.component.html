@@ -76,8 +76,8 @@
 <div *dxTemplate="let data of 'content'">
 
     <form action="your-action" (submit)="onFormSubmit($event)">
-        <dx-form id="form" [formData]="pmuProjectDetails" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
-            <dxi-item>                
+        <dx-form id="form" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
+            <dxi-item>   
                 <!-- <dx-select-box
                 [dataSource]="data"
                 displayExpr="ProjectName"
@@ -90,7 +90,7 @@
 
             <dxi-item dataField="Project"
                 editorType="dxSelectBox"
-                [editorOptions]="{ dataSource: data }">
+                [editorOptions]="{ dataSource: projectPmu }">
                 <dxi-validation-rule 
                     type="required">
                 </dxi-validation-rule>

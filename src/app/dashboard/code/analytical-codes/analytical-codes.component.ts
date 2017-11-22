@@ -83,7 +83,7 @@ export class AnalyticalCodesComponent implements OnInit {
     };
 
     this.showFilterRow = true;
-    
+
     this.tab1 = {
       store: {
         type: 'array',
@@ -147,8 +147,6 @@ export class AnalyticalCodesComponent implements OnInit {
   selectTab(e) {
     this.showSelectedTab = e.itemIndex;
     debugger;
-      // this.tabContent = this.tabs[e.itemIndex].content;
   }
-
 
 }

@@ -26,10 +26,11 @@ export class ProjectsComponent implements OnInit {
   constructor(private pmuservice: PmuService) {
     this.pmuProjects = this.pmuservice.getPMUProjects();
     this.projectPmu = this.pmuservice.getPMUProjectsList();
-    this.data = new ArrayStore({
-        data: this.projectPmu,
-        key: "ID"
-    });
+    // this.data = new ArrayStore({
+    //     data: this.projectPmu,
+    //     key: "ID"
+    // });
+      debugger;
     }
 
   ngOnInit() {
