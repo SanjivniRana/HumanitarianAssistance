@@ -12,6 +12,9 @@ export class JournalCodeComponent implements OnInit {
   showFilterRow: boolean;
   data: any;
 
+  //Use for event handling 
+  events: Array<string> = [];
+
   //Edit / Delete POPUP
   popupVisibleEditJournalCode = false;
   popupVisibleDeleteJournalCode = false;
@@ -65,5 +68,10 @@ export class JournalCodeComponent implements OnInit {
     this.popupAddJournalVisible = false;
   }
 
+  //TODO: Event for ADD, UPDATE, DELETE
+  logEvent(eventName) {
+    debugger;
+    this.events.unshift(eventName);
+  }
 
 }

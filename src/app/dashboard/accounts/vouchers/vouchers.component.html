@@ -5,7 +5,18 @@
             <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="showInfo()">
             </dx-button>
         </div>
-        <dx-data-grid id="gridContainer" [dataSource]="orders" (onContentReady)="onContentReady($event)" (onCellPrepared)="onCellPrepared($event)">
+        <dx-data-grid id="gridContainer" 
+                    [dataSource]="orders" 
+                    (onContentReady)="onContentReady($event)" 
+                    (onCellPrepared)="onCellPrepared($event)"
+                    (onEditingStart)="logEvent('EditingStart')"
+                    (onInitNewRow)="logEvent('InitNewRow')"
+                    (onRowInserting)="logEvent('RowInserting')"
+                    (onRowInserted)="logEvent('RowInserted')"
+                    (onRowUpdating)="logEvent('RowUpdating')"
+                    (onRowUpdated)="logEvent('RowUpdated')"
+                    (onRowRemoving)="logEvent('RowRemoving')"
+                    (onRowRemoved)="logEvent('RowRemoved')" >
             <dxo-paging [pageSize]="10"></dxo-paging>
             <!-- <dxo-pager
          [allowedPageSizes]="[5, 8, 15, 30]"

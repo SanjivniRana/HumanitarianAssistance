@@ -25,6 +25,9 @@ export class ChartOfAccountsComponent implements OnInit {
   showFilterRow: boolean;
   data: any;
 
+  //Use for event handling 
+  events: Array<string> = [];
+
   //Edit popup
   popupVisibleEditChartOfAccount = false;
 
@@ -73,6 +76,12 @@ export class ChartOfAccountsComponent implements OnInit {
 
   cancelDeleteVoucher() {
     this.popupVisibleEditChartOfAccount = false;
+  }
+
+  //TODO: Event for ADD, UPDATE, DELETE
+  logEvent(eventName) {
+    debugger;
+    this.events.unshift(eventName);
   }
 
 }

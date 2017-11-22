@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CodeService, AnalyticalCode } from '../code.service';
 import { Tab } from '../../accounts/accounts.service';
+import { DxDataGridComponent } from 'devextreme-angular';
 // import ArrayStore from 'devextreme/data/array_store';
 
 @Component({
@@ -12,6 +13,9 @@ export class AnalyticalCodesComponent implements OnInit {
 
   tabContent: string;
   showSelectedTab = 0;
+
+  //Use for event handling 
+  events: Array<string> = [];
 
   tabs: Tab[] = [
     {
@@ -83,7 +87,7 @@ export class AnalyticalCodesComponent implements OnInit {
     };
 
     this.showFilterRow = true;
-    
+
     this.tab1 = {
       store: {
         type: 'array',
@@ -147,8 +151,12 @@ export class AnalyticalCodesComponent implements OnInit {
   selectTab(e) {
     this.showSelectedTab = e.itemIndex;
     debugger;
-      // this.tabContent = this.tabs[e.itemIndex].content;
   }
 
+  //TODO: Event for ADD, UPDATE, DELETE
+  logEvent(eventName) {
+    debugger;
+    this.events.unshift(eventName);
+  }
 
 }
