@@ -150,12 +150,12 @@ export class AnalyticalCodesComponent implements OnInit {
 
   selectTab(e) {
     this.showSelectedTab = e.itemIndex;
-    debugger;
+     
   }
 
   //TODO: Event for ADD, UPDATE, DELETE
   logEvent(eventName) {
-    debugger;
+     
     this.events.unshift(eventName);
   }
 

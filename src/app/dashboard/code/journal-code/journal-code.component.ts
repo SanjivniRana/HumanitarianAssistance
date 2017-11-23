@@ -70,7 +70,7 @@ export class JournalCodeComponent implements OnInit {
 
   //TODO: Event for ADD, UPDATE, DELETE
   logEvent(eventName) {
-    debugger;
+     
     this.events.unshift(eventName);
   }
 

@@ -176,7 +176,9 @@
             </dxo-editing>
             <!-- editing -->
 
-            <dxi-column dataField="Code" [calculateCellValue]="calculateCellValue"></dxi-column>
+            <dxi-column dataField="Code" [calculateCellValue]="calculateCellValue">
+                <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
             <!-- <dxi-column dataField="Donor"></dxi-column>
             <dxi-column dataField="Program"></dxi-column>
             <dxi-column dataField="Project"></dxi-column>

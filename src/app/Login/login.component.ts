@@ -43,7 +43,7 @@ import { GLOBAL } from '../shared/global';
      // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
     onFormSubmit (e) {    
-      debugger;
+       
       this.loading=true;
       this.returnUrl;
       this.loginModel.UserName = e.Username;
@@ -51,7 +51,7 @@ import { GLOBAL } from '../shared/global';
       this.authenticationService.login(this.loginModel)
       .subscribe(
         data => { 
-          debugger;          
+                     
           this.userRolesArr = [];
           data.data.Roles.forEach(element => {
             this.userRolesArr.push(element);            

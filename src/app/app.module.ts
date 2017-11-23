@@ -27,6 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './Auth/Authentication';
 import { LanguageChange } from './Shared/languageChange';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+// import {HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -78,7 +80,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppSettingsService,
     httpClientService,
     MessageService,
-    AuthGuard //Auth Guard
+    AuthGuard, //Auth Guard
+    {provide: LocationStrategy,useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

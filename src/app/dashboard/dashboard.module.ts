@@ -23,7 +23,6 @@ import { httpClientService } from "../Auth/httpClient";
 import { MessageService } from "primeng/components/common/messageservice";
 import { DashboardComponent } from "./dashboard.component";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
-import { AccountsService } from "../Components/accounts/accounts.service";
 
 
 @NgModule({
@@ -70,8 +69,7 @@ import { AccountsService } from "../Components/accounts/accounts.service";
         AuthenticationService,
         AppSettingsService,
         httpClientService,
-        MessageService,
-        AccountsService
+        MessageService
     ],
 
 })

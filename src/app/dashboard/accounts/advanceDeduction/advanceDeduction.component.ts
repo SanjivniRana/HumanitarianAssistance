@@ -40,8 +40,7 @@ export class AdvanceDeductionComponent implements OnInit {
 
 
   //TODO: Event for ADD, UPDATE, DELETE
-  logEvent(eventName) {
-    debugger;
+  logEvent(eventName) {    
     this.events.unshift(eventName);
   }
 

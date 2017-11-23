@@ -210,7 +210,7 @@ export class UserComponent implements OnInit,OnDestroy {
     this.loading=true;
     this.userService.GetUserList(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_GetUserList).subscribe(
       data => { 
-        debugger;                     
+                              
         this.userDetails = [];
         this.loading=false;
         data.data.UserDetailsList.forEach(element => {

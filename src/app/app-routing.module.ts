@@ -6,22 +6,21 @@ import { AuthGuard } from './Auth/Authentication';
 
 const appRoutes: Routes = [
 
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
     {
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule',
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: '**', redirectTo: 'not-found' }
-]
+]   
 
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
+    imports: [RouterModule.forRoot(appRoutes,{useHash : true})],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

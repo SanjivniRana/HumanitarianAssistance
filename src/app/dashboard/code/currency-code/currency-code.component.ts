@@ -86,7 +86,7 @@ export class CurrencyCodeComponent implements OnInit {
 
 onFormSubmit(model)
 {
-      debugger;
+       
       if(model.CurrencyId == "")    
       {
           this.AddCurrencyCode(model);
@@ -163,7 +163,7 @@ EditCurrencyCode(model)
 
 GetCurrencyDetailByCode(data)
 {
-    debugger;
+     
     this.currencydata.CurrencyId = data.data.CurrencyId;
     this.currencydata.CurrencyCode = data.data.CurrencyCode;
     this.currencydata.CurrencyName = data.data.CurrencyName;

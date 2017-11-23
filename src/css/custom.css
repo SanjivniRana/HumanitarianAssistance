@@ -32,7 +32,7 @@ header .sidebar-control { position:absolute;left:12px;top:12px;width:42px;height
 .search-panel .sp-input-wrap input[type="submit"] { position:absolute;background-color:transparent;background-image:url(../img/icon-search.png);background-repeat:no-repeat;background-position:center center;top:4px;right:0;width:22px;height:22px;}
 .search-panel .sp-dropdown select:focus,
 .search-panel .sp-input-wrap input[type="text"]:focus,
-.search-panel .sp-input-wrap input[type="submit"]:focus { outline:none;}
+.search-panel .sp-input-wrap input[type="submit"]:focus { outline:none !important;}
 
 /* heading */
 h2.page-heading { color:#a3abba;font-size:18px;border-bottom:1px solid #edeef1;padding-bottom:20px;}
@@ -43,7 +43,7 @@ h3.page-heading { color:#3dc5ab;margin-bottom:20px;font-size:18px;font-weight:50
 .filter-item { margin:12px 0;}
 .filter-item.no-margin { margin:0;}
 .filter-item input[type="checkbox"] { -webkit-appearance:none;border:1px solid #bec4ce;border-radius:5px;width:20px;height:20px;margin:0;display:inline-block;vertical-align:middle;}
-.filter-item input[type="checkbox"]:focus { outline:none;}
+.filter-item input[type="checkbox"]:focus { outline:none !important;}
 .filter-item input[type="checkbox"]:checked { background-color:#0ce3ac;border-color:#0ce3ac;}
 .filter-item label { color:#a3abba;font-size:14px;font-weight:normal;display:inline-block;vertical-align:middle;margin-bottom:0;margin-left:10px;}
 
@@ -206,7 +206,7 @@ span.ui-cell-data { display: inline-block;  width: 100%;  text-align: center;  f
 span.ui-cell-data .fa { font-size: 18px; padding: 0 3px;}
 span.ui-cell-data .fa:hover{ cursor: pointer;}
 .btn { min-width: 124px; padding: 7px 10px;}
-p-multiselect.form-control { border: 1px solid #e2e2e2;  padding: 7px 6px;}
+p-multiselect.form-control { border: 1px solid #e2e2e2;  padding: 4px 2px;}
 .ui-chkbox .ui-state-default {  border: 1px solid #e2e2e2;  background: #ffffff;  color: #555555;}
 input.ui-inputtext.ui-widget.ui-state-default.ui-corner-all { width: 100%;  padding: 5px 0;}
 .ui-multiselect-header .ui-multiselect-filter-container { position: relative;  display: inline-block;  vertical-align: middle;  width: 80%;
@@ -233,7 +233,7 @@ p-dropdown.form-control.ng-tns-c2-1 { height: 34px;}
   width: 100% !important;display: inline-block; height: 26px !important;}
 p-dropdown.form-control.ng-tns-c2-1 { height: 34px;  padding: 2px 7px !important;}
 .ui-dropdown .ui-dropdown-trigger .fa {margin-top: 6px; margin-left: -.125em;}
-.multi-drop-custom .form-control { height: 34px; padding: 2px 6px;}
+.multi-drop-custom .form-control { height: 34px; padding: 1px 1px;}
 .multi-drop-custom  .ui-dropdown { width: 100% !important;}
 
 /** css update **/
@@ -331,7 +331,7 @@ tr.dx-row.dx-data-row.dx-column-lines td {color: #898989; }
 tr.ui-state-default {
   border: 1px solid #e2e2e2 !important;
 }
-.ui-state-default{border-right: 1px solid #e2e2e2 !important;}
+.ui-state-default{border-right: 0px solid #e2e2e2 !important;}
 th.ui-state-default.ui-unselectable-text.ui-sortable-column {border-right: 1px solid #e2e2e2 !important;}
 .ui-datatable-even.ui-widget-content{border:1px solid #e2e2e2!important;}
 .ui-datatable-even.ui-widget-content { border: 0px solid #e2e2e2!important;}
@@ -343,3 +343,14 @@ tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transpar
    .dx-validationsummary-item-content { display: none;}
    .dx-template-wrapper{text-align: center;}
    .dx-popup-content {   min-height: 58px;    height: auto !important;}
+   .ui-dropdown.ui-widget.ui-state-default { border: 0px !important;}
+   .dx-field-value{width: 25% !important;
+    margin-right: 16px;}
+    .left-sidebar .dropdown-menu li> a:hover {
+      color: #3dc5ab;
+      border-left-color: #3dc5ab; background: none;
+  }
+  .dx-field-item-content.dx-field-item-content-location-right{ text-align: left;}
+  .login-page{margin-top: -70px; height: 100%;  background-size: cover;  margin-left: 0px !important;    position: absolute; height: 100% !important;   width: 100%;    left: 0;    right: 0;}
+  .login-btn:hover{ cursor: pointer;}
+  span.ui-cell-data {display: inline-block;  width: 100%;    text-align: center;    font-size: 15px;    word-wrap: break-word;}

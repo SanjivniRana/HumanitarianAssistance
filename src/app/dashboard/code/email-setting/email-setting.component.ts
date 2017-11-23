@@ -19,6 +19,7 @@ export class EmailSettingComponent implements OnInit {
   emailsettingtempdata: EmailSettingTempData[];
   popupVisible = false;  
   emailtypes: string[];
+//   ConfirmationPopup = false;
 
   constructor(private router: Router, private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private codeservice: CodeService) 
   { 

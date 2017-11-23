@@ -45,7 +45,7 @@ export class OfficeCodeComponent implements OnInit {
 
   ShowConfirmationPopup(data)
   {
-      debugger;
+       
       this.officecodeid = data.data.OfficeId
       this.ConfirmationPopup = true;
   }
@@ -90,7 +90,7 @@ export class OfficeCodeComponent implements OnInit {
 
 onFormSubmit(model)
 {
-      debugger;
+       
       if(model.OfficeId == "")    
       {
           this.AddOfficeCode(model);
@@ -171,7 +171,7 @@ EditOfficeCode(model)
 
 DeleteOfficeCode()
 {
-  debugger;
+   
   var obj: any = {};
   var addofficecode: OfficeCodefordelete = {
       OfficeId : this.officecodeid
@@ -196,7 +196,7 @@ DeleteOfficeCode()
 
 GetOfficeDetailByCode(data)
 {
-    debugger;
+     
     this.officedata.OfficeId = data.data.OfficeId;
     this.officedata.OfficeCode = data.data.OfficeCode;
     this.officedata.OfficeName = data.data.OfficeName;

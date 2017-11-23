@@ -31,7 +31,8 @@ import { BudgetBalanceComponent } from './budget-balance/budget-balance.componen
     LedgerComponent,
     AdvanceDeductionComponent,
     FinancialReportComponent,
-    BudgetBalanceComponent      
+    BudgetBalanceComponent,
+        
   ],
   imports: [
     CommonModule,   
