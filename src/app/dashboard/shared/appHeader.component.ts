@@ -175,7 +175,7 @@ export class AppHeaderComponent implements OnDestroy {
         localStorage.removeItem('UserId');     
         localStorage.removeItem('UserId');     
         localStorage.removeItem('UserName');
-        // this.router.navigateByUrl("/login");
+        this.router.navigate(['../login']);
         
         this.commonService.menuVisibility=false;
         this.checkToken.emit();

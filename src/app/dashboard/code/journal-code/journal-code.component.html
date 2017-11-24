@@ -10,7 +10,17 @@
 
     <!-- Journal Filters -->
     <div>
-      <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnHidingEnabled]="true">
+      <dx-data-grid id="gridContainer" 
+                    [dataSource]="dataSource"
+                    [columnHidingEnabled]="true"
+                    (onEditingStart)="logEvent('EditingStart')"
+                    (onInitNewRow)="logEvent('InitNewRow')"
+                    (onRowInserting)="logEvent('RowInserting')"
+                    (onRowInserted)="logEvent('RowInserted')"
+                    (onRowUpdating)="logEvent('RowUpdating')"
+                    (onRowUpdated)="logEvent('RowUpdated')"
+                    (onRowRemoving)="logEvent('RowRemoving')"
+                    (onRowRemoved)="logEvent('RowRemoved')" >
         <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
         
         <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
@@ -22,7 +32,7 @@
         <dxo-selection mode="multiple">
         </dxo-selection>
 
-        <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" ></dxo-editing>
+        <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true" ></dxo-editing>
         
         <dxi-column dataField="ID" [allowEditing]="false" [width]="100"></dxi-column>
         <dxi-column dataField="JournalName" ></dxi-column>

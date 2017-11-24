@@ -18,7 +18,7 @@ export class AuthenticationService {
     }
 
     login(loginDetails: UserLogin) {
-        debugger;
+         
         let url = this.settings.getBaseUrl() + GLOBAL.API_Login_Auth_Url;
         return this.http.request(url, {
             body: loginDetails,
@@ -29,9 +29,9 @@ export class AuthenticationService {
             .map((response: Response) => {
                 let loginResponse = response.json();
                 localStorage.setItem('authenticationtoken', loginResponse.Token);
-                localStorage.setItem('plainRolesText', loginResponse.Roles);
+                // localStorage.setItem('plainRolesText', loginResponse.Roles);
                 //localStorage.setItem('userRoles', loginResponse.RolesTicket);
-                localStorage.setItem('userId', loginResponse.UserId);
+                // localStorage.setItem('userId', loginResponse.UserId);
                 return loginResponse;
             }).catch((error: any) => {
                 if (error.status === RequestStatus.InternalError) {

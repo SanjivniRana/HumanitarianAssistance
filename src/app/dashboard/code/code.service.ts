@@ -554,6 +554,11 @@ export class CodeService {
 
     }
 
+    //MainLevelAccount
+    getMainLevelAccounts(): MainLevelAccount[] {
+        return mainLevelAccounts;
+    }
+
     private handleError(error: Response) 
         {        
             console.log(error.json());
@@ -561,3 +566,333 @@ export class CodeService {
     
         }
 }
+
+//MainLevelAccount
+export class MainLevelAccount {
+    ID: number;
+    ParentID: number;
+    AccountCode: number;
+    AccountName: string;
+    AccountType: string;
+}
+
+//MainLevelAccount
+var mainLevelAccounts: MainLevelAccount[] = [
+    {
+        "ID": 1,
+        "ParentID": 0,
+        "AccountCode": 1,
+        "AccountName": "Endownment",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 2,
+        "ParentID": 0,
+        "AccountCode": 2,
+        "AccountName": "Assets",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 3,
+        "ParentID": 0,
+        "AccountCode": 3,
+        "AccountName": "Liabilities",
+        "AccountType": "Expandables",
+    },
+    {
+        "ID": 4,
+        "ParentID": 0,
+        "AccountCode": 4,
+        "AccountName": "Fund/Reserves",
+        "AccountType": "Non Expandables",
+    },
+    {
+        "ID": 5,
+        "ParentID": 0,
+        "AccountCode": 5,
+        "AccountName": "Main Expenses",
+        "AccountType": "Other",
+    },
+
+    //1
+    {
+        "ID": 6,
+        "ParentID": 1,
+        "AccountCode": 11,
+        "AccountName": "Endownment A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 7,
+        "ParentID": 1,
+        "AccountCode": 21,
+        "AccountName": "Asset A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 8,
+        "ParentID": 1,
+        "AccountCode": 31,
+        "AccountName": "Liabilities A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 9,
+        "ParentID": 1,
+        "AccountCode": 41,
+        "AccountName": "FUNDS A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 10,
+        "ParentID": 1,
+        "AccountCode": 43,
+        "AccountName": "Reserves A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 11,
+        "ParentID": 1,
+        "AccountCode": 51,
+        "AccountName": "EXPENSES A",
+        "AccountType": "Other",
+    },
+
+
+
+    //2
+    {
+        "ID": 12,
+        "ParentID": 2,
+        "AccountCode": 21,
+        "AccountName": "Asset A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 13,
+        "ParentID": 2,
+        "AccountCode": 31,
+        "AccountName": "Liabilities A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 14,
+        "ParentID": 2,
+        "AccountCode": 41,
+        "AccountName": "FUNDS A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 15,
+        "ParentID": 2,
+        "AccountCode": 43,
+        "AccountName": "Reserves A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 16,
+        "ParentID": 2,
+        "AccountCode": 51,
+        "AccountName": "EXPENSES A",
+        "AccountType": "Other",
+    },
+
+    //3
+    {
+        "ID": 17,
+        "ParentID": 3,
+        "AccountCode": 21,
+        "AccountName": "Asset A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 18,
+        "ParentID": 3,
+        "AccountCode": 31,
+        "AccountName": "Liabilities A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 19,
+        "ParentID": 3,
+        "AccountCode": 41,
+        "AccountName": "FUNDS A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 20,
+        "ParentID": 3,
+        "AccountCode": 43,
+        "AccountName": "Reserves A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 21,
+        "ParentID": 3,
+        "AccountCode": 51,
+        "AccountName": "EXPENSES A",
+        "AccountType": "Other",
+    },
+
+
+    //4
+    {
+        "ID": 22,
+        "ParentID": 4,
+        "AccountCode": 21,
+        "AccountName": "Asset A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 23,
+        "ParentID": 4,
+        "AccountCode": 31,
+        "AccountName": "Liabilities A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 24,
+        "ParentID": 4,
+        "AccountCode": 41,
+        "AccountName": "FUNDS A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 25,
+        "ParentID": 4,
+        "AccountCode": 43,
+        "AccountName": "Reserves A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 26,
+        "ParentID": 4,
+        "AccountCode": 51,
+        "AccountName": "EXPENSES A",
+        "AccountType": "Other",
+    },
+
+
+
+    //5
+    {
+        "ID": 27,
+        "ParentID": 5,
+        "AccountCode": 21,
+        "AccountName": "Asset A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 28,
+        "ParentID": 5,
+        "AccountCode": 31,
+        "AccountName": "Liabilities A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 29,
+        "ParentID": 5,
+        "AccountCode": 41,
+        "AccountName": "FUNDS A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 30,
+        "ParentID": 5,
+        "AccountCode": 43,
+        "AccountName": "Reserves A",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 31,
+        "ParentID": 5,
+        "AccountCode": 51,
+        "AccountName": "EXPENSES A",
+        "AccountType": "Other",
+    },
+
+
+    // 1 - 1
+    {
+        "ID": 32,
+        "ParentID": 6,
+        "AccountCode": 4101,
+        "AccountName": "Income F",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 33,
+        "ParentID": 6,
+        "AccountCode": 4102,
+        "AccountName": "Income E",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 34,
+        "ParentID": 6,
+        "AccountCode": 4103,
+        "AccountName": "Income D",
+        "AccountType": "Non Expandable",
+    },
+    {
+        "ID": 35,
+        "ParentID": 6,
+        "AccountCode": 4104,
+        "AccountName": "Income V",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 36,
+        "ParentID": 6,
+        "AccountCode": 5101,
+        "AccountName": "Expense J",
+        "AccountType": "Expandable",
+    },
+    {
+        "ID": 37,
+        "ParentID": 6,
+        "AccountCode": 5102,
+        "AccountName": "Expense K",
+        "AccountType": "Expandable",
+    },
+    {
+        "ID": 38,
+        "ParentID": 6,
+        "AccountCode": 5103,
+        "AccountName": "Expense L",
+        "AccountType": "Expandable",
+    },
+    {
+        "ID": 39,
+        "ParentID": 6,
+        "AccountCode": 5104,
+        "AccountName": "Expense M",
+        "AccountType": "Expandable",
+    },
+    {
+        "ID": 40,
+        "ParentID": 6,
+        "AccountCode": 5104,
+        "AccountName": "Expense N",
+        "AccountType": "Expandable",
+    },
+
+
+    // 1 - 1 - 1
+    {
+        "ID": 41,
+        "ParentID": 32,
+        "AccountCode": 410101,
+        "AccountName": "Clinical Income",
+        "AccountType": "Other",
+    },
+    {
+        "ID": 42,
+        "ParentID": 32,
+        "AccountCode": 410102,
+        "AccountName": "Medical Income",
+        "AccountType": "Expandable",
+    },
+
+
+];

@@ -71,13 +71,11 @@ export class FinancialReportComponent implements OnInit {
 
   selectTab(e) {
     this.showSelectedTab = e.itemIndex;
-    debugger;
       // this.tabContent = this.tabs[e.itemIndex].content;
   }
 
   selectedFinancialYear(value)
   {
-    debugger;
   }
 
   ngOnInit() {
