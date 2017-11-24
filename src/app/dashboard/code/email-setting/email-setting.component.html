@@ -6,7 +6,7 @@
           <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="showPopup()"></dx-button>                
       </div> 
       <div>
-          <dx-data-grid id="gridContainer" [dataSource]="emailsettingtempdata" [columnHidingEnabled]="true">                
+          <dx-data-grid id="gridContainer" [dataSource]="emailsettingdt" [columnHidingEnabled]="true">                
               <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
               <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
               <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
@@ -16,13 +16,13 @@
               </dxo-selection>
               <dxo-filter-row [visible]="showFilterRow">
               </dxo-filter-row>
-              <dxi-column dataField="EmailType"></dxi-column>
+              <dxi-column dataField="EmailTypeName"></dxi-column>
               <dxi-column dataField="SenderEmail"></dxi-column>
               <dxi-column dataField="SmtpServer"></dxi-column>
               <dxo-paging [pageSize]="10"></dxo-paging>
               <dxi-column caption="Action" alignment="center" [width]="100" cellTemplate="CellTemplateEdit"></dxi-column>
               <div *dxTemplate="let data of 'CellTemplateEdit'">         
-                  <a href="javascript:void()" (click)="showPopup()">Edit</a>
+                  <a href="javascript:void()" (click)="GetEmailSettingDetailsById(data)">Edit</a>
               </div>
           </dx-data-grid>
       </div>
@@ -64,7 +64,7 @@ class="popup"
 [width]="600"
 [height]="250"
 [showTitle]="true"
-title="Add/Edit Currency Details"
+title="Add/Edit Email Setting Detail"
 [dragEnabled]="false"
 [closeOnOutsideClick]="true"
 [(visible)]="popupVisible">
@@ -76,10 +76,14 @@ title="Add/Edit Currency Details"
               [showColonAfterLabel]="true"
               [showValidationSummary]="true"
               validationGroup="customerData">
-              
-              <dxi-item dataField="EmailType"
+
+              <dxi-item dataField="EmailTypeId"
                   editorType="dxSelectBox"
-                  [editorOptions]="{ dataSource: emailtypes }">
+                  [editorOptions]="{
+			        dataSource: emailtypelistdata, 
+			        value: EmailTypeId,
+			        displayExpr: 'EmailTypeName',
+                    valueExpr: 'EmailTypeId'}">
                   <dxi-validation-rule 
                       type="required">
                   </dxi-validation-rule>
@@ -109,8 +113,6 @@ title="Add/Edit Currency Details"
                   </dxi-validation-rule>
               </dxi-item>
               <dxi-item dataField="EnableSSL" alignment="right">
-                  <dxi-validation-rule>
-                  </dxi-validation-rule>
               </dxi-item>
           </dx-form>
           <br />
@@ -121,26 +123,3 @@ title="Add/Edit Currency Details"
       </form>
   </div>
 </dx-popup>
-
-<!-- <dx-popup
-class="popup"
-[width]="400"
-[height]="250"
-[showTitle]="true"
-title="Confirmation Message"
-[dragEnabled]="false"
-[closeOnOutsideClick]="true"
-[(visible)]="ConfirmationPopup">
-  <div *dxTemplate="let data of 'content'">
-      <form action="your-action">
-          <div class="form-group">
-              <label for="journalname">Are you sure want to delete?</label>
-          </div> 
-          <br />
-          <div class="btn-grp-wrap">
-              <dx-button text="Delete" type="success" (onClick)="DeleteJournalCode()"></dx-button>
-              <dx-button text="Cancel" (onClick)="HideConfirmationPopup()"></dx-button>
-          </div>            
-      </form>
-  </div>
-</dx-popup> -->
