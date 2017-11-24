@@ -29,8 +29,7 @@
                 <!-- editing -->
                 <dxo-editing mode="popup" 
                             [allowDeleting]="true"
-                            [allowUpdating]="true"
-                            [allowAdding]="true"
+                            [allowUpdating]="true"                            
                             [form]="{
                                     items: ['VoucherNo','VoucherDate','VoucherRefNo','Office','Journal','Description','Currency']
                                 }">
@@ -97,15 +96,7 @@
                             <dxi-validation-rule 
                                 type="required">
                             </dxi-validation-rule>
-                        </dxi-item>                              
-                        
-                        <dxi-item dataField="Office"
-                            editorType="dxSelectBox"
-                            [editorOptions]="{ dataSource: countries }">
-                            <dxi-validation-rule 
-                                type="required">
-                            </dxi-validation-rule>
-                        </dxi-item>
+                        </dxi-item>                                                  
     
                     <dxi-item dataField="Office" editorType="dxSelectBox" [editorOptions]="{ dataSource: countries }">
                         <dxi-validation-rule type="required">

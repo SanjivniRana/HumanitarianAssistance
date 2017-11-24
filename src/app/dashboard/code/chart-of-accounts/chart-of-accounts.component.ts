@@ -12,7 +12,7 @@ import {
   DxTemplateHost
 } from 'devextreme-angular';
 
-import { CodeService, ChartOfAccountLevel, AccountType } from '../code.service';
+import { CodeService, MainLevelAccount } from '../code.service';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -20,68 +20,14 @@ import { CodeService, ChartOfAccountLevel, AccountType } from '../code.service';
   styleUrls: ['./chart-of-accounts.component.css']
 })
 
-export class ChartOfAccountsComponent implements OnInit {
-  dataSource: any;
-  showFilterRow: boolean;
-  data: any;
-
-  //Use for event handling 
-  events: Array<string> = [];
-
-  //Edit popup
-  popupVisibleEditChartOfAccount = false;
-
-  //Edit form
-  chartOfAccounts: ChartOfAccountLevel[];
-  accountType: AccountType[];
-  //accountLevel: string[];
-  // accountLevel: AccountLevelDropdowns[];
-
-  constructor(private codeService: CodeService) {
-    this.showFilterRow = true;
-
-    //TODO: Edit popup
-    this.chartOfAccounts = this.codeService.getChartOfAccountLevels();
-    this.accountType = this.codeService.getAccountTypes();
-
-    //this.accountLevel = this.codeService.getAccountLevelDropdowns();
-
-    this.dataSource = {
-      store: {
-        type: 'array',
-        key: 'ID',
-        data: this.codeService.getChartOfAccountLevels()
-      }
-
-
-    }
-    // this.accountLevel    
-    // this.data = {
-    //   data: this.accountLevel,
-    //   key: "ID"
-    // };
-  }
-
+export class ChartOfAccountsComponent implements OnInit { 
 
   ngOnInit() {
   }
 
-  completedValue(rowData) {
-    return rowData.Status == "Completed";
-  }
+  mainLevelAccount: MainLevelAccount[];
 
-  editChartOfAccount() {
-    this.popupVisibleEditChartOfAccount = true;
+  constructor(service: CodeService) {
+    this.mainLevelAccount = service.getMainLevelAccounts();
   }
-
-  cancelDeleteVoucher() {
-    this.popupVisibleEditChartOfAccount = false;
-  }
-
-  //TODO: Event for ADD, UPDATE, DELETE
-  logEvent(eventName) {
-     
-    this.events.unshift(eventName);
-  }
-
 }
