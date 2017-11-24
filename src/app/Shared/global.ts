@@ -20,8 +20,12 @@ export class GLOBAL {
     public static API_CurrencyCodes_GetAllCurrency = 'Code/GetAllCurrency';
     public static API_CurrencyCodes_AddCurrency = 'Code/AddCurrency';
     public static API_CurrencyCode_EditCurrency = 'Code/EditCurrency';
-    public static API_OfficeCode_GetAllOfficdeDetails = 'Code/GetAllOfficdeDetails';
+    public static API_OfficeCode_GetAllOfficeDetails = 'Code/GetAllOfficeDetails';
     public static API_OfficeCode_AddOfficeDetail = 'Code/AddOfficeDetail';
     public static API_OfficeCode_EditOfficeDetails = 'Code/EditOfficeDetails';
     public static API_OfficeCode_DeleteOfficeDetails = 'Code/DeleteOfficeDetails';
+    public static API_EmailSetting_GetAllEmailSettingDetail = 'Code/GetAllEmailSettingDetail';
+    public static API_EmailType_GetAllEmailType = 'Code/GetAllEmailType';
+    public static API_EmailSetting_AddEmailSettingDetail = 'Code/AddEmailSettingDetail';
+    public static API_EmailSetting_EditEmailSettingDetail = 'Code/EditEmailSettingDetail';
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { CurrencyCode, OfficeCode, OfficeCodefordelete } from '../../Models/CodeModel';
+import { CurrencyCode, OfficeCode, OfficeCodefordelete, EmailSetting } from '../../Models/CodeModel';
 
 //chartOfAccounts------------------------------------>
 export class ChartOfAccountLevel {
@@ -336,7 +336,8 @@ let officedata: OfficeData ={
 export class EmailSettingData{
     EmailId : any;
     SenderEmail : string;
-    EmailType : any;
+    EmailTypeId : any;
+    EmailTypeName: string;
     SenderPassword : string;
     SmtpPort : any;
     SmtpServer : string;
@@ -346,67 +347,13 @@ export class EmailSettingData{
 let emailsetting: EmailSettingData = {
     "EmailId" : "",
     "SenderEmail" : "",
-    "EmailType" : "",
+    "EmailTypeId" : "",
+    "EmailTypeName" : "",
     "SenderPassword" : "",
     "SmtpPort" : "",
     "SmtpServer" : "",
     "EnableSSL" : false
 }
-
-let emailtypes: string[] = [
-    'General','Bidding Panel'];
-
-export class EmailSettingTempData{
-    EmailId : any;
-    SenderEmail : string;
-    EmailType : any;
-    SenderPassword : string;
-    SmtpPort : any;
-    SmtpServer : string;
-    EnableSSL : boolean;
-}
-
-let emailsettingtempdata: EmailSettingTempData[] = [{
-    "EmailId": 1,
-    "SenderEmail": "admin",
-    "EmailType": "General",
-    "SenderPassword": "11800",
-    "SmtpPort": "4000",
-    "SmtpServer": "192.155.246.146",
-    "EnableSSL": true
-}, {
-    "EmailId": 2,
-    "SenderEmail": "admin",
-    "EmailType": "General",
-    "SenderPassword": "11800",
-    "SmtpPort": "4000",
-    "SmtpServer": "192.155.246.146",
-    "EnableSSL": true
-}, {
-    "EmailId": 3,
-    "SenderEmail": "admin",
-    "EmailType": "General",
-    "SenderPassword": "11800",
-    "SmtpPort": "4000",
-    "SmtpServer": "192.155.246.146",
-    "EnableSSL": true
-}, {
-    "EmailId": 4,
-    "SenderEmail": "supperadmin",
-    "EmailType": "Bidding Panel",
-    "SenderPassword": "11800",
-    "SmtpPort": "4000",
-    "SmtpServer": "192.155.246.146",
-    "EnableSSL": true
-}, {
-    "EmailId": 5,
-    "SenderEmail": "supperadmin",
-    "EmailType": "Bidding Panel",
-    "SenderPassword": "11800",
-    "SmtpPort": "4000",
-    "SmtpServer": "192.155.246.146",
-    "EnableSSL": false
-}];
 
 @Injectable()
 export class CodeService {
@@ -458,7 +405,7 @@ export class CodeService {
 
     GetAllCodeList(url: string) 
     {
-        debugger;
+        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -472,7 +419,7 @@ export class CodeService {
     }
 
     AddEditCurrencyCode(url: string, model: CurrencyCode) {
-        debugger;
+        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -510,7 +457,7 @@ export class CodeService {
     }
 
     AddEditOfficeCode(url: string, model: OfficeCode) {
-        debugger;
+        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -539,7 +486,7 @@ export class CodeService {
     }
 
     DeleteOfficeCode(url: string, model: OfficeCodefordelete) {
-        debugger;
+        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -567,7 +514,8 @@ export class CodeService {
     {
         emailsetting.EmailId = "";
         emailsetting.SenderEmail = "";
-        emailsetting.EmailType = "";
+        emailsetting.EmailTypeId = "";
+        emailsetting.EmailTypeName = "";
         emailsetting.SenderPassword = "";
         emailsetting.SmtpPort = "";
         emailsetting.SmtpServer = "";
@@ -575,12 +523,35 @@ export class CodeService {
         return emailsetting;
     }
 
-    getEmailTypes() {
-        return emailtypes;
-    }
+    AddEditEmailSetting(url: string, model: EmailSetting) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        
+        let a=new RequestOptions();
+        let b=
+        {
+            EmailId : model.EmailId,
+            SenderEmail : model.SenderEmail,
+            EmailTypeName : model.EmailTypeName,
+            EmailTypeId : model.EmailTypeId,
+            SenderPassword : model.SenderPassword,
+            SmtpPort : model.SmtpPort,
+            SmtpServer : model.SmtpServer,
+            EnableSSL : model.EnableSSL       
+        }
+                
+        return this.http.post(url, JSON.stringify(b)
+        ,options)            
+        .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
 
-    getEmailSetting(): EmailSettingTempData[] {
-        return emailsettingtempdata;
     }
 
     private handleError(error: Response) 
