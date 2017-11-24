@@ -28,4 +28,8 @@ export class GLOBAL {
     public static API_EmailType_GetAllEmailType = 'Code/GetAllEmailType';
     public static API_EmailSetting_AddEmailSettingDetail = 'Code/AddEmailSettingDetail';
     public static API_EmailSetting_EditEmailSettingDetail = 'Code/EditEmailSettingDetail';
+    public static API_JournalCode_GetAllJournalDetail = 'Code/GetAllJournalDetail';
+    public static API_JournalCode_AddJournalDetail = 'Code/AddJournalDetail';
+    public static API_JournalCode_EditJournalDetail = 'Code/EditJournalDetail';
+    public static API_JournalCode_DeleteJournalDetail = 'Code/DeleteJournalDetail';
 }

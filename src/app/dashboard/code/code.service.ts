@@ -55,12 +55,6 @@ export class ProjectTab {
     Status: boolean;
 }
 
-//JournalCode
-export class JournalCode {
-    ID: number;
-    JournalName: string;
-}
-
 //chartOfAccounts
 let accountTypeDropdowns: string[] = [
     'Expandable', 'Non Expandable', 'Other'];
@@ -264,27 +258,6 @@ let projectTabs: ProjectTab[] = [
     }
 ];
 
-
-//JournalCode
-let journalCodes: JournalCode[] = [
-    {
-        "ID": 1,
-        "JournalName": "Journal 1"
-    },
-    {
-        "ID": 2,
-        "JournalName": "Journal 2"
-    },
-    {
-        "ID": 3,
-        "JournalName": "Journal 3"
-    },
-    {
-        "ID": 4,
-        "JournalName": "Journal 4"
-    },
-];
-
 //AccountType
 let accountTypes: AccountType[] = [
     {
@@ -355,6 +328,24 @@ let emailsetting: EmailSettingData = {
     "EnableSSL" : false
 }
 
+export class JournalCodeData{
+    JournalCode : any;
+    JournalName : string;
+}
+
+let journalcodedata = {
+    "JournalCode": "",
+    "JournalName": ""
+}
+
+export class DeleteJournalCode{
+    JournalCode : any;
+}
+let deletejournalcode : DeleteJournalCode = {
+    "JournalCode": ""
+}
+
+
 @Injectable()
 export class CodeService {
 
@@ -382,17 +373,10 @@ export class CodeService {
         return projectTabs;
     }
 
-
-    //JournalCodes
-    getJournalCodes() {
-        return journalCodes;
-    }
     //Accoutn Type
     getAccountTypes() {
         return accountTypes;
     }
-
-
 
     getCurrencyData() : CurrencyData
     {
@@ -554,9 +538,65 @@ export class CodeService {
 
     }
 
+    AddEditJournalCode(url: string, model: JournalCodeData) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        
+        let a=new RequestOptions();
+        let b=
+        {
+            JournalCode : model.JournalCode,
+            JournalName : model.JournalName      
+        }
+                
+        return this.http.post(url, JSON.stringify(b)
+        ,options)            
+        .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    DeleteJournalCode(url: string, model: DeleteJournalCode) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        
+        let a=new RequestOptions();
+        let b=
+        {
+           JournalCode : model.JournalCode
+        }
+                
+        return this.http.post(url, JSON.stringify(b)
+        ,options)            
+        .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
     //MainLevelAccount
     getMainLevelAccounts(): MainLevelAccount[] {
         return mainLevelAccounts;
+    }
+
+    getJournalCodeData() : JournalCodeData
+    {
+        journalcodedata.JournalCode = "";
+        journalcodedata.JournalName = "";
+        return journalcodedata;
     }
 
     private handleError(error: Response) 
@@ -896,3 +936,6 @@ var mainLevelAccounts: MainLevelAccount[] = [
 
 
 ];
+
+
+

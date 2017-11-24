@@ -38,3 +38,9 @@ export interface EmailTypeList
     EmailTypeId: any;
     EmailTypeName: string;
 }
+
+export interface JournalCodeList
+{
+    JournalCode : any;
+    JournalName : string;
+}
