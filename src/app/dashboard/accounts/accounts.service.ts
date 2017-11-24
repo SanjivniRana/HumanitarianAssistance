@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-
+import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+ 
+// Vouchers Listing,add, edit Class
 export class Order {
     ID: number;
     VoucherNo: string;
@@ -8,7 +11,9 @@ export class Order {
     Office: string;
     Journal: string;
     Description: string;
-    Currency: number;
+    Currency: string;
+    ChequeNo?: string;
+    VoucherType?: string;
 }
 
 export class Voucher {
@@ -86,6 +91,43 @@ export class Customer {
     Accepted: boolean;
 }
 
+//New Currency Class
+
+export class CurrencyClass {
+    CurrencyId: number;
+    CurrencyName: string;
+    CurrencyCode:string;
+}
+
+let currency: CurrencyClass[] = [
+    {
+        "CurrencyId": 1,
+        "CurrencyName": "USD",
+        "CurrencyCode": "USD"
+    },
+    {
+        "CurrencyId": 2,
+        "CurrencyName": "EUR",
+        "CurrencyCode": "USD"
+    },
+    {
+        "CurrencyId": 3,
+        "CurrencyName": "AUD",
+        "CurrencyCode": "USD"
+    },
+    {
+        "CurrencyId": 4,
+        "CurrencyName": "JPY",
+        "CurrencyCode": "USD"
+    },
+    {
+        "CurrencyId": 5,
+        "CurrencyName": "AFG-AFG",
+        "CurrencyCode": "USD"
+    }
+];
+
+
 
 export class Currency {
     ID: number;
@@ -123,7 +165,7 @@ let orders: Order[] = [{
     "Office": "Kabul",
     "Journal": "California",
     "Description": "Los Angeles",
-    "Currency": 2
+    "Currency": "02bb51f0-da81-416b-ad3a-a82b0145b279"
 }, {
     "ID": 2,
     "VoucherNo": "35703",
@@ -132,7 +174,7 @@ let orders: Order[] = [{
     "Office": "Kabul",
     "Journal": "California",
     "Description": "Los Angeles",
-    "Currency": 5
+    "Currency": "04ec2879-5af5-4446-a3a5-a83100d77eb6"
 }, {
     "ID": 4,
     "VoucherNo": "35703",
@@ -141,7 +183,7 @@ let orders: Order[] = [{
     "Office": "Kabul",
     "Journal": "California",
     "Description": "Los Angeles",
-    "Currency": 4
+    "Currency":"329bc74b-5a6a-431e-a329-a83100ccf00f"
 }, {
     "ID": 5,
     "VoucherNo": "35703",
@@ -150,7 +192,7 @@ let orders: Order[] = [{
     "Office": "Kabul",
     "Journal": "California",
     "Description": "Los Angeles",
-    "Currency": 1
+    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
 }, {
     "ID": 7,
     "VoucherNo": "35703",
@@ -159,7 +201,7 @@ let orders: Order[] = [{
     "Office": "Kabul",
     "Journal": "California",
     "Description": "Los Angeles",
-    "Currency": 2
+    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
 }, {
     "ID": 9,
     "VoucherNo": "35703",
@@ -168,7 +210,7 @@ let orders: Order[] = [{
     "Office": "Kabul",
     "Journal": "California",
     "Description": "Los Angeles",
-    "Currency":  3
+    "Currency":  "329bc74b-5a6a-431e-a329-a83100ccf00f"
 }];
 
 
@@ -1307,6 +1349,9 @@ let budget: BudgetBalanceClass[] = [{
 
 @Injectable()
 export class AccountsService {
+    constructor(private http: Http){
+
+    }
     getOrders(): Order[] {
         return orders;
     }
@@ -1377,6 +1422,32 @@ export class AccountsService {
     getBudgetBalance()
     {
         return budget;
+    }
+
+    //New Curency Class
+    getCurrency()
+    {
+        return currency;
+    }
+
+    GetAllCurrencyCodeList(url: string) 
+    {         
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError); 
+    }
+
+    private handleError(error: Response) 
+    {        
+        console.log(error.json());
+        return Observable.throw(error.json().error || 'Server error');
     }
 
 }

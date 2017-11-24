@@ -10,8 +10,12 @@ import {
     DxFormComponent,
     DxPopupModule, DxTemplateModule
 } from 'devextreme-angular';
-import { Order, AccountsService, Employee, Customer, Currency } from '../accounts.service';
+import { Order, AccountsService, Employee, Customer, Currency, CurrencyClass } from '../accounts.service';
 import ArrayStore from 'devextreme/data/array_store';
+import { AppSettingsService } from '../../../Services/App-settings.Service';
+import { GLOBAL } from '../../../shared/global';
+import { CurrencyCode } from '../../../Models/CodeModel';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-vouchers',
@@ -29,6 +33,7 @@ export class VouchersComponent implements OnInit {
     tasks: any;
 
     currency: Currency[];
+    currencyModel : any[];
 
     //Use for event handling 
     events: Array<string> = [];
@@ -64,7 +69,7 @@ export class VouchersComponent implements OnInit {
     colCountByScreen: Object;
     simpleProducts: string[];
     data: any;
-    constructor(private accountservice: AccountsService) {
+    constructor(private accountservice: AccountsService, private setting : AppSettingsService, private toastr: ToastrService ) {
 
 
         this.voucherNO = [{
@@ -80,8 +85,7 @@ export class VouchersComponent implements OnInit {
         this.data = new ArrayStore({
             data: this.countries1,
             key: "ID"
-        });
-        debugger;
+        });        
         this.customer = this.accountservice.getCustomer();
         this.statuses = ["All", "California", "Nevada", "Colorado", "Deferred", "Completed"];
 
@@ -106,10 +110,11 @@ export class VouchersComponent implements OnInit {
     }
 
     showInfo() {
-        this.popupVisible = true;
+        this.popupVisible = true;        
     }
 
     editVoucher(data: any) {
+        debugger;
         this.popupVisibleEditVoucher = true;
     }
 
@@ -161,42 +166,43 @@ export class VouchersComponent implements OnInit {
 
     // TODO: Edit , Delete  ---------------------------
 
-    onContentReady(e) {
-        e.component.columnOption("command:edit", {
-            //    visibleIndex: -1,
-            //    width: 80
-        });
-    }
+    // onContentReady(e) {
+    //     e.component.columnOption("command:edit", {
+    //         //    visibleIndex: -1,
+    //         //    width: 80
+    //     });
+    // }
 
-    onCellPrepared(e) {
-        if (e.rowType === "data" && e.column.command === "edit") {
-            var isEditing = e.row.isEditing,
-                cellElement = e.cellElement;
+    // onCellPrepared(e) {
+    //     if (e.rowType === "data" && e.column.command === "edit") {
+    //         var isEditing = e.row.isEditing,
+    //             cellElement = e.cellElement;
 
-            if (isEditing) {
-                let saveLink = cellElement.querySelector(".dx-link-save"),
-                    cancelLink = cellElement.querySelector(".dx-link-cancel");
+    //         if (isEditing) {
+    //             let saveLink = cellElement.querySelector(".dx-link-save"),
+    //                 cancelLink = cellElement.querySelector(".dx-link-cancel");
 
-                saveLink.classList.add("dx-icon-save");
-                cancelLink.classList.add("dx-icon-revert");
+    //             saveLink.classList.add("dx-icon-save");
+    //             cancelLink.classList.add("dx-icon-revert");
 
-                saveLink.textContent = "";
-                cancelLink.textContent = "";
-            } else {
-                let editLink = cellElement.querySelector(".dx-link-edit"),
-                    deleteLink = cellElement.querySelector(".dx-link-delete");
+    //             saveLink.textContent = "";
+    //             cancelLink.textContent = "";
+    //         } else {
+    //             let editLink = cellElement.querySelector(".dx-link-edit"),
+    //                 deleteLink = cellElement.querySelector(".dx-link-delete");
 
-                editLink.classList.add("dx-icon-edit");
-                deleteLink.classList.add("dx-icon-trash");
+    //             editLink.classList.add("dx-icon-edit");
+    //             deleteLink.classList.add("dx-icon-trash");
 
-                editLink.textContent = "";
-                deleteLink.textContent = "";
-            }
-        }
-    }
+    //             editLink.textContent = "";
+    //             deleteLink.textContent = "";
+    //         }
+    //     }
+    // }
     // TODO: Edit , Delete  ---------------------------
 
     ngOnInit() {
+        this.getCurrencyCodeList();
     }
 
     //TODO: Event for ADD, UPDATE, DELETE
@@ -204,5 +210,42 @@ export class VouchersComponent implements OnInit {
         debugger;
         this.events.unshift(eventName);
     }
+
+    getCurrencyCodeList()
+    { 
+        this.accountservice.GetAllCurrencyCodeList(this.setting.getBaseUrl() + GLOBAL.API_CurrencyCodes_GetAllCurrency).subscribe(
+            data => { 
+                debugger;                     
+                this.currencyModel = [];        
+                data.data.CurrencyList.forEach(element => {
+                this.currencyModel.push({
+                  CurrencyId: element.CurrencyId,
+                  CurrencyCode: element.CurrencyCode                              
+                });
+            });            
+            console.log(this.currencyModel);
+        },
+        error => {  
+        if (error.StatusCode == 500) {
+          this.toastr.error("Internal Server Error....");
+        }
+        else if (error.StatusCode == 401) {
+          this.toastr.error("Unauthorized Access Error....");
+        } 
+        else if(error.StatusCode == 403)      
+        {
+          this.toastr.error("Forbidden Error....");
+        }
+        else {
+        }}
+    )
+  }
+
+    onFormSubmit(value)
+    {
+        debugger;
+    }
+
+
 
 }

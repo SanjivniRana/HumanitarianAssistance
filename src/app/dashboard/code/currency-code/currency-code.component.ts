@@ -57,7 +57,8 @@ export class CurrencyCodeComponent implements OnInit {
   getCurrencyCodeList()
   { 
       this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_CurrencyCodes_GetAllCurrency).subscribe(
-          data => {                      
+          data => { 
+              debugger;                     
               this.currencycodedt = [];        
               data.data.CurrencyList.forEach(element => {
               this.currencycodedt.push({
