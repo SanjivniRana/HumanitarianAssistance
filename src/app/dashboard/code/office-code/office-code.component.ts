@@ -58,7 +58,7 @@ export class OfficeCodeComponent implements OnInit {
   //Get all Office Details
   getOfficeCodeList()
   { 
-      this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_OfficeCode_GetAllOfficdeDetails).subscribe(
+      this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_OfficeCode_GetAllOfficeDetails).subscribe(
           data => {                      
               this.officecodedt = [];        
               data.data.OfficeDetailsList.forEach(element => {

@@ -25,9 +25,16 @@ export interface EmailSetting
 {
     EmailId : any;
     SenderEmail : string;
-    EmailType : any;
+    EmailTypeName : string;
+    EmailTypeId : any;
     SenderPassword : string;
     SmtpPort : any;
     SmtpServer : string;
     EnableSSL : boolean;
+}
+
+export interface EmailTypeList
+{
+    EmailTypeId: any;
+    EmailTypeName: string;
 }
