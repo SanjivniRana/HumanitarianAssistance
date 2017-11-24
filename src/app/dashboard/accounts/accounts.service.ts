@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
  
 // Vouchers Listing,add, edit Class
-export class Order {
+export class VoucherClass {
     ID: number;
     VoucherNo: string;
     VoucherDate: string;
@@ -91,44 +91,6 @@ export class Customer {
     Accepted: boolean;
 }
 
-//New Currency Class
-
-export class CurrencyClass {
-    CurrencyId: number;
-    CurrencyName: string;
-    CurrencyCode:string;
-}
-
-let currency: CurrencyClass[] = [
-    {
-        "CurrencyId": 1,
-        "CurrencyName": "USD",
-        "CurrencyCode": "USD"
-    },
-    {
-        "CurrencyId": 2,
-        "CurrencyName": "EUR",
-        "CurrencyCode": "USD"
-    },
-    {
-        "CurrencyId": 3,
-        "CurrencyName": "AUD",
-        "CurrencyCode": "USD"
-    },
-    {
-        "CurrencyId": 4,
-        "CurrencyName": "JPY",
-        "CurrencyCode": "USD"
-    },
-    {
-        "CurrencyId": 5,
-        "CurrencyName": "AFG-AFG",
-        "CurrencyCode": "USD"
-    }
-];
-
-
-
 export class Currency {
     ID: number;
     Name: string;
@@ -157,7 +119,7 @@ let currencies: Currency[] = [
     }
 ];
 
-let orders: Order[] = [{
+let voucherClass: VoucherClass[] = [{
     "ID": 1,
     "VoucherNo": "35703",
     "VoucherDate": "2014/04/10",
@@ -1352,8 +1314,8 @@ export class AccountsService {
     constructor(private http: Http){
 
     }
-    getOrders(): Order[] {
-        return orders;
+    getVouchersList(): VoucherClass[] {
+        return voucherClass;
     }
 
     getCustomer(): Customer {
@@ -1424,14 +1386,23 @@ export class AccountsService {
         return budget;
     }
 
-    //New Curency Class
-    getCurrency()
-    {
-        return currency;
-    }
-
     GetAllCurrencyCodeList(url: string) 
     {         
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError); 
+    }
+
+    GetAllOfficeCodeList(url: string) 
+    {
+        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });

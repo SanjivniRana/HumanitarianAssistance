@@ -10,7 +10,7 @@ import { DxDataGridComponent,
   DxPopupModule, DxTemplateModule,
   DxTemplateHost 
  } from 'devextreme-angular';
-  import { Order, AccountsService, Employee, Customer } from '../accounts.service';
+  import { AccountsService, Employee, Customer } from '../accounts.service';
 
   @Component({
     selector: 'app-trialBalance',
