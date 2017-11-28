@@ -5,7 +5,7 @@ import { CommonModule } from "@angular/common";
 import { JournalCodeComponent } from "./journal-code/journal-code.component";
 import { CodeRoutingModule } from "./code-routing.module";
 import { ChartOfAccountsComponent } from './chart-of-accounts/chart-of-accounts.component';
-import { DxFileUploaderModule, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxPopupModule, DxTemplateModule, DxTabsModule, DxTreeListModule, DxLookupModule } from "devextreme-angular";
+import { DxFileUploaderModule, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxPopupModule, DxTemplateModule, DxTabsModule, DxTreeListModule } from "devextreme-angular";
 import { NgxPermissionsModule } from "ngx-permissions";
 import { TranslateModule } from "@ngx-translate/core";
 import { LoadingModule, ANIMATION_TYPES } from "ngx-loading";
@@ -33,7 +33,6 @@ import { EmailSettingComponent } from './email-setting/email-setting.component';
         DxTabsModule,
         DxTreeListModule,
         DxPopupModule,
-        DxLookupModule,
         DxTemplateModule,
         NgxPermissionsModule.forChild({
             permissionsIsolate: true,

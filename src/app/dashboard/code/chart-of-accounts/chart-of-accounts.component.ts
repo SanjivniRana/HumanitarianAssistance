@@ -12,10 +12,7 @@ import {
   DxTemplateHost
 } from 'devextreme-angular';
 
-import { CodeService, MainLevelAccount, AccountLevel } from '../code.service';
-import { Toast, ToastrService } from 'ngx-toastr';
-import { FormGroup } from '@angular/forms/src/model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { CodeService, MainLevelAccount } from '../code.service';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -23,104 +20,14 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./chart-of-accounts.component.css']
 })
 
-export class ChartOfAccountsComponent implements OnInit {
-
-  popupVisibleEditChartOfAccount = false;
-  formToggle: number;
-
-  fMainLevelAccount = {
-    'AccountCode': '12',
-    'AccountName': '',
-    'ShowInList': true,
-    'DonorMISCode': '',
-    'DepMethod': '',
-    'Rate(%)': ''
-  };
-
-  fControlLevelAccount = {
-    'AccountCode': '1',
-    'AccountName': '',
-    'ShowInList': true,
-    'DonorMISCode': '',
-    'DepMethod': '',
-    'Rate(%)': ''
-  };
-
-  fSubLevelAccount = {
-    'MainAccountLevel': '',
-    'SelectMain': '',
-    'AccountCode': '2',
-    'AccountName': '',
-    'ShowInList': true,
-    'DonorMISCode': '',
-    'DepMethod': '',
-    'Rate(%)': ''
-  };
-
-  fInputLevelAccount = {
-    'MainAccountLevel': '',
-    'ControlAccountLevel': '',
-    'SelectMain': '',
-    'AccountCode': '2',
-    'AccountName': '',
-    'ShowInList': true,
-    'DonorMISCode': '',
-    'DepMethod': '',
-    'Rate(%)': ''
-  };
+export class ChartOfAccountsComponent implements OnInit { 
 
   ngOnInit() {
-    this.formToggle = 1;
   }
 
   mainLevelAccount: MainLevelAccount[];
 
-  mainLeveFormlData: MainLevelAccount[];
-
-  accountLevelDropdown: AccountLevel[];
-
-  constructor(private codeService: CodeService, private toastr: ToastrService) {
-    this.mainLevelAccount = this.codeService.getMainLevelAccounts();
-
-    //Use for FormData
-    // this.mainLeveFormlData = this.codeService.getMainLevelAccounts();
-
-    this.accountLevelDropdown = this.codeService.getaccountLevels();
-
-  }
-
-  //Dropdown inside Add Model
-  accountLevelSelectedValue(event: any) {
-    this.toastr.success(event.value.AccountLevelName);
-    this.formToggle = event.value.ID;
-  }
-
-  // MainLevelAccount Data
-  onAddMainLevelAccount(data: any) {
-    console.log(data);
-  }
-
-  // ControlLevelAccount Data
-  onAddControlLevelAccount(data: any) {
-    console.log(data);
-  }
-
-  // SubLevelAccount Data
-  onAddSubLevelAccount(data: any) {
-    console.log(data);
-  }
-
-  // InputLevelAccount Data
-  onAddInputLevelAccount(data: any) {
-    console.log(data);
-  }
-
-  addChartOfAccount() {
-    this.popupVisibleEditChartOfAccount = true;
-  }
-
-  cancelChartOfAccount() {
-    this.popupVisibleEditChartOfAccount = false;
+  constructor(service: CodeService) {
+    this.mainLevelAccount = service.getMainLevelAccounts();
   }
 }
-

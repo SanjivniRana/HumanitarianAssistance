@@ -11,7 +11,7 @@ import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
-import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxPivotGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
 import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
@@ -32,38 +32,41 @@ import { BudgetBalanceComponent } from './budget-balance/budget-balance.componen
     AdvanceDeductionComponent,
     FinancialReportComponent,
     BudgetBalanceComponent,
-        
+
   ],
   imports: [
-    CommonModule,   
+    CommonModule,
     AccountsRoutingModule,
     DxFileUploaderModule,
+    DxTreeListModule,
     DxDataGridModule,
-    DxPivotGridModule,
     DxSelectBoxModule,
     DxCheckBoxModule,
     DxNumberBoxModule,
     DxButtonModule,
     DxFormModule,
-    DxPopupModule, DxTemplateModule,
-    DxTabsModule, DxSelectBoxModule,
+    DxTemplateModule,
+    DxPivotGridModule,
+    DxPopupModule,
+    DxTabsModule,
     NgxPermissionsModule.forChild({
-      permissionsIsolate: true, 
-      rolesIsolate: true}),
-      //BrowserAnimationsModule,
-      FormsModule,
-      ReactiveFormsModule,
+      permissionsIsolate: true,
+      rolesIsolate: true
+    }),
+    //BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     TranslateModule.forChild({}),
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.threeBounce,
-      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
       backdropBorderRadius: '4px',
-      primaryColour: '#31c3aa', 
-      secondaryColour: '#000', 
+      primaryColour: '#31c3aa',
+      secondaryColour: '#000',
       tertiaryColour: '#a129'
-  }),
+    }),
   ],
   providers: [AccountsService],
-  
+
 })
 export class AccountsModule { }
