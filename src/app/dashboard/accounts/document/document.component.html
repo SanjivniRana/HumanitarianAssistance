@@ -44,28 +44,24 @@
         [(visible)]="popupVisible">
         <div *dxTemplate="let data of 'content'">
 
-            <form action="your-action" (submit)="onFormSubmit($event)">
-                <dx-form id="form" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
+            <form action="your-action" (submit)="onFormSubmit(addNewDocument)">
+                <dx-form id="form" [formData]="addNewDocument" [readOnly]="false" [showColonAfterLabel]="true"
+                    [showValidationSummary]="true" validationGroup="customerData">
 
-                    <dxi-item dataField="Date" editorType="dxDateBox" [editorOptions]="{ 
-                            invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
+                    <dxi-item dataField="DocumentDate" editorType="dxDateBox">
                         <dxo-label text="Document Date">
                         </dxo-label>
-                        <dxi-validation-rule type="required" message="Date of birth is required">
-                        </dxi-validation-rule>
-                        <dxi-validation-rule type="range" [max]="maxDate" message="You must be at least 21 years old">
-                        </dxi-validation-rule>
+                        <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
                     </dxi-item>
 
                     <dxi-item dataField="DocumentName" caption="Document Name">
-                        <dxi-validation-rule type="required" message="Login is required">
-                        </dxi-validation-rule>
+                        <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
                     </dxi-item>
 
                     <dxi-item caption="File Path">
                         <dxo-label text="File Path">
                         </dxo-label>
-                        <dx-file-uploader selectButtonText="Choose File" labelText="" accept="image/*" uploadMode="useForm">
+                        <dx-file-uploader selectButtonText="Choose File" labelText="" accept="*" uploadMode="form">
                         </dx-file-uploader>
                     </dxi-item>
 

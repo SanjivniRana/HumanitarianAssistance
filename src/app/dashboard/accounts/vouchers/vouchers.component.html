@@ -3,7 +3,7 @@
         <div class="main-heading clearfix">
             <h3 class="page-heading">Vouchers</h3>            
         </div>
-        <dx-data-grid id="gridContainer" [dataSource]="vouchers" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
+        <dx-data-grid id="gridContainer" [dataSource]="voucherDetails" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
             (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted')" (onRowUpdating)="logEvent('RowUpdating')"
             (onRowUpdated)="logEvent('RowUpdated')" (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved')">
             <dxo-paging [pageSize]="10"></dxo-paging>
@@ -39,6 +39,7 @@
             </dxi-column>
 
             <dxi-column dataField="Journal" caption="Journal" alignment="right">
+                    <dxo-lookup [dataSource]="journalcodelist" displayExpr="JournalName" valueExpr="JournalCode"></dxo-lookup>
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
@@ -55,7 +56,7 @@
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
-            <dxi-column dataField="Currency" caption="Currency" [width]="125">
+            <dxi-column dataField="CurrencyCode" caption="Currency" [width]="125">
                 <dxo-lookup [dataSource]="currencyModel" displayExpr="CurrencyCode" valueExpr="CurrencyId"></dxo-lookup>
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>

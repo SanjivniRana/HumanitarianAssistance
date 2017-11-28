@@ -1,7 +1,148 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Http, Headers, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
- 
+
+
+export class JournalClass {
+    "ID": number;
+    "Journal": string;
+    "VoucherNo": number;
+    "Description": string;
+    "Date": string;
+    "Credit": number;
+    "Debit": number;
+    "ParentID": number;
+    "AccountNo": string;
+}
+
+let journalData: JournalClass[] = [
+    {
+        "ID": 1,
+        "ParentID": 0,
+        "Journal": "Journal1",
+        "VoucherNo": null,
+        "Description": null,
+        "Date": null,
+        "Credit": null,
+        "Debit": null,
+        "AccountNo": null
+    },
+    //Voucher Inside
+    {
+        "ID": 2,
+        "ParentID": 1,
+        "Journal": "1223",
+        "VoucherNo": 1,
+        "Description": null,
+        "Date": "2017/11/27",
+        "Credit": null,
+        "Debit": null,
+        "AccountNo": null
+    },
+    //Transaction Inside
+    {
+        "ID": 3,
+        "ParentID": 2,
+        "Journal": null,
+        "VoucherNo": 1,
+        "Description": "Transaction Description",
+        "Date": "2017/11/27",
+        "Credit": 30000,
+        "Debit": 0,
+        "AccountNo": "410101"
+    },
+    {
+        "ID": 4,
+        "ParentID": 2,
+        "Journal": null,
+        "VoucherNo": 1,
+        "Description": "Transaction Description",
+        "Date": "2017/11/27",
+        "Credit": 0,
+        "Debit": 30000,
+        "AccountNo": "510101"
+    },
+    {
+        "ID": 5,
+        "ParentID": 2,
+        "Journal": null,
+        "VoucherNo": 1,
+        "Description": "Transaction Description",
+        "Date": "2017/11/27",
+        "Credit": 0,
+        "Debit": 10000,
+        "AccountNo": "410102"
+    },
+    {
+        "ID": 50,
+        "ParentID": 2,
+        "Journal": null,
+        "VoucherNo": 1,
+        "Description": "Transaction Description",
+        "Date": "2017/11/27",
+        "Credit": 10000,
+        "Debit": 0,
+        "AccountNo": "410103"
+    },
+    //Transaction Inside Ends
+
+    //Second Journal
+    {
+        "ID": 6,
+        "ParentID": 0,
+        "Journal": "Journal2",
+        "VoucherNo": null,
+        "Description": null,
+        "Date": null,
+        "Credit": null,
+        "Debit": null,
+        "AccountNo": null
+    },
+    {
+        "ID": 7,
+        "ParentID": 6,
+        "Journal": "Journal2",
+        "VoucherNo": 2,
+        "Description": null,
+        "Date": "2017/11/26",
+        "Credit": null,
+        "Debit": null,
+        "AccountNo": null
+    },
+    {
+        "ID": 8,
+        "ParentID": 7,
+        "Journal": "Journal2",
+        "VoucherNo": 2,
+        "Description": null,
+        "Date": "2017/11/26",
+        "Credit": 0,
+        "Debit": 30000,
+        "AccountNo": "410103"
+    },
+    {
+        "ID": 9,
+        "ParentID": 7,
+        "Journal": "Journal2",
+        "VoucherNo": 2,
+        "Description": null,
+        "Date": "2017/11/26",
+        "Credit": 0,
+        "Debit": 30000,
+        "AccountNo": "410103"
+    },
+    {
+        "ID": 10,
+        "ParentID": 7,
+        "Journal": "Journal2",
+        "VoucherNo": 2,
+        "Description": null,
+        "Date": "2017/11/26",
+        "Credit": 0,
+        "Debit": 30000,
+        "AccountNo": "410103"
+    }
+];
 // Vouchers Listing,add, edit Class
 export class VoucherClass {
     ID: number;
@@ -15,6 +156,90 @@ export class VoucherClass {
     ChequeNo?: string;
     VoucherType?: string;
 }
+
+let voucherClass: VoucherClass[] = [{
+    "ID": 1,
+    "VoucherNo": "35703",
+    "VoucherDate": "2014/04/10",
+    "VoucherRefNo": "11800",
+    "Office": "Kabul",
+    "Journal": "California",
+    "Description": "Los Angeles",
+    "Currency": "02bb51f0-da81-416b-ad3a-a82b0145b279"
+}, {
+    "ID": 2,
+    "VoucherNo": "35703",
+    "VoucherDate": "2014/04/10",
+    "VoucherRefNo": "11800",
+    "Office": "Kabul",
+    "Journal": "California",
+    "Description": "Los Angeles",
+    "Currency": "04ec2879-5af5-4446-a3a5-a83100d77eb6"
+}, {
+    "ID": 4,
+    "VoucherNo": "35703",
+    "VoucherDate": "2014/04/10",
+    "VoucherRefNo": "11800",
+    "Office": "Kabul",
+    "Journal": "California",
+    "Description": "Los Angeles",
+    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
+}, {
+    "ID": 5,
+    "VoucherNo": "35703",
+    "VoucherDate": "2014/04/10",
+    "VoucherRefNo": "11800",
+    "Office": "Kabul",
+    "Journal": "California",
+    "Description": "Los Angeles",
+    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
+}, {
+    "ID": 7,
+    "VoucherNo": "35703",
+    "VoucherDate": "2014/04/10",
+    "VoucherRefNo": "11800",
+    "Office": "Kabul",
+    "Journal": "California",
+    "Description": "Los Angeles",
+    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
+}, {
+    "ID": 9,
+    "VoucherNo": "35703",
+    "VoucherDate": "2014/04/10",
+    "VoucherRefNo": "11800",
+    "Office": "Kabul",
+    "Journal": "California",
+    "Description": "Los Angeles",
+    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
+}];
+
+export class Document {
+    ID: any;
+    DocumentName: string;
+    DocumentFilePath?: string;
+    DocumentDate?: string;
+    VoucherNo?: string;
+}
+
+let addDocument: Document =
+    {
+        "ID": "",
+        "DocumentName": "",
+        "DocumentFilePath": "",
+        "DocumentDate": "",
+        "VoucherNo": ""
+    };
+
+let documentData: Document[] = [{
+    "ID": 1,
+    "DocumentName": "Document 1"
+}, {
+    "ID": 2,
+    "DocumentName": "Document 2"
+}, {
+    "ID": 3,
+    "DocumentName": "Document 3"
+}];
 
 export class Voucher {
     ID: number;
@@ -118,63 +343,6 @@ let currencies: Currency[] = [
         "Name": "AFG-AFG"
     }
 ];
-
-let voucherClass: VoucherClass[] = [{
-    "ID": 1,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "02bb51f0-da81-416b-ad3a-a82b0145b279"
-}, {
-    "ID": 2,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "04ec2879-5af5-4446-a3a5-a83100d77eb6"
-}, {
-    "ID": 4,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency":"329bc74b-5a6a-431e-a329-a83100ccf00f"
-}, {
-    "ID": 5,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}, {
-    "ID": 7,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}, {
-    "ID": 9,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency":  "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}];
-
 
 let customer: Customer = {
     "Login": "",
@@ -717,108 +885,109 @@ export class TrailBalanceVoucher {
     Credit: number;
 }
 
-let trial: TrailBalanceClass[] = [{
-    "ID": 1,
-    "Currency": "AFG-AFG",
-    "Account": "410101 - Clinic Income",
-    "Office": "TestOffice",
-    "RecordType": "Single Currency",
-    "VoucherDate": "1966/03/16",
-    "TrailBalanceVouchers": [{
-        "ID": 4,
-        "AccountName": "410201",
-        "Debit": 0,
-        "Credit": 10000
-    },
+let trial: TrailBalanceClass[] = [
     {
-        "ID": 5,
-        "AccountName": "410101 - Clinical Income",
-        "Debit": 0,
-        "Credit": 50000
-    },
-    {
-        "ID": 6,
-        "AccountName": "410102 - Sports Income",
-        "Debit": 0,
-        "Credit": 8000
-    },
-    {
-        "ID": 7,
-        "AccountName": "410103 - Medical Income",
-        "Debit": 10000,
-        "Credit": 0
-    },
-    {
-        "ID": 8,
-        "AccountName": "410103 - Director Income",
-        "Debit": 50000,
-        "Credit": 0
-    },
-    {
-        "ID": 7,
-        "AccountName": "410103 - Medical Income",
-        "Debit": 3000,
-        "Credit": 0
-    },
-    {
-        "ID": 8,
-        "AccountName": "410103 - Director Income",
-        "Debit": 5000,
-        "Credit": 0
-    }]
+        "ID": 1,
+        "Currency": "AFG-AFG",
+        "Account": "410101 - Clinic Income",
+        "Office": "TestOffice",
+        "RecordType": "Single Currency",
+        "VoucherDate": "1966/03/16",
+        "TrailBalanceVouchers": [{
+            "ID": 4,
+            "AccountName": "410201",
+            "Debit": 0,
+            "Credit": 10000
+        },
+        {
+            "ID": 5,
+            "AccountName": "410101 - Clinical Income",
+            "Debit": 0,
+            "Credit": 50000
+        },
+        {
+            "ID": 6,
+            "AccountName": "410102 - Sports Income",
+            "Debit": 0,
+            "Credit": 8000
+        },
+        {
+            "ID": 7,
+            "AccountName": "410103 - Medical Income",
+            "Debit": 10000,
+            "Credit": 0
+        },
+        {
+            "ID": 8,
+            "AccountName": "410103 - Director Income",
+            "Debit": 50000,
+            "Credit": 0
+        },
+        {
+            "ID": 7,
+            "AccountName": "410103 - Medical Income",
+            "Debit": 3000,
+            "Credit": 0
+        },
+        {
+            "ID": 8,
+            "AccountName": "410103 - Director Income",
+            "Debit": 5000,
+            "Credit": 0
+        }]
 
-},
-{
-    "ID": 2,
-    "Currency": "USD-USD",
-    "Account": "410101 - Medical Income",
-    "Office": "TestOffice",
-    "RecordType": "Single Currency",
-    "VoucherDate": "1964/03/16",
-    "TrailBalanceVouchers": [{
-        "ID": 4,
-        "AccountName": "410201",
-        "Debit": 0,
-        "Credit": 10000
     },
     {
-        "ID": 5,
-        "AccountName": "410101 - Clinical Income",
-        "Debit": 0,
-        "Credit": 50000
-    },
-    {
-        "ID": 6,
-        "AccountName": "410102 - Sports Income",
-        "Debit": 0,
-        "Credit": 8000
-    },
-    {
-        "ID": 7,
-        "AccountName": "410103 - Medical Income",
-        "Debit": 10000,
-        "Credit": 0
-    },
-    {
-        "ID": 8,
-        "AccountName": "410103 - Director Income",
-        "Debit": 50000,
-        "Credit": 0
-    },
-    {
-        "ID": 7,
-        "AccountName": "410103 - Medical Income",
-        "Debit": 3000,
-        "Credit": 0
-    },
-    {
-        "ID": 8,
-        "AccountName": "410103 - Director Income",
-        "Debit": 5000,
-        "Credit": 0
-    }]
+        "ID": 2,
+        "Currency": "USD-USD",
+        "Account": "410101 - Medical Income",
+        "Office": "TestOffice",
+        "RecordType": "Single Currency",
+        "VoucherDate": "1964/03/16",
+        "TrailBalanceVouchers": [{
+            "ID": 4,
+            "AccountName": "410201",
+            "Debit": 0,
+            "Credit": 10000
+        },
+        {
+            "ID": 5,
+            "AccountName": "410101 - Clinical Income",
+            "Debit": 0,
+            "Credit": 50000
+        },
+        {
+            "ID": 6,
+            "AccountName": "410102 - Sports Income",
+            "Debit": 0,
+            "Credit": 8000
+        },
+        {
+            "ID": 7,
+            "AccountName": "410103 - Medical Income",
+            "Debit": 10000,
+            "Credit": 0
+        },
+        {
+            "ID": 8,
+            "AccountName": "410103 - Director Income",
+            "Debit": 50000,
+            "Credit": 0
+        },
+        {
+            "ID": 7,
+            "AccountName": "410103 - Medical Income",
+            "Debit": 3000,
+            "Credit": 0
+        },
+        {
+            "ID": 8,
+            "AccountName": "410103 - Director Income",
+            "Debit": 5000,
+            "Credit": 0
+        }]
 
-}];
+    }];
 // TRIAL BALANCE ENDS 
 
 
@@ -975,7 +1144,7 @@ export class FinancialReport_BalanceSheetClass {
     Description: string;
     Notes: number;
     Balance: number;
-    Currency:string;
+    Currency: string;
 }
 
 let financial_balancesheet: FinancialReport_BalanceSheetClass[] = [{
@@ -1102,7 +1271,7 @@ let years: FinancialYear[] = [{
 },
 {
     "ID": 2,
-    "Year": "2015"  
+    "Year": "2015"
 },
 {
     "ID": 3,
@@ -1133,119 +1302,119 @@ export class BudgetBalanceInnerClass {
     Budget: number;
     Expenditure: number;
     Balance: number;
-    Percentage:string;
+    Percentage: string;
 }
 
 let budget: BudgetBalanceClass[] = [{
     "ID": 1,
     "Currency": "USD-USD",
     "Budget": 12000,
-    "RecordType": "Single Currency",    
+    "RecordType": "Single Currency",
     "Date": "2015/03/16",
     "BudgetBalance": [{
-        "ID": 4,        
+        "ID": 4,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "USD-USD",
         "Budget": 12000,
         "Expenditure": 2000,
-        "Balance": 10000,        
+        "Balance": 10000,
         "Percentage": "83.3333%"
     },
     {
-        "ID": 5,        
+        "ID": 5,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "USD-USD",
         "Budget": 12000,
         "Expenditure": 2000,
-        "Balance": 10000,        
+        "Balance": 10000,
         "Percentage": "83.3333%"
     },
     {
-        "ID": 6,        
+        "ID": 6,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "USD-USD",
         "Budget": 12000,
         "Expenditure": 2000,
-        "Balance": 10000,        
+        "Balance": 10000,
         "Percentage": "83.3333%"
     },
     {
-        "ID": 7,        
+        "ID": 7,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "USD-USD",
         "Budget": 12000,
         "Expenditure": 2000,
-        "Balance": 10000,        
+        "Balance": 10000,
         "Percentage": "83.3333%"
     },
     {
-        "ID": 8,        
+        "ID": 8,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "USD-USD",
         "Budget": 12000,
         "Expenditure": 2000,
-        "Balance": 10000,        
+        "Balance": 10000,
         "Percentage": "83.3333%"
     }]
 }, {
     "ID": 2,
     "Currency": "AFG-AFG",
     "Budget": 10000,
-    "RecordType": "Single Currency",    
+    "RecordType": "Single Currency",
     "Date": "2016/03/16",
     "BudgetBalance": [{
-        "ID": 9,        
+        "ID": 9,
         "BLine": "410201",
         "BLineDescription": "Sports Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 10000,
         "Expenditure": 1000,
-        "Balance": 9000,        
+        "Balance": 9000,
         "Percentage": "90%"
     },
     {
-        "ID": 10,        
+        "ID": 10,
         "BLine": "410201",
         "BLineDescription": "Sports Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 10000,
         "Expenditure": 1000,
-        "Balance": 9000,        
+        "Balance": 9000,
         "Percentage": "90%"
     },
     {
-        "ID": 11,        
+        "ID": 11,
         "BLine": "410201",
         "BLineDescription": "Sports Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 10000,
         "Expenditure": 1000,
-        "Balance": 9000,        
+        "Balance": 9000,
         "Percentage": "90%"
     },
     {
-        "ID": 12,        
+        "ID": 12,
         "BLine": "410201",
         "BLineDescription": "Sports Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 10000,
         "Expenditure": 1000,
-        "Balance": 9000,        
+        "Balance": 9000,
         "Percentage": "90%"
     },
     {
-        "ID": 13,        
+        "ID": 13,
         "BLine": "410201",
         "BLineDescription": "Sports Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 10000,
         "Expenditure": 1000,
-        "Balance": 9000,        
+        "Balance": 9000,
         "Percentage": "90%"
     }]
 },
@@ -1253,73 +1422,156 @@ let budget: BudgetBalanceClass[] = [{
     "ID": 3,
     "Currency": "USD-USD",
     "Budget": 30000,
-    "RecordType": "Single Currency",    
+    "RecordType": "Single Currency",
     "Date": "2017/03/16",
     "BudgetBalance": [{
-        "ID": 14,        
+        "ID": 14,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 30000,
         "Expenditure": 10000,
-        "Balance": 20000,        
+        "Balance": 20000,
         "Percentage": "66.666%"
     },
     {
-        "ID": 15,        
+        "ID": 15,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 30000,
         "Expenditure": 10000,
-        "Balance": 20000,        
+        "Balance": 20000,
         "Percentage": "66.666%"
     },
     {
-        "ID": 16,        
+        "ID": 16,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 30000,
         "Expenditure": 10000,
-        "Balance": 20000,        
+        "Balance": 20000,
         "Percentage": "66.666%"
     },
     {
-        "ID": 17,        
+        "ID": 17,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 30000,
         "Expenditure": 10000,
-        "Balance": 20000,        
+        "Balance": 20000,
         "Percentage": "66.666%"
     },
     {
-        "ID": 18,        
+        "ID": 18,
         "BLine": "410201",
         "BLineDescription": "Kabul Clinic Income",
         "Currency": "AFG-AFG",
         "Budget": 30000,
         "Expenditure": 10000,
-        "Balance": 20000,        
+        "Balance": 20000,
         "Percentage": "66.666%"
     }]
 }];
 
 //End of Budget Balance
 
+//Journal
+export class Sale {
+    id: number;
+    journal: string;
+    country: string;
+    transaction: string;
+    voucher: string;
+    amount: number;
+    transactionType: string;
+}
+
+//Journal
+let journal: Sale[] = [
+    {
+        "id": 1,
+        "journal": "Journal1",
+        "country": "USA",
+        "voucher": "Voucher 1",
+        "transaction": "transaction 1",
+        "amount": 500,
+        "transactionType": "Debit"
+    }, {
+        "id": 2,
+        "journal": "Journal1",
+        "country": "USA",
+        "voucher": "Voucher 1",
+        "transaction": "transaction 2",
+        "amount": 500,
+        "transactionType": "Credit"
+    }, {
+        "id": 3,
+        "journal": "Journal1",
+        "country": "USA",
+        "voucher": "Voucher 2",
+        "transaction": "transaction 3",
+        "amount": 1000,
+        "transactionType": "Debit"
+    }, {
+        "id": 4,
+        "journal": "Journal1",
+        "country": "CAN",
+        "voucher": "Voucher 2",
+        "transaction": "transaction 1",
+        "amount": 1000,
+        "transactionType": "Credit"
+    }, {
+        "id": 5,
+        "journal": "Journal2",
+        "country": "CAN",
+        "voucher": "Voucher 1",
+        "transaction": "transaction 2",
+        "amount": 880,
+        "transactionType": "Debit"
+    }, {
+        "id": 6,
+        "journal": "Journal5",
+        "country": "BRA",
+        "voucher": "Voucher 1",
+        "transaction": "transaction 1",
+        "amount": 5260,
+        "transactionType": "Credit"
+    }
+];
+
+
 @Injectable()
 export class AccountsService {
-    constructor(private http: Http){
+    constructor(private http: Http) {
 
     }
+
+    getJournalData(): JournalClass[] {
+        return journalData;
+    }
+
     getVouchersList(): VoucherClass[] {
         return voucherClass;
     }
 
+    getVouchersDocumentList(): Document[] {
+        return documentData;
+    }
+
     getCustomer(): Customer {
         return customer;
+    }
+
+    getAddDoucmentModel(): Document {
+        addDocument.ID = "";
+        addDocument.DocumentName = "";
+        addDocument.DocumentFilePath = "";
+        addDocument.DocumentDate = "";
+        addDocument.VoucherNo = "";
+        return addDocument;
     }
 
     getCountries() {
@@ -1377,17 +1629,15 @@ export class AccountsService {
         return currencies;
     }
 
-    getFinancialYear_Report(){
+    getFinancialYear_Report() {
         return years;
     }
 
-    getBudgetBalance()
-    {
+    getBudgetBalance() {
         return budget;
     }
 
-    GetAllCurrencyCodeList(url: string) 
-    {         
+    GetAllCurrencyCodeList(url: string) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -1397,11 +1647,10 @@ export class AccountsService {
                 if (codelist) {
                     return codelist;
                 }
-            }).catch(this.handleError); 
+            }).catch(this.handleError);
     }
 
-    GetAllOfficeCodeList(url: string) 
-    {
+    GetAllOfficeCodeList(url: string) {
         //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
@@ -1412,13 +1661,44 @@ export class AccountsService {
                 if (codelist) {
                     return codelist;
                 }
-            }).catch(this.handleError); 
+            }).catch(this.handleError);
     }
 
-    private handleError(error: Response) 
-    {        
+    GetAllJournalCodeList(url: string) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    GetAllVoucherDetails(url: string) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    private handleError(error: Response) {
         console.log(error.json());
         return Observable.throw(error.json().error || 'Server error');
     }
 
+    //Journal
+    getJournals() {
+        return journal;
+    }
 }
