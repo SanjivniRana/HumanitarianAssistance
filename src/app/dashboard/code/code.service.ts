@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Http, Headers, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { CurrencyCode, OfficeCode, OfficeCodefordelete, EmailSetting } from '../../Models/CodeModel';
 
@@ -288,49 +288,49 @@ let currencydata: CurrencyData = {
     "CurrencyRate": null
 };
 
-export class OfficeData{
-    OfficeId : any;
-    OfficeCode : string;
-    OfficeName : string;
-    SupervisorName : string;
-    PhoneNo : string;
-    FaxNo : string;
+export class OfficeData {
+    OfficeId: any;
+    OfficeCode: string;
+    OfficeName: string;
+    SupervisorName: string;
+    PhoneNo: string;
+    FaxNo: string;
 }
 
-let officedata: OfficeData ={
-    "OfficeId" : "",
-    "OfficeCode" : "",
-    "OfficeName" : "",
-    "SupervisorName" : "",
-    "PhoneNo" : "",
-    "FaxNo" : ""
+let officedata: OfficeData = {
+    "OfficeId": "",
+    "OfficeCode": "",
+    "OfficeName": "",
+    "SupervisorName": "",
+    "PhoneNo": "",
+    "FaxNo": ""
 }
 
-export class EmailSettingData{
-    EmailId : any;
-    SenderEmail : string;
-    EmailTypeId : any;
+export class EmailSettingData {
+    EmailId: any;
+    SenderEmail: string;
+    EmailTypeId: any;
     EmailTypeName: string;
-    SenderPassword : string;
-    SmtpPort : any;
-    SmtpServer : string;
-    EnableSSL : boolean;
+    SenderPassword: string;
+    SmtpPort: any;
+    SmtpServer: string;
+    EnableSSL: boolean;
 }
 
 let emailsetting: EmailSettingData = {
-    "EmailId" : "",
-    "SenderEmail" : "",
-    "EmailTypeId" : "",
-    "EmailTypeName" : "",
-    "SenderPassword" : "",
-    "SmtpPort" : "",
-    "SmtpServer" : "",
-    "EnableSSL" : false
+    "EmailId": "",
+    "SenderEmail": "",
+    "EmailTypeId": "",
+    "EmailTypeName": "",
+    "SenderPassword": "",
+    "SmtpPort": "",
+    "SmtpServer": "",
+    "EnableSSL": false
 }
 
-export class JournalCodeData{
-    JournalCode : any;
-    JournalName : string;
+export class JournalCodeData {
+    JournalCode: any;
+    JournalName: string;
 }
 
 let journalcodedata = {
@@ -338,19 +338,47 @@ let journalcodedata = {
     "JournalName": ""
 }
 
-export class DeleteJournalCode{
-    JournalCode : any;
+export class DeleteJournalCode {
+    JournalCode: any;
 }
-let deletejournalcode : DeleteJournalCode = {
+let deletejournalcode: DeleteJournalCode = {
     "JournalCode": ""
 }
 
+//Alpit 28-11-17
+export class AccountLevel {
+    ID: number;
+    AccountLevelName: string;
+}
+
+let accountLevels: AccountLevel[] = [
+    {
+        "ID": 1,
+        "AccountLevelName": "Main Level Account"
+    },
+    {
+        "ID": 2,
+        "AccountLevelName": "Control Level Account"
+    },
+    {
+        "ID": 3,
+        "AccountLevelName": "Sub Level Account"
+    },
+    {
+        "ID": 4,
+        "AccountLevelName": "Input Level Account"
+    }
+];
 
 @Injectable()
 export class CodeService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) { }
 
+    //Account level dropdown
+    getaccountLevels() {
+        return accountLevels;
+    }
     //Manage Chat of account
 
     //chartOfAccounts
@@ -378,8 +406,7 @@ export class CodeService {
         return accountTypes;
     }
 
-    getCurrencyData() : CurrencyData
-    {
+    getCurrencyData(): CurrencyData {
         currencydata.CurrencyId = "";
         currencydata.CurrencyCode = "";
         currencydata.CurrencyName = "";
@@ -387,8 +414,7 @@ export class CodeService {
         return currencydata;
     }
 
-    GetAllCodeList(url: string) 
-    {
+    GetAllCodeList(url: string) {
         //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
@@ -399,7 +425,7 @@ export class CodeService {
                 if (codelist) {
                     return codelist;
                 }
-            }).catch(this.handleError); 
+            }).catch(this.handleError);
     }
 
     AddEditCurrencyCode(url: string, model: CurrencyCode) {
@@ -408,19 +434,19 @@ export class CodeService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        
-        let a=new RequestOptions();
-        let b=
-        {
-            CurrencyId : model.CurrencyId,
-            CurrencyCode : model.CurrencyCode,
-            CurrencyName : model.CurrencyName,
-            CurrencyRate : model.CurrencyRate        
-        }
-                
+
+        let a = new RequestOptions();
+        let b =
+            {
+                CurrencyId: model.CurrencyId,
+                CurrencyCode: model.CurrencyCode,
+                CurrencyName: model.CurrencyName,
+                CurrencyRate: model.CurrencyRate
+            }
+
         return this.http.post(url, JSON.stringify(b)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -429,8 +455,7 @@ export class CodeService {
 
     }
 
-    getOfficeData() : OfficeData
-    {
+    getOfficeData(): OfficeData {
         officedata.OfficeId = "";
         officedata.OfficeCode = "";
         officedata.OfficeName = "";
@@ -446,21 +471,21 @@ export class CodeService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        
-        let a=new RequestOptions();
-        let b=
-        {
-            OfficeId : model.OfficeId,
-            OfficeCode : model.OfficeCode,
-            OfficeName : model.OfficeName,
-            SupervisorName : model.SupervisorName,
-            PhoneNo : model.PhoneNo,
-            FaxNo : model.FaxNo
-        }
-                
+
+        let a = new RequestOptions();
+        let b =
+            {
+                OfficeId: model.OfficeId,
+                OfficeCode: model.OfficeCode,
+                OfficeName: model.OfficeName,
+                SupervisorName: model.SupervisorName,
+                PhoneNo: model.PhoneNo,
+                FaxNo: model.FaxNo
+            }
+
         return this.http.post(url, JSON.stringify(b)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -475,16 +500,16 @@ export class CodeService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        
-        let a=new RequestOptions();
-        let b=
-        {
-            OfficeId : model.OfficeId
-        }
-                
+
+        let a = new RequestOptions();
+        let b =
+            {
+                OfficeId: model.OfficeId
+            }
+
         return this.http.post(url, JSON.stringify(b)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -494,8 +519,7 @@ export class CodeService {
     }
 
 
-    getEmailSettingData() : EmailSettingData
-    {
+    getEmailSettingData(): EmailSettingData {
         emailsetting.EmailId = "";
         emailsetting.SenderEmail = "";
         emailsetting.EmailTypeId = "";
@@ -513,23 +537,23 @@ export class CodeService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        
-        let a=new RequestOptions();
-        let b=
-        {
-            EmailId : model.EmailId,
-            SenderEmail : model.SenderEmail,
-            EmailTypeName : model.EmailTypeName,
-            EmailTypeId : model.EmailTypeId,
-            SenderPassword : model.SenderPassword,
-            SmtpPort : model.SmtpPort,
-            SmtpServer : model.SmtpServer,
-            EnableSSL : model.EnableSSL       
-        }
-                
+
+        let a = new RequestOptions();
+        let b =
+            {
+                EmailId: model.EmailId,
+                SenderEmail: model.SenderEmail,
+                EmailTypeName: model.EmailTypeName,
+                EmailTypeId: model.EmailTypeId,
+                SenderPassword: model.SenderPassword,
+                SmtpPort: model.SmtpPort,
+                SmtpServer: model.SmtpServer,
+                EnableSSL: model.EnableSSL
+            }
+
         return this.http.post(url, JSON.stringify(b)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -544,17 +568,17 @@ export class CodeService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        
-        let a=new RequestOptions();
-        let b=
-        {
-            JournalCode : model.JournalCode,
-            JournalName : model.JournalName      
-        }
-                
+
+        let a = new RequestOptions();
+        let b =
+            {
+                JournalCode: model.JournalCode,
+                JournalName: model.JournalName
+            }
+
         return this.http.post(url, JSON.stringify(b)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -569,16 +593,16 @@ export class CodeService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        
-        let a=new RequestOptions();
-        let b=
-        {
-           JournalCode : model.JournalCode
-        }
-                
+
+        let a = new RequestOptions();
+        let b =
+            {
+                JournalCode: model.JournalCode
+            }
+
         return this.http.post(url, JSON.stringify(b)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -592,19 +616,17 @@ export class CodeService {
         return mainLevelAccounts;
     }
 
-    getJournalCodeData() : JournalCodeData
-    {
+    getJournalCodeData(): JournalCodeData {
         journalcodedata.JournalCode = "";
         journalcodedata.JournalName = "";
         return journalcodedata;
     }
 
-    private handleError(error: Response) 
-        {        
-            console.log(error.json());
-            return Observable.throw(error.json().error || 'Server error');
-    
-        }
+    private handleError(error: Response) {
+        console.log(error.json());
+        return Observable.throw(error.json().error || 'Server error');
+
+    }
 }
 
 //MainLevelAccount
