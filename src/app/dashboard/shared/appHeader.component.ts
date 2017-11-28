@@ -18,6 +18,7 @@ import { UserService } from '../admin/user.service';
 import { Subject } from 'rxjs';
 import { CurrentPasswordModel } from '../../Models/CurrentPasswordModel';
 import { ToastrService } from 'ngx-toastr';
+import { DashboardComponent } from '../dashboard.component'
 @Component({
     selector : "app-header",
     templateUrl:'./appHeader.component.html',
@@ -66,8 +67,8 @@ export class AppHeaderComponent implements OnDestroy {
         private http:Http,
         private setting:AppSettingsService,
         private userService : UserService,
-        private toastr: ToastrService
-        
+        private toastr: ToastrService,
+        public _dashboard: DashboardComponent
         
         
     ) { 
@@ -205,5 +206,10 @@ export class AppHeaderComponent implements OnDestroy {
       ngOnDestroy(): void {
         this.unsubscribe.next();
         this.unsubscribe.complete(); 
+       }
+
+       toggleSideFun(){
+          
+           this._dashboard.toggleSide = !this._dashboard.toggleSide;
        }
 }

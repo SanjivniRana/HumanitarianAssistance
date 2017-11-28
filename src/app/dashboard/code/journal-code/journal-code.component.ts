@@ -57,12 +57,13 @@ export class JournalCodeComponent implements OnInit {
   //Get all Journal Details
   getJournalCodeList()
   { 
+    debugger;
       this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_JournalCode_GetAllJournalDetail).subscribe(
           data => {                      
-              this.journalcodelist = [];        
-              data.data.JournalDetailList.forEach(element => {
-              this.journalcodelist.push({JournalCode:element.JournalCode,JournalName:element.JournalName});
-          });
+              this.journalcodelist = [];   
+              data!=null || data!=undefined? data.data.JournalDetailList.forEach(element => {
+                this.journalcodelist.push({JournalCode:element.JournalCode,JournalName:element.JournalName});                            
+          }):null;
       },
       error => {  
       if (error.StatusCode == 500) {
