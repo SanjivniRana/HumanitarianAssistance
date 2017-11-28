@@ -423,6 +423,7 @@ export class CodeService {
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
+                    debugger;
                     return codelist;
                 }
             }).catch(this.handleError);
