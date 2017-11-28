@@ -394,7 +394,7 @@ export class UserComponent implements OnInit,OnDestroy {
 
     this.userService.EditUser(this.setting.getBaseUrl() + GLOBAL.API_UserDetail_EditUser, editUser).subscribe(
       data => {        
-        if (data.StatusCode == 200) //Success
+        if (data.data.StatusCode == 200) //Success
         {
           this.toastr.success("User Updated Successfully!!!");
           this.getUserList();

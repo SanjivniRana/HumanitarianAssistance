@@ -1,24 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AccountsService, Company, Document  } from '../accounts.service';
+import { AccountsService, Company } from '../accounts.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
-import { FormBuilder } from '@angular/forms';
-
+import { DxDataGridComponent,
+    DxDataGridModule,
+    DxSelectBoxModule,
+    DxCheckBoxModule,
+    DxNumberBoxModule,
+    DxButtonModule,
+    DxFormModule,
+    DxFormComponent,
+    DxPopupModule,
+     DxTemplateModule,
+     DxFileUploaderModule
+   } from 'devextreme-angular';
 @Component({
     selector: 'app-document',
     templateUrl: './document.component.html'
   })
   export class DocumentComponent implements OnInit { 
-    dataSource: Document[];
+    dataSource: Company[];
     popupVisible = false;
-    addNewDocument : Document;    
 
-    constructor(private accountservice:AccountsService, private router: Router, private fb:FormBuilder){
-        this.dataSource = this.accountservice.getVouchersDocumentList();
-        this.addNewDocument = this.accountservice.getAddDoucmentModel();        
+    constructor(private accountservice:AccountsService, private router: Router){
+        this.dataSource = this.accountservice.getCompanies();
     }
     ngOnInit() {
-        
     }
 
     addDocument()
@@ -33,9 +39,5 @@ import { FormBuilder } from '@angular/forms';
     backToVouchers()
     {        
         this.router.navigate(['../vouchers']);
-    }    
-    onFormSubmit(value)
-    {
-        debugger;
     }
   }

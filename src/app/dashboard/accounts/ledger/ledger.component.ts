@@ -10,7 +10,7 @@ import { DxDataGridComponent,
   DxPopupModule, DxTemplateModule,
   DxTemplateHost 
  } from 'devextreme-angular';
-  import { AccountsService, Employee, Customer } from '../accounts.service';
+  import { Order, AccountsService, Employee, Customer } from '../accounts.service';
 
   @Component({
     selector: 'app-ledger',

@@ -25,22 +25,9 @@ export interface EmailSetting
 {
     EmailId : any;
     SenderEmail : string;
-    EmailTypeName : string;
-    EmailTypeId : any;
+    EmailType : any;
     SenderPassword : string;
     SmtpPort : any;
     SmtpServer : string;
     EnableSSL : boolean;
-}
-
-export interface EmailTypeList
-{
-    EmailTypeId: any;
-    EmailTypeName: string;
-}
-
-export interface JournalCodeList
-{
-    JournalCode : any;
-    JournalName : string;
 }
