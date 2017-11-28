@@ -26,7 +26,7 @@ export class VouchersComponent implements OnInit {
     events: Array<string> = [];
 
     constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService) {
-        this.vouchers = accountservice.getVouchersList();
+        // this.vouchers = accountservice.getVouchersList();
 
         //Static value for voucherType Control in add/edit popup
         this.voucherTypeArr = [
@@ -49,9 +49,62 @@ export class VouchersComponent implements OnInit {
     }
 
     //TODO: Event for ADD, UPDATE, DELETE
-    logEvent(eventName) {
+    logEvent(eventName, obj) {
         debugger;
-        this.events.unshift(eventName);
+        //Edit Code
+        if(eventName == "RowUpdating")
+        {
+            // Merge old data with new Data            
+            var value = Object.assign(obj.oldData,obj.newData);
+            this.accountservice.EditVoucher(this.setting.getBaseUrl() + GLOBAL.API_Accounting_EditVouchers, value).subscribe(
+                data => {
+                    if(data.StatusCode == 200)
+                    {
+                        this.toastr.success("Voucher Updated Successfully!!!");
+                    }
+                },
+                error => {
+                    if (error.StatusCode == 500) {
+                        this.toastr.error("Internal Server Error....");
+                    }
+                    else if (error.StatusCode == 401) {
+                        this.toastr.error("Unauthorized Access Error....");
+                    }
+                    else if (error.StatusCode == 403) {
+                        this.toastr.error("Forbidden Error....");
+                    }
+                    else {
+                    }
+                }
+            )            
+        }
+
+        //Add New Voucher Details
+        else if(eventName == "RowInserting")
+        {
+            this.accountservice.AddVoucher(this.setting.getBaseUrl() + GLOBAL.API_Accounting_AddVouchers, obj.data).subscribe(
+                data => {
+                    if(data.StatusCode == 200)
+                    {
+                        this.toastr.success("Voucher Added Successfully!!!");
+                    }
+                },
+                error => {
+                    if (error.StatusCode == 500) {
+                        this.toastr.error("Internal Server Error....");
+                    }
+                    else if (error.StatusCode == 401) {
+                        this.toastr.error("Unauthorized Access Error....");
+                    }
+                    else if (error.StatusCode == 403) {
+                        this.toastr.error("Forbidden Error....");
+                    }
+                    else {
+                    }
+                }
+            )
+        }        
+        // this.events.unshift(eventName);
     }
 
     //Get Currency Code in Add, Edit Dropdown 
@@ -153,13 +206,14 @@ export class VouchersComponent implements OnInit {
                         VoucherDate: element.VoucherDate,
                         VoucherRefNo: element.ReferenceNo,
                         Office:element.OfficeId,
-                        // Office: element.OfficeName,
+                        ChequeNo:element.ChequeNo,
                         Journal: element.JournalCode,
-                        // Journal: element.JournalName,
+                        VoucherType : element.VoucherTypeId,
                         Description: element.Description,
-                        CurrencyCode: element.CurrencyCode
+                        Currency: element.CurrencyId
                      });
                 });
+                console.log(this.voucherDetails);
             },
             error => {
                 if (error.StatusCode == 500) {
@@ -176,5 +230,6 @@ export class VouchersComponent implements OnInit {
             }
         )
     }
+
 
 }

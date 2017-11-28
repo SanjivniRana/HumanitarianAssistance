@@ -20,6 +20,7 @@ import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.c
 import { FinancialReportComponent } from './financial-report/financial-report.component';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
+import { TransactionComponent } from './vouchers/transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { BudgetBalanceComponent } from './budget-balance/budget-balance.componen
     AdvanceDeductionComponent,
     FinancialReportComponent,
     BudgetBalanceComponent,
-
+    TransactionComponent
   ],
   imports: [
     CommonModule,

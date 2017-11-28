@@ -275,7 +275,7 @@ let accountTypes: AccountType[] = [
 ];
 
 export class CurrencyData{
-    CurrencyId: string;
+    CurrencyId: any;
     CurrencyCode: string;
     CurrencyName: string;
     CurrencyRate: DoubleRange;

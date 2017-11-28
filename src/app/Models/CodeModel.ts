@@ -1,6 +1,6 @@
 export interface CurrencyCode
 {
-    CurrencyId : string;
+    CurrencyId : any;
     CurrencyCode : string;
     CurrencyName : string;
     CurrencyRate : DoubleRange;

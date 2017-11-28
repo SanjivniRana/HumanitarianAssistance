@@ -10,6 +10,7 @@ import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.c
 import { FinancialReportComponent } from './financial-report/financial-report.component';
 import { NgModule } from '@angular/core';
 import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
+import { TransactionComponent } from './vouchers/transaction/transaction.component';
 
 const Account_Router: Routes =
     [{
@@ -18,7 +19,8 @@ const Account_Router: Routes =
             // { path: '', redirectTo: 'vouchers', pathMatch: 'full' },
             { path: 'vouchers', component: VouchersComponent },
             { path: 'journal', component: JournalComponent },
-            { path :'document',component:DocumentComponent},
+            { path :'document',component: DocumentComponent},
+            { path :'vouchers/transaction',component: TransactionComponent},
             { 
                 path: 'ledger', 
                 component: LedgerComponent

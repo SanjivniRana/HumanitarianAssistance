@@ -33,4 +33,6 @@ export class GLOBAL {
     public static API_JournalCode_EditJournalDetail = 'Code/EditJournalDetail';
     public static API_JournalCode_DeleteJournalDetail = 'Code/DeleteJournalDetail';
     public static API_Accounting_GetAllVoucherDetails = 'Account/GetAllVoucherDetails';
+    public static API_Accounting_AddVouchers = 'Account/AddVoucherDetail';
+    public static API_Accounting_EditVouchers = 'Account/EditVoucherDetail';
 }

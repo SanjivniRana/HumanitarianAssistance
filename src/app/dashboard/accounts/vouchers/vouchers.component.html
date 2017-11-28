@@ -3,9 +3,15 @@
         <div class="main-heading clearfix">
             <h3 class="page-heading">Vouchers</h3>            
         </div>
-        <dx-data-grid id="gridContainer" [dataSource]="voucherDetails" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
-            (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted')" (onRowUpdating)="logEvent('RowUpdating')"
-            (onRowUpdated)="logEvent('RowUpdated')" (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved')">
+        <dx-data-grid id="gridContainer" [dataSource]="voucherDetails"
+        (onEditingStart)="logEvent('EditingStart',$event)"
+        (onInitNewRow)="logEvent('InitNewRow',$event)"
+        (onRowInserting)="logEvent('RowInserting',$event)"
+        (onRowInserted)="logEvent('RowInserted',$event)"
+        (onRowUpdating)="logEvent('RowUpdating',$event)"
+        (onRowUpdated)="logEvent('RowUpdated',$event)"
+        (onRowRemoving)="logEvent('RowRemoving',$event)"
+        (onRowRemoved)="logEvent('RowRemoved',$event)">
             <dxo-paging [pageSize]="10"></dxo-paging>
             <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
                 [visible]="true">
@@ -21,9 +27,9 @@
             <dxo-header-filter [visible]="true"></dxo-header-filter>
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
 
-            <dxi-column dataField="VoucherNo" [width]="130" alignment="right" caption="Voucher No">
-                <dxi-validation-rule type="required"></dxi-validation-rule>
-            </dxi-column>
+            <!-- <dxi-column dataField="VoucherNo" [width]="130" alignment="right" caption="Voucher No"> -->
+                <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
+            <!-- </dxi-column> -->
 
             <dxi-column dataField="VoucherDate" caption="Voucher Date" alignment="right" dataType="date">
                 <dxi-validation-rule type="required"></dxi-validation-rule>
@@ -56,16 +62,22 @@
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
-            <dxi-column dataField="CurrencyCode" caption="Currency" [width]="125">
+            <dxi-column dataField="Currency" caption="Currency" [width]="125">
                 <dxo-lookup [dataSource]="currencyModel" displayExpr="CurrencyCode" valueExpr="CurrencyId"></dxo-lookup>
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
-            <dxi-column dataField="documentId" caption="Document" [allowEditing]="false" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column>
+            <dxi-column dataField="documentId" caption="Document"  alignment="right" cellTemplate="CellTemplateDocument"></dxi-column>
+
+            <dxi-column dataField="transaction" caption="Transaction"  alignment="right" cellTemplate="CellTemplateTransaction"></dxi-column>
 
             <div *dxTemplate="let data of 'CellTemplateDocument'">                
                 <a [routerLink]="['../document']">Document</a>
-            </div>            
+            </div>
+            
+            <div *dxTemplate="let data of 'CellTemplateTransaction'">                
+                <a [routerLink]="['./transaction']">Transaction</a>
+            </div>   
         </dx-data-grid>
     </div>
 </div>

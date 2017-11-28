@@ -1692,6 +1692,65 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
+    AddVoucher(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });        
+        let  obj =
+        {            
+            CurrencyId : model.Currency,
+            ChequeNo : model.ChequeNo,
+            Description : model.Description,
+            JournalCode : model.Journal,
+            OfficeId : model.Office,
+            VoucherDate : model.VoucherDate,
+            ReferenceNo : model.VoucherRefNo,
+            VoucherTypeId : model.VoucherType        
+        }
+                
+        return this.http.post(url, JSON.stringify(obj)
+        ,options)            
+        .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    EditVoucher(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });        
+        let  obj =
+        {            
+            VoucherNo : model.VoucherNo,
+            CurrencyId : model.Currency,
+            ChequeNo : model.ChequeNo,
+            Description : model.Description,
+            JournalCode : model.Journal,
+            OfficeId : model.Office,
+            VoucherDate : model.VoucherDate,
+            ReferenceNo : model.VoucherRefNo,
+            VoucherTypeId : model.VoucherType        
+        }
+                
+        return this.http.post(url, JSON.stringify(obj)
+        ,options)            
+        .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
     private handleError(error: Response) {
         console.log(error.json());
         return Observable.throw(error.json().error || 'Server error');

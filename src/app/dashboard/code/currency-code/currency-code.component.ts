@@ -82,7 +82,7 @@ export class CurrencyCodeComponent implements OnInit {
     }
 
     onFormSubmit(model) {
-        // debugger;
+         debugger;
           if(model.CurrencyId == "")    
           {
               this.AddCurrencyCode(model);
@@ -96,7 +96,7 @@ export class CurrencyCodeComponent implements OnInit {
     AddCurrencyCode(model) {
         var obj: any = {};
         var addcurrencycode: CurrencyCode = {
-            CurrencyId: "00000000-0000-0000-0000-000000000000",
+            CurrencyId: 0,
             CurrencyCode: model.CurrencyCode,
             CurrencyName: model.CurrencyName,
             CurrencyRate: model.CurrencyRate
