@@ -389,7 +389,7 @@ export class CodeService {
 
     GetAllCodeList(url: string) 
     {
-        //debugger;
+        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -397,6 +397,7 @@ export class CodeService {
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
+                    debugger;
                     return codelist;
                 }
             }).catch(this.handleError); 

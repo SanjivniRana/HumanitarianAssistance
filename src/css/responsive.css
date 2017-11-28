@@ -59,6 +59,7 @@
 }
 
 @media only screen and (max-width: 991px) {
+
     body {
         overflow-x: hidden;
     }
@@ -134,6 +135,12 @@
     .bottomMargin-51 {
         margin-bottom: 0px;
     }
+    .login-form{min-width: 290px; padding: 0px 5px;}
+    .login-btn{ max-width: 100%;}
+    .f-pswrd,.custom-checkbox > lab,.custom-checkbox > label{ font-size:12px;}
+    .fg-left{ width:45%}
+    .profile-dropdown span {display: none;}
+    .search-panel .sp-dropdown select{ width: 150px;}
 }
 
 @media only screen and (max-width: 767px) {
@@ -153,6 +160,31 @@
     small.med {
         margin-bottom: 15px;
     }
+    header .search-panel{ display: none;}
+    header { background:#293242}
+    .navbar-brand {
+        background: #343f51;
+        width: 180px;
+        padding: 15px 10px; font-size: 12px;}
+        .navbar-toggle {            
+            background-color: #10d68c;         
+            border: 1px solid transparent;          
+            margin-left: 10px; cursor: pointer;    margin-right: 0px;
+        }
+        .navbar-toggle .icon-bar{ background: #fff}
+        .ui-widget-header input[type="text"]{ width: 270px;}
+        .profile-dropdown .dropdown-toggle img{ margin-right: 3px;}
+        .navbar-fixed-left{
+            position: fixed;
+            top: 67px;
+            width: 250px;
+            z-index: 1030;
+            height: 100%;
+            transition: 0.5s;
+            transform: translate(-260px);
+        }
+        .navbar-fixed-left.toggleMe{ transition: 0.5s;
+            transform: translate(0px);}
 }
 
 @media only screen and (max-width: 667px) {
@@ -165,9 +197,7 @@
     .header_logo {
         width: 115px;
     }
-    header {
-        padding: 7px 0 7px 115px;
-    }
+  
     .user-btn img,
     .user-btn span {
         display: none;

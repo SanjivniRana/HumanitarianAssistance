@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd , NavigationStart } from '@angular/router';
 import { commonService  } from '../../Services/common.service';
 import { SelectItem } from 'primeng/primeng';
@@ -20,7 +20,7 @@ export class AppSidebarComponent {
     Patients: Array<SelectItem>;  
     isMaster : boolean = false;
     isAdmin : boolean = false;
-    
+    @Input() toggle: boolean;
     constructor(
         private router: Router,
         private commonService : commonService,

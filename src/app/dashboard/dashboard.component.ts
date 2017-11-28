@@ -12,6 +12,7 @@ export class DashboardComponent {
 
   title = 'app';
   commonService = new CommonService();
+  public toggleSide: boolean = false;
    
   constructor(private permisstionService: NgxPermissionsService, private roleService: NgxRolesService) {
 
