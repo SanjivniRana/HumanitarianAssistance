@@ -351,13 +351,12 @@ tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transpar
    .dx-template-wrapper{text-align: center;}
    .dx-popup-content {   min-height: 58px;    height: auto !important;}
    .ui-dropdown.ui-widget.ui-state-default { border: 0px !important;}
-   .dx-field-value{width: 25% !important;
-    margin-right: 16px;}
+   .dx-field-value{width: 25% !important;    margin-right: 16px; min-width: 200px;}
     .left-sidebar .dropdown-menu li> a:hover {
       color: #3dc5ab;
       border-left-color: #3dc5ab; background: none;
   }
   .dx-field-item-content.dx-field-item-content-location-right{ text-align: left;}
-  .login-page{margin-top: -70px; height: 100%;  background-size: cover;  margin-left: 0px !important;    position: absolute;min- height: 100% !important;   width: 100%;    left: 0;    right: 0;}
+  .login-page{margin-top: -70px; min-height: 100%;  background-size: cover;  margin-left: 0px !important;    position: absolute;min- height: 100% !important;   width: 100%;    left: 0;    right: 0;}
   .login-btn:hover{ cursor: pointer;}
   span.ui-cell-data {display: inline-block;  width: 100%;    text-align: center;    font-size: 15px;    word-wrap: break-word;}
