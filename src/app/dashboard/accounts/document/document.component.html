@@ -12,7 +12,7 @@
 
             <!-- editing -->
             <dxo-editing mode="popup" [allowDeleting]="true" [form]="{ items: ['DocumentName'] }">
-                <dxo-popup title="Analytical Codes" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: 'window' }">
+                <dxo-popup title="Analytical Codes" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
                 </dxo-popup>
             </dxo-editing>
             <!-- editing -->
@@ -40,40 +40,41 @@
 
 <!-- Add Document Popup -->
 <div class="addDocumentModal">
+
     <dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Add Document" [dragEnabled]="false" [closeOnOutsideClick]="true"
         [(visible)]="popupVisible">
         <div *dxTemplate="let data of 'content'">
 
-            <form action="your-action" (submit)="onFormSubmit(addNewDocument)">
-                <dx-form id="form" [formData]="addNewDocument" [readOnly]="false" [showColonAfterLabel]="true"
-                    [showValidationSummary]="true" validationGroup="customerData">
+    <form action="your-action" (submit)="onFormSubmit(addNewDocument)">
+        <dx-form id="form" [formData]="addNewDocument" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+            validationGroup="customerData">
 
-                    <dxi-item dataField="DocumentDate" editorType="dxDateBox">
-                        <dxo-label text="Document Date">
-                        </dxo-label>
-                        <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
-                    </dxi-item>
+            <dxi-item dataField="DocumentDate" editorType="dxDateBox">
+                <dxo-label text="Document Date">
+                </dxo-label>
+            </dxi-item>
 
-                    <dxi-item dataField="DocumentName" caption="Document Name">
-                        <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
-                    </dxi-item>
+            <dxi-item dataField="DocumentName" caption="Document Name">
+            </dxi-item>
 
-                    <dxi-item caption="File Path">
-                        <dxo-label text="File Path">
-                        </dxo-label>
-                        <dx-file-uploader selectButtonText="Choose File" labelText="" accept="*" uploadMode="form">
-                        </dx-file-uploader>
-                    </dxi-item>
+            <dxi-item dataField="DocumentFilePath" caption="File Path">
+                <dxo-label text="File Path">
+                </dxo-label>
+                <dx-file-uploader selectButtonText="Select photo" labelText="" accept="*" uploadMode="useForm" (onValueChanged)="onImageSelect($event)"
+                    [multiple]="false">
+                </dx-file-uploader>
+            </dxi-item>
 
-                </dx-form>
-                <br />
-                <div class="btn-grp-wrap">
-                    <dx-button text="Add" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
-                    </dx-button>
-                    <dx-button text="Cancel" (onClick)="cancelDeleteVoucher()">
-                    </dx-button>
-                </div>
-            </form>
+        </dx-form>
+        <br />
+        <div class="btn-grp-wrap">
+            <dx-button text="Add" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
+            </dx-button>
+            <dx-button text="Cancel" (onClick)="cancelDeleteVoucher()">
+            </dx-button>
         </div>
+    </form>
+
+    </div>
     </dx-popup>
 </div>

@@ -4,6 +4,7 @@
             <h3 class="page-heading">Vouchers</h3>            
         </div>
         <dx-data-grid id="gridContainer" [dataSource]="voucherDetails"
+        [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true"        
         (onEditingStart)="logEvent('EditingStart',$event)"
         (onInitNewRow)="logEvent('InitNewRow',$event)"
         (onRowInserting)="logEvent('RowInserting',$event)"
@@ -11,11 +12,14 @@
         (onRowUpdating)="logEvent('RowUpdating',$event)"
         (onRowUpdated)="logEvent('RowUpdated',$event)"
         (onRowRemoving)="logEvent('RowRemoving',$event)"
-        (onRowRemoved)="logEvent('RowRemoved',$event)">
+        (onRowRemoved)="logEvent('RowRemoved',$event)"
+        (onCellClick)="documentFunc($event)">
             <dxo-paging [pageSize]="10"></dxo-paging>
             <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
-                [visible]="true">
+                 [visible]="true">
             </dxo-pager>
+
+            <dxo-scrolling mode="infinite"></dxo-scrolling>
 
             <dxo-editing mode="popup" [allowAdding]="true" [allowDeleting]="true" [allowUpdating]="true" [form]="{
                                     items: ['Currency','Office','VoucherDate','ChequeNo','VoucherRefNo','Journal','VoucherType','Description']
@@ -72,11 +76,11 @@
             <dxi-column dataField="transaction" caption="Transaction"  alignment="right" cellTemplate="CellTemplateTransaction"></dxi-column>
 
             <div *dxTemplate="let data of 'CellTemplateDocument'">                
-                <a [routerLink]="['../document']">Document</a>
+                <a [routerLink]="['../document']" (click)="documentFunc(data)">Document</a>
             </div>
             
             <div *dxTemplate="let data of 'CellTemplateTransaction'">                
-                <a [routerLink]="['./transaction']">Transaction</a>
+                <a [routerLink]="['./transaction']" (click)="documentFunc(data)">Transaction</a>
             </div>   
         </dx-data-grid>
     </div>

@@ -24,7 +24,6 @@ export class JournalCodeComponent implements OnInit {
   { 
       this.showFilterRow = true;
       this.journalcodedata = this.codeservice.getJournalCodeData();
-      console.log(this.journalcodedata);
   }
 
 

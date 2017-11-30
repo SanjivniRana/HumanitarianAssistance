@@ -9,6 +9,7 @@ import { RequestStatus } from '../Shared/enums';
 @Injectable()
 
 export class commonService {
+    voucherNumber : any;
     constructor(private settings: AppSettingsService, private http: Http) { }
 
     GetProviders() {
@@ -73,5 +74,10 @@ export class commonService {
      verifyCurrentDomain(){
          let parts = location.hostname.split('.');
          let SubDomain = parts.shift();
+     }
+
+     setSelectedVoucherNumber(voucherNo)
+     {
+        this.voucherNumber = voucherNo;
      }
 }

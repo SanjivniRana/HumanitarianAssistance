@@ -624,7 +624,6 @@ export class CodeService {
     }
 
     private handleError(error: Response) {
-        console.log(error.json());
         return Observable.throw(error.json().error || 'Server error');
 
     }

@@ -2,147 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-
-export class JournalClass {
-    "ID": number;
-    "Journal": string;
-    "VoucherNo": number;
-    "Description": string;
-    "Date": string;
-    "Credit": number;
-    "Debit": number;
-    "ParentID": number;
-    "AccountNo": string;
-}
-
-let journalData: JournalClass[] = [
-    {
-        "ID": 1,
-        "ParentID": 0,
-        "Journal": "Journal1",
-        "VoucherNo": null,
-        "Description": null,
-        "Date": null,
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    //Voucher Inside
-    {
-        "ID": 2,
-        "ParentID": 1,
-        "Journal": "1223",
-        "VoucherNo": 1,
-        "Description": null,
-        "Date": "2017/11/27",
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    //Transaction Inside
-    {
-        "ID": 3,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 30000,
-        "Debit": 0,
-        "AccountNo": "410101"
-    },
-    {
-        "ID": 4,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "510101"
-    },
-    {
-        "ID": 5,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 0,
-        "Debit": 10000,
-        "AccountNo": "410102"
-    },
-    {
-        "ID": 50,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 10000,
-        "Debit": 0,
-        "AccountNo": "410103"
-    },
-    //Transaction Inside Ends
-
-    //Second Journal
-    {
-        "ID": 6,
-        "ParentID": 0,
-        "Journal": "Journal2",
-        "VoucherNo": null,
-        "Description": null,
-        "Date": null,
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    {
-        "ID": 7,
-        "ParentID": 6,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    {
-        "ID": 8,
-        "ParentID": 7,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "410103"
-    },
-    {
-        "ID": 9,
-        "ParentID": 7,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "410103"
-    },
-    {
-        "ID": 10,
-        "ParentID": 7,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "410103"
-    }
-];
 // Vouchers Listing,add, edit Class
 export class VoucherClass {
     ID: number;
@@ -156,63 +15,6 @@ export class VoucherClass {
     ChequeNo?: string;
     VoucherType?: string;
 }
-
-let voucherClass: VoucherClass[] = [
-    {
-        "ID": 1,
-        "VoucherNo": "35703",
-        "VoucherDate": "2014/04/10",
-        "VoucherRefNo": "11800",
-        "Office": "Kabul",
-        "Journal": "California",
-        "Description": "Los Angeles",
-        "Currency": "02bb51f0-da81-416b-ad3a-a82b0145b279"
-    }, {
-        "ID": 2,
-        "VoucherNo": "35703",
-        "VoucherDate": "2014/04/10",
-        "VoucherRefNo": "11800",
-        "Office": "Kabul",
-        "Journal": "California",
-        "Description": "Los Angeles",
-        "Currency": "04ec2879-5af5-4446-a3a5-a83100d77eb6"
-    }, {
-        "ID": 4,
-        "VoucherNo": "35703",
-        "VoucherDate": "2014/04/10",
-        "VoucherRefNo": "11800",
-        "Office": "Kabul",
-        "Journal": "California",
-        "Description": "Los Angeles",
-        "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-    }, {
-        "ID": 5,
-        "VoucherNo": "35703",
-        "VoucherDate": "2014/04/10",
-        "VoucherRefNo": "11800",
-        "Office": "Kabul",
-        "Journal": "California",
-        "Description": "Los Angeles",
-        "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-    }, {
-        "ID": 7,
-        "VoucherNo": "35703",
-        "VoucherDate": "2014/04/10",
-        "VoucherRefNo": "11800",
-        "Office": "Kabul",
-        "Journal": "California",
-        "Description": "Los Angeles",
-        "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-    }, {
-        "ID": 9,
-        "VoucherNo": "35703",
-        "VoucherDate": "2014/04/10",
-        "VoucherRefNo": "11800",
-        "Office": "Kabul",
-        "Journal": "California",
-        "Description": "Los Angeles",
-        "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-    }];
 
 export class Document {
     ID: any;
@@ -235,13 +37,34 @@ let documentData: Document[] = [
     {
         "ID": 1,
         "DocumentName": "Document 1"
-    }, {
+    },
+    {
         "ID": 2,
         "DocumentName": "Document 2"
-    }, {
+    },
+    {
         "ID": 3,
         "DocumentName": "Document 3"
-    }];
+    }
+];
+
+export class VoucherTransaction {
+    ID: any;
+    VoucherNo: number;
+    LineItemDescription: string;
+    DebitAccount: number;
+    CreditAccount: number;
+    Amount: number;
+}
+
+let voucherTransaction: VoucherTransaction[] = [{
+    "ID": 1,
+    "VoucherNo": 3132,
+    "LineItemDescription": "Kabul Income Clinic",
+    "DebitAccount": 32,
+    "CreditAccount": 0,
+    "Amount": 10000
+}];
 
 export class Voucher {
     ID: number;
@@ -1493,87 +1316,82 @@ let budget: BudgetBalanceClass[] = [
 //End of Budget Balance
 
 //Journal
-export class Sale {
-    id: number;
-    journal: string;
-    country: string;
-    transaction: string;
-    voucher: string;
-    amount: number;
-    transactionType: string;
+export class JournalVoucherModel {    
+    JournalCode: number;
+    AccountCode: number;
+    Amount: number;
+    TransactionNo: number;
+    TransactionDate: string;
+    TransactionType: string;
+    VoucherNo: number;
 }
 
 //Journal
-let journal: Sale[] = [
-    {
-        "id": 1,
-        "journal": "Journal1",
-        "country": "USA",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 1",
-        "amount": 500,
-        "transactionType": "Debit"
-    }, {
-        "id": 2,
-        "journal": "Journal1",
-        "country": "USA",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 2",
-        "amount": 500,
-        "transactionType": "Credit"
-    }, {
-        "id": 3,
-        "journal": "Journal1",
-        "country": "USA",
-        "voucher": "Voucher 2",
-        "transaction": "transaction 3",
-        "amount": 1000,
-        "transactionType": "Debit"
-    }, {
-        "id": 4,
-        "journal": "Journal1",
-        "country": "CAN",
-        "voucher": "Voucher 2",
-        "transaction": "transaction 1",
-        "amount": 1000,
-        "transactionType": "Credit"
-    }, {
-        "id": 5,
-        "journal": "Journal2",
-        "country": "CAN",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 2",
-        "amount": 880,
-        "transactionType": "Debit"
-    }, {
-        "id": 6,
-        "journal": "Journal5",
-        "country": "BRA",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 1",
-        "amount": 5260,
-        "transactionType": "Credit"
-    }
-];
+// let journal: JournalVoucherModel[] = [
+//     {
+//         "id": 1,
+//         "journal": "Journal1",
+//         "country": "USA",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 1",
+//         "amount": 500,
+//         "transactionType": "Debit"
+//     }, {
+//         "id": 2,
+//         "journal": "Journal1",
+//         "country": "USA",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 2",
+//         "amount": 500,
+//         "transactionType": "Credit"
+//     }, {
+//         "id": 3,
+//         "journal": "Journal1",
+//         "country": "USA",
+//         "voucher": "Voucher 2",
+//         "transaction": "transaction 3",
+//         "amount": 1000,
+//         "transactionType": "Debit"
+//     }, {
+//         "id": 4,
+//         "journal": "Journal1",
+//         "country": "CAN",
+//         "voucher": "Voucher 2",
+//         "transaction": "transaction 1",
+//         "amount": 1000,
+//         "transactionType": "Credit"
+//     }, {
+//         "id": 5,
+//         "journal": "Journal2",
+//         "country": "CAN",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 2",
+//         "amount": 880,
+//         "transactionType": "Debit"
+//     }, {
+//         "id": 6,
+//         "journal": "Journal5",
+//         "country": "BRA",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 1",
+//         "amount": 5260,
+//         "transactionType": "Credit"
+//     }
+// ];
 
 
 
 @Injectable()
 export class AccountsService {
     constructor(private http: Http) {
-
-    }
-
-    getJournalData(): JournalClass[] {
-        return journalData;
-    }
-
-    getVouchersList(): VoucherClass[] {
-        return voucherClass;
     }
 
     getVouchersDocumentList(): Document[] {
         return documentData;
+    }
+
+    getVoucherTransactionModel(): VoucherTransaction []{
+        return voucherTransaction;
     }
 
     getCustomer(): Customer {
@@ -1712,22 +1530,22 @@ export class AccountsService {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
-        let options = new RequestOptions({ headers: Myheaders });        
-        let  obj =
-        {            
-            CurrencyId : model.Currency,
-            ChequeNo : model.ChequeNo,
-            Description : model.Description,
-            JournalCode : model.Journal,
-            OfficeId : model.Office,
-            VoucherDate : model.VoucherDate,
-            ReferenceNo : model.VoucherRefNo,
-            VoucherTypeId : model.VoucherType        
-        }
-                
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                CurrencyId: model.Currency,
+                ChequeNo: model.ChequeNo,
+                Description: model.Description,
+                JournalCode: model.Journal,
+                OfficeId: model.Office,
+                VoucherDate: model.VoucherDate,
+                ReferenceNo: model.VoucherRefNo,
+                VoucherTypeId: model.VoucherType
+            }
+
         return this.http.post(url, JSON.stringify(obj)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -1741,23 +1559,23 @@ export class AccountsService {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
-        let options = new RequestOptions({ headers: Myheaders });        
-        let  obj =
-        {            
-            VoucherNo : model.VoucherNo,
-            CurrencyId : model.Currency,
-            ChequeNo : model.ChequeNo,
-            Description : model.Description,
-            JournalCode : model.Journal,
-            OfficeId : model.Office,
-            VoucherDate : model.VoucherDate,
-            ReferenceNo : model.VoucherRefNo,
-            VoucherTypeId : model.VoucherType        
-        }
-                
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                VoucherNo: model.VoucherNo,
+                CurrencyId: model.Currency,
+                ChequeNo: model.ChequeNo,
+                Description: model.Description,
+                JournalCode: model.Journal,
+                OfficeId: model.Office,
+                VoucherDate: model.VoucherDate,
+                ReferenceNo: model.VoucherRefNo,
+                VoucherTypeId: model.VoucherType
+            }
+
         return this.http.post(url, JSON.stringify(obj)
-        ,options)            
-        .map((response: Response) => {
+            , options)
+            .map((response: Response) => {
                 let journal = response.json();
                 if (journal) {
                     return journal;
@@ -1766,14 +1584,24 @@ export class AccountsService {
 
     }
 
+    GetAllJournalDetails(url: string) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
     private handleError(error: Response) {
-        console.log(error.json());
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    //Journal
-    getJournals() {
-        return journal;
-    } 
+
 
 }

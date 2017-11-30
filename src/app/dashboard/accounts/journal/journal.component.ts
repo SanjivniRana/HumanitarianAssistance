@@ -11,9 +11,12 @@ import {
   DxPopupModule, DxTemplateModule,
   DxTemplateHost
 } from 'devextreme-angular';
-import { AccountsService, Employee, Customer } from '../accounts.service';
+import { AccountsService, Employee, Customer, JournalVoucherModel } from '../accounts.service';
 
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
+import { ToastrService } from 'ngx-toastr';
+import { AppSettingsService } from '../../../Services/App-settings.Service';
+import { GLOBAL } from '../../../shared/global';
 
 @Component({
   selector: 'app-journal',
@@ -21,67 +24,17 @@ import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
   styleUrls: ['./journal.component.css']
 })
 export class JournalComponent implements OnInit {
-  //   dataSource: any;
-  //   showFilterRow: boolean;
-  //   constructor(private accountservice:AccountsService) { 
-  //     this.showFilterRow = true;
-  //     this.dataSource = {
-  //         store: {
-  //             type: 'array',
-  //             key: 'ID',
-  //             // data: this.accountservice.getEmployees()
-  //             data: this.accountservice.getJournalData()
-  //         }
-  //     }
-  //   }
-  //   completedValue(rowData) { 
-  //     return rowData.Status == "Completed";
-  // }
-  //   ngOnInit() {
-  //   }
-
-  // }
 
   pivotGridDataSource: any;
   drillDownDataSource: any;
   salesPopupVisible = false;
   salesPopupTitle = "";
 
-  constructor(service: AccountsService) {
+  journalVoucher: JournalVoucherModel[];
 
-    this.pivotGridDataSource = new PivotGridDataSource({
-      fields: [
-        {
-          caption: "Journal",
-          width: 120,
-          dataField: "journal",
-          area: "row"
-        }, {
-          caption: "Voucher",
-          dataField: "voucher",
-          width: 150,
-          showTotals: true,
-          area: "row"
-        }, {
-          caption: "Transaction",
-          dataField: "transaction",
-          width: 150,
-          area: "row"
-        }, {
-          dataField: "transactionType",
-          dataType: "string",
-          area: "column"
-        }, {
-          caption: "Total",
-          dataField: "amount",
-          dataType: "number",
-          summaryType: "sum",
-          format: "currency",
-          area: "data"
-        }
-      ],
-      store: service.getJournals()
-    });
+  constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService) {
+
+
   }
 
 
@@ -99,10 +52,416 @@ export class JournalComponent implements OnInit {
 
 
   onCellPrepared(e) {
-    console.log(e);
+
   }
 
   ngOnInit() {
+    this.GetAllJournalDetails();
+  }
+
+  GetAllJournalDetails() {
+    this.accountservice.GetAllJournalDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllJournalDetails).subscribe(
+      data => {
+        debugger;
+        if (data.StatusCode == 200) {
+          this.journalVoucher = [];          
+          data.data.JournalVoucherViewList.forEach(element => {
+            this.journalVoucher.push(element);
+          });
+          this.pivotGridDataSource = new PivotGridDataSource({
+            fields: [
+              {
+                caption: "Journal",
+                width: 120,
+                dataField: "JournalCode",
+                showTotals:false,
+                area: "row"
+              }, {
+                caption: "Voucher",
+                dataField: "VoucherNo",
+                width: 150,
+                
+                area: "row"
+              },
+              {
+                caption: "Transaction No.",
+                dataField: "TransactionNo",
+                showTotals:false,
+                width: 150,
+                area: "row"
+              },
+              {
+                caption: "Account Code",
+                dataField: "AccountCode",
+                showTotals:false,
+                width: 150,
+                area: "row"
+              },
+              {
+                caption: "Transaction Date",
+                dataField: "TransactionDate",     
+                width: 150,
+                area: "row"
+              },
+              {          
+                dataField: "TransactionType",
+                dataType: "string",
+                area: "column"
+              }, {
+                caption: "Total",
+                dataField: "Amount",
+                dataType: "number",
+                summaryType: "sum",
+                format: "currency",
+                area: "data"
+              }
+            ],
+            store : this.journalVoucher
+          });
+          console.log(this.journalVoucher);
+        }
+      },
+      error => {
+        if (error.StatusCode == 500) {
+          this.toastr.error("Internal Server Error....");
+        }
+        else if (error.StatusCode == 401) {
+          this.toastr.error("Unauthorized Access Error....");
+        }
+        else if (error.StatusCode == 403) {
+          this.toastr.error("Forbidden Error....");
+        }
+        else {
+        }
+      }
+    )    
+      // let journalData: JournalVoucherModel[] = [
+      //   {
+      //     "JournalCode": 1,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 1,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 2,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 2,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 4,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 4,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 5,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 5,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 6,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 6,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 7,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 7,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 8,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 8,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 9,
+      //     "VoucherNo": 6,
+      //     "Amount": 200,
+      //     "TransactionNo": 2,
+      //     "TransactionDate": "2017-11-29T07:04:06.0542",
+      //     "TransactionType": "Debit",
+      //     "AccountCode": 2
+      //   },
+      //   {
+      //     "JournalCode": 9,
+      //     "VoucherNo": 6,
+      //     "Amount": 200,
+      //     "TransactionNo": 2,
+      //     "TransactionDate": "2017-11-29T07:04:06.0542",
+      //     "TransactionType": "Credit",
+      //     "AccountCode": 1
+      //   },
+      //   {
+      //     "JournalCode": 10,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 10,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 11,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 11,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 12,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 12,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 13,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 13,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 14,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 14,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 15,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 15,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 16,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 16,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 17,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 17,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 18,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 18,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 19,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   },
+      //   {
+      //     "JournalCode": 19,
+      //     "VoucherNo": null,
+      //     "Amount": null,
+      //     "TransactionNo": null,
+      //     "TransactionDate": null,
+      //     "TransactionType": null,
+      //     "AccountCode": null
+      //   }
+      // ];
+      // return journalData;
   }
 
 }

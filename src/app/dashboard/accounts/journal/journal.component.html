@@ -12,14 +12,19 @@
       <dx-pivot-grid id="sales"
       [allowSortingBySummary]="true"
       [allowSorting]="true"
-      [allowFiltering]="true"
-      [allowExpandAll]="true"
+      [allowFiltering]="true"      
       [showBorders]="true"
-      [showColumnGrandTotals]="false"
+      [showColumnTotals]="false"
+      [showColumnGrandTotals]="false"            
       [dataSource]="pivotGridDataSource"
       (onCellPrepared)="onCellPrepared($event)"
-      (onCellClick)="onPivotCellClick($event)">
+      (onCellClick)="onPivotCellClick($event)">      
       <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+      <dxo-field-panel
+      [showDataFields]="true" 
+      [visible]="true">
+    </dxo-field-panel>
+      <dxo-scrolling mode="virtual"></dxo-scrolling>      
     </dx-pivot-grid>
      
     <!-- <dx-popup

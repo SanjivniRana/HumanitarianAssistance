@@ -97,22 +97,22 @@ export class ChartOfAccountsComponent implements OnInit {
 
   // MainLevelAccount Data
   onAddMainLevelAccount(data: any) {
-    console.log(data);
+
   }
 
   // ControlLevelAccount Data
   onAddControlLevelAccount(data: any) {
-    console.log(data);
+
   }
 
   // SubLevelAccount Data
   onAddSubLevelAccount(data: any) {
-    console.log(data);
+
   }
 
   // InputLevelAccount Data
   onAddInputLevelAccount(data: any) {
-    console.log(data);
+
   }
 
   addChartOfAccount() {

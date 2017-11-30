@@ -24,7 +24,6 @@ export class OfficeCodeComponent implements OnInit {
   constructor(private router: Router, private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private codeservice: CodeService) 
   { 
       this.officedata = this.codeservice.getOfficeData();
-      console.log(this.officedata);
       this.showFilterRow = true;
   }
 

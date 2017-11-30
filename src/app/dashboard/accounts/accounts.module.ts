@@ -11,7 +11,7 @@ import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
-import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule, DxLookupModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule, DxLookupModule, DxTextBoxModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
 import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
@@ -21,6 +21,7 @@ import { FinancialReportComponent } from './financial-report/financial-report.co
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
 import { TransactionComponent } from './vouchers/transaction/transaction.component';
+import { commonService } from '../../Services/common.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TransactionComponent } from './vouchers/transaction/transaction.compone
     DxPopupModule,
     DxTabsModule,
     DxLookupModule,
+    DxTextBoxModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true,
       rolesIsolate: true
@@ -68,7 +70,7 @@ import { TransactionComponent } from './vouchers/transaction/transaction.compone
       tertiaryColour: '#a129'
     }),
   ],
-  providers: [AccountsService],
+  providers: [AccountsService, commonService],
 
 })
 export class AccountsModule { }

@@ -11,7 +11,7 @@
     <div>
       <dx-data-grid id="gridContainer" 
         [dataSource]="journalcodelist"
-        [columnHidingEnabled]="true"
+        [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" 
         (onEditingStart)="logEvent('EditingStart')"
         (onInitNewRow)="logEvent('InitNewRow')"
         (onRowInserting)="logEvent('RowInserting')"
