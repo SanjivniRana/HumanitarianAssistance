@@ -55,15 +55,17 @@ export class VoucherTransaction {
     DebitAccount: number;
     CreditAccount: number;
     Amount: number;
+    TransactionDate: string;
 }
 
 let voucherTransaction: VoucherTransaction[] = [{
     "ID": 1,
     "VoucherNo": 3132,
     "LineItemDescription": "Kabul Income Clinic",
-    "DebitAccount": 32,
-    "CreditAccount": 0,
-    "Amount": 10000
+    "DebitAccount": 410101,
+    "CreditAccount": 510101,
+    "Amount": 10000,
+    "TransactionDate": "2017/11/28"
 }];
 
 export class Voucher {
@@ -1571,6 +1573,72 @@ export class AccountsService {
                 VoucherDate: model.VoucherDate,
                 ReferenceNo: model.VoucherRefNo,
                 VoucherTypeId: model.VoucherType
+            }
+
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    GetVoucherDocumentDetails(url: string, VoucherNo) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url+"?VoucherNo="+VoucherNo, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    AddVoucherDocument(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj : any =
+            {
+                DocumentName : model.DocumentName,
+                FilePath : model.DocumentFilePath,
+                DocumentDate : model.DocumentDate,
+                VoucherNo : model.VoucherNo
+            }
+
+        return this.http.post(url, obj
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    AddVoucherTransaction(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                DebitAccount : model.DebitAccount,
+                CreditAccount : model.CreditAccount,
+                Amount : model.Amount,
+                Description : model.LineItemDescription,
+                TransactionDate : model.TransactionDate,
+                VoucherNo : model.VoucherNo
             }
 
         return this.http.post(url, JSON.stringify(obj)

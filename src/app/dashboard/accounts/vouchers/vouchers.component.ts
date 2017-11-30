@@ -23,12 +23,10 @@ export class VouchersComponent implements OnInit {
     voucherTypeArr: any[];
     voucherDetails: any[];    
     selectedVoucherNo: any;
-
-    //Use for event handling 
-    events: Array<string> = [];
-    url = "data:text/plain;charset=utf-8;base64,aHR0cHM6Ly9iaXRidWNrZXQub3J…uYW5ndWxhcmFwcA0KSHVtYXRhcmlhbkRldmVsb3BlclRlYW0=";
+    
     constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService, private commonservice: commonService) {
         
+        // Voucher Type Static array
         this.voucherTypeArr = [
             {
                 "VoucherTypeId": 1,
@@ -49,63 +47,72 @@ export class VouchersComponent implements OnInit {
     }
 
     //TODO: Event for ADD, UPDATE, DELETE
-    logEvent(eventName, obj) {   
-        debugger;     
-        //Edit Voucher Details Code
+    logEvent(eventName, obj) {                   
         if(eventName == "RowUpdating")
-        {
-            // Merge old data with new Data            
-            var value = Object.assign(obj.oldData,obj.newData);
-            this.accountservice.EditVoucher(this.setting.getBaseUrl() + GLOBAL.API_Accounting_EditVouchers, value).subscribe(
-                data => {
-                    if(data.StatusCode == 200)
-                    {
-                        this.toastr.success("Voucher Updated Successfully!!!");
-                        
-                    }
-                },
-                error => {
-                    if (error.StatusCode == 500) {
-                        this.toastr.error("Internal Server Error....");
-                    }
-                    else if (error.StatusCode == 401) {
-                        this.toastr.error("Unauthorized Access Error....");
-                    }
-                    else if (error.StatusCode == 403) {
-                        this.toastr.error("Forbidden Error....");
-                    }
-                    else {
-                    }
-                }
-            )            
+        {                       
+            var value = Object.assign(obj.oldData,obj.newData);     // Merge old data with new Data 
+            this.EditVoucher(value);            
         }
 
-        //Add New Voucher Details
         else if(eventName == "RowInserting")
         {
-            this.accountservice.AddVoucher(this.setting.getBaseUrl() + GLOBAL.API_Accounting_AddVouchers, obj.data).subscribe(
-                data => {
-                    if(data.StatusCode == 200)
-                    {
-                        this.toastr.success("Voucher Added Successfully!!!");
-                    }
-                },
-                error => {
-                    if (error.StatusCode == 500) {
-                        this.toastr.error("Internal Server Error....");
-                    }
-                    else if (error.StatusCode == 401) {
-                        this.toastr.error("Unauthorized Access Error....");
-                    }
-                    else if (error.StatusCode == 403) {
-                        this.toastr.error("Forbidden Error....");
-                    }
-                    else {
-                    }
-                }
-            )
+            this.AddVoucher(obj.data);
+        }
+
+        else{
+            //delete the row functionality
         }        
-        // this.events.unshift(eventName);
+    }
+
+    AddVoucher(obj)
+    {
+        this.accountservice.AddVoucher(this.setting.getBaseUrl() + GLOBAL.API_Accounting_AddVouchers, obj).subscribe(
+            data => {
+                if(data.StatusCode == 200)
+                {
+                    this.toastr.success("Voucher Added Successfully!!!");
+                }
+            },
+            error => {
+                if (error.StatusCode == 500) {
+                    this.toastr.error("Internal Server Error....");
+                }
+                else if (error.StatusCode == 401) {
+                    this.toastr.error("Unauthorized Access Error....");
+                }
+                else if (error.StatusCode == 403) {
+                    this.toastr.error("Forbidden Error....");
+                }
+                else {
+                }
+            }
+        )
+    }
+
+    EditVoucher(value)
+    {
+        this.accountservice.EditVoucher(this.setting.getBaseUrl() + GLOBAL.API_Accounting_EditVouchers, value).subscribe(
+            data => {
+                if(data.StatusCode == 200)
+                {
+                    this.toastr.success("Voucher Updated Successfully!!!");
+                    
+                }
+            },
+            error => {
+                if (error.StatusCode == 500) {
+                    this.toastr.error("Internal Server Error....");
+                }
+                else if (error.StatusCode == 401) {
+                    this.toastr.error("Unauthorized Access Error....");
+                }
+                else if (error.StatusCode == 403) {
+                    this.toastr.error("Forbidden Error....");
+                }
+                else {
+                }
+            }
+        ) 
     }
 
     //Get Currency Code in Add, Edit Dropdown 
@@ -204,6 +211,7 @@ export class VouchersComponent implements OnInit {
         )
     }
 
+    //Get voucher details list
     getAllVoucherDetails() {
         this.accountservice.GetAllVoucherDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllVoucherDetails).subscribe(
             data => {
@@ -223,10 +231,7 @@ export class VouchersComponent implements OnInit {
                             Currency: element.CurrencyId
                          });
                     });
-                }
-                // else{
-                //     this.toastr.error("Data Not Found....");
-                // }                
+                }            
             },
             error => {
                 if (error.StatusCode == 500) {
@@ -244,10 +249,11 @@ export class VouchersComponent implements OnInit {
         )
     }
 
-    documentFunc(data)
-    {                    
-        this.commonservice.setSelectedVoucherNumber(data.data.VoucherNo);
-        console.log(data.data.VoucherNo);
+    // Send row data for document & transactions
+    sendRowData(data)
+    {                        
+        // this.commonservice.setSelectedVoucherNumber(data.data.VoucherNo); 
+        localStorage.setItem("SelectedVoucherNumber",data.data.VoucherNo);      
     }
 
 }
