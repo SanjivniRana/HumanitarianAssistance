@@ -23,8 +23,7 @@ export class DocumentComponent implements OnInit {
     imageURL: string;
     imageData = { Image: "" }
 
-    constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService, private router: Router, private fb: FormBuilder, private commonservice: commonService, private _DomSanitizer: DomSanitizer) {
-        // this.dataSource = this.accountservice.getVouchersDocumentList();
+    constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService, private router: Router, private fb: FormBuilder, private commonservice: commonService, private _DomSanitizer: DomSanitizer) {        
         this.voucherNumber = this.commonservice.voucherNumber;
         this.addNewDocument = {
             DocumentName: "",
