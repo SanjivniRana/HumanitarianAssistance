@@ -12,32 +12,54 @@ import {
   DxTemplateHost,
   DxTreeListModule
 } from 'devextreme-angular';
-import { AccountsService, Employee, Customer, Currency } from '../accounts.service';
+import { AccountsService, Ledger } from '../accounts.service';
+import { AppSettingsService } from '../../../Services/App-settings.Service';
+import { ToastrService } from 'ngx-toastr';
+import { commonService } from '../../../Services/common.service';
+import { GLOBAL } from '../../../shared/global';
 
 @Component({
   selector: 'app-ledger',
   templateUrl: './ledger.component.html'
 })
-export class LedgerComponent implements OnInit {
-  dataSource: any;
-  showFilterRow: boolean;
-  
-  accountLevelDropdown: Currency[];
+export class LedgerComponent implements OnInit {  
+  dataSource: Ledger[];
 
-  constructor(private accountservice: AccountsService) {
-    this.showFilterRow = true;
-    this.dataSource = {
-      store: {
-        type: 'array',
-        key: 'ID',
-        data: this.accountservice.getLedger()
-      }
-    }
+  constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService, private commonservice: commonService) {
 
-    
-    this.accountLevelDropdown = this.accountservice.getCurrencies();
   }
   ngOnInit() {
+    this.GetLedgerDetails();
+  }
+
+  GetLedgerDetails()
+  {
+    this.accountservice.GetAllCurrencyCodeList(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllLedgerDetails).subscribe(
+      data => {
+        debugger;
+          this.dataSource = [];
+          if(data.StatusCode == 200)
+          {
+              data.data.LedgerList.forEach(element => {
+                  this.dataSource.push(element);
+                  // console.log(element);
+              }); 
+          }               
+      },
+      error => {
+          if (error.StatusCode == 500) {
+              this.toastr.error("Internal Server Error....");
+          }
+          else if (error.StatusCode == 401) {
+              this.toastr.error("Unauthorized Access Error....");
+          }
+          else if (error.StatusCode == 403) {
+              this.toastr.error("Forbidden Error....");
+          }
+          else {
+          }
+      }
+  )
   }
 
 }

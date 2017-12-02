@@ -35,6 +35,12 @@ export class GLOBAL {
     public static API_Accounting_GetAllVoucherDetails = 'Account/GetAllVoucherDetails';
     public static API_Accounting_AddVouchers = 'Account/AddVoucherDetail';
     public static API_Accounting_EditVouchers = 'Account/EditVoucherDetail';
+    public static API_Accounting_GetVoucherDocumentDetail = 'Account/GetAllVoucherDocumentDetailByVoucherNo';
+    public static API_Accounting_AddVouchersDocument = 'Account/AddVoucherDocumentDetail';
+    public static API_Accounting_GetAccountDetails = 'Code/GetAllChartAccountDetail';
+    public static API_Accounting_GetAllVoucherTransactionDetail = 'Account/GetAllVoucherTransactionDetailByVoucherNo';
+    public static API_Accounting_AddVouchersTransaction = 'Account/AddVoucherTransactionDetail';
+    public static API_Accounting_EditVouchersTransaction = 'Account/EditVoucherTransactionDetail';
     public static API_Accounting_GetAllJournalDetails = 'Account/GetJouranlVoucherDetails';
 
     //Alpit 30-11-2017
@@ -43,4 +49,5 @@ export class GLOBAL {
     public static API_ChartOfAccount_AddChartAccountDetail = 'Code/AddChartAccountDetail';
     public static API_ChartOfAccount_EditChartAccountDetail = 'Code/EditChartAccountDetail';
     
+    public static API_Accounting_GetAllLedgerDetails = 'Account/GetAllLedgerDetails';
 }

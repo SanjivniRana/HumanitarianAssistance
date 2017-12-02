@@ -3,7 +3,6 @@
 // import { Router, ActivatedRoute } from '@angular/router';
 // import { DxDataGridComponent, DxTextBoxModule, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { DomSanitizer } from '@angular/platform-browser';
 
 // @Component({
 //     selector: 'app-document',
@@ -14,11 +13,10 @@
 //     popupVisible = false;
 //     addNewDocument: any;
 
-//     constructor(private _DomSanitizer: DomSanitizer, private accountservice: AccountsService, private router: Router, private fb: FormBuilder) {
+//     constructor(private accountservice: AccountsService, private router: Router, private fb: FormBuilder) {
 //         this.dataSource = this.accountservice.getVouchersDocumentList();
-//         // this.addNewDocument = this.accountservice.getAddDoucmentModel();
 
-//         this.addNewDocument = {
+//         this.addNewDocument = {           
 //             DocumentName: "",
 //             DocumentFilePath: "",
 //             DocumentDate: ""
@@ -40,7 +38,7 @@
 //     backToVouchers() {
 //         this.router.navigate(['../vouchers']);
 //     }
-
+    
 //     form: FormGroup;
 //     loading: boolean = false;
 //     @ViewChild('fileInput') fileInput: ElementRef;
@@ -53,7 +51,6 @@
 //     }
 
 //     onFileChange(event) {
-//         debugger;
 //         let reader = new FileReader();
 //         if (event.target.files && event.target.files.length > 0) {
 //             let file = event.target.files[0];
@@ -86,43 +83,24 @@
 //     }
 
 //     imageURL: string;
-//     imageData = { Image: "" }
-//     //Image Select
-//     onImageSelect(event: any) {
-//         //for dx-file-uploager path read
-//         var file: File = event.value[0];
-//         var myReader: FileReader = new FileReader();
-//         myReader.readAsDataURL(file);
-//         myReader.onloadend = (e) => {
-//             this.imageURL = myReader.result;
-//             console.log('Path --> ', this.imageURL);
-//         }
+//     imageData = {Image: ""} 
+//       //Image Select
+//   onImageSelect(event: any) {
+//     //for dx-file-uploager path read
+//     var file: File = event.value[0];    
+//     var myReader: FileReader = new FileReader();
+//     myReader.readAsDataURL(file);
+//     myReader.onloadend = (e) => {
+//       this.imageURL = myReader.result;
+//       console.log('Path --> ', this.imageURL);
 //     }
+//   }
 
-//     // MainLevelAccount Data
-//     onFormSubmit(data: any) {
-//         this.addNewDocument.DocumentFilePath = this.imageURL;
-//         console.log(data);
+//   // MainLevelAccount Data
+//   onFormSubmit(data: any) {    
+//     this.addNewDocument.DocumentFilePath=this.imageURL;
+//     console.log(data);
 
-//     }
+//   }
 
-//     //Document Download
-//     //   onDownloadClicked(){
-
-//     //     //var blob = window.atob(this.imageURL);
-//     //     var fileReader: FileReader = new FileReader();
-//     //     var blob = fileReader.readAsArrayBuffer(this.imageURL);
-//     //     window.navigator.msSaveOrOpenBlob(blob, "my-image");
-//     //   }
-//     fileURL: any;
-//     // onDownloadClicked() {
-//     //     debugger;
-//     //     this.fileURL = this._DomSanitizer.bypassSecurityTrustUrl(this.imageURL);
-//     //     window.navigator.msSaveOrOpenBlob(this.fileURL , "my-image");
-//     // }
-
-//     //TODO: Unsafe to Safe Change
-//     sanitize(){
-//         return this._DomSanitizer.bypassSecurityTrustUrl(this.imageURL);
-//     }
 // }

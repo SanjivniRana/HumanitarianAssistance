@@ -33,13 +33,11 @@ export class JournalCodeComponent implements OnInit {
 
   //TODO: Event for ADD, UPDATE, DELETE
   logEvent(eventName) {
-     debugger;
     //this.events.unshift(eventName);
   }
 
   UpdateJournalCode(eventName)
   {
-    debugger;
   }
 
   ShowPopup()
@@ -56,7 +54,6 @@ export class JournalCodeComponent implements OnInit {
   //Get all Journal Details
   getJournalCodeList()
   { 
-    debugger;
       this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_JournalCode_GetAllJournalDetail).subscribe(
           data => {                      
               this.journalcodelist = [];   
@@ -115,7 +112,6 @@ AddJournalCode(model)
 
 EditJournalCode(model)
 {
-  debugger;
   var addjournalcode: JournalCodeData = {
     JournalCode : model.key.JournalCode,
     JournalName : model.key.JournalName
@@ -144,7 +140,6 @@ EditJournalCode(model)
 
 DeleteJournalCode(model)
 {
-  debugger;
   var deletejournalcode: DeleteJournalCode = {
       JournalCode : model.key.JournalCode
   };

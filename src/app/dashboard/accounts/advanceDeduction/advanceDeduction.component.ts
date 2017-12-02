@@ -11,7 +11,7 @@ import {
   DxPopupModule, DxTemplateModule,
   DxTemplateHost
 } from 'devextreme-angular';
-import { AccountsService, Employee, Customer } from '../accounts.service';
+import { AccountsService, Customer } from '../accounts.service';
 
 @Component({
   selector: 'app-advanceDeduction',

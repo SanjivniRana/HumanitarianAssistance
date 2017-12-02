@@ -5,24 +5,33 @@
             <!-- <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="addDocument()">
             </dx-button> -->
         </div>
-        <dx-data-grid id="gridContainer" [dataSource]="dataSource">
+        <dx-data-grid id="gridContainer" [dataSource]="dataSource"
+        [allowColumnReordering]="true" [allowColumnResizing]="true"
+        [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart',$event)" (onInitNewRow)="logEvent('InitNewRow',$event)"
+        (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)" (onRowUpdating)="logEvent('RowUpdating',$event)"
+        (onRowUpdated)="logEvent('RowUpdated',$event)" (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)">
             <dxo-paging [pageSize]="10"></dxo-paging>
             <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
             </dxo-pager>
-
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
             <!-- editing -->
-            <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
-                <dxo-popup title="Analytical Codes" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
+            <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true" [form]="{
+                items: ['TransactionDate','Description','DebitAccount','CreditAccount','Amount']
+            }">
+                <dxo-popup title="Add/Edit Transaction" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
                 </dxo-popup>
             </dxo-editing>
             <!-- editing -->
 
-            <dxi-column dataField="LineItemDescription" caption="Line Item Description" alignment="right"></dxi-column>
+            <dxi-column dataField="TransactionId" caption="TransactionId" [visible]="false"></dxi-column>
+            <dxi-column dataField="TransactionDate" dataType="date" caption="Transaction Date" alignment="right"></dxi-column>
+            <dxi-column dataField="Description" caption="Line Item Description" alignment="right"></dxi-column>
             <dxi-column dataField="DebitAccount" caption="Debit Account" alignment="right">
-                <dxo-lookup [dataSource]="DebitAccount" displayExpr="DebitAccount" valueExpr="DebitAccount"></dxo-lookup>
+                <dxo-lookup [dataSource]="AccountsArr" displayExpr="AccountName" valueExpr="AccountCode"></dxo-lookup>
             </dxi-column>
             <dxi-column dataField="CreditAccount" caption="Credit Account" alignment="right">
-                <dxo-lookup [dataSource]="CreditAccount" displayExpr="CreditAccount" valueExpr="CreditAccount"></dxo-lookup>
+                <dxo-lookup [dataSource]="AccountsArr" displayExpr="AccountName" valueExpr="AccountCode"></dxo-lookup>
             </dxi-column>
             <dxi-column dataField="Amount" caption="Amount" alignment="right"></dxi-column>
             

@@ -1,4 +1,3 @@
-//import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MultiSelectModule } from 'primeng/components/multiselect/multiselect';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
@@ -21,6 +20,7 @@ import { AccountsRoutingModule } from './accounts-routing.module';
 import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
 import { TransactionComponent } from './vouchers/transaction/transaction.component';
 import { commonService } from '../../Services/common.service';
+import { DocumentComponent } from './vouchers/document/document.component';
 
 @NgModule({
   declarations: [
