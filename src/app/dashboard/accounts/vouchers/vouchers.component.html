@@ -8,7 +8,7 @@
             (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)" (onRowUpdating)="logEvent('RowUpdating',$event)"
             (onRowUpdated)="logEvent('RowUpdated',$event)" (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)"
             (onCellClick)="documentFunc($event)">
-            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-paging [pageSize]="7"></dxo-paging>
             <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
                 [visible]="true">
             </dxo-pager>

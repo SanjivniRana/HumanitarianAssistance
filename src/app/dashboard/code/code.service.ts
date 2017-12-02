@@ -415,7 +415,6 @@ export class CodeService {
     }
 
     GetAllCodeList(url: string) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -423,14 +422,12 @@ export class CodeService {
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
-                    debugger;
                     return codelist;
                 }
             }).catch(this.handleError);
     }
 
     AddEditCurrencyCode(url: string, model: CurrencyCode) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -467,7 +464,6 @@ export class CodeService {
     }
 
     AddEditOfficeCode(url: string, model: OfficeCode) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -496,7 +492,6 @@ export class CodeService {
     }
 
     DeleteOfficeCode(url: string, model: OfficeCodefordelete) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -533,7 +528,6 @@ export class CodeService {
     }
 
     AddEditEmailSetting(url: string, model: EmailSetting) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -564,7 +558,6 @@ export class CodeService {
     }
 
     AddEditJournalCode(url: string, model: JournalCodeData) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -589,7 +582,6 @@ export class CodeService {
     }
 
     DeleteJournalCode(url: string, model: DeleteJournalCode) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");

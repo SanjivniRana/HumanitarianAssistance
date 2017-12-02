@@ -51,7 +51,6 @@
 //     }
 
 //     onFileChange(event) {
-//         debugger;
 //         let reader = new FileReader();
 //         if (event.target.files && event.target.files.length > 0) {
 //             let file = event.target.files[0];

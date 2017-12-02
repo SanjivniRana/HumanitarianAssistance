@@ -17,48 +17,102 @@ import { GLOBAL } from '../../../../shared/global';
 export class TransactionComponent implements OnInit {
     dataSource: VoucherTransaction[];
     voucherNumber: any;
-    DebitAccount: any[];
-    CreditAccount: any[];
+    AccountsArr : any[];
 
     constructor(private accountservice: AccountsService, private router: Router, private setting: AppSettingsService, private toastr: ToastrService, private fb: FormBuilder, private voucherComponent: VouchersComponent, private commonservice: commonService) {
-        this.dataSource = this.accountservice.getVoucherTransactionModel();
-        this.voucherNumber = this.commonservice.voucherNumber;
-        this.DebitAccount = [
-            {
-                "DebitAccount": 410101
-            },
-            {
-                "DebitAccount": 410102
-            },
-            {
-                "DebitAccount": 410103
-            }
-        ];
-
-        this.CreditAccount = [
-            {
-                "CreditAccount": 510101
-            },
-            {
-                "CreditAccount": 510102
-            },
-            {
-                "CreditAccount": 510103
-            }
-        ];
+        // this.dataSource = this.accountservice.getVoucherTransactionModel();
+        this.voucherNumber = this.commonservice.voucherNumber;      
     }
+
     ngOnInit() {
+        this.GetAccountDetails();  
+        this.GetAllVoucherTransactionDetail();      
+    }
+
+    GetAccountDetails() {
+        this.accountservice.GetAccountDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAccountDetails).subscribe(
+            data => {        
+                debugger;        
+                this.AccountsArr = [];
+                if(data.StatusCode == 200)                          
+                {
+                    data.data.ChartAccountList.forEach(element => {
+                        this.AccountsArr.push(
+                            {
+                                AccountCode: element.AccountCode,
+                                AccountName: element.AccountName
+                            }                            
+                        );                        
+                    });
+                }
+            },
+            error => {
+                if (error.StatusCode == 500) {
+                    this.toastr.error("Internal Server Error....");
+                }
+                else if (error.StatusCode == 401) {
+                    this.toastr.error("Unauthorized Access Error....");
+                }
+                else if (error.StatusCode == 403) {
+                    this.toastr.error("Forbidden Error....");
+                }
+                else {
+                }
+            }
+        )
+    }
+
+    GetAllVoucherTransactionDetail()
+    {
+        this.accountservice.GetAllVoucherTransactionDetail(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllVoucherTransactionDetail, localStorage.getItem("SelectedVoucherNumber")).subscribe(
+            data => {                
+                debugger;
+                if(data.StatusCode == 200)
+                {
+                    this.dataSource = [];
+                    data.data.VoucherTransactionList.forEach(element => {
+                        this.dataSource.push(element);
+                    });
+                    console.log(this.dataSource);
+                }
+            },
+            error => {
+                if (error.StatusCode == 500) {
+                    this.toastr.error("Internal Server Error....");
+                }
+                else if (error.StatusCode == 401) {
+                    this.toastr.error("Unauthorized Access Error....");
+                }
+                else if (error.StatusCode == 403) {
+                    this.toastr.error("Forbidden Error....");
+                }
+                else {
+                }
+            }
+        )
     }
 
     logEvent(eventName, obj) {
-        debugger;
-        obj.data.VoucherNo = this.voucherNumber;
+        
         if(eventName == "RowInserting")
         {
+            obj.data.VoucherNo = localStorage.getItem("SelectedVoucherNumber");
             this.AddVoucherTransaction(obj.data);
         }
+
+        else if(eventName == "RowUpdating")
+        {
+            debugger;
+            var value = Object.assign(obj.oldData,obj.newData);     // Merge old data with new Data
+            value.VoucherNo = localStorage.getItem("SelectedVoucherNumber"); 
+            this.EditVoucherTransaction(value);
+        }
+
+        else{
+            //delete the row functionality
+        }
         
-    }
+    }    
 
     AddVoucherTransaction(data)
     {
@@ -85,11 +139,35 @@ export class TransactionComponent implements OnInit {
         )
     }
 
+    EditVoucherTransaction(data)
+    {
+        this.accountservice.EditVoucherTransaction(this.setting.getBaseUrl() + GLOBAL.API_Accounting_EditVouchersTransaction, data).subscribe(
+            data => {
+                if(data.StatusCode == 200)
+                {
+                    this.toastr.success("Transaction Updated Successfully!!!");
+                }
+            },
+            error => {
+                if (error.StatusCode == 500) {
+                    this.toastr.error("Internal Server Error....");
+                }
+                else if (error.StatusCode == 401) {
+                    this.toastr.error("Unauthorized Access Error....");
+                }
+                else if (error.StatusCode == 403) {
+                    this.toastr.error("Forbidden Error....");
+                }
+                else {
+                }
+            }
+        )
+    }
+
     backToVouchers() {
         this.router.navigate(['../vouchers']);
     }
     onFormSubmit(value) {
-        debugger;
 
     }
 }

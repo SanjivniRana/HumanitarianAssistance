@@ -49,64 +49,31 @@ let documentData: Document[] = [
 ];
 
 export class VoucherTransaction {
-    ID: any;
     VoucherNo: number;
-    LineItemDescription: string;
+    Description: string;
     DebitAccount: number;
     CreditAccount: number;
     Amount: number;
     TransactionDate: string;
+    TransactionId?: string;    
 }
 
-let voucherTransaction: VoucherTransaction[] = [{
-    "ID": 1,
-    "VoucherNo": 3132,
-    "LineItemDescription": "Kabul Income Clinic",
-    "DebitAccount": 410101,
-    "CreditAccount": 510101,
-    "Amount": 10000,
-    "TransactionDate": "2017/11/28"
-}];
-
-export class Voucher {
-    ID: number;
-    Date: string;
-    ACNO: string;
-    TransactionDescription: string;
-    Debit: number;
-    Credit: number;
-    Currency: string;
-    BL: string;
-    Area: string;
-    Sector: string;
-    Program: string;
-    Project: string;
-    Job: string;
+//Ledger Class
+export class Ledger{
+    AccountCode: number;
+    ChartAccountName: string;
+    CurrencyName: string;
+    transactionlist: Transactionlist[];
 }
 
-export class Employee1 {
-    ID: number;
-    Journal: string;
-    Office: string;
-    Currency: string;
-    RecordType: string;
-    Accounts: string;
-    Status: string;
-    ReportDate: string;
-    Vouchers: Voucher[];
-}
-
-export class Employee {
-    ID: number;
-    FirstName: string;
-    LastName: string;
-    Prefix: string;
-    Position: string;
-    Picture: string;
-    BirthDate: string;
-    HireDate: string;
-    Notes: string;
-    Address: string;
+export class Transactionlist{
+    TransactionNo: number;
+    AccountName: string;
+    TransactionDate: string;
+    DebitAmount: number;
+    CreditAmount: number;
+    VoucherNo: number;
+    Description: string;
 }
 
 export class LedgerClass {
@@ -129,7 +96,6 @@ export class LedgerVoucher {
     Currency: string;
     Status: string;
 }
-
 
 export class Customer {
     Login: string;
@@ -218,248 +184,6 @@ let companies: Company[] = [
     }];
 //DATA FOR DOCUMENT PAGE ENDS
 
-let employees: Employee1[] = [
-    {
-        "ID": 1,
-        "Journal": "Journal",
-        "Office": "A0001",
-        "RecordType": "Single Currency",
-        "Currency": "AFG-AFG",
-        "Accounts": "CEO",
-        "Status": "All",
-        "ReportDate": "1964/03/16",
-        "Vouchers": [{
-
-            "ID": 4,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 0.00,
-            "Credit": 10000,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 10000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-
-            "ID": 4,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 0.00,
-            "Credit": 50000,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 50000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 5000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 3000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 0.00,
-            "Credit": 8000,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        }]
-    },
-    {
-        "ID": 2,
-        "Journal": "Journal2",
-        "Office": "A0001",
-        "RecordType": "Single Currency",
-        "Currency": "USD-USD",
-        "Accounts": "CEO",
-        "Status": "All",
-        "ReportDate": "1964/03/16",
-        "Vouchers": [{
-
-            "ID": 4,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 0.00,
-            "Credit": 10000,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 10000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-
-            "ID": 4,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 0.00,
-            "Credit": 50000,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 50000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 5000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 3000,
-            "Credit": 0.00,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        },
-        {
-            "ID": 5,
-            "Date": "11/02/2017",
-            "ACNO": "410201",
-            "TransactionDescription": "Kabul Clinic Income",
-            "Debit": 0.00,
-            "Credit": 8000,
-            "Currency": "AFG-AFG",
-            "BL": "",
-            "Area": "",
-            "Sector": "",
-            "Program": "",
-            "Project": "",
-            "Job": ""
-        }
-        ]
-    }
-];
-
 //Data for LEDGER STATEMENT
 
 let ledgers: LedgerClass[] = [
@@ -478,7 +202,7 @@ let ledgers: LedgerClass[] = [
             "Debit": 0.00,
             "Credit": 10000,
             "Currency": "AFG-AFG",
-            "Status": "Active"
+            "Status": "Active"  
         },
         {
             "ID": 4,
@@ -1328,61 +1052,6 @@ export class JournalVoucherModel {
     VoucherNo: number;
 }
 
-//Journal
-// let journal: JournalVoucherModel[] = [
-//     {
-//         "id": 1,
-//         "journal": "Journal1",
-//         "country": "USA",
-//         "voucher": "Voucher 1",
-//         "transaction": "transaction 1",
-//         "amount": 500,
-//         "transactionType": "Debit"
-//     }, {
-//         "id": 2,
-//         "journal": "Journal1",
-//         "country": "USA",
-//         "voucher": "Voucher 1",
-//         "transaction": "transaction 2",
-//         "amount": 500,
-//         "transactionType": "Credit"
-//     }, {
-//         "id": 3,
-//         "journal": "Journal1",
-//         "country": "USA",
-//         "voucher": "Voucher 2",
-//         "transaction": "transaction 3",
-//         "amount": 1000,
-//         "transactionType": "Debit"
-//     }, {
-//         "id": 4,
-//         "journal": "Journal1",
-//         "country": "CAN",
-//         "voucher": "Voucher 2",
-//         "transaction": "transaction 1",
-//         "amount": 1000,
-//         "transactionType": "Credit"
-//     }, {
-//         "id": 5,
-//         "journal": "Journal2",
-//         "country": "CAN",
-//         "voucher": "Voucher 1",
-//         "transaction": "transaction 2",
-//         "amount": 880,
-//         "transactionType": "Debit"
-//     }, {
-//         "id": 6,
-//         "journal": "Journal5",
-//         "country": "BRA",
-//         "voucher": "Voucher 1",
-//         "transaction": "transaction 1",
-//         "amount": 5260,
-//         "transactionType": "Credit"
-//     }
-// ];
-
-
-
 @Injectable()
 export class AccountsService {
     constructor(private http: Http) {
@@ -1392,38 +1061,12 @@ export class AccountsService {
         return documentData;
     }
 
-    getVoucherTransactionModel(): VoucherTransaction []{
-        return voucherTransaction;
-    }
-
-    getCustomer(): Customer {
-        return customer;
-    }
-
-    getAddDoucmentModel(): Document {
-        addDocument.ID = "";
-        addDocument.DocumentName = "";
-        addDocument.DocumentFilePath = "";
-        addDocument.DocumentDate = "";
-        addDocument.VoucherNo = "";
-        return addDocument;
-    }
-
-    getCountries() {
-        return countries;
-    }
-
-    getCountries1() {
-        return countries1;
-    }
+    // getVoucherTransactionModel(): VoucherTransaction []{
+    //     return voucherTransaction;
+    // }
 
     //Document Function 
-    getCompanies() {
-        return companies;
-    }
-    getEmployees() {
-        return employees;
-    }
+
     getLedger() {
         return ledgers;
     }
@@ -1472,6 +1115,8 @@ export class AccountsService {
         return budget;
     }
 
+    //Voucher Services
+
     GetAllCurrencyCodeList(url: string) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
@@ -1485,8 +1130,7 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
-    GetAllOfficeCodeList(url: string) {
-        //debugger;
+    GetAllOfficeCodeList(url: string) {        
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -1499,8 +1143,7 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
-    GetAllJournalCodeList(url: string) {
-        //debugger;
+    GetAllJournalCodeList(url: string) {        
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -1513,8 +1156,7 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
-    GetAllVoucherDetails(url: string) {
-        //debugger;
+    GetAllVoucherDetails(url: string) {    
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -1527,8 +1169,7 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
-    AddVoucher(url: string, model: any) {
-        debugger;
+    AddVoucher(url: string, model: any) {        
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -1556,8 +1197,7 @@ export class AccountsService {
 
     }
 
-    EditVoucher(url: string, model: any) {
-        debugger;
+    EditVoucher(url: string, model: any) {        
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -1586,8 +1226,8 @@ export class AccountsService {
 
     }
 
-    GetVoucherDocumentDetails(url: string, VoucherNo) {
-        //debugger;
+    //Voucher Document Services
+    GetVoucherDocumentDetails(url: string, VoucherNo) {        
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -1601,7 +1241,6 @@ export class AccountsService {
     }
 
     AddVoucherDocument(url: string, model: any) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -1625,8 +1264,35 @@ export class AccountsService {
 
     }
 
+    // Voucher Transaction Services
+
+    GetAccountDetails(url: string) {        
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    GetAllVoucherTransactionDetail(url: string, VoucherNo) {        
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url+"?VoucherNo="+ VoucherNo, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
     AddVoucherTransaction(url: string, model: any) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -1652,8 +1318,36 @@ export class AccountsService {
 
     }
 
+    EditVoucherTransaction(url: string, model: any) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                DebitAccount : model.DebitAccount,
+                CreditAccount : model.CreditAccount,
+                Amount : model.Amount,
+                Description : model.Description,
+                TransactionDate : model.TransactionDate,
+                VoucherNo : model.VoucherNo,
+                TransactionId : model.TransactionId
+            }
+
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    //Journal Services
+
     GetAllJournalDetails(url: string) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });

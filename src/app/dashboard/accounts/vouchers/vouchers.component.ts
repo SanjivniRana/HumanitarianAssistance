@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule } from 'devextreme-angular';
-import { VoucherClass, AccountsService, Employee, Customer, Currency } from '../accounts.service';
+import { VoucherClass, AccountsService, Currency } from '../accounts.service';
 import ArrayStore from 'devextreme/data/array_store';
 import { AppSettingsService } from '../../../Services/App-settings.Service';
 import { GLOBAL } from '../../../shared/global';
@@ -52,11 +52,13 @@ export class VouchersComponent implements OnInit {
         {                       
             var value = Object.assign(obj.oldData,obj.newData);     // Merge old data with new Data 
             this.EditVoucher(value);            
+            this.getAllVoucherDetails();
         }
 
         else if(eventName == "RowInserting")
         {
             this.AddVoucher(obj.data);
+            this.getAllVoucherDetails();
         }
 
         else{

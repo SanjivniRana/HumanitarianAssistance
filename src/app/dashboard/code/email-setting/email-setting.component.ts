@@ -80,7 +80,6 @@ export class EmailSettingComponent implements OnInit {
 
 getEmailTypeList()
 { 
-    debugger;
     this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_EmailType_GetAllEmailType).subscribe(
         data => {                      
             this.emailtypelistdata = [];        
@@ -191,7 +190,6 @@ EditEmailSetting(model)
 
 GetEmailSettingDetailsById(data)
 {
-    //debugger;
     this.emailsettingdata.EmailId = data.data.EmailId;
     this.emailsettingdata.EmailTypeId = data.data.EmailTypeId;
     this.emailsettingdata.SenderEmail = data.data.SenderEmail;

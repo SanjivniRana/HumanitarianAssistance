@@ -5,31 +5,31 @@
         </div>
     </div>
     <div class="col-sm-12">
-
-
-
-        <div class="options">
-                <dx-select-box style="max-width: 20rem;" id="select-all-mode" [dataSource]="['All', 'Afg','USD']" [(value)]="allMode" [disabled]="checkBoxesMode === 'none'"></dx-select-box>
-        </div>
-
-
-        <!-- <div class="dx-field" style="max-width: 30rem;">
-            <dx-lookup (onValueChanged)="accountLevelSelectedValue($event)" [items]="accountLevelDropdown" [value]="accountLevelDropdown[0]"
-                displayExpr="Name" [searchEnabled]="false" [showPopupTitle]="false" [closeOnOutsideClick]="true" title="Select Currency">
-            </dx-lookup>
-        </div> -->
-        <br>
-
-
         <!-- Ledger Filters -->
-        <dx-tree-list id="employees" [dataSource]="dataSource" keyExpr="ID" parentIdExpr="ParentID" [showRowLines]="true" [allowColumnResizing]="true"
-            [columnAutoWidth]="true" [expandedRowKeys]="[1]">
-            <dxi-column dataField="Currency"></dxi-column>
-            <dxi-column dataField="Account"></dxi-column>
-            <dxi-column dataField="RecordType"></dxi-column>
-            <dxi-column dataField="Status"></dxi-column>
-            <dxi-column dataField="VoucherDate"></dxi-column>
-            <!-- <dxi-column dataField="LedgerVouchers"></dxi-column> -->
-        </dx-tree-list>
+        <dx-data-grid id="gridContainer" [dataSource]="dataSource" [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="AccountCode">
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+            <dxi-column dataField="AccountCode" [width]="70" caption="Title"></dxi-column>
+            <dxi-column dataField="ChartAccountName"></dxi-column>
+            <dxi-column dataField="CurrencyName"></dxi-column>
+
+            <div *dxTemplate="let ledger of 'detail'">
+                <div class="master-detail-caption">{{ledger.data.AccountName}}</div>
+                <dx-data-grid [dataSource]="ledger.data.Transactionlist" [showBorders]="true" [columnAutoWidth]="true">
+                    <dxo-filter-row [visible]="true"></dxo-filter-row>
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                    <!-- <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel> -->
+                    <dxi-column dataField="TransactionNo"></dxi-column>
+                    <dxi-column dataField="AccountName"></dxi-column>
+                    <dxi-column dataField="TransactionDate" dataType="date"></dxi-column>
+                    <dxi-column dataField="DebitAmount"></dxi-column>
+                    <dxi-column dataField="CreditAmount"></dxi-column>
+                    <dxi-column dataField="VoucherNo"></dxi-column>
+                    <dxi-column dataField="Description"></dxi-column>
+                    <!-- <dxi-column  dataType="boolean" caption="Completed" [calculateCellValue]="completedValue"></dxi-column> -->
+                </dx-data-grid>
+            </div>
+        </dx-data-grid>
     </div>
 </div>

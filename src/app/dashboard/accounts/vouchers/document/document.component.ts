@@ -83,7 +83,6 @@ export class DocumentComponent implements OnInit {
     {
         this.accountservice.GetVoucherDocumentDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetVoucherDocumentDetail, localStorage.getItem("SelectedVoucherNumber")).subscribe(
             data => {
-                debugger;
                 if(data.StatusCode == 200)         
                 {
                     this.voucherDocumentDetails = [];
@@ -116,6 +115,7 @@ export class DocumentComponent implements OnInit {
                 if (data.StatusCode == 200) {
                     this.toastr.success("Document Added Successfully!!!");
                 }
+                this.cancelDeleteVoucher();
             },
             error => {
                 if (error.StatusCode == 500) {
