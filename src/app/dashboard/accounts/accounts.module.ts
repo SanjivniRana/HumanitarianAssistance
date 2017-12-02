@@ -27,6 +27,7 @@ import { DocumentComponent } from './vouchers/document/document.component';
     VouchersComponent,
     AccountsComponent,
     JournalComponent,
+    DocumentComponent,
     TrailBalanceComponent,
     LedgerComponent,
     AdvanceDeductionComponent,
