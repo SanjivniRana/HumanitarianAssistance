@@ -13,7 +13,6 @@ import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
 import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule, DxLookupModule, DxTextBoxModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
-import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
@@ -28,7 +27,6 @@ import { commonService } from '../../Services/common.service';
     VouchersComponent,
     AccountsComponent,
     JournalComponent,
-    DocumentComponent,
     TrailBalanceComponent,
     LedgerComponent,
     AdvanceDeductionComponent,

@@ -1,108 +1,128 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AccountsService, Company, Document } from '../accounts.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DxDataGridComponent, DxTextBoxModule, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+// import { AccountsService, Company, Document } from '../accounts.service';
+// import { Router, ActivatedRoute } from '@angular/router';
+// import { DxDataGridComponent, DxTextBoxModule, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { DomSanitizer } from '@angular/platform-browser';
 
-@Component({
-    selector: 'app-document',
-    templateUrl: './document.component.html'
-})
-export class DocumentComponent implements OnInit {
-    dataSource: Document[];
-    popupVisible = false;
-    addNewDocument: any;
+// @Component({
+//     selector: 'app-document',
+//     templateUrl: './document.component.html'
+// })
+// export class DocumentComponent implements OnInit {
+//     dataSource: Document[];
+//     popupVisible = false;
+//     addNewDocument: any;
 
-    constructor(private accountservice: AccountsService, private router: Router, private fb: FormBuilder) {
-        this.dataSource = this.accountservice.getVouchersDocumentList();
-        // this.addNewDocument = this.accountservice.getAddDoucmentModel();
+//     constructor(private _DomSanitizer: DomSanitizer, private accountservice: AccountsService, private router: Router, private fb: FormBuilder) {
+//         this.dataSource = this.accountservice.getVouchersDocumentList();
+//         // this.addNewDocument = this.accountservice.getAddDoucmentModel();
 
-        this.addNewDocument = {           
-            DocumentName: "",
-            DocumentFilePath: "",
-            DocumentDate: ""
-        };
+//         this.addNewDocument = {
+//             DocumentName: "",
+//             DocumentFilePath: "",
+//             DocumentDate: ""
+//         };
 
-        this.createForm();
-    }
-    ngOnInit() {
+//         this.createForm();
+//     }
+//     ngOnInit() {
 
-    }
+//     }
 
-    addDocument() {
-        this.popupVisible = true;
-    }
+//     addDocument() {
+//         this.popupVisible = true;
+//     }
 
-    cancelDeleteVoucher() {
-        this.popupVisible = false;
-    }
-    backToVouchers() {
-        this.router.navigate(['../vouchers']);
-    }
-    
-    form: FormGroup;
-    loading: boolean = false;
-    @ViewChild('fileInput') fileInput: ElementRef;
+//     cancelDeleteVoucher() {
+//         this.popupVisible = false;
+//     }
+//     backToVouchers() {
+//         this.router.navigate(['../vouchers']);
+//     }
 
-    createForm() {
-        this.form = this.fb.group({
-            name: ['', Validators.required],
-            avatar: null
-        });
-    }
+//     form: FormGroup;
+//     loading: boolean = false;
+//     @ViewChild('fileInput') fileInput: ElementRef;
 
-    onFileChange(event) {
-        debugger;
-        let reader = new FileReader();
-        if (event.target.files && event.target.files.length > 0) {
-            let file = event.target.files[0];
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                this.form.get('avatar').setValue({
-                    filename: file.name,
-                    filetype: file.type,
-                    value: reader.result.split(',')[1]
-                })
-            };
-        }
-    }
+//     createForm() {
+//         this.form = this.fb.group({
+//             name: ['', Validators.required],
+//             avatar: null
+//         });
+//     }
 
-    onSubmit() {
-        const formModel = this.form.value;
-        this.loading = true;
-        // In a real-world app you'd have a http request / service call here like
-        // this.http.post('apiUrl', formModel)
-        setTimeout(() => {
-            console.log(formModel);
-            alert('done!');
-            this.loading = false;
-        }, 1000);
-    }
+//     onFileChange(event) {
+//         debugger;
+//         let reader = new FileReader();
+//         if (event.target.files && event.target.files.length > 0) {
+//             let file = event.target.files[0];
+//             reader.readAsDataURL(file);
+//             reader.onload = () => {
+//                 this.form.get('avatar').setValue({
+//                     filename: file.name,
+//                     filetype: file.type,
+//                     value: reader.result.split(',')[1]
+//                 })
+//             };
+//         }
+//     }
 
-    clearFile() {
-        this.form.get('avatar').setValue(null);
-        this.fileInput.nativeElement.value = '';
-    }
+//     onSubmit() {
+//         const formModel = this.form.value;
+//         this.loading = true;
+//         // In a real-world app you'd have a http request / service call here like
+//         // this.http.post('apiUrl', formModel)
+//         setTimeout(() => {
+//             console.log(formModel);
+//             alert('done!');
+//             this.loading = false;
+//         }, 1000);
+//     }
 
-    imageURL: string;
-    imageData = {Image: ""} 
-      //Image Select
-  onImageSelect(event: any) {
-    //for dx-file-uploager path read
-    var file: File = event.value[0];    
-    var myReader: FileReader = new FileReader();
-    myReader.readAsDataURL(file);
-    myReader.onloadend = (e) => {
-      this.imageURL = myReader.result;
-      console.log('Path --> ', this.imageURL);
-    }
-  }
+//     clearFile() {
+//         this.form.get('avatar').setValue(null);
+//         this.fileInput.nativeElement.value = '';
+//     }
 
-  // MainLevelAccount Data
-  onFormSubmit(data: any) {    
-    this.addNewDocument.DocumentFilePath=this.imageURL;
-    console.log(data);
+//     imageURL: string;
+//     imageData = { Image: "" }
+//     //Image Select
+//     onImageSelect(event: any) {
+//         //for dx-file-uploager path read
+//         var file: File = event.value[0];
+//         var myReader: FileReader = new FileReader();
+//         myReader.readAsDataURL(file);
+//         myReader.onloadend = (e) => {
+//             this.imageURL = myReader.result;
+//             console.log('Path --> ', this.imageURL);
+//         }
+//     }
 
-  }
+//     // MainLevelAccount Data
+//     onFormSubmit(data: any) {
+//         this.addNewDocument.DocumentFilePath = this.imageURL;
+//         console.log(data);
 
-}
+//     }
+
+//     //Document Download
+//     //   onDownloadClicked(){
+
+//     //     //var blob = window.atob(this.imageURL);
+//     //     var fileReader: FileReader = new FileReader();
+//     //     var blob = fileReader.readAsArrayBuffer(this.imageURL);
+//     //     window.navigator.msSaveOrOpenBlob(blob, "my-image");
+//     //   }
+//     fileURL: any;
+//     // onDownloadClicked() {
+//     //     debugger;
+//     //     this.fileURL = this._DomSanitizer.bypassSecurityTrustUrl(this.imageURL);
+//     //     window.navigator.msSaveOrOpenBlob(this.fileURL , "my-image");
+//     // }
+
+//     //TODO: Unsafe to Safe Change
+//     sanitize(){
+//         return this._DomSanitizer.bypassSecurityTrustUrl(this.imageURL);
+//     }
+// }
