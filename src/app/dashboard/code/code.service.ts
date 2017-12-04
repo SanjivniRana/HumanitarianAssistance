@@ -18,7 +18,7 @@ export class ChartOfAccountLevelDetail {
 }
 
 export class AccountType {
-    ID: number;
+    AccountTypeId: number;
     AccountTypeName: string;
 }
 //chartOfAccounts------------------------------------>
@@ -56,8 +56,8 @@ export class ProjectTab {
 }
 
 //chartOfAccounts
-let accountTypeDropdowns: string[] = [
-    'Expandable', 'Non Expandable', 'Other'];
+// let accountTypeDropdowns: string[] = [
+//     'Expandable', 'Non Expandable', 'Other'];
 
 let accountLevelDropdowns: string[] = [
     'Main level', 'Control level', 'Sub level', 'Input level'];
@@ -258,23 +258,8 @@ let projectTabs: ProjectTab[] = [
     }
 ];
 
-//AccountType
-let accountTypes: AccountType[] = [
-    {
-        "ID": 1,
-        "AccountTypeName": "Other Account"
-    },
-    {
-        "ID": 2,
-        "AccountTypeName": "Expandable"
-    },
-    {
-        "ID": 3,
-        "AccountTypeName": "Non Expandable"
-    },
-];
 
-export class CurrencyData{
+export class CurrencyData {
     CurrencyId: any;
     CurrencyCode: string;
     CurrencyName: string;
@@ -376,7 +361,7 @@ export class CodeService {
     constructor(private http: Http) { }
 
     //Account level dropdown
-    getaccountLevels() {
+    getAccountLevels() {
         return accountLevels;
     }
     //Manage Chat of account
@@ -385,9 +370,23 @@ export class CodeService {
     getChartOfAccountLevels() {
         return chartOfAccountLevels;
     }
-    getAccountTypeDropdown() {
-        return accountTypeDropdowns;
+
+    //Dropdown for main level account
+    getAccountType(url: string) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
     }
+
+
     getAccountLevelDropdowns() {
         return accountLevelDropdowns;
     }
@@ -401,11 +400,6 @@ export class CodeService {
         return projectTabs;
     }
 
-    //Accoutn Type
-    getAccountTypes() {
-        return accountTypes;
-    }
-
     getCurrencyData(): CurrencyData {
         currencydata.CurrencyId = "";
         currencydata.CurrencyCode = "";
@@ -415,7 +409,6 @@ export class CodeService {
     }
 
     GetAllCodeList(url: string) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -423,14 +416,12 @@ export class CodeService {
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
-                    debugger;
                     return codelist;
                 }
             }).catch(this.handleError);
     }
 
     AddEditCurrencyCode(url: string, model: CurrencyCode) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -467,7 +458,6 @@ export class CodeService {
     }
 
     AddEditOfficeCode(url: string, model: OfficeCode) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -496,7 +486,6 @@ export class CodeService {
     }
 
     DeleteOfficeCode(url: string, model: OfficeCodefordelete) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -533,7 +522,6 @@ export class CodeService {
     }
 
     AddEditEmailSetting(url: string, model: EmailSetting) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -564,7 +552,6 @@ export class CodeService {
     }
 
     AddEditJournalCode(url: string, model: JournalCodeData) {
-        debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -589,7 +576,6 @@ export class CodeService {
     }
 
     DeleteJournalCode(url: string, model: DeleteJournalCode) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -612,10 +598,108 @@ export class CodeService {
 
     }
 
-    //MainLevelAccount
-    getMainLevelAccounts(): MainLevelAccount[] {
-        return mainLevelAccounts;
+    //MainLevelAccount ---------- Alpit 30-11-2017
+    getMainLevelAccounts(url: string) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
     }
+
+
+    //Add MainLevelAccount ---------- Alpit 30-11-2017
+    AddMainLevelAccount(url: string, model: any) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                AccountName: model.AccountName,
+                AccountLevelId: model.AccountLevelId,
+                AccountTypeId: model.AccountTypeId,
+                AccountTypeName: model.AccountTypeName,
+                ParentID: model.ParentID,
+                DepRate: model.DepRate,
+                DepMethod: model.DepMethod,
+                AccountNote: model.AccountNote,
+                MDCode: model.MDCode,
+                Show: model.Show
+            }
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let chartOfAccount = response.json();
+                if (chartOfAccount) {
+                    return chartOfAccount;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    //Edit ChartOfAccountDetail---------- Alpit 2-12-2017    
+    EditChartOfAccountDetail(url: string, model: any) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj = null;
+        if (model.ParentID == 0) {
+            obj =
+                {
+                    AccountName: model.AccountName,
+                    AccountCode: model.AccountCode,
+                    AccountTypeId: model.AccountTypeId,
+                    AccountLevelId: model.AccountLevelId + 1,
+                    ParentID: model.ParentID + 1,
+                    // AccountTypeId: model.AccountTypeId,
+                    // AccountTypeName: model.AccountTypeName,
+                    // ParentID: model.ParentID,
+                    // DepRate: model.DepRate,
+                    // DepMethod: model.DepMethod,
+                    // AccountNote: model.AccountNote,
+                    // MDCode: model.MDCode,
+                    // Show: model.Show
+                }
+        }
+        else {
+            obj =
+                {
+                    AccountName: model.AccountName,
+                    AccountCode: model.AccountCode,
+                    AccountTypeId: model.AccountTypeId,
+                    AccountLevelId: model.AccountLevelId,
+                    ParentID: model.ParentID,
+                    // AccountTypeId: model.AccountTypeId,
+                    // AccountTypeName: model.AccountTypeName,
+                    // ParentID: model.ParentID,
+                    // DepRate: model.DepRate,
+                    // DepMethod: model.DepMethod,
+                    // AccountNote: model.AccountNote,
+                    // MDCode: model.MDCode,
+                    // Show: model.Show
+                }
+        }
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let chartOfAccount = response.json();
+                if (chartOfAccount) {
+                    return chartOfAccount;
+                }
+            }).catch(this.handleError);
+
+    }
+
+
 
     getJournalCodeData(): JournalCodeData {
         journalcodedata.JournalCode = "";
@@ -629,335 +713,79 @@ export class CodeService {
     }
 }
 
-//MainLevelAccount
-export class MainLevelAccount {
-    ID: number;
-    ParentID: number;
+
+export class EditChartOfAccount {
     AccountCode: number;
     AccountName: string;
-    AccountType: string;
+    AccountTypeId: number;
 }
 
+
+//MainLevelAccount     ---important
+export class MainLevelAccount {
+    ParentID: number;
+    AccountLevelId: number;
+    AccountTypeName: "Main Level Accounts";
+    AccountNote: number;
+    AccountName: string;
+    AccountTypeId: number;
+    Show: boolean;
+    MDCode: string;
+    DepMethod: string;
+    DepRate: number;
+}
+
+//ControlLevelAccount     ---important
+export class ControlLevelAccount {
+    ParentID: number;
+    AccountLevelId: number;
+    AccountTypeName: "Control Level Accounts";
+    AccountNote: number;
+    MainLevel: number;
+    AccountName: string;
+    AccountTypeId: number;
+    Show: boolean;
+    MDCode: string;
+}
+
+//SubLevelAccount     ---important
+export class SubLevelAccount {
+    ParentID: number;
+    AccountLevelId: number;
+    AccountTypeName: "Sub Level Accounts";
+    AccountNote: number;
+    MainLevel: number;
+    AccountName: string;
+    AccountTypeId: number;
+    Show: boolean;
+    MDCode: string;
+}
+
+//InputLevelAccount     ---important
+export class InputLevelAccount {
+    ParentID: number;
+    AccountLevelId: number;
+    AccountTypeName: "Input Level Accounts";
+    AccountNote: number;
+    MainLevel: number;
+    AccountName: string;
+    AccountTypeId: number;
+    Show: boolean;
+    MDCode: string;
+}
+
+
 //MainLevelAccount
-var mainLevelAccounts: MainLevelAccount[] = [
-    {
-        "ID": 1,
-        "ParentID": 0,
-        "AccountCode": 1,
-        "AccountName": "Endownment",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 2,
-        "ParentID": 0,
-        "AccountCode": 2,
-        "AccountName": "Assets",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 3,
-        "ParentID": 0,
-        "AccountCode": 3,
-        "AccountName": "Liabilities",
-        "AccountType": "Expandables",
-    },
-    {
-        "ID": 4,
-        "ParentID": 0,
-        "AccountCode": 4,
-        "AccountName": "Fund/Reserves",
-        "AccountType": "Non Expandables",
-    },
-    {
-        "ID": 5,
-        "ParentID": 0,
-        "AccountCode": 5,
-        "AccountName": "Main Expenses",
-        "AccountType": "Other",
-    },
-
-    //1
-    {
-        "ID": 6,
-        "ParentID": 1,
-        "AccountCode": 11,
-        "AccountName": "Endownment A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 7,
-        "ParentID": 1,
-        "AccountCode": 21,
-        "AccountName": "Asset A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 8,
-        "ParentID": 1,
-        "AccountCode": 31,
-        "AccountName": "Liabilities A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 9,
-        "ParentID": 1,
-        "AccountCode": 41,
-        "AccountName": "FUNDS A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 10,
-        "ParentID": 1,
-        "AccountCode": 43,
-        "AccountName": "Reserves A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 11,
-        "ParentID": 1,
-        "AccountCode": 51,
-        "AccountName": "EXPENSES A",
-        "AccountType": "Other",
-    },
+export class chartOfAccountsData {
+    ID: number;
+    ParentID: number;
+    AccountName: string;
+    AccountCode: number;
+    AccountTypeId: number;
+    AccountLevelId: number;
+}
 
 
-
-    //2
-    {
-        "ID": 12,
-        "ParentID": 2,
-        "AccountCode": 21,
-        "AccountName": "Asset A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 13,
-        "ParentID": 2,
-        "AccountCode": 31,
-        "AccountName": "Liabilities A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 14,
-        "ParentID": 2,
-        "AccountCode": 41,
-        "AccountName": "FUNDS A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 15,
-        "ParentID": 2,
-        "AccountCode": 43,
-        "AccountName": "Reserves A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 16,
-        "ParentID": 2,
-        "AccountCode": 51,
-        "AccountName": "EXPENSES A",
-        "AccountType": "Other",
-    },
-
-    //3
-    {
-        "ID": 17,
-        "ParentID": 3,
-        "AccountCode": 21,
-        "AccountName": "Asset A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 18,
-        "ParentID": 3,
-        "AccountCode": 31,
-        "AccountName": "Liabilities A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 19,
-        "ParentID": 3,
-        "AccountCode": 41,
-        "AccountName": "FUNDS A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 20,
-        "ParentID": 3,
-        "AccountCode": 43,
-        "AccountName": "Reserves A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 21,
-        "ParentID": 3,
-        "AccountCode": 51,
-        "AccountName": "EXPENSES A",
-        "AccountType": "Other",
-    },
-
-
-    //4
-    {
-        "ID": 22,
-        "ParentID": 4,
-        "AccountCode": 21,
-        "AccountName": "Asset A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 23,
-        "ParentID": 4,
-        "AccountCode": 31,
-        "AccountName": "Liabilities A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 24,
-        "ParentID": 4,
-        "AccountCode": 41,
-        "AccountName": "FUNDS A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 25,
-        "ParentID": 4,
-        "AccountCode": 43,
-        "AccountName": "Reserves A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 26,
-        "ParentID": 4,
-        "AccountCode": 51,
-        "AccountName": "EXPENSES A",
-        "AccountType": "Other",
-    },
-
-
-
-    //5
-    {
-        "ID": 27,
-        "ParentID": 5,
-        "AccountCode": 21,
-        "AccountName": "Asset A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 28,
-        "ParentID": 5,
-        "AccountCode": 31,
-        "AccountName": "Liabilities A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 29,
-        "ParentID": 5,
-        "AccountCode": 41,
-        "AccountName": "FUNDS A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 30,
-        "ParentID": 5,
-        "AccountCode": 43,
-        "AccountName": "Reserves A",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 31,
-        "ParentID": 5,
-        "AccountCode": 51,
-        "AccountName": "EXPENSES A",
-        "AccountType": "Other",
-    },
-
-
-    // 1 - 1
-    {
-        "ID": 32,
-        "ParentID": 6,
-        "AccountCode": 4101,
-        "AccountName": "Income F",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 33,
-        "ParentID": 6,
-        "AccountCode": 4102,
-        "AccountName": "Income E",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 34,
-        "ParentID": 6,
-        "AccountCode": 4103,
-        "AccountName": "Income D",
-        "AccountType": "Non Expandable",
-    },
-    {
-        "ID": 35,
-        "ParentID": 6,
-        "AccountCode": 4104,
-        "AccountName": "Income V",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 36,
-        "ParentID": 6,
-        "AccountCode": 5101,
-        "AccountName": "Expense J",
-        "AccountType": "Expandable",
-    },
-    {
-        "ID": 37,
-        "ParentID": 6,
-        "AccountCode": 5102,
-        "AccountName": "Expense K",
-        "AccountType": "Expandable",
-    },
-    {
-        "ID": 38,
-        "ParentID": 6,
-        "AccountCode": 5103,
-        "AccountName": "Expense L",
-        "AccountType": "Expandable",
-    },
-    {
-        "ID": 39,
-        "ParentID": 6,
-        "AccountCode": 5104,
-        "AccountName": "Expense M",
-        "AccountType": "Expandable",
-    },
-    {
-        "ID": 40,
-        "ParentID": 6,
-        "AccountCode": 5104,
-        "AccountName": "Expense N",
-        "AccountType": "Expandable",
-    },
-
-
-    // 1 - 1 - 1
-    {
-        "ID": 41,
-        "ParentID": 32,
-        "AccountCode": 410101,
-        "AccountName": "Clinical Income",
-        "AccountType": "Other",
-    },
-    {
-        "ID": 42,
-        "ParentID": 32,
-        "AccountCode": 410102,
-        "AccountName": "Medical Income",
-        "AccountType": "Expandable",
-    },
-
-
-];
 
 
 

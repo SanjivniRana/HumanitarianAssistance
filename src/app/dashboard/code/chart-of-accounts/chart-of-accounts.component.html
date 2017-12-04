@@ -27,40 +27,29 @@
   <div class="col-sm-12">
 
     <!--  Chart of Accounts Filters -->
-    <dx-tree-list id="employees" [dataSource]="mainLevelAccount" keyExpr="ID" parentIdExpr="ParentID" [showRowLines]="true"
-      [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" [expandedRowKeys]="[1]">
-      <!-- <dxo-editing
-        mode="popup"
-        [allowAdding]="true"
-        [allowUpdating]="true"
-        [allowDeleting]="true">
-    </dxo-editing> -->
+    <dx-tree-list id="employees" [dataSource]="chartOfAccountsData" keyExpr="AccountCode" parentIdExpr="ParentID" [showRowLines]="true"
+      [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" [expandedRowKeys]="[1]" (onRowUpdating)="EditChartOfAccount($event)">
 
       <!-- editing -->
-      <dxo-editing mode="popup" [allowUpdating]="true" [form]="{
-                items: ['AccountName','AccountCode','AccountType']}">
-
+      <dxo-editing mode="popup" [allowUpdating]="true" [form]="{items: ['AccountName','AccountCode','AccountTypeId']}">
         <dxo-popup title="Chart of account" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
         </dxo-popup>
-
       </dxo-editing>
       <!-- editing -->
 
-      <dxo-selection mode="multiple">
-      </dxo-selection>
-      <!-- <dxo-column-chooser [enabled]="true" ></dxo-column-chooser> -->
-      <dxo-filter-row [visible]="showFilterRow">
-      </dxo-filter-row>
+      <dxo-selection mode="multiple"> </dxo-selection>
+      <dxo-filter-row [visible]="showFilterRow"> </dxo-filter-row>
       <dxo-header-filter [visible]="true"></dxo-header-filter>
-      <dxo-filter-row [visible]="true">
-      </dxo-filter-row>
+      <dxo-filter-row [visible]="true"> </dxo-filter-row>
       <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
-      <!-- <dxi-column dataField="ID" caption="ID"></dxi-column>   -->
-      <dxi-column dataField="AccountName">
 
+      <dxi-column dataField="AccountName"> </dxi-column>
+      <dxi-column dataField="AccountCode" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="AccountTypeId">
+        <dxo-lookup [dataSource]="accountTypeDropdown" valueExpr="AccountTypeId" displayExpr="AccountTypeName">
+        </dxo-lookup>
       </dxi-column>
-      <dxi-column dataField="AccountCode"></dxi-column>
-      <dxi-column dataField="AccountType"></dxi-column>
+      <dxi-column dataField="AccountLevelId" [allowEditing]="false" [visible]="false"></dxi-column>
 
     </dx-tree-list>
   </div>
@@ -72,65 +61,49 @@
   [(visible)]="popupVisibleEditChartOfAccount">
   <div *dxTemplate="let data of 'content'">
 
-    <div class="dx-fieldset col-md-4 col-md-offset-4" style="margin-top: -10px;">
+    <div class="dx-fieldset" >
       <div class="dx-fieldset-header">Add Account Level</div>
-      <div class="dx-field" style="max-width: 30rem;">
+      <div class="dx-field margin-auto" style="max-width: 30rem;">
         <dx-lookup (onValueChanged)="accountLevelSelectedValue($event)" [items]="accountLevelDropdown" [value]="accountLevelDropdown[0]"
           displayExpr="AccountLevelName" [searchEnabled]="false" [showPopupTitle]="false" [closeOnOutsideClick]="true" title="Select Account">
         </dx-lookup>
       </div>
     </div>
-
-
     <br>
 
     <!-- Main Level Account -->
     <div *ngIf="formToggle==1">
-      <form action="your-action" (submit)="onAddMainLevelAccount(fMainLevelAccount)"  >
+      <form action="your-action" (submit)="onAddMainLevelAccount(fMainLevelAccount)">
         <dx-form id="form" [(formData)]="fMainLevelAccount" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
           validationGroup="customerData">
 
-          <dxi-item dataField="AccountCode" [editorOptions]="{ disabled: true }">
+          <!-- <dxi-item dataField="AccountCode" [editorOptions]="{ disabled: true }">
             <dxi-validation-rule type="required">
             </dxi-validation-rule>
-          </dxi-item>
+          </dxi-item> -->
 
           <dxi-item dataField="AccountName">
             <dxi-validation-rule type="required">
             </dxi-validation-rule>
           </dxi-item>
 
-          <!-- <dxi-item dataField="AccountType">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="AccountTypeId" caption="Account Type" editorType="dxSelectBox" [editorOptions]="{ dataSource: accountTypeDropdown, value: AccountTypeId, displayExpr: 'AccountTypeName', valueExpr: 'AccountTypeId'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
+          </dxi-item>
+
+          <dxi-item dataField="Show" editorType="dxCheckBox">
+          </dxi-item>
+
+          <dxi-item dataField="MDCode" caption="Donor MIS Code">
+            <!-- <dxi-validation-rule type="required">
+            </dxi-validation-rule> -->
+          </dxi-item>
+
+          <!-- <dxi-item dataField="DepMethod">
           </dxi-item> -->
 
-          <dxi-item dataField="AccountType" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '' }">
-            <!-- <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule> -->
-          </dxi-item>
-
-          <dxi-item dataField="ShowInList" editorType="dxCheckBox">
-          </dxi-item>
-
-          <dxi-item dataField="DonorMISCode" label="Donor MIS Code">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
-
-          <dxi-item dataField="DepMethod">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
-
-          <dxi-item dataField="Rate(%)" >
-            <dxi-validation-rule type="required" >
-            </dxi-validation-rule>
-          </dxi-item>
-
-          <!-- <dxi-item dataField="Voucher Type" editorType="dxSelectBox" [editorOptions]="{ dataSource: countries }">
-        <dxi-validation-rule type="required">
-        </dxi-validation-rule>
-      </dxi-item> -->
+          <!-- <dxi-item dataField="DepRate" caption="Rate(%)">
+          </dxi-item> -->
 
         </dx-form>
         <br />
@@ -148,19 +121,12 @@
     <!-- Control Level Account -->
     <div *ngIf="formToggle==2">
 
-      <form action="your-action" (submit)="onAddControlLevelAccount(fControlLevelAccount)">
+      <form action="your-action" (submit)="onAddOtherAccounts(fControlLevelAccount)">
         <dx-form id="form" [(formData)]="fControlLevelAccount" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
           validationGroup="customerData">
 
-
-          <dxi-item dataField="SelectMain" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '' }">
-            <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
-          </dxi-item>
-
-
-          <dxi-item dataField="AccountCode" [editorOptions]="{ disabled: true }">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="MainLevel" editorType="dxSelectBox" [editorOptions]="{ dataSource: mainLevelArr, displayExpr: 'AccountName', valueExpr: 'AccountCode'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
           </dxi-item>
 
           <dxi-item dataField="AccountName">
@@ -168,31 +134,23 @@
             </dxi-validation-rule>
           </dxi-item>
 
-          <dxi-item dataField="AccountType" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '' }">
-            <!-- <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule> -->
+          <dxi-item dataField="AccountTypeId" title="Account Type" editorType="dxSelectBox" [editorOptions]="{ dataSource: accountTypeDropdown, value: AccountTypeId, displayExpr: 'AccountTypeName', valueExpr: 'AccountTypeId'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
           </dxi-item>
 
-          <dxi-item dataField="ShowInList" editorType="dxCheckBox">
+          <dxi-item dataField="Show" editorType="dxCheckBox">
           </dxi-item>
 
-          <dxi-item dataField="DonorMISCode" label="Donor MIS Code">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="MDCode" caption="DonorMISCode" label="Donor MIS Code">
+            <!-- <dxi-validation-rule type="required">
+            </dxi-validation-rule> -->
           </dxi-item>
 
-          <dxi-item dataField="DepMethod">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
+          <!-- <dxi-item dataField="DepMethod">
+          </dxi-item> -->
 
-          <dxi-item dataField="Rate(%)">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
-
-          <!-- <dx-check-box [value]="true" [width]="80" text="Check"></dx-check-box> -->
-
-
+          <!-- <dxi-item dataField="DepRate" caption="Rate(%)">
+          </dxi-item> -->
 
         </dx-form>
         <br>
@@ -209,27 +167,12 @@
 
     <!-- Sub Level Account -->
     <div *ngIf="formToggle==3">
-      <form action="your-action" (submit)="onAddSubLevelAccount(fSubLevelAccount)">
+      <form action="your-action" (submit)="onAddOtherAccounts(fSubLevelAccount)">
         <dx-form id="form" [(formData)]="fSubLevelAccount" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
           validationGroup="customerData">
 
-          <!-- <dxi-item dataField="MainAccountLevel" [editorOptions]="{ disabled: true }">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item> -->
-
-          <dxi-item dataField="MainAccountLevel" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '', disabled: true  }">
-            <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
-          </dxi-item>
-
-          <dxi-item dataField="SelectMain" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '' }">
-            <!-- <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule> -->
-          </dxi-item>
-
-
-          <dxi-item dataField="AccountCode" [editorOptions]="{ disabled: true }">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="MainLevel" editorType="dxSelectBox" [editorOptions]="{ dataSource: controlLevelArr, displayExpr: 'AccountName', valueExpr: 'AccountCode'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
           </dxi-item>
 
           <dxi-item dataField="AccountName">
@@ -237,27 +180,23 @@
             </dxi-validation-rule>
           </dxi-item>
 
-          <dxi-item dataField="AccountType" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '' }">
-            <!-- <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule> -->
+          <dxi-item dataField="AccountTypeId" editorType="dxSelectBox" [editorOptions]="{ dataSource: accountTypeDropdown, value: AccountTypeId, displayExpr: 'AccountTypeName', valueExpr: 'AccountTypeId'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
           </dxi-item>
 
-          <dxi-item dataField="ShowInList" editorType="dxCheckBox">
+          <dxi-item dataField="Show" editorType="dxCheckBox">
           </dxi-item>
 
-          <dxi-item dataField="DonorMISCode" label="Donor MIS Code">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="MDCode" caption="DonorMISCode" label="Donor MIS Code">
+            <!-- <dxi-validation-rule type="required">
+            </dxi-validation-rule> -->
           </dxi-item>
 
-          <dxi-item dataField="DepMethod">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
+          <!-- <dxi-item dataField="DepMethod">
+          </dxi-item> -->
 
-          <dxi-item dataField="Rate(%)">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
+          <!-- <dxi-item dataField="DepRate" caption="Rate(%)">
+          </dxi-item> -->
 
         </dx-form>
 
@@ -276,31 +215,13 @@
     <!-- Input Level Account -->
     <div *ngIf="formToggle==4">
 
-      <form action="your-action" (submit)="onAddInputLevelAccount(fInputLevelAccount)">
+      <form action="your-action" (submit)="onAddOtherAccounts(fInputLevelAccount)">
         <dx-form id="form" [(formData)]="fInputLevelAccount" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
           validationGroup="customerData">
 
-          <!-- <dxi-item dataField="MainAccountLevel" [editorOptions]="{ disabled: true }">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item> -->
 
-          <dxi-item dataField="MainAccountLevel" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '', disabled: true  }">
-            <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
-          </dxi-item>
-
-          <dxi-item dataField="ControlAccountLevel" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '', disabled: true  }">
-            <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
-          </dxi-item>
-
-          <dxi-item dataField="SelectMain" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '', disabled: true  }">
-            <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule>
-          </dxi-item>
-
-
-          <dxi-item dataField="AccountCode" [editorOptions]="{ disabled: true }">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="MainLevel" editorType="dxSelectBox" [editorOptions]="{ dataSource: subLevelArr, displayExpr: 'AccountName', valueExpr: 'AccountCode'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
           </dxi-item>
 
           <dxi-item dataField="AccountName">
@@ -308,27 +229,23 @@
             </dxi-validation-rule>
           </dxi-item>
 
-          <dxi-item dataField="AccountType" editorType="dxSelectBox" [editorOptions]="{ items: positions, value: '' }">
-            <!-- <dxi-validation-rule type="required" message="Position is required"></dxi-validation-rule> -->
+          <dxi-item dataField="AccountTypeId" editorType="dxSelectBox" [editorOptions]="{ dataSource: accountTypeDropdown, value: AccountTypeId, displayExpr: 'AccountTypeName', valueExpr: 'AccountTypeId'  }">
+            <dxi-validation-rule type="required"> </dxi-validation-rule>
           </dxi-item>
 
-          <dxi-item dataField="ShowInList" editorType="dxCheckBox">
+          <dxi-item dataField="Show" editorType="dxCheckBox">
           </dxi-item>
 
-          <dxi-item dataField="DonorMISCode" label="Donor MIS Code">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
+          <dxi-item dataField="MDCode" caption="DonorMISCode" label="Donor MIS Code">
+            <!-- <dxi-validation-rule type="required">
+            </dxi-validation-rule> -->
           </dxi-item>
 
-          <dxi-item dataField="DepMethod">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
+          <!-- <dxi-item dataField="DepMethod">
+          </dxi-item> -->
 
-          <dxi-item dataField="Rate(%)">
-            <dxi-validation-rule type="required">
-            </dxi-validation-rule>
-          </dxi-item>
+          <!-- <dxi-item dataField=" DepRate" caption="Rate(%)">
+          </dxi-item> -->
 
         </dx-form>
 
@@ -346,4 +263,4 @@
 
   </div>
 </dx-popup>
-<!-- Edit chart of account -->
+<!-- Add chart of account -->

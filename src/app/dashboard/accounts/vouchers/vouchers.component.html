@@ -7,8 +7,8 @@
             [columnAutoWidth]="true" (onEditingStart)="logEvent('EditingStart',$event)" (onInitNewRow)="logEvent('InitNewRow',$event)"
             (onRowInserting)="logEvent('RowInserting',$event)" (onRowInserted)="logEvent('RowInserted',$event)" (onRowUpdating)="logEvent('RowUpdating',$event)"
             (onRowUpdated)="logEvent('RowUpdated',$event)" (onRowRemoving)="logEvent('RowRemoving',$event)" (onRowRemoved)="logEvent('RowRemoved',$event)"
-            (onCellClick)="documentFunc($event)">
-            <dxo-paging [pageSize]="10"></dxo-paging>
+            (onRowClick)="onRowClickEvent($event.data)">
+            <dxo-paging [pageSize]="7"></dxo-paging>
             <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
                 [visible]="true">
             </dxo-pager>
@@ -29,7 +29,7 @@
             <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
             <!-- </dxi-column> -->
 
-            <dxi-column dataField="VoucherDate" caption="Voucher Date" alignment="right" dataType="date">
+            <dxi-column dataField="VoucherDate" caption="Voucher Date" alignment="right" dataType="date" [visible]="false">
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
@@ -65,7 +65,7 @@
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
-            <dxi-column dataField="documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column>
+            <!-- <dxi-column dataField="documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column> -->
 
             <dxi-column dataField="transaction" caption="Transaction" alignment="right" cellTemplate="CellTemplateTransaction"></dxi-column>
 
@@ -79,3 +79,19 @@
         </dx-data-grid>
     </div>
 </div>
+
+
+<!-- Add chart of account -->
+<dx-popup class="popup" [width]="800" [height]="800" [showTitle]="true" title="Vouchers Documents" [dragEnabled]="false"
+    [closeOnOutsideClick]="false" [(visible)]="popupVisibleDocument" >
+    <div *dxTemplate="let data of 'content'">
+
+        <!-- document  -->
+        <app-document [VoucherNo]="voucherNoMain" [voucherDocumentDetails]="voucherDocumentDetails" ></app-document>
+
+        <div class="btn-grp-wrap">
+            <dx-button text="Cancel" (onClick)="onCancelVoucherDocument()">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>

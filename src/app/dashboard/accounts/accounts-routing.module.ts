@@ -3,7 +3,6 @@ import { AccountsComponent } from './accounts.component';
 import { UserComponent } from '../admin/user.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { JournalComponent } from './journal/journal.component';
-
 import { LedgerComponent } from './ledger/ledger.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
