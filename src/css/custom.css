@@ -357,17 +357,20 @@ tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transpar
       border-left-color: #3dc5ab; background: none;
   }
   .dx-field-item-content.dx-field-item-content-location-right{ text-align: left;}
-  .login-page{margin-top: -70px; min-height: 100%;  background-size: cover;  margin-left: 0px !important;    position: absolute;min- height: 100% !important;   width: 100%;    left: 0;    right: 0;}
+  .login-page{margin-top: -70px; min-height: 100%;  background-size: cover;  margin-left: 0px !important;    position: absolute;min-height: 100% !important;   width: 100%;    left: 0;    right: 0;}
   .login-btn:hover{ cursor: pointer;}
   span.ui-cell-data {display: inline-block;  width: 100%;    text-align: center;    font-size: 15px;    word-wrap: break-word;}
   .dx-popup-wrapper > .dx-overlay-content .dx-scrollview-content{ max-height: 300px; overflow-y: auto;}
-  .dx-popup-content{ padding: 10px;}
-  .dx-toolbar-after { left: 0px; right:0px; padding-left: 0px; display: block;}
+
+
+  
+  /* .dx-popup-content{ padding: 10px;}
+  .dx-toolbar-after { left: 0px; right:0px; padding-left: 0px; display: block;} */
   /********** POPUP UPDATES (4/12/2017) **********/
-  .dx-popup-content .dx-fieldset.col-md-4{ margin-top: 0px !important;}
+  /* .dx-popup-content .dx-fieldset.col-md-4{ margin-top: 0px !important;}
   .margin-auto{ margin-left: auto !important; margin-right: auto !important; }
   .dx-popup-bottom .dx-button{ min-width:80px !important;}
   .dx-popup-bottom.dx-toolbar .dx-toolbar-after{ padding-left: 0px;}
   .dx-overlay-content .dx-popup-bottom.dx-toolbar{ padding-top: 0px;}
-  .dx-toolbar-items-container .dx-toolbar-center{ margin-right: 0px !important;}
+  .dx-toolbar-items-container .dx-toolbar-center{ margin-right: 0px !important;} */
   /********** POPUP UPDATES (4/12/2017) **********/

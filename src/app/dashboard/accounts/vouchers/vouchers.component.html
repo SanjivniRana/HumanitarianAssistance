@@ -29,7 +29,7 @@
             <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
             <!-- </dxi-column> -->
 
-            <dxi-column dataField="VoucherDate" caption="Voucher Date" alignment="right" dataType="date">
+            <dxi-column dataField="VoucherDate" caption="Voucher Date" alignment="right" dataType="date" [visible]="false">
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
@@ -65,7 +65,7 @@
                 <dxi-validation-rule type="required"></dxi-validation-rule>
             </dxi-column>
 
-            <dxi-column dataField="documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column>
+            <!-- <dxi-column dataField="documentId" caption="Document" alignment="right" cellTemplate="CellTemplateDocument"></dxi-column> -->
 
             <dxi-column dataField="transaction" caption="Transaction" alignment="right" cellTemplate="CellTemplateTransaction"></dxi-column>
 
