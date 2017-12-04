@@ -236,6 +236,7 @@ export class ChartOfAccountsComponent implements OnInit {
       data => {
         if (data.StatusCode == 200) {
           this.toastr.success("Main Account Added Successfully !");
+          this.getChartOfAccountsList();
           this.cancelChartOfAccount();
         }
       },
@@ -265,6 +266,7 @@ export class ChartOfAccountsComponent implements OnInit {
       data => {
         if (data.StatusCode == 200) {
           this.toastr.success("Account Added Successfully !");
+          this.getChartOfAccountsList();
           this.cancelChartOfAccount();
         }
       },

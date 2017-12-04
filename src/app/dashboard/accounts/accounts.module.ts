@@ -10,7 +10,7 @@ import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
-import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule, DxLookupModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule, DxLookupModule, DxTextBoxModule, DxTileViewModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { LedgerComponent } from './ledger/ledger.component';
@@ -52,6 +52,7 @@ import { DocumentComponent } from './vouchers/document/document.component';
     DxTabsModule,
     DxLookupModule,
     DxTextBoxModule,
+    DxTileViewModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true,
       rolesIsolate: true
