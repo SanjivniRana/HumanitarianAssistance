@@ -49,4 +49,13 @@ export class ProjectsComponent implements OnInit {
      
   }
 
+  // redirect() {
+  //   this.router.navigate(['/add-new']);
+  // }
+
+  // private loadComponent = false;
+  // loadMyChildComponent(){
+  //    this.loadComponent = true;
+  // }
+
 }

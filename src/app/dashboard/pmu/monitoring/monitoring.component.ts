@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PMUProjectList, PMUProjectDetail, PmuService } from '../pmu.service';
 
 @Component({
   selector: 'app-monitoring',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonitoringComponent implements OnInit {
 
-  constructor() { }
+  pmuProjects: any[];
+  popupVisible = false;
+  projectPmu: PMUProjectList[];
+  pmuProjectDetails: PMUProjectDetail;
+  data: any;
+  constructor(private pmuservice: PmuService) {
+    this.pmuProjects = this.pmuservice.getPMUProjects();
+    this.projectPmu = this.pmuservice.getPMUProjectsList();
+  }
 
   ngOnInit() {
+  }
+
+  addProjectPMU() {
+    this.popupVisible = true;
+  }
+
+  cancelDeleteVoucher() {
+    this.popupVisible = false;
+  }
+
+  selectedFinancialYear(value) {
+     
   }
 
 }

@@ -36,7 +36,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     // LoginComponent,
     // ChangePasswordComponent
   ],
