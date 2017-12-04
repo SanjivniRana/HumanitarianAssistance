@@ -34,7 +34,7 @@ export class LedgerComponent implements OnInit {
 
   GetLedgerDetails()
   {
-    this.accountservice.GetAllCurrencyCodeList(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllLedgerDetails).subscribe(
+    this.accountservice.GetAllLedgerDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllLedgerDetails).subscribe(
       data => {
         debugger;
           this.dataSource = [];
@@ -42,7 +42,6 @@ export class LedgerComponent implements OnInit {
           {
               data.data.LedgerList.forEach(element => {
                   this.dataSource.push(element);
-                  // console.log(element);
               }); 
           }               
       },

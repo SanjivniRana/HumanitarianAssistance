@@ -7,8 +7,6 @@
     <div class="col-sm-12">
      
       <!-- Journal Filters -->   
-     
-      
       <dx-pivot-grid id="sales"
       [allowSortingBySummary]="true"
       [allowSorting]="true"
@@ -16,9 +14,7 @@
       [showBorders]="true"
       [showColumnTotals]="false"
       [showColumnGrandTotals]="false"            
-      [dataSource]="pivotGridDataSource"
-      (onCellPrepared)="onCellPrepared($event)"
-      (onCellClick)="onPivotCellClick($event)">      
+      [dataSource]="pivotGridDataSource">      
       <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
       <dxo-field-panel
       [showDataFields]="true" 
@@ -27,20 +23,5 @@
       <dxo-scrolling mode="virtual"></dxo-scrolling>      
     </dx-pivot-grid>
      
-    <!-- <dx-popup
-      [(visible)]="salesPopupVisible"
-      [title]="salesPopupTitle"
-      [width]="600"
-      [height]="400">
-      <div *dxTemplate="let data of 'content'">
-        <dx-data-grid [width]="560" [height]="300"
-          [dataSource]="drillDownDataSource"
-          [columns]="['journal', 'voucher','transaction','amount','transactionType']">
-        </dx-data-grid>
-      </div>
-    </dx-popup> -->
-
-
-
 </div>
 </div>

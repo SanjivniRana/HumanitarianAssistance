@@ -1,18 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  DxDataGridComponent,
-  DxDataGridModule,
-  DxSelectBoxModule,
-  DxCheckBoxModule,
-  DxNumberBoxModule,
-  DxButtonModule,
-  DxFormModule,
-  DxFormComponent,
-  DxPopupModule, DxTemplateModule,
-  DxTemplateHost
-} from 'devextreme-angular';
+import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxTemplateHost} from 'devextreme-angular';
 import { AccountsService, Customer, JournalVoucherModel } from '../accounts.service';
-
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 import { ToastrService } from 'ngx-toastr';
 import { AppSettingsService } from '../../../Services/App-settings.Service';
@@ -27,31 +15,9 @@ export class JournalComponent implements OnInit {
 
   pivotGridDataSource: any;
   drillDownDataSource: any;
-  salesPopupVisible = false;
-  salesPopupTitle = "";
-
   journalVoucher: JournalVoucherModel[];
 
   constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService) {
-
-
-  }
-
-
-  onPivotCellClick(e) {
-    if (e.area == "data") {
-      var rowPathLength = e.cell.rowPath.length,
-        rowPathName = e.cell.rowPath[rowPathLength - 1];
-
-      this.drillDownDataSource = this.pivotGridDataSource.createDrillDownDataSource(e.cell);      
-      this.salesPopupTitle = ("Total") + " Drill Down Data";
-      this.salesPopupVisible = true;
-    }
-  }
-
-
-  onCellPrepared(e) {
-
   }
 
   ngOnInit() {
@@ -62,7 +28,7 @@ export class JournalComponent implements OnInit {
     this.accountservice.GetAllJournalDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllJournalDetails).subscribe(
       data => {
         if (data.StatusCode == 200) {
-          this.journalVoucher = [];          
+          this.journalVoucher = [];
           data.data.JournalVoucherViewList.forEach(element => {
             this.journalVoucher.push(element);
           });
@@ -72,36 +38,36 @@ export class JournalComponent implements OnInit {
                 caption: "Journal",
                 width: 120,
                 dataField: "JournalCode",
-                showTotals:false,
+                showTotals: false,
                 area: "row"
               }, {
                 caption: "Voucher",
                 dataField: "VoucherNo",
                 width: 150,
-                
+
                 area: "row"
               },
               {
                 caption: "Transaction No.",
                 dataField: "TransactionNo",
-                showTotals:false,
+                showTotals: false,
                 width: 150,
                 area: "row"
               },
               {
                 caption: "Account Code",
                 dataField: "AccountCode",
-                showTotals:false,
+                showTotals: false,
                 width: 150,
                 area: "row"
               },
               {
                 caption: "Transaction Date",
-                dataField: "TransactionDate",     
+                dataField: "TransactionDate",
                 width: 150,
                 area: "row"
               },
-              {          
+              {
                 dataField: "TransactionType",
                 dataType: "string",
                 area: "column"
@@ -114,8 +80,8 @@ export class JournalComponent implements OnInit {
                 area: "data"
               }
             ],
-            store : this.journalVoucher
-          });          
+            store: this.journalVoucher
+          });
         }
       },
       error => {
@@ -131,7 +97,7 @@ export class JournalComponent implements OnInit {
         else {
         }
       }
-    )    
+    )
   }
 
 }

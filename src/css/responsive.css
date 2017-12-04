@@ -142,8 +142,13 @@
     .profile-dropdown span {display: none;}
     .search-panel .sp-dropdown select{ width: 150px;}
 }
-
+@media (min-width:670px) and (max-width:767px){
+    .dx-popup-wrapper > .dx-overlay-content {transform: none !important; -webkit-transform: none !important; -ms-transform: none !important;  left: 0 !important;   right: 0 !important;width: auto !important;   }
+}
 @media only screen and (max-width: 767px) {
+    .dx-overlay-wrapper.dx-header-filter-menu.dx-popup-wrapper{ width: 100%;}
+    .dx-toolbar .dx-toolbar-after{ right: 0px !important;}
+    .dx-overlay-wrapper.dx-dropdowneditor-overlay.dx-dropdownlist-popup-wrapper{width:100%;}
     .slider_section {
         margin: 20px 0;
     }
@@ -188,6 +193,7 @@
 }
 
 @media only screen and (max-width: 667px) {
+    .dx-popup-wrapper > .dx-overlay-content .dx-scrollview-content { max-height: 260px;}
     .loggedin_body {
         padding-top: 57px;
     }
@@ -215,7 +221,9 @@
 
     .dx-popup-normal { max-width: 96% !important;}
 }
-
+@media only screen and (max-width:480px){
+    .dx-popup-wrapper > .dx-overlay-content .dx-scrollview-content { max-height: 220px;}
+}
 @media only screen and (max-width: 414px) {
     .login_wrapper {
         width: 100%;

@@ -1032,10 +1032,22 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
+    //Ledger Services
+
+    GetAllLedgerDetails(url: string) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
     private handleError(error: Response) {
         return Observable.throw(error.json().error || 'Server error');
     }
-
-
-
 }

@@ -223,7 +223,7 @@ export class ChartOfAccountsComponent implements OnInit {
 
   //TODO: Main Account Level Filter in Dropdown
   accountLevelSelectedValue(event: any) {
-    this.toastr.success(event.value.AccountLevelName);
+    // this.toastr.success(event.value.AccountLevelName);
     this.formToggle = event.value.ID;
   }
 
