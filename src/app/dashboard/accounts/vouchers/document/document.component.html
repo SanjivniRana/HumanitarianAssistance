@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="main-heading clearfix">
-            <h3 class="page-heading">Documents</h3>
+            <h3 class="page-heading">Voucher No {{VoucherNo}} </h3>
+
             <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="addDocument()">
             </dx-button>
         </div>
@@ -30,12 +31,6 @@
                 <a href="javascript:void()">Delete</a>
             </div> -->
         </dx-data-grid>
-
-        <div class="btn-grp-wrap">
-            <dx-button text="Back" [routerLink]="['../../vouchers']">
-            </dx-button>
-
-        </div>
     </div>
 </div>
 
@@ -46,36 +41,36 @@
         [(visible)]="popupVisible">
         <div *dxTemplate="let data of 'content'">
 
-    <form action="your-action" (submit)="onFormSubmit(addNewDocument)">
-        <dx-form id="form" [formData]="addNewDocument" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
-            validationGroup="customerData">
+            <form action="your-action" (submit)="onFormSubmit(addNewDocument)">
+                <dx-form id="form" [formData]="addNewDocument" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                    validationGroup="customerData">
 
-            <dxi-item dataField="DocumentDate" editorType="dxDateBox">
-                <dxo-label text="Document Date">
-                </dxo-label>
-            </dxi-item>
+                    <dxi-item dataField="DocumentDate" editorType="dxDateBox">
+                        <dxo-label text="Document Date">
+                        </dxo-label>
+                    </dxi-item>
 
-            <dxi-item dataField="DocumentName" caption="Document Name">
-            </dxi-item>
+                    <dxi-item dataField="DocumentName" caption="Document Name">
+                    </dxi-item>
 
-            <dxi-item dataField="DocumentFilePath" caption="File Path">
-                <dxo-label text="File Path">
-                </dxo-label>
-                <dx-file-uploader selectButtonText="Select photo" labelText="" accept="*" uploadMode="useForm" (onValueChanged)="onImageSelect($event)"
-                    [multiple]="false">
-                </dx-file-uploader>
-            </dxi-item>
+                    <dxi-item dataField="DocumentFilePath" caption="File Path">
+                        <dxo-label text="File Path">
+                        </dxo-label>
+                        <dx-file-uploader selectButtonText="Select photo" labelText="" accept="*" uploadMode="useForm" (onValueChanged)="onImageSelect($event)"
+                            [multiple]="false">
+                        </dx-file-uploader>
+                    </dxi-item>
 
-        </dx-form>
-        <br />
-        <div class="btn-grp-wrap">
-            <dx-button text="Add" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
-            </dx-button>
-            <dx-button text="Cancel" (onClick)="cancelDeleteVoucher()">
-            </dx-button>
+                </dx-form>
+                <br />
+                <div class="btn-grp-wrap">
+                    <dx-button text="Add" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
+                    </dx-button>
+                    <dx-button text="Cancel" (onClick)="cancelDeleteVoucher()">
+                    </dx-button>
+                </div>
+            </form>
+
         </div>
-    </form>
-
-    </div>
     </dx-popup>
 </div>
