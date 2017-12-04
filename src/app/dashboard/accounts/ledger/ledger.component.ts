@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DxDataGridComponent,
+import {
+  DxDataGridComponent,
   DxDataGridModule,
   DxSelectBoxModule,
   DxCheckBoxModule,
@@ -8,27 +9,35 @@ import { DxDataGridComponent,
   DxFormModule,
   DxFormComponent,
   DxPopupModule, DxTemplateModule,
-  DxTemplateHost 
- } from 'devextreme-angular';
-  import { AccountsService, Employee, Customer } from '../accounts.service';
+  DxTemplateHost,
+  DxTreeListModule
+} from 'devextreme-angular';
+import { AccountsService, Employee, Customer, Currency } from '../accounts.service';
 
-  @Component({
-    selector: 'app-ledger',
-    templateUrl: './ledger.component.html'
-  })
-  export class LedgerComponent implements OnInit { 
-    dataSource: any;
-    showFilterRow: boolean;
-    constructor(private accountservice:AccountsService){
-      this.showFilterRow = true;
-        this.dataSource = {
-            store: {
-                type: 'array',
-                key: 'ID',
-                data: this.accountservice.getLedger()
-            }
-        }
+@Component({
+  selector: 'app-ledger',
+  templateUrl: './ledger.component.html'
+})
+export class LedgerComponent implements OnInit {
+  dataSource: any;
+  showFilterRow: boolean;
+  
+  accountLevelDropdown: Currency[];
+
+  constructor(private accountservice: AccountsService) {
+    this.showFilterRow = true;
+    this.dataSource = {
+      store: {
+        type: 'array',
+        key: 'ID',
+        data: this.accountservice.getLedger()
+      }
     }
-    ngOnInit() {
-    }
+
+    
+    this.accountLevelDropdown = this.accountservice.getCurrencies();
   }
+  ngOnInit() {
+  }
+
+}

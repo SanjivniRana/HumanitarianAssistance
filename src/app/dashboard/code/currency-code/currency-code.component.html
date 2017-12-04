@@ -6,7 +6,7 @@
           <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="showPopup()"></dx-button>                
       </div>
       <div>
-            <dx-data-grid id="gridContainer" [dataSource]="currencycodedt" [columnHidingEnabled]="true">                
+            <dx-data-grid id="gridContainer" [dataSource]="currencycodedt" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" >                
                 <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
                 <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
                 <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
@@ -74,7 +74,7 @@ class="popup"
 [showTitle]="true"
 title="Add/Edit Currency Details"
 [dragEnabled]="false"
-[closeOnOutsideClick]="true"
+[closeOnOutsideClick]="false"
 [(visible)]="popupVisible">
   <div *dxTemplate="let data of 'content'">
       <form action="your-action" (submit)="onFormSubmit(currencydata)">

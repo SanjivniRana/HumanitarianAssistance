@@ -1,4 +1,3 @@
-//import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MultiSelectModule } from 'primeng/components/multiselect/multiselect';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
@@ -11,15 +10,17 @@ import { AccountsComponent } from './accounts.component';
 import { AdminComponent } from '../admin/admin.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { AccountsService } from './accounts.service';
-import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxFormModule, DxButtonModule, DxNumberBoxModule, DxPopupModule, DxTemplateModule, DxFileUploaderModule, DxTabsModule, DxTreeListModule, DxPivotGridModule, DxLookupModule, DxTextBoxModule } from 'devextreme-angular';
 import { JournalComponent } from './journal/journal.component';
-import { DocumentComponent } from './document/document.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { LedgerComponent } from './ledger/ledger.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
+import { TransactionComponent } from './vouchers/transaction/transaction.component';
+import { commonService } from '../../Services/common.service';
+import { DocumentComponent } from './vouchers/document/document.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { BudgetBalanceComponent } from './budget-balance/budget-balance.componen
     AdvanceDeductionComponent,
     FinancialReportComponent,
     BudgetBalanceComponent,
-
+    TransactionComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +50,8 @@ import { BudgetBalanceComponent } from './budget-balance/budget-balance.componen
     DxPivotGridModule,
     DxPopupModule,
     DxTabsModule,
+    DxLookupModule,
+    DxTextBoxModule,
     NgxPermissionsModule.forChild({
       permissionsIsolate: true,
       rolesIsolate: true
@@ -66,7 +69,7 @@ import { BudgetBalanceComponent } from './budget-balance/budget-balance.componen
       tertiaryColour: '#a129'
     }),
   ],
-  providers: [AccountsService],
+  providers: [AccountsService, commonService],
 
 })
 export class AccountsModule { }

@@ -2,147 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-
-export class JournalClass {
-    "ID": number;
-    "Journal": string;
-    "VoucherNo": number;
-    "Description": string;
-    "Date": string;
-    "Credit": number;
-    "Debit": number;
-    "ParentID": number;
-    "AccountNo": string;
-}
-
-let journalData: JournalClass[] = [
-    {
-        "ID": 1,
-        "ParentID": 0,
-        "Journal": "Journal1",
-        "VoucherNo": null,
-        "Description": null,
-        "Date": null,
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    //Voucher Inside
-    {
-        "ID": 2,
-        "ParentID": 1,
-        "Journal": "1223",
-        "VoucherNo": 1,
-        "Description": null,
-        "Date": "2017/11/27",
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    //Transaction Inside
-    {
-        "ID": 3,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 30000,
-        "Debit": 0,
-        "AccountNo": "410101"
-    },
-    {
-        "ID": 4,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "510101"
-    },
-    {
-        "ID": 5,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 0,
-        "Debit": 10000,
-        "AccountNo": "410102"
-    },
-    {
-        "ID": 50,
-        "ParentID": 2,
-        "Journal": null,
-        "VoucherNo": 1,
-        "Description": "Transaction Description",
-        "Date": "2017/11/27",
-        "Credit": 10000,
-        "Debit": 0,
-        "AccountNo": "410103"
-    },
-    //Transaction Inside Ends
-
-    //Second Journal
-    {
-        "ID": 6,
-        "ParentID": 0,
-        "Journal": "Journal2",
-        "VoucherNo": null,
-        "Description": null,
-        "Date": null,
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    {
-        "ID": 7,
-        "ParentID": 6,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": null,
-        "Debit": null,
-        "AccountNo": null
-    },
-    {
-        "ID": 8,
-        "ParentID": 7,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "410103"
-    },
-    {
-        "ID": 9,
-        "ParentID": 7,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "410103"
-    },
-    {
-        "ID": 10,
-        "ParentID": 7,
-        "Journal": "Journal2",
-        "VoucherNo": 2,
-        "Description": null,
-        "Date": "2017/11/26",
-        "Credit": 0,
-        "Debit": 30000,
-        "AccountNo": "410103"
-    }
-];
 // Vouchers Listing,add, edit Class
 export class VoucherClass {
     ID: number;
@@ -156,62 +15,6 @@ export class VoucherClass {
     ChequeNo?: string;
     VoucherType?: string;
 }
-
-let voucherClass: VoucherClass[] = [{
-    "ID": 1,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "02bb51f0-da81-416b-ad3a-a82b0145b279"
-}, {
-    "ID": 2,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "04ec2879-5af5-4446-a3a5-a83100d77eb6"
-}, {
-    "ID": 4,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}, {
-    "ID": 5,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}, {
-    "ID": 7,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}, {
-    "ID": 9,
-    "VoucherNo": "35703",
-    "VoucherDate": "2014/04/10",
-    "VoucherRefNo": "11800",
-    "Office": "Kabul",
-    "Journal": "California",
-    "Description": "Los Angeles",
-    "Currency": "329bc74b-5a6a-431e-a329-a83100ccf00f"
-}];
 
 export class Document {
     ID: any;
@@ -230,15 +33,39 @@ let addDocument: Document =
         "VoucherNo": ""
     };
 
-let documentData: Document[] = [{
+let documentData: Document[] = [
+    {
+        "ID": 1,
+        "DocumentName": "Document 1"
+    },
+    {
+        "ID": 2,
+        "DocumentName": "Document 2"
+    },
+    {
+        "ID": 3,
+        "DocumentName": "Document 3"
+    }
+];
+
+export class VoucherTransaction {
+    ID: any;
+    VoucherNo: number;
+    LineItemDescription: string;
+    DebitAccount: number;
+    CreditAccount: number;
+    Amount: number;
+    TransactionDate: string;
+}
+
+let voucherTransaction: VoucherTransaction[] = [{
     "ID": 1,
-    "DocumentName": "Document 1"
-}, {
-    "ID": 2,
-    "DocumentName": "Document 2"
-}, {
-    "ID": 3,
-    "DocumentName": "Document 3"
+    "VoucherNo": 3132,
+    "LineItemDescription": "Kabul Income Clinic",
+    "DebitAccount": 410101,
+    "CreditAccount": 510101,
+    "Amount": 10000,
+    "TransactionDate": "2017/11/28"
 }];
 
 export class Voucher {
@@ -358,18 +185,19 @@ let customer: Customer = {
 
 let countries: string[] = [
     'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'The   Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burma', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Democratic Republic of the Congo', 'Republic of the Congo', 'Costa Rica', 'Ivory Coast', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'East Timor', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'The Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Republic of Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'North Korea', 'South Korea', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Republic of Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Federated States of Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Namibia', 'Nauru', 'Nepal', 'Kingdom of the Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Palau', 'State of Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'São Tomé and Príncipe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'];
-let countries1: any[] = [{
-    "Id": 1,
-    "Country": "India"
-},
-{
-    "Id": 2,
-    "Country": "USA"
-},
-{
-    "Id": 3,
-    "Country": "UK"
-}];
+let countries1: any[] = [
+    {
+        "Id": 1,
+        "Country": "India"
+    },
+    {
+        "Id": 2,
+        "Country": "USA"
+    },
+    {
+        "Id": 3,
+        "Country": "UK"
+    }];
 
 //DATA FOR DOCUMENT PAGE
 export class Company {
@@ -377,494 +205,497 @@ export class Company {
     DocumentName: string;
 }
 
-let companies: Company[] = [{
-    "ID": 1,
-    "DocumentName": "Document 1"
-}, {
-    "ID": 2,
-    "DocumentName": "Document 2"
-}, {
-    "ID": 3,
-    "DocumentName": "Document 3"
-}];
+let companies: Company[] = [
+    {
+        "ID": 1,
+        "DocumentName": "Document 1"
+    }, {
+        "ID": 2,
+        "DocumentName": "Document 2"
+    }, {
+        "ID": 3,
+        "DocumentName": "Document 3"
+    }];
 //DATA FOR DOCUMENT PAGE ENDS
 
-let employees: Employee1[] = [{
-    "ID": 1,
-    "Journal": "Journal",
-    "Office": "A0001",
-    "RecordType": "Single Currency",
-    "Currency": "AFG-AFG",
-    "Accounts": "CEO",
-    "Status": "All",
-    "ReportDate": "1964/03/16",
-    "Vouchers": [{
+let employees: Employee1[] = [
+    {
+        "ID": 1,
+        "Journal": "Journal",
+        "Office": "A0001",
+        "RecordType": "Single Currency",
+        "Currency": "AFG-AFG",
+        "Accounts": "CEO",
+        "Status": "All",
+        "ReportDate": "1964/03/16",
+        "Vouchers": [{
 
-        "ID": 4,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 10000,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
+            "ID": 4,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 10000,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
 
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 10000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 10000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
 
-        "ID": 4,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 50000,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
+            "ID": 4,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 50000,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
 
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 50000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 3000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 8000,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        }]
     },
     {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 50000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 3000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 8000,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    }]
-},
-{
-    "ID": 2,
-    "Journal": "Journal2",
-    "Office": "A0001",
-    "RecordType": "Single Currency",
-    "Currency": "USD-USD",
-    "Accounts": "CEO",
-    "Status": "All",
-    "ReportDate": "1964/03/16",
-    "Vouchers": [{
+        "ID": 2,
+        "Journal": "Journal2",
+        "Office": "A0001",
+        "RecordType": "Single Currency",
+        "Currency": "USD-USD",
+        "Accounts": "CEO",
+        "Status": "All",
+        "ReportDate": "1964/03/16",
+        "Vouchers": [{
 
-        "ID": 4,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 10000,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
+            "ID": 4,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 10000,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
 
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 10000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 10000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
 
-        "ID": 4,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 50000,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
+            "ID": 4,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 50000,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
 
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 50000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 3000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
-    },
-    {
-        "ID": 5,
-        "Date": "11/02/2017",
-        "ACNO": "410201",
-        "TransactionDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 8000,
-        "Currency": "AFG-AFG",
-        "BL": "",
-        "Area": "",
-        "Sector": "",
-        "Program": "",
-        "Project": "",
-        "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 50000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 3000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        },
+        {
+            "ID": 5,
+            "Date": "11/02/2017",
+            "ACNO": "410201",
+            "TransactionDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 8000,
+            "Currency": "AFG-AFG",
+            "BL": "",
+            "Area": "",
+            "Sector": "",
+            "Program": "",
+            "Project": "",
+            "Job": ""
+        }
+        ]
     }
-    ]
-}
 ];
 
 //Data for LEDGER STATEMENT
 
-let ledgers: LedgerClass[] = [{
-    "ID": 1,
-    "Currency": "USD-USD",
-    "Account": "410101 - Clinic Income",
-    "RecordType": "Single Currency",
-    "Status": "All",
-    "VoucherDate": "1966/03/16",
-    "LedgerVouchers": [{
-        "ID": 4,
-        "Date": "11/03/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 10000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
+let ledgers: LedgerClass[] = [
+    {
+        "ID": 1,
+        "Currency": "USD-USD",
+        "Account": "410101 - Clinic Income",
+        "RecordType": "Single Currency",
+        "Status": "All",
+        "VoucherDate": "1966/03/16",
+        "LedgerVouchers": [{
+            "ID": 4,
+            "Date": "11/03/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 10000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/04/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 10000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/05/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 50000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/06/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 50000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 3000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 8000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        }]
+    }, {
+        "ID": 2,
+        "Currency": "USD-USD",
+        "Account": "410102 - Sports Income",
+        "RecordType": "Single Currency",
+        "Status": "All",
+        "VoucherDate": "1968/03/16",
+        "LedgerVouchers": [{
+            "ID": 4,
+            "Date": "11/03/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 10000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/04/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 10000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/05/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0.00,
+            "Credit": 50000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/06/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 50000,
+            "Credit": 0.00,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 0,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 3000,
+            "Credit": 0,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0,
+            "Credit": 8000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        }]
     },
     {
-        "ID": 4,
-        "Date": "11/04/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 10000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/05/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 50000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/06/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 50000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 3000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 8000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    }]
-}, {
-    "ID": 2,
-    "Currency": "USD-USD",
-    "Account": "410102 - Sports Income",
-    "RecordType": "Single Currency",
-    "Status": "All",
-    "VoucherDate": "1968/03/16",
-    "LedgerVouchers": [{
-        "ID": 4,
-        "Date": "11/03/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 10000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/04/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 10000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/05/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0.00,
-        "Credit": 50000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/06/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 50000,
-        "Credit": 0.00,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 0,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 3000,
-        "Credit": 0,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0,
-        "Credit": 8000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    }]
-},
-{
-    "ID": 3,
-    "Currency": "USD-USD",
-    "Account": "410102 - Medical Income",
-    "RecordType": "Single Currency",
-    "Status": "All",
-    "VoucherDate": "2000/03/16",
-    "LedgerVouchers": [{
-        "ID": 4,
-        "Date": "11/03/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0,
-        "Credit": 10000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/04/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 10000,
-        "Credit": 0,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/05/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0,
-        "Credit": 50000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/06/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 50000,
-        "Credit": 0,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 5000,
-        "Credit": 0,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 3000,
-        "Credit": 0,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    },
-    {
-        "ID": 4,
-        "Date": "11/07/2017",
-        "Voucher": "410201",
-        "LineItemDescription": "Kabul Clinic Income",
-        "Debit": 0,
-        "Credit": 8000,
-        "Currency": "AFG-AFG",
-        "Status": "Active"
-    }]
-}
+        "ID": 3,
+        "Currency": "USD-USD",
+        "Account": "410102 - Medical Income",
+        "RecordType": "Single Currency",
+        "Status": "All",
+        "VoucherDate": "2000/03/16",
+        "LedgerVouchers": [{
+            "ID": 4,
+            "Date": "11/03/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0,
+            "Credit": 10000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/04/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 10000,
+            "Credit": 0,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/05/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0,
+            "Credit": 50000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/06/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 50000,
+            "Credit": 0,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 5000,
+            "Credit": 0,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 3000,
+            "Credit": 0,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        },
+        {
+            "ID": 4,
+            "Date": "11/07/2017",
+            "Voucher": "410201",
+            "LineItemDescription": "Kabul Clinic Income",
+            "Debit": 0,
+            "Credit": 8000,
+            "Currency": "AFG-AFG",
+            "Status": "Active"
+        }]
+    }
 ];
 
 //Trail Balance Class 
@@ -1010,69 +841,70 @@ export class AdvanceDeductionSalary {
     NetSalary: number;
 }
 
-let advanceDeduction: AdvanceDeductionClass[] = [{
-    "ID": 1,
-    "Currency": "AFG-AFG",
-    "Office": "TestOffice",
-    "Month": "2017/11/17",
-    "AdvanceDeductionSalarys": [{
-        "ID": 4,
-        "EmployeeName": "Naval Bhatt",
-        "NetSalaryAdvance": 50000,
-        "AdvanceDeduction": 10000,
-        "NetSalary": 40000,
-    },
+let advanceDeduction: AdvanceDeductionClass[] = [
     {
-        "ID": 4,
-        "EmployeeName": "Fuster Cluck",
-        "NetSalaryAdvance": 60000,
-        "AdvanceDeduction": 10000,
-        "NetSalary": 50000,
-    },
-    {
-        "ID": 4,
-        "EmployeeName": "Hamza",
-        "NetSalaryAdvance": 70000,
-        "AdvanceDeduction": 40000,
-        "NetSalary": 30000,
-    }]
+        "ID": 1,
+        "Currency": "AFG-AFG",
+        "Office": "TestOffice",
+        "Month": "2017/11/17",
+        "AdvanceDeductionSalarys": [{
+            "ID": 4,
+            "EmployeeName": "Naval Bhatt",
+            "NetSalaryAdvance": 50000,
+            "AdvanceDeduction": 10000,
+            "NetSalary": 40000,
+        },
+        {
+            "ID": 4,
+            "EmployeeName": "Fuster Cluck",
+            "NetSalaryAdvance": 60000,
+            "AdvanceDeduction": 10000,
+            "NetSalary": 50000,
+        },
+        {
+            "ID": 4,
+            "EmployeeName": "Hamza",
+            "NetSalaryAdvance": 70000,
+            "AdvanceDeduction": 40000,
+            "NetSalary": 30000,
+        }]
 
-},
-{
-    "ID": 2,
-    "Currency": "USD-USD",
-    "Office": "TestOffice1",
-    "Month": "2017/11/18",
-    "AdvanceDeductionSalarys": [{
-        "ID": 5,
-        "EmployeeName": "Rohit Grover",
-        "NetSalaryAdvance": 50000,
-        "AdvanceDeduction": 10000,
-        "NetSalary": 40000,
     },
     {
-        "ID": 5,
-        "EmployeeName": "Bipul",
-        "NetSalaryAdvance": 60000,
-        "AdvanceDeduction": 10000,
-        "NetSalary": 50000,
-    },
-    {
-        "ID": 5,
-        "EmployeeName": "Shubham",
-        "NetSalaryAdvance": 70000,
-        "AdvanceDeduction": 40000,
-        "NetSalary": 30000,
-    },
-    {
-        "ID": 5,
-        "EmployeeName": "Alpit",
-        "NetSalaryAdvance": 70000,
-        "AdvanceDeduction": 40000,
-        "NetSalary": 30000,
-    }]
+        "ID": 2,
+        "Currency": "USD-USD",
+        "Office": "TestOffice1",
+        "Month": "2017/11/18",
+        "AdvanceDeductionSalarys": [{
+            "ID": 5,
+            "EmployeeName": "Rohit Grover",
+            "NetSalaryAdvance": 50000,
+            "AdvanceDeduction": 10000,
+            "NetSalary": 40000,
+        },
+        {
+            "ID": 5,
+            "EmployeeName": "Bipul",
+            "NetSalaryAdvance": 60000,
+            "AdvanceDeduction": 10000,
+            "NetSalary": 50000,
+        },
+        {
+            "ID": 5,
+            "EmployeeName": "Shubham",
+            "NetSalaryAdvance": 70000,
+            "AdvanceDeduction": 40000,
+            "NetSalary": 30000,
+        },
+        {
+            "ID": 5,
+            "EmployeeName": "Alpit",
+            "NetSalaryAdvance": 70000,
+            "AdvanceDeduction": 40000,
+            "NetSalary": 30000,
+        }]
 
-}];
+    }];
 
 //END ADVANCE DEDUCTION
 
@@ -1090,24 +922,25 @@ export class FinancialReport_Notes_of_COAClass {
     Notes: number;
 }
 
-let financial_notes_of_COAClass: FinancialReport_Notes_of_COAClass[] = [{
-    "ID": 1,
-    "Code": 3123,
-    "AccountName": "Income D",
-    "Notes": 18,
-},
-{
-    "ID": 2,
-    "Code": 3123,
-    "AccountName": "Income D",
-    "Notes": 18,
-},
-{
-    "ID": 3,
-    "Code": 3123,
-    "AccountName": "Income D",
-    "Notes": 18,
-}];
+let financial_notes_of_COAClass: FinancialReport_Notes_of_COAClass[] = [
+    {
+        "ID": 1,
+        "Code": 3123,
+        "AccountName": "Income D",
+        "Notes": 18,
+    },
+    {
+        "ID": 2,
+        "Code": 3123,
+        "AccountName": "Income D",
+        "Notes": 18,
+    },
+    {
+        "ID": 3,
+        "Code": 3123,
+        "AccountName": "Income D",
+        "Notes": 18,
+    }];
 
 export class FinancialReport_NotesClass {
     ID: number;
@@ -1117,27 +950,28 @@ export class FinancialReport_NotesClass {
     BalanceType: string;
 }
 
-let financial_notes: FinancialReport_NotesClass[] = [{
-    "ID": 4,
-    "Code": 11,
-    "Narration": "Reserve Account",
-    "Notes": 12,
-    "BalanceType": "SUM"
-},
-{
-    "ID": 5,
-    "Code": 11,
-    "Narration": "Reserve Account",
-    "Notes": 12,
-    "BalanceType": "SUM"
-},
-{
-    "ID": 6,
-    "Code": 11,
-    "Narration": "Reserve Account",
-    "Notes": 12,
-    "BalanceType": "SUM"
-}];
+let financial_notes: FinancialReport_NotesClass[] = [
+    {
+        "ID": 4,
+        "Code": 11,
+        "Narration": "Reserve Account",
+        "Notes": 12,
+        "BalanceType": "SUM"
+    },
+    {
+        "ID": 5,
+        "Code": 11,
+        "Narration": "Reserve Account",
+        "Notes": 12,
+        "BalanceType": "SUM"
+    },
+    {
+        "ID": 6,
+        "Code": 11,
+        "Narration": "Reserve Account",
+        "Notes": 12,
+        "BalanceType": "SUM"
+    }];
 
 export class FinancialReport_BalanceSheetClass {
     ID: number;
@@ -1147,27 +981,28 @@ export class FinancialReport_BalanceSheetClass {
     Currency: string;
 }
 
-let financial_balancesheet: FinancialReport_BalanceSheetClass[] = [{
-    "ID": 7,
-    "Description": "Donor Funds",
-    "Notes": 4,
-    "Balance": 9000,
-    "Currency": "USD-USD"
-},
-{
-    "ID": 8,
-    "Description": "Donor Funds",
-    "Notes": 4,
-    "Balance": 9000,
-    "Currency": "USD-USD"
-},
-{
-    "ID": 9,
-    "Description": "Donor Funds",
-    "Notes": 4,
-    "Balance": 9000,
-    "Currency": "AFG-AFG"
-}];
+let financial_balancesheet: FinancialReport_BalanceSheetClass[] = [
+    {
+        "ID": 7,
+        "Description": "Donor Funds",
+        "Notes": 4,
+        "Balance": 9000,
+        "Currency": "USD-USD"
+    },
+    {
+        "ID": 8,
+        "Description": "Donor Funds",
+        "Notes": 4,
+        "Balance": 9000,
+        "Currency": "USD-USD"
+    },
+    {
+        "ID": 9,
+        "Description": "Donor Funds",
+        "Notes": 4,
+        "Balance": 9000,
+        "Currency": "AFG-AFG"
+    }];
 
 export class FinancialReport_IncomeClass {
     ID: number;
@@ -1177,27 +1012,28 @@ export class FinancialReport_IncomeClass {
     Currency: string;
 }
 
-let financial_Income: FinancialReport_IncomeClass[] = [{
-    "ID": 10,
-    "Description": "Currency Exchange Loss",
-    "Notes": 15,
-    "Balance": 480,
-    "Currency": "USD-USD"
-},
-{
-    "ID": 11,
-    "Description": "Currency Exchange Loss",
-    "Notes": 15,
-    "Balance": 480,
-    "Currency": "AFG-AFG"
-},
-{
-    "ID": 12,
-    "Description": "Currency Exchange Loss",
-    "Notes": 15,
-    "Balance": 480,
-    "Currency": "AFG-AFG"
-}];
+let financial_Income: FinancialReport_IncomeClass[] = [
+    {
+        "ID": 10,
+        "Description": "Currency Exchange Loss",
+        "Notes": 15,
+        "Balance": 480,
+        "Currency": "USD-USD"
+    },
+    {
+        "ID": 11,
+        "Description": "Currency Exchange Loss",
+        "Notes": 15,
+        "Balance": 480,
+        "Currency": "AFG-AFG"
+    },
+    {
+        "ID": 12,
+        "Description": "Currency Exchange Loss",
+        "Notes": 15,
+        "Balance": 480,
+        "Currency": "AFG-AFG"
+    }];
 
 export class FinancialReport_Details_of_NotesClass {
     ID: number;
@@ -1208,30 +1044,31 @@ export class FinancialReport_Details_of_NotesClass {
     Currency: string;
 }
 
-let financial_details: FinancialReport_Details_of_NotesClass[] = [{
-    "ID": 13,
-    "AccountCode": 410201,
-    "AccountName": "Sports Income",
-    "Notes": 15,
-    "Balance": 6000,
-    "Currency": "USD-USD"
-},
-{
-    "ID": 14,
-    "AccountCode": 410201,
-    "AccountName": "Sports Income",
-    "Notes": 15,
-    "Balance": 6000,
-    "Currency": "USD-USD"
-},
-{
-    "ID": 15,
-    "AccountCode": 410201,
-    "AccountName": "Sports Income",
-    "Notes": 15,
-    "Balance": 6000,
-    "Currency": "AFG-AFG"
-}];
+let financial_details: FinancialReport_Details_of_NotesClass[] = [
+    {
+        "ID": 13,
+        "AccountCode": 410201,
+        "AccountName": "Sports Income",
+        "Notes": 15,
+        "Balance": 6000,
+        "Currency": "USD-USD"
+    },
+    {
+        "ID": 14,
+        "AccountCode": 410201,
+        "AccountName": "Sports Income",
+        "Notes": 15,
+        "Balance": 6000,
+        "Currency": "USD-USD"
+    },
+    {
+        "ID": 15,
+        "AccountCode": 410201,
+        "AccountName": "Sports Income",
+        "Notes": 15,
+        "Balance": 6000,
+        "Currency": "AFG-AFG"
+    }];
 
 
 let tabs: Tab[] = [
@@ -1265,22 +1102,23 @@ export class FinancialYear {
     Year: string;
 }
 
-let years: FinancialYear[] = [{
-    "ID": 1,
-    "Year": "2014"
-},
-{
-    "ID": 2,
-    "Year": "2015"
-},
-{
-    "ID": 3,
-    "Year": "2016"
-},
-{
-    "ID": 4,
-    "Year": "2017"
-}];
+let years: FinancialYear[] = [
+    {
+        "ID": 1,
+        "Year": "2014"
+    },
+    {
+        "ID": 2,
+        "Year": "2015"
+    },
+    {
+        "ID": 3,
+        "Year": "2016"
+    },
+    {
+        "ID": 4,
+        "Year": "2017"
+    }];
 //End Financial Year DropDown
 
 //Start of Budget Balance
@@ -1305,260 +1143,257 @@ export class BudgetBalanceInnerClass {
     Percentage: string;
 }
 
-let budget: BudgetBalanceClass[] = [{
-    "ID": 1,
-    "Currency": "USD-USD",
-    "Budget": 12000,
-    "RecordType": "Single Currency",
-    "Date": "2015/03/16",
-    "BudgetBalance": [{
-        "ID": 4,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
+let budget: BudgetBalanceClass[] = [
+    {
+        "ID": 1,
         "Currency": "USD-USD",
         "Budget": 12000,
-        "Expenditure": 2000,
-        "Balance": 10000,
-        "Percentage": "83.3333%"
+        "RecordType": "Single Currency",
+        "Date": "2015/03/16",
+        "BudgetBalance": [{
+            "ID": 4,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "USD-USD",
+            "Budget": 12000,
+            "Expenditure": 2000,
+            "Balance": 10000,
+            "Percentage": "83.3333%"
+        },
+        {
+            "ID": 5,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "USD-USD",
+            "Budget": 12000,
+            "Expenditure": 2000,
+            "Balance": 10000,
+            "Percentage": "83.3333%"
+        },
+        {
+            "ID": 6,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "USD-USD",
+            "Budget": 12000,
+            "Expenditure": 2000,
+            "Balance": 10000,
+            "Percentage": "83.3333%"
+        },
+        {
+            "ID": 7,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "USD-USD",
+            "Budget": 12000,
+            "Expenditure": 2000,
+            "Balance": 10000,
+            "Percentage": "83.3333%"
+        },
+        {
+            "ID": 8,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "USD-USD",
+            "Budget": 12000,
+            "Expenditure": 2000,
+            "Balance": 10000,
+            "Percentage": "83.3333%"
+        }]
+    }, {
+        "ID": 2,
+        "Currency": "AFG-AFG",
+        "Budget": 10000,
+        "RecordType": "Single Currency",
+        "Date": "2016/03/16",
+        "BudgetBalance": [{
+            "ID": 9,
+            "BLine": "410201",
+            "BLineDescription": "Sports Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 10000,
+            "Expenditure": 1000,
+            "Balance": 9000,
+            "Percentage": "90%"
+        },
+        {
+            "ID": 10,
+            "BLine": "410201",
+            "BLineDescription": "Sports Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 10000,
+            "Expenditure": 1000,
+            "Balance": 9000,
+            "Percentage": "90%"
+        },
+        {
+            "ID": 11,
+            "BLine": "410201",
+            "BLineDescription": "Sports Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 10000,
+            "Expenditure": 1000,
+            "Balance": 9000,
+            "Percentage": "90%"
+        },
+        {
+            "ID": 12,
+            "BLine": "410201",
+            "BLineDescription": "Sports Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 10000,
+            "Expenditure": 1000,
+            "Balance": 9000,
+            "Percentage": "90%"
+        },
+        {
+            "ID": 13,
+            "BLine": "410201",
+            "BLineDescription": "Sports Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 10000,
+            "Expenditure": 1000,
+            "Balance": 9000,
+            "Percentage": "90%"
+        }]
     },
     {
-        "ID": 5,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
+        "ID": 3,
         "Currency": "USD-USD",
-        "Budget": 12000,
-        "Expenditure": 2000,
-        "Balance": 10000,
-        "Percentage": "83.3333%"
-    },
-    {
-        "ID": 6,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "USD-USD",
-        "Budget": 12000,
-        "Expenditure": 2000,
-        "Balance": 10000,
-        "Percentage": "83.3333%"
-    },
-    {
-        "ID": 7,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "USD-USD",
-        "Budget": 12000,
-        "Expenditure": 2000,
-        "Balance": 10000,
-        "Percentage": "83.3333%"
-    },
-    {
-        "ID": 8,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "USD-USD",
-        "Budget": 12000,
-        "Expenditure": 2000,
-        "Balance": 10000,
-        "Percentage": "83.3333%"
-    }]
-}, {
-    "ID": 2,
-    "Currency": "AFG-AFG",
-    "Budget": 10000,
-    "RecordType": "Single Currency",
-    "Date": "2016/03/16",
-    "BudgetBalance": [{
-        "ID": 9,
-        "BLine": "410201",
-        "BLineDescription": "Sports Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 10000,
-        "Expenditure": 1000,
-        "Balance": 9000,
-        "Percentage": "90%"
-    },
-    {
-        "ID": 10,
-        "BLine": "410201",
-        "BLineDescription": "Sports Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 10000,
-        "Expenditure": 1000,
-        "Balance": 9000,
-        "Percentage": "90%"
-    },
-    {
-        "ID": 11,
-        "BLine": "410201",
-        "BLineDescription": "Sports Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 10000,
-        "Expenditure": 1000,
-        "Balance": 9000,
-        "Percentage": "90%"
-    },
-    {
-        "ID": 12,
-        "BLine": "410201",
-        "BLineDescription": "Sports Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 10000,
-        "Expenditure": 1000,
-        "Balance": 9000,
-        "Percentage": "90%"
-    },
-    {
-        "ID": 13,
-        "BLine": "410201",
-        "BLineDescription": "Sports Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 10000,
-        "Expenditure": 1000,
-        "Balance": 9000,
-        "Percentage": "90%"
-    }]
-},
-{
-    "ID": 3,
-    "Currency": "USD-USD",
-    "Budget": 30000,
-    "RecordType": "Single Currency",
-    "Date": "2017/03/16",
-    "BudgetBalance": [{
-        "ID": 14,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "AFG-AFG",
         "Budget": 30000,
-        "Expenditure": 10000,
-        "Balance": 20000,
-        "Percentage": "66.666%"
-    },
-    {
-        "ID": 15,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 30000,
-        "Expenditure": 10000,
-        "Balance": 20000,
-        "Percentage": "66.666%"
-    },
-    {
-        "ID": 16,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 30000,
-        "Expenditure": 10000,
-        "Balance": 20000,
-        "Percentage": "66.666%"
-    },
-    {
-        "ID": 17,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 30000,
-        "Expenditure": 10000,
-        "Balance": 20000,
-        "Percentage": "66.666%"
-    },
-    {
-        "ID": 18,
-        "BLine": "410201",
-        "BLineDescription": "Kabul Clinic Income",
-        "Currency": "AFG-AFG",
-        "Budget": 30000,
-        "Expenditure": 10000,
-        "Balance": 20000,
-        "Percentage": "66.666%"
-    }]
-}];
+        "RecordType": "Single Currency",
+        "Date": "2017/03/16",
+        "BudgetBalance": [{
+            "ID": 14,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 30000,
+            "Expenditure": 10000,
+            "Balance": 20000,
+            "Percentage": "66.666%"
+        },
+        {
+            "ID": 15,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 30000,
+            "Expenditure": 10000,
+            "Balance": 20000,
+            "Percentage": "66.666%"
+        },
+        {
+            "ID": 16,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 30000,
+            "Expenditure": 10000,
+            "Balance": 20000,
+            "Percentage": "66.666%"
+        },
+        {
+            "ID": 17,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 30000,
+            "Expenditure": 10000,
+            "Balance": 20000,
+            "Percentage": "66.666%"
+        },
+        {
+            "ID": 18,
+            "BLine": "410201",
+            "BLineDescription": "Kabul Clinic Income",
+            "Currency": "AFG-AFG",
+            "Budget": 30000,
+            "Expenditure": 10000,
+            "Balance": 20000,
+            "Percentage": "66.666%"
+        }]
+    }];
 
 //End of Budget Balance
 
 //Journal
-export class Sale {
-    id: number;
-    journal: string;
-    country: string;
-    transaction: string;
-    voucher: string;
-    amount: number;
-    transactionType: string;
+export class JournalVoucherModel {    
+    JournalCode: number;
+    AccountCode: number;
+    Amount: number;
+    TransactionNo: number;
+    TransactionDate: string;
+    TransactionType: string;
+    VoucherNo: number;
 }
 
 //Journal
-let journal: Sale[] = [
-    {
-        "id": 1,
-        "journal": "Journal1",
-        "country": "USA",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 1",
-        "amount": 500,
-        "transactionType": "Debit"
-    }, {
-        "id": 2,
-        "journal": "Journal1",
-        "country": "USA",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 2",
-        "amount": 500,
-        "transactionType": "Credit"
-    }, {
-        "id": 3,
-        "journal": "Journal1",
-        "country": "USA",
-        "voucher": "Voucher 2",
-        "transaction": "transaction 3",
-        "amount": 1000,
-        "transactionType": "Debit"
-    }, {
-        "id": 4,
-        "journal": "Journal1",
-        "country": "CAN",
-        "voucher": "Voucher 2",
-        "transaction": "transaction 1",
-        "amount": 1000,
-        "transactionType": "Credit"
-    }, {
-        "id": 5,
-        "journal": "Journal2",
-        "country": "CAN",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 2",
-        "amount": 880,
-        "transactionType": "Debit"
-    }, {
-        "id": 6,
-        "journal": "Journal5",
-        "country": "BRA",
-        "voucher": "Voucher 1",
-        "transaction": "transaction 1",
-        "amount": 5260,
-        "transactionType": "Credit"
-    }
-];
+// let journal: JournalVoucherModel[] = [
+//     {
+//         "id": 1,
+//         "journal": "Journal1",
+//         "country": "USA",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 1",
+//         "amount": 500,
+//         "transactionType": "Debit"
+//     }, {
+//         "id": 2,
+//         "journal": "Journal1",
+//         "country": "USA",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 2",
+//         "amount": 500,
+//         "transactionType": "Credit"
+//     }, {
+//         "id": 3,
+//         "journal": "Journal1",
+//         "country": "USA",
+//         "voucher": "Voucher 2",
+//         "transaction": "transaction 3",
+//         "amount": 1000,
+//         "transactionType": "Debit"
+//     }, {
+//         "id": 4,
+//         "journal": "Journal1",
+//         "country": "CAN",
+//         "voucher": "Voucher 2",
+//         "transaction": "transaction 1",
+//         "amount": 1000,
+//         "transactionType": "Credit"
+//     }, {
+//         "id": 5,
+//         "journal": "Journal2",
+//         "country": "CAN",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 2",
+//         "amount": 880,
+//         "transactionType": "Debit"
+//     }, {
+//         "id": 6,
+//         "journal": "Journal5",
+//         "country": "BRA",
+//         "voucher": "Voucher 1",
+//         "transaction": "transaction 1",
+//         "amount": 5260,
+//         "transactionType": "Credit"
+//     }
+// ];
+
 
 
 @Injectable()
 export class AccountsService {
     constructor(private http: Http) {
-
-    }
-
-    getJournalData(): JournalClass[] {
-        return journalData;
-    }
-
-    getVouchersList(): VoucherClass[] {
-        return voucherClass;
     }
 
     getVouchersDocumentList(): Document[] {
         return documentData;
+    }
+
+    getVoucherTransactionModel(): VoucherTransaction []{
+        return voucherTransaction;
     }
 
     getCustomer(): Customer {
@@ -1692,13 +1527,149 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
+    AddVoucher(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                CurrencyId: model.Currency,
+                ChequeNo: model.ChequeNo,
+                Description: model.Description,
+                JournalCode: model.Journal,
+                OfficeId: model.Office,
+                VoucherDate: model.VoucherDate,
+                ReferenceNo: model.VoucherRefNo,
+                VoucherTypeId: model.VoucherType
+            }
+
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    EditVoucher(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                VoucherNo: model.VoucherNo,
+                CurrencyId: model.Currency,
+                ChequeNo: model.ChequeNo,
+                Description: model.Description,
+                JournalCode: model.Journal,
+                OfficeId: model.Office,
+                VoucherDate: model.VoucherDate,
+                ReferenceNo: model.VoucherRefNo,
+                VoucherTypeId: model.VoucherType
+            }
+
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    GetVoucherDocumentDetails(url: string, VoucherNo) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url+"?VoucherNo="+VoucherNo, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    AddVoucherDocument(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj : any =
+            {
+                DocumentName : model.DocumentName,
+                FilePath : model.DocumentFilePath,
+                DocumentDate : model.DocumentDate,
+                VoucherNo : model.VoucherNo
+            }
+
+        return this.http.post(url, obj
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    AddVoucherTransaction(url: string, model: any) {
+        debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        let obj =
+            {
+                DebitAccount : model.DebitAccount,
+                CreditAccount : model.CreditAccount,
+                Amount : model.Amount,
+                Description : model.LineItemDescription,
+                TransactionDate : model.TransactionDate,
+                VoucherNo : model.VoucherNo
+            }
+
+        return this.http.post(url, JSON.stringify(obj)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+
+    }
+
+    GetAllJournalDetails(url: string) {
+        //debugger;
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
     private handleError(error: Response) {
-        console.log(error.json());
         return Observable.throw(error.json().error || 'Server error');
     }
 
-    //Journal
-    getJournals() {
-        return journal;
-    }
+
+
 }

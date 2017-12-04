@@ -9,6 +9,7 @@ import { NgxRolesService } from 'ngx-permissions';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { AppSettingsService } from '../../Services/App-settings.Service';
 import { GLOBAL } from '../../shared/global';
+import { DashboardComponent } from '../dashboard.component';
 
 @Component({
     selector: "app-sidebar",
@@ -27,7 +28,8 @@ export class AppSidebarComponent {
         private changeDetector: ChangeDetectorRef,
         private authService : AuthenticationService,
         private appSettigs: AppSettingsService,
-        private ngxroleservice : NgxRolesService
+        private ngxroleservice : NgxRolesService,
+        public _dashboard: DashboardComponent
     ) {
         
     }
@@ -69,6 +71,11 @@ export class AppSidebarComponent {
         
         
     }
+
+    toggleSideFun(){
+        
+         this._dashboard.toggleSide = !this._dashboard.toggleSide;
+     }
 
     // goToInventory() {
     //     this.router.navigate(['/inventory']);

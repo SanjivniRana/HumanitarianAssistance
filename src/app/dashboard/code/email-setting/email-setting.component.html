@@ -6,7 +6,7 @@
           <dx-button class="button-info btn btn-default btn-green" text="Add New" (onClick)="showPopup()"></dx-button>                
       </div> 
       <div>
-          <dx-data-grid id="gridContainer" [dataSource]="emailsettingdt" [columnHidingEnabled]="true">                
+          <dx-data-grid id="gridContainer" [dataSource]="emailsettingdt" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" >                
               <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
               <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
               <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>

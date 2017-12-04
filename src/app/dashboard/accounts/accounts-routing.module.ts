@@ -3,13 +3,15 @@ import { AccountsComponent } from './accounts.component';
 import { UserComponent } from '../admin/user.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { JournalComponent } from './journal/journal.component';
-import { DocumentComponent } from './document/document.component';
+
 import { LedgerComponent } from './ledger/ledger.component';
 import { TrailBalanceComponent } from './trialBalance/trialBalance.component';
 import { AdvanceDeductionComponent } from './advanceDeduction/advanceDeduction.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
 import { NgModule } from '@angular/core';
 import { BudgetBalanceComponent } from './budget-balance/budget-balance.component';
+import { TransactionComponent } from './vouchers/transaction/transaction.component';
+import { DocumentComponent } from './vouchers/document/document.component';
 
 const Account_Router: Routes =
     [{
@@ -18,7 +20,8 @@ const Account_Router: Routes =
             // { path: '', redirectTo: 'vouchers', pathMatch: 'full' },
             { path: 'vouchers', component: VouchersComponent },
             { path: 'journal', component: JournalComponent },
-            { path :'document',component:DocumentComponent},
+            { path :'vouchers/document',component: DocumentComponent},
+            { path :'vouchers/transaction',component: TransactionComponent},
             { 
                 path: 'ledger', 
                 component: LedgerComponent

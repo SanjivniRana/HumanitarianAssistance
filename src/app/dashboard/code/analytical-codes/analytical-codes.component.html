@@ -15,9 +15,7 @@
 
           <dx-data-grid id="gridContainer" 
                         [dataSource]="dataSource" 
-                        [allowColumnReordering]="true" 
-                        [allowColumnResizing]="true" 
-                        [columnAutoWidth]="true"
+                        [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true" 
                         (onEditingStart)="logEvent('EditingStart')"
                         (onInitNewRow)="logEvent('InitNewRow')"
                         (onRowInserting)="logEvent('RowInserting')"
@@ -38,7 +36,7 @@
             <dxo-selection mode="multiple">
             </dxo-selection>
 
-            <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+            <!-- <dxo-column-fixing [enabled]="true"></dxo-column-fixing> -->
 
             <!-- editing -->
             <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">

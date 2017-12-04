@@ -23,7 +23,7 @@ export class EmailSettingComponent implements OnInit {
   constructor(private router: Router, private toastr: ToastrService,private fb: FormBuilder,private setting : AppSettingsService , private modalService: BsModalService, private codeservice: CodeService) 
   { 
       this.emailsettingdata = this.codeservice.getEmailSettingData();
-      console.log(this.emailsettingdata);
+
       this.showFilterRow = true;
       this.getEmailTypeList();
   }

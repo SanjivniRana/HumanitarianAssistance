@@ -209,6 +209,11 @@
     .noti {
         margin-right: 0px;
     }
+    .dx-popup-wrapper > .dx-popup-fullscreen {       
+        max-width: 96% !important;        
+    }
+
+    .dx-popup-normal { max-width: 96% !important;}
 }
 
 @media only screen and (max-width: 414px) {
@@ -243,6 +248,9 @@
     }
     .fc-toolbar button {
         padding: 0px 5px;
+    }
+    .dx-toolbar .dx-texteditor {
+        width: inherit !important;
     }
 }
 
