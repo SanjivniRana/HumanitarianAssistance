@@ -19,7 +19,7 @@
         <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>    
             <!-- editing -->
             <dxo-editing mode="popup" [allowUpdating]="false" [allowDeleting]="true" [allowAdding]="true" >
-              <dxo-popup title="Documents" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
+              <dxo-popup title="Add Document Details" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
               </dxo-popup>
             </dxo-editing>
             <!-- editing -->
@@ -58,11 +58,12 @@
                 displayExpr="DocTypeName">
             </dxo-lookup>
         </dxi-column>     
-        <dxi-column 
+        <!-- <dxi-column 
             dataField="DocumentFile"
             caption="Document File">
             <dxi-validation-rule type="required"></dxi-validation-rule>
-        </dxi-column>
+            <dx-file-uploader accept="image/*"></dx-file-uploader>
+        </dxi-column> -->
         <dxi-column 
             dataField="DocumentFile"
             caption="Document File">
@@ -70,8 +71,8 @@
             <dx-file-uploader
                 selectButtonText="Choose File"
                 labelText="No file choosen"
-                accept="/*"
-                uploadMode="useForm">
+                accept="image/*"
+                uploadMode="useButtons">
             </dx-file-uploader>
         </dxi-column>
     </dx-data-grid>  

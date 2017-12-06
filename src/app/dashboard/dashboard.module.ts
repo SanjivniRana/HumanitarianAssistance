@@ -23,6 +23,13 @@ import { httpClientService } from "../Auth/httpClient";
 import { MessageService } from "primeng/components/common/messageservice";
 import { DashboardComponent } from "./dashboard.component";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
+import { EmployeesComponent } from './hr/employees/employees.component';
+import { ProspectiveEmployeesComponent } from './HR/prospective-employees/prospective-employees.component';
+import { AdvancesComponent } from './HR/advances/advances.component';
+import { MonthlyLeavesRegisterComponent } from './HR/monthly-leaves-register/monthly-leaves-register.component';
+import { MonthlyPayrollSheetComponent } from './HR/monthly-payroll-sheet/monthly-payroll-sheet.component';
+import { PayrollMonthlyHoursComponent } from './HR/payroll-monthly-hours/payroll-monthly-hours.component';
+import { HrComponent } from './hr/hr.component';
 
 
 @NgModule({
@@ -56,7 +63,14 @@ import { DashboardRoutingModule } from "./dashboard-routing.module";
     declarations: [
         DashboardComponent,
         AppHeaderComponent,
-        AppSidebarComponent        
+        AppSidebarComponent,
+        EmployeesComponent,
+        ProspectiveEmployeesComponent,
+        AdvancesComponent,
+        MonthlyLeavesRegisterComponent,
+        MonthlyPayrollSheetComponent,
+        PayrollMonthlyHoursComponent,
+        HrComponent        
     ],
 
     providers: [

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+//#region "Questions class definition"
 export class Ques {
     ID: number;
     Question: string;
@@ -11,14 +12,18 @@ export class Ques {
     Rating4: string;
     Rating5: string;
 }
+//#endregion "Questions"
 
+//#region "Documents class definition"
 export class Documents {
     ID: number;
     DocumentName: string;
     DocumentType: number;
     DocumentFile: string;
 }
+//#endregion "Documents"
 
+//#region "Beneficiaries class definition"
 export class Beneficiaries {
     ID: number;
     SerialNo: number;
@@ -36,9 +41,11 @@ export class Beneficiaries {
     TypeOfCase: string;
     TelephoneNo: number;
 }
+//#endregion "Beneficiaries class definition"
 
+//#region "Activity class definition"
 export class Activity {
-    ID: number;
+    // ID: number;
     ActivityDesc: string;
     PlannedStartDate: string;
     PlannedEndDate: string;
@@ -56,8 +63,10 @@ export class Activity {
     RecurringMonth: string;
     TaskType: string;
 }
+//#endregion "Activity class definition"
 
-export class ActivitiesData{
+//#region "ActivitiesData class definition"
+export class ActivitiesData {
     ActivityDesc : string;
     PlannedStartDate : string;
     PlannedEndDate : string;
@@ -66,30 +75,70 @@ export class ActivitiesData{
     LocationOfActivity : string;
     TaskType : string;
 }
+//#endregion "ActivitiesData class definition"
 
-let activitiesdata = {
-    "ActivityDesc" : "string",
-    "PlannedStartDate" : "string",
-    "PlannedEndDate" : "string",
-    "BudgetLine" : "string",
-    "Resource" : "string",
-    "LocationOfActivity" : "string",
-    "TaskType" : "string"
+
+export class ActivityLocationTypes {
+    ActivityLocationTypeId: number;
+    ActivityLocationTypeName: string;
 }
 
+export class BudgetTypes {
+    BudgetTypeId: number;
+    BudgetTypeName: string;
+}
+
+export class ResourceTypes {
+    ResourceTypeId: number;
+    ResourceTypeName: string;
+}
+
+let budgettypes : BudgetTypes[] = [
+    { BudgetTypeId: 1, BudgetTypeName: 'Demo'},
+    { BudgetTypeId: 2, BudgetTypeName: 'Demo'}
+  ];
+
+ let resourcetypes : ResourceTypes[] = [
+    { ResourceTypeId: 1, ResourceTypeName: 'E0001-Wasim Khan'},
+    { ResourceTypeId: 2, ResourceTypeName: 'E0002-Salman Khan'},
+    { ResourceTypeId: 3, ResourceTypeName: 'E0003-Amir Pathan'},
+    { ResourceTypeId: 4, ResourceTypeName: 'E0004-Rahul Khan'},
+    { ResourceTypeId: 4, ResourceTypeName: 'E0005-Sam Ansari'}
+  ];
+
+ let activitylocationtypes : ActivityLocationTypes[] = [
+    { ActivityLocationTypeId: 1, ActivityLocationTypeName: 'TES-TestOffice'}
+  ];
+
+//#region "activitiesdata"
+let activitiesdata = {
+    "ActivityDesc" : "",
+    "PlannedStartDate" : "",
+    "PlannedEndDate" : "",
+    "BudgetLine" : "",
+    "Resource" : "",
+    "LocationOfActivity" : "",
+    "TaskType" : ""
+}
+//#endregion "activitiesdata"
+
+//#region "measuretype"
 let measuretype: string[] = [
    "Qualitative",
    "Quantitative",
    "Qualitative & Quantitative"
 ]
+//#endregion "measuretype"
 
+//#region "projecttype"
 let projecttype: string[] = [
     "projecttype1",
     "projecttype2",
     "projecttype3"
  ]
+ //#endregion "projecttype"
 
-//ques
+//#region "ques"
 let ques: Ques[] = [
     {
         'ID': 1,
@@ -128,8 +177,10 @@ let ques: Ques[] = [
         "Rating4": "string",
         "Rating5": "string",
     }
-];
+]
+//#endregion "ques"
 
+//#region "docs"
 let docs: Documents[] = [
     {
         "ID": 1,
@@ -150,7 +201,9 @@ let docs: Documents[] = [
         "DocumentFile": "string",
     },
 ]
+//#endregion "docs"
 
+//#region "beneficiaries"
 let beneficiaries: Beneficiaries[] = [
     {
         "ID": 1,
@@ -165,7 +218,7 @@ let beneficiaries: Beneficiaries[] = [
         "Sex": 1,
         "MaritalStatus": 1,
         "Referrer": "string",
-        "ReferDate": "string",
+        "ReferDate": "03/11/2017",
         "TypeOfCase": "string",
         "TelephoneNo": 7686868,
     },
@@ -182,7 +235,7 @@ let beneficiaries: Beneficiaries[] = [
         "Sex": 1,
         "MaritalStatus": 1,
         "Referrer": "string",
-        "ReferDate": "string",
+        "ReferDate": "02/21/2017",
         "TypeOfCase": "string",
         "TelephoneNo": 7686868,
     },
@@ -199,23 +252,25 @@ let beneficiaries: Beneficiaries[] = [
         "Sex": 1,
         "MaritalStatus": 1,
         "Referrer": "string",
-        "ReferDate": "string",
+        "ReferDate": "09/02/2017",
         "TypeOfCase": "string",
         "TelephoneNo": 7686868,
     }
 ]
+//#endregion "beneficiaries
 
+//#region "activity"
 let activity: Activity[] = [
     {
-        "ID": 1,
+        // "ID": 1,
         "ActivityDesc": "string",
-        "PlannedStartDate": "string",
-        "PlannedEndDate": "string",
+        "PlannedStartDate": "01-05-2017",
+        "PlannedEndDate": "02-06-2017",
         "BudgetLine": 1,
         "Resource": 1,
         "LocationOfActivity": 1,
-        "ActualStartDate": "string",
-        "ActualEndDate": "string",
+        "ActualStartDate": "02-07-2017",
+        "ActualEndDate": "03-08-2017",
         "ImplementationMethod": "string",
         "Challenges": "string",
         "OvercomingChallenges": "string",
@@ -226,6 +281,7 @@ let activity: Activity[] = [
         "TaskType": "string"
     }
 ]
+//#endregion "activity"
 
 @Injectable()
 export class ProjectsService {
@@ -257,5 +313,17 @@ export class ProjectsService {
     getActivitiesData() {
         return activitiesdata;
     }
+
+    // getBudgetType() {
+    //     return budgettype;
+    // }
+
+    // getResourceType() {
+    //     return resourcetype;
+    // }
+
+    // getLocationType() {
+    //     return locationtype;
+    // }
 
 }

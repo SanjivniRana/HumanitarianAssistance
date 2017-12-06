@@ -32,7 +32,8 @@ import { EditComponent } from "./projects/edit/edit.component";
         DxTextAreaModule,
         DxDateBoxModule,
         DxFileUploaderModule,
-        DxRadioGroupModule
+        DxRadioGroupModule,
+        CommonModule
 
     ],
     declarations: [

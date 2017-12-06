@@ -9,6 +9,8 @@ import { Beneficiaries, ProjectsService } from '../projects.service';
 export class BeneficiariesComponent{
 
   beneficiaries: Beneficiaries[];
+
+  
   dataSource: any;
   // data: any;
   // question: string[];

@@ -17,8 +17,8 @@
         [columnAutoWidth]="true">
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>    
-        <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true" >
-            <dxo-popup title="Add/Edit PMU Beneficiary Details" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
+        <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="true" >
+            <dxo-popup title="PMU Beneficiary Details" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }">
             </dxo-popup>
           </dxo-editing>
             <!-- editing -->
@@ -101,7 +101,7 @@
             <dxi-validation-rule type="required"></dxi-validation-rule>
       </dxi-column>
       <dxi-column 
-            dataField="Refer Date"
+            dataField="ReferDate"
             caption="Refer Date" dataType="date">
             <dxi-validation-rule type="required"></dxi-validation-rule>
       </dxi-column>
