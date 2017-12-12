@@ -11,7 +11,8 @@
                             <li (click)="toggleSideFun()"><a [routerLink]="['./code/currency-code']">Currency Codes</a></li>                                                        
                             <li (click)="toggleSideFun()"><a [routerLink]="['./code/office-code']">Office Codes</a></li>
                             <li (click)="toggleSideFun()"><a [routerLink]="['./code/analytical-codes']">Analytical Codes</a></li>
-                            <li (click)="toggleSideFun()"><a [routerLink]="['./code/email-setting']">Email Settings</a></li>                            
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./code/email-setting']">Email Settings</a></li>
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./code/exchange-rate']">Exchange Rate</a></li>                            
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -29,16 +30,17 @@
                             <!-- <li><a href="javascript:void(0)">Set Financial Year</a></li> -->
                         </ul>
                     </li>
-                    <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" class="dropdown">
+                    <!-- <li *ngxPermissionsOnly = "['SuperAdmin','Admin']" class="dropdown"> -->
+                    <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-users"></i></span> HR <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Employees</a></li>
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Prospective Employees</a></li>
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./hr/employees']">Employees</a></li>
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./hr/prospective-employees']">Prospective Employees</a></li>
                             <li role="separator" class="divider"></li>
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Advances</a></li>                            
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Monthly Leaves Register</a></li>
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Monthly Payroll Sheet</a></li>
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Payroll Monthly Hours</a></li>
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./hr/advances']">Advances</a></li>                            
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./hr/leave-register']">Monthly Leaves Register</a></li>
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./hr/payroll']">Monthly Payroll Sheet</a></li>
+                            <li (click)="toggleSideFun()"><a [routerLink]="['./hr/payroll-monthly-hours']">Payroll Monthly Hours</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -55,7 +57,6 @@
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><i class="fa fa-info-circle"></i></span> General <i class="fa fa-angle-down pull-right"></i></a>
                         <ul class="dropdown-menu">
-                            <li (click)="toggleSideFun()"><a href="javascript:void(0)">Exchange Rate</a></li>
                             <li (click)="toggleSideFun()"><a href="javascript:void(0)">Monthly Exchange Rate</a></li>                            
                         </ul>
                     </li>

@@ -28,8 +28,13 @@ import { GLOBAL } from '../../../shared/global';
 
 export class ChartOfAccountsComponent implements OnInit {
 
+  popupVisibleAddChartOfAccount = false;
   popupVisibleEditChartOfAccount = false;
   formToggle: number;
+
+  //popup main level filter  
+  selectValue: number = 1;
+
 
   //Forms Classes
   fMainLevelAccount: MainLevelAccount;
@@ -57,7 +62,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.formToggle = 1;
 
     //Select Account Level (Global Filter)
-    this.accountLevelDropdown = this.codeService.getAccountLevels();
+    // this.accountLevelDropdown = this.codeService.getAccountLevels();
 
     //AccountType
     this.getAccountType();
@@ -76,8 +81,6 @@ export class ChartOfAccountsComponent implements OnInit {
       'AccountTypeId': null,
       'Show': true,
       'MDCode': null,
-      'DepMethod': null,
-      'DepRate': 0
     };
 
     //Form Control Level Account    
@@ -99,7 +102,7 @@ export class ChartOfAccountsComponent implements OnInit {
       'AccountLevelId': 3,
       'AccountTypeName': "Sub Level Accounts",
       "AccountNote": 3,
-      'MainLevel': 0,
+      'ControlLevel': 0,
       'AccountName': null,
       'AccountTypeId': null,
       'Show': true,
@@ -112,7 +115,7 @@ export class ChartOfAccountsComponent implements OnInit {
       'AccountLevelId': 4,
       'AccountTypeName': "Input Level Accounts",
       "AccountNote": 4,
-      'MainLevel': 0,
+      'SubLevel': 0,
       'AccountName': null,
       'AccountTypeId': null,
       'Show': true,
@@ -174,7 +177,7 @@ export class ChartOfAccountsComponent implements OnInit {
               }
             );
           }
-          else {
+          else if (element.AccountLevelId == 2) {
             this.chartOfAccountsData.push(
               {
                 ID: counter,
@@ -224,50 +227,26 @@ export class ChartOfAccountsComponent implements OnInit {
   //TODO: Main Account Level Filter in Dropdown
   accountLevelSelectedValue(event: any) {
     // this.toastr.success(event.value.AccountLevelName);
-    this.formToggle = event.value.ID;
+    this.formToggle = event.value;
   }
 
-  // MainLevelAccount Data
-  onAddMainLevelAccount(data: any) {
-    //  this.fMainLevelAccount.AccountType = data.AccountType;
-    console.log(data);
-    debugger;
-    this.codeService.AddMainLevelAccount(this.setting.getBaseUrl() + GLOBAL.API_ChartOfAccount_AddChartAccountDetail, data).subscribe(
-      data => {
-        if (data.StatusCode == 200) {
-          this.toastr.success("Main Account Added Successfully !");
-          this.getChartOfAccountsList();
-          this.cancelChartOfAccount();
-        }
-      },
-      error => {
-        if (error.StatusCode == 500) {
-          this.toastr.error("Internal Server Error....");
-          this.cancelChartOfAccount();
-        }
-        else if (error.StatusCode == 401) {
-          this.toastr.error("Unauthorized Access Error....");
-          this.cancelChartOfAccount();
-        }
-        else if (error.StatusCode == 403) {
-          this.toastr.error("Forbidden Error....");
-          this.cancelChartOfAccount();
-        }
-        else {
-        }
-      }
-    );
-  }
 
-  //Add Control, Sub, Input level Account ----
-  onAddOtherAccounts(data: any) {
-    data.ParentID = data.MainLevel;
+
+  //Add Main, Control, Sub, Input level Account ----
+  onAddAccounts(data: any) {
+    if (data.MainLevel) {
+      data.ParentID = data.MainLevel;
+    }
+    else if (data.ControlLevel) {
+      data.ParentID = data.ControlLevel;
+    }
+    else if (data.SubLevel) {
+      data.ParentID = data.SubLevel;
+    }
     this.codeService.AddMainLevelAccount(this.setting.getBaseUrl() + GLOBAL.API_ChartOfAccount_AddChartAccountDetail, data).subscribe(
       data => {
         if (data.StatusCode == 200) {
           this.toastr.success("Account Added Successfully !");
-          this.getChartOfAccountsList();
-          this.cancelChartOfAccount();
         }
       },
       error => {
@@ -281,12 +260,11 @@ export class ChartOfAccountsComponent implements OnInit {
         }
         else if (error.StatusCode == 403) {
           this.toastr.error("Forbidden Error....");
-          this.cancelChartOfAccount();
-        }
-        else {
         }
       }
     );
+    this.getChartOfAccountsList();
+    this.cancelChartOfAccount();
   }
 
   //TODO: Update Chart of Account Detail
@@ -296,8 +274,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.codeService.EditChartOfAccountDetail(this.setting.getBaseUrl() + GLOBAL.API_ChartOfAccount_EditChartAccountDetail, value).subscribe(
       data => {
         if (data.StatusCode == 200) {
-          this.toastr.success("Updated Successfully !");
-          this.getChartOfAccountsList();
+          this.toastr.success("Updated Successfully !");          
         }
       },
       error => {
@@ -315,18 +292,32 @@ export class ChartOfAccountsComponent implements OnInit {
         }
       }
     );
+    this.getChartOfAccountsList();
+  }
+
+  //on add Popup show
+  onShowing() {
+    this.formToggle = 1;
+    this.selectValue = 1;
+    this.allFormInitialize();
+
+    //Select Account Level (Global Filter)
+    this.accountLevelDropdown = this.codeService.getAccountLevels();
+
+    //AccountType
+    this.getAccountType();
+    this.getChartOfAccountsList();
+
   }
 
   //EVENT: On Add Popup called
   addChartOfAccount() {
-    this.formToggle = 1;
-    this.allFormInitialize();
-    this.popupVisibleEditChartOfAccount = true;
+    this.popupVisibleAddChartOfAccount = true;
   }
 
   //EVENT: On Add Popup cancelled
   cancelChartOfAccount() {
-    this.popupVisibleEditChartOfAccount = false;
+    this.popupVisibleAddChartOfAccount = false;
   }
 }
 

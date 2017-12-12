@@ -1,20 +1,42 @@
 <div class="row">
-    <div class="col-sm-12">
-        <div class="main-heading clearfix">
-                <h3 class="page-heading">Journal</h3>
-        </div>
-        </div>
-    <div class="col-sm-12">
-     
-      <!-- Journal Filters -->   
-      <dx-pivot-grid id="sales"
-      [allowSortingBySummary]="true"
-      [allowSorting]="true"
-      [allowFiltering]="true"      
-      [showBorders]="true"
-      [showColumnTotals]="false"
-      [showColumnGrandTotals]="false"            
-      [dataSource]="pivotGridDataSource">      
+  <div class="col-sm-12">
+    <div class="main-heading clearfix">
+      <h3 class="page-heading">Journal</h3>
+    </div>
+  </div>
+  <div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  </div>
+
+  <div>
+    <div class="row" style="border:1px solid ;">
+      <div class="col-md-12">
+
+        <form action="your-action" (submit)="onApplyingFilter(journalFilter)">
+          <dx-form id="form" [(formData)]="journalFilter" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+            validationGroup="customerData">
+            <dxi-item dataField="CurrencyId" editorType="dxSelectBox" [editorOptions]="{ dataSource: currencyDropdown, value: CurrencyId, displayExpr: 'CurrencyCode', valueExpr: 'CurrencyId', showClearButton:'true'  }"></dxi-item>
+            <dxi-item dataField="OfficeId" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeDropdown, value: OfficeId, displayExpr: 'OfficeName', valueExpr: 'OfficeId', showClearButton:'true'  }"></dxi-item>
+            <dxi-item dataField="RecordType" editorType="dxSelectBox" [editorOptions]="{ dataSource: recordTypeDropdown, value: Id, displayExpr: 'Name', valueExpr: 'Id', showClearButton:'true'  }"></dxi-item>
+            <dxi-item dataField="FromDate" editorType="dxDateBox" [editorOptions]="{ value: currentYear, width: '100%' }"></dxi-item>
+            <dxi-item dataField="ToDate" editorType="dxDateBox" [editorOptions]="{ value: now, width: '100%' }"></dxi-item>
+          </dx-form>
+          <br>
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8 text-center">
+              <dx-button text="Show" type="success" validationGroup="customerData" [useSubmitBehavior]="true"></dx-button>
+            </div>
+          </div>
+          <br>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-12">
+    <dx-pivot-grid id="sales" [allowSortingBySummary]="true" [allowSorting]="true" [allowFiltering]="true" [showBorders]="true"
+      [showColumnTotals]="false" [showColumnGrandTotals]="false" [dataSource]="pivotGridDataSource">
       <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
       <dxo-field-panel
       [showDataFields]="true" 

@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router'
+import { Routes, RouterModule } from '@angular/router';
 import { AccountsComponent } from './accounts.component';
 import { UserComponent } from '../admin/user.component';
 import { VouchersComponent } from './vouchers/vouchers.component';

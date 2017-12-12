@@ -24,6 +24,12 @@
             [showPageSizeSelector]="true"
             [visible]="true">
             </dxo-pager>  -->
+            <dxo-paging [pageSize]="7"></dxo-paging>
+            <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
+                  [visible]="true">
+            </dxo-pager>
+      
+            <dxo-scrolling mode="infinite"></dxo-scrolling>
             <dxo-filter-row 
                 [visible]="true">
             </dxo-filter-row>

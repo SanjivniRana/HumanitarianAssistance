@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DxDataGridComponent, DxTextBoxModule, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountsService } from '../../accounts.service';
 import { commonService } from '../../../../Services/common.service';
@@ -8,6 +7,7 @@ import { AppSettingsService } from '../../../../Services/App-settings.Service';
 import { ToastrService } from 'ngx-toastr';
 import { GLOBAL } from '../../../../shared/global';
 import { DomSanitizer } from '@angular/platform-browser';
+import { VouchersComponent } from '../vouchers.component';
 
 @Component({
     selector: 'app-document',
@@ -28,18 +28,16 @@ export class DocumentComponent implements OnInit {
     @Input() VoucherNo: any;
     @Input() voucherDocumentDetails: Document[];
 
-    constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService, private router: Router, private fb: FormBuilder, private commonservice: commonService, private _DomSanitizer: DomSanitizer) {
+    constructor(private accountservice: AccountsService,private vouchercomponent: VouchersComponent, private setting: AppSettingsService, private toastr: ToastrService, private router: Router, private fb: FormBuilder, private commonservice: commonService, private _DomSanitizer: DomSanitizer) {
         this.voucherNumber = this.commonservice.voucherNumber;
         this.addNewDocument = {
             DocumentName: "",
             DocumentFilePath: "",
             DocumentDate: ""
         };
-
     }
 
     ngOnInit() {
-        // localStorage.setItem("SelectedVoucherNumber", this.VoucherNo);
         this.GetVoucherDocumentList();
     }
 
@@ -84,7 +82,7 @@ export class DocumentComponent implements OnInit {
     GetVoucherDocumentList() {
         this.accountservice.GetVoucherDocumentDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetVoucherDocumentDetail, localStorage.getItem("SelectedVoucherNumber")).subscribe(
             data => {
-                if (data.StatusCode == 200) {
+                if (data.StatusCode == 200) {                    
                     this.voucherDocumentDetails = [];
                     data.data.VoucherDocumentDetailList.forEach(element => {
                         this.voucherDocumentDetails.push(element);
@@ -104,7 +102,7 @@ export class DocumentComponent implements OnInit {
                 else {
                 }
             }
-        )
+        );        
     }
 
     //Add New Voucher Document
@@ -114,8 +112,6 @@ export class DocumentComponent implements OnInit {
                 if (data.StatusCode == 200) {
                     this.toastr.success("Document Added Successfully!!!");
                 }
-                this.GetVoucherDocumentList();
-                this.cancelDeleteVoucher();
             },
             error => {
                 if (error.StatusCode == 500) {
@@ -132,6 +128,7 @@ export class DocumentComponent implements OnInit {
             }
         )
         this.GetVoucherDocumentList();
+        this.cancelDeleteVoucher();
     }
 
 }

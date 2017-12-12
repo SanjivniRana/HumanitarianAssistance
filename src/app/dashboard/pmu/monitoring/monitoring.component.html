@@ -17,13 +17,14 @@
           [columnAutoWidth]="true">
           <dxo-paging [pageSize]="10"></dxo-paging>
           <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>    
-          <!-- <dxo-pager
-          [allowedPageSizes]="[5, 8, 15, 30]"
-          [showInfo]="true"
-          [showNavigationButtons]="true"
-          [showPageSizeSelector]="true"
-          [visible]="true">
-          </dxo-pager>  -->
+          <dxo-paging [pageSize]="7"></dxo-paging>
+          <dxo-pager 
+                [allowedPageSizes]="[5, 8, 15, 30]" 
+                [showInfo]="true" 
+                [showNavigationButtons]="true" 
+                [showPageSizeSelector]="true"
+                [visible]="true">
+          </dxo-pager>
           <dxo-filter-row 
               [visible]="true">
           </dxo-filter-row>
@@ -57,9 +58,9 @@
           <dxi-column [fixed]="true" fixedPosition="right" dataField = "editId" caption="Action" cellTemplate="CellTemplateOpen"></dxi-column>
           <!-- <dxi-column dataField = "deleteId" caption="Delete" alignment="right" cellTemplate="CellTemplateDelete"></dxi-column> -->
           <div *dxTemplate="let data of 'CellTemplateOpen'">         
-                  <a [routerLink]="['../beneficiaries']" title="Beneficiaries"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></a>
+                  <a [routerLink]="['../beneficiaries-monitoring']" title="Beneficiaries"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></a>
                   <span style="color:#acacac;">&nbsp;|&nbsp;</span>
-                  <a [routerLink]="['../project-activities']" title="Project Activities"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i></a>
+                  <a [routerLink]="['../project-activities-monitoring']" title="Project Activities"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i></a>
           </div>    
           
       </dx-data-grid>

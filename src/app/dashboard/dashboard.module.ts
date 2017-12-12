@@ -63,14 +63,7 @@ import { HrComponent } from './hr/hr.component';
     declarations: [
         DashboardComponent,
         AppHeaderComponent,
-        AppSidebarComponent,
-        EmployeesComponent,
-        ProspectiveEmployeesComponent,
-        AdvancesComponent,
-        MonthlyLeavesRegisterComponent,
-        MonthlyPayrollSheetComponent,
-        PayrollMonthlyHoursComponent,
-        HrComponent        
+        AppSidebarComponent                
     ],
 
     providers: [

@@ -2,7 +2,7 @@
 <div class="row">
       <div class="col-sm-12">
           <div class="main-heading clearfix">
-                  <h3 class="page-heading">PMU Projects</h3>
+                  <h3 class="page-heading">PMU Implementation</h3>
                   <dx-button
                   class="button-info btn btn-default btn-green"
                   text="Back"
@@ -18,6 +18,11 @@
               <dxo-paging [pageSize]="10"></dxo-paging>
               <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>    
 
+              <dxo-paging [pageSize]="7"></dxo-paging>
+              <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
+                    [visible]="true">
+              </dxo-pager>
+              
               <!-- <dxo-pager
               [allowedPageSizes]="[5, 8, 15, 30]"
               [showInfo]="true"

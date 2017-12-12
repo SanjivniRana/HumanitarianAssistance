@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxFileUploaderModule } from 'devextreme-angular';
 import { FormBuilder } from '@angular/forms';
 import { AccountsService, VoucherTransaction } from '../../accounts.service';
 import { VouchersComponent } from '../vouchers.component';
@@ -97,6 +96,8 @@ export class TransactionComponent implements OnInit {
         if(eventName == "RowInserting")
         {
             obj.data.VoucherNo = localStorage.getItem("SelectedVoucherNumber");
+            obj.data.CurrencyId = localStorage.getItem("SelectedVoucherCurrency");            
+            obj.data.OfficeId = localStorage.getItem("SelectedOfficeId");
             this.AddVoucherTransaction(obj.data);
         }
 
@@ -104,14 +105,12 @@ export class TransactionComponent implements OnInit {
         {
             debugger;
             var value = Object.assign(obj.oldData,obj.newData);     // Merge old data with new Data
-            value.VoucherNo = localStorage.getItem("SelectedVoucherNumber"); 
+            value.VoucherNo = localStorage.getItem("SelectedVoucherNumber");
+            value.CurrencyId = localStorage.getItem("SelectedVoucherCurrency");            
+            value.OfficeId = localStorage.getItem("SelectedOfficeId");
             this.EditVoucherTransaction(value);
         }
-
-        else{
-            //delete the row functionality
-        }
-        
+        this.GetAllVoucherTransactionDetail();
     }    
 
     AddVoucherTransaction(data)
@@ -121,6 +120,10 @@ export class TransactionComponent implements OnInit {
                 if(data.StatusCode == 200)
                 {
                     this.toastr.success("Transaction Added Successfully!!!");
+                }
+                else if(data.StatusCode == 400)
+                {
+                    this.toastr.error(data.Message);
                 }
             },
             error => {

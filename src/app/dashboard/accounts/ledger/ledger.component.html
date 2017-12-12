@@ -4,32 +4,84 @@
             <h3 class="page-heading">Ledger Statement</h3>
         </div>
     </div>
-    <div class="col-sm-12">
-        <!-- Ledger Filters -->
-        <dx-data-grid id="gridContainer" [dataSource]="dataSource" [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="AccountCode">
-            <dxo-filter-row [visible]="true"></dxo-filter-row>
-            <dxo-header-filter [visible]="true"></dxo-header-filter>
-            <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
-            <dxi-column dataField="AccountCode" [width]="70" caption="Account Code"></dxi-column>
-            <dxi-column dataField="ChartAccountName"></dxi-column>
-            <dxi-column dataField="CurrencyName"></dxi-column>
+    <div>
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    </div>
 
-            <div *dxTemplate="let ledger of 'detail'">
-                <div class="master-detail-caption">{{ledger.data.AccountName}}</div>
-                <dx-data-grid [dataSource]="ledger.data.Transactionlist" [showBorders]="true" [columnAutoWidth]="true">
-                    <dxo-filter-row [visible]="true"></dxo-filter-row>
-                    <dxo-header-filter [visible]="true"></dxo-header-filter>
-                    <!-- <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel> -->
-                    <dxi-column dataField="TransactionNo"></dxi-column>
-                    <dxi-column dataField="AccountName"></dxi-column>
-                    <dxi-column dataField="TransactionDate" dataType="date"></dxi-column>
-                    <dxi-column dataField="DebitAmount"></dxi-column>
-                    <dxi-column dataField="CreditAmount"></dxi-column>
-                    <dxi-column dataField="VoucherNo"></dxi-column>
-                    <dxi-column dataField="Description"></dxi-column>
-                    <!-- <dxi-column  dataType="boolean" caption="Completed" [calculateCellValue]="completedValue"></dxi-column> -->
-                </dx-data-grid>
+    <div>
+        <div class="row" style="border:1px solid ;">
+            <div class="col-md-12">
+
+                <form action="your-action" (submit)="onApplyingFilter(ledgerFilter)">
+                    <dx-form id="form" [(formData)]="ledgerFilter" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                        validationGroup="customerData">
+
+                        <dxi-item dataField="CurrencyId" editorType="dxSelectBox" [editorOptions]="{ dataSource: currencyDropdown, value: CurrencyId, displayExpr: 'CurrencyCode', valueExpr: 'CurrencyId', showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="OfficeCode" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeDropdown, value: OfficeId, displayExpr: 'OfficeName', valueExpr: 'OfficeId', showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="RecordType" editorType="dxSelectBox" [editorOptions]="{ dataSource: recordTypeDropdown, value: Id, displayExpr: 'Name', valueExpr: 'Id', showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="AccountId" editorType="dxSelectBox" [editorOptions]="{ dataSource: accountDropdown, value: AccountCode, displayExpr: 'AccountName', valueExpr: 'AccountCode', showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="FromDate" editorType="dxDateBox" [editorOptions]="{ value: currentYear, width: '100%' }"></dxi-item>
+                        <dxi-item dataField="ToDate" editorType="dxDateBox" [editorOptions]="{ value: now, width: '100%' }"></dxi-item>
+                    </dx-form>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8 text-center">
+                            <dx-button text="Show" type="success" validationGroup="customerData" [useSubmitBehavior]="true"></dx-button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
             </div>
-        </dx-data-grid>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <dx-pivot-grid id="sales" [allowSortingBySummary]="true" [allowSorting]="true" [allowFiltering]="true" [showBorders]="true"
+            [showColumnTotals]="false" [showColumnGrandTotals]="false" [dataSource]="pivotGridDataSource">
+            <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+            <dxo-field-panel [showDataFields]="true" [visible]="true"></dxo-field-panel>
+        </dx-pivot-grid>
+        <br>
+    </div>
+
+
+
+    <div class="row text-center">
+
+        <div class="col-md-offset-2 col-md-8">
+
+            <dx-box direction="row">
+                <div class="row  text-center">
+                    <div class="col-md-6">
+                        <dxi-item class="rect" [ratio]="1">
+                            <span class="panelAccount">Opening Account :  {{OpenningBalanceType}}</span>  
+                        </dxi-item>
+                    </div>
+                    <div class="col-md-6">
+                        <dxi-item class="rect" [ratio]="2">
+                            <span class="panelAccount">Opening Balance :  {{OpenningBalance}}</span> 
+                        </dxi-item>
+                    </div>
+                </div>
+
+            </dx-box>
+            <dx-box direction="row">
+                <div class="row  text-center">
+                    <div class="col-md-6">
+                        <dxi-item class="rect" [ratio]="1">
+
+                                <span class="panelAccount">Closing Account : {{ClosingBalanceType}}</span> 
+                        </dxi-item>
+                    </div>
+                    <div class="col-md-6">
+                        <dxi-item class="rect" [ratio]="2">
+                                <span class="panelAccount">Closing Balance : {{ClosingBalance}}</span>  
+                        </dxi-item>
+                    </div>
+                </div>
+
+
+            </dx-box>
+        </div>
     </div>
 </div>

@@ -11,6 +11,7 @@ export interface OfficeCode
     OfficeId : any;
     OfficeCode : string;
     OfficeName : string;
+    OfficeKey: string;
     SupervisorName : string;
     PhoneNo : string;
     FaxNo : string;

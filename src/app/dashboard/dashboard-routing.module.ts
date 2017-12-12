@@ -21,7 +21,7 @@ const routes: Routes = [
 
             { path: 'code', loadChildren: './code/code.module#CodeModule' },
             { path: 'pmu', loadChildren: './pmu/pmu.module#PMUModule' },
-
+            { path: 'hr', loadChildren: './hr/hr.module#HrModule' },
         ]
     }
 ];

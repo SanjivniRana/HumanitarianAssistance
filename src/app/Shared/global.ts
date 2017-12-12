@@ -17,6 +17,7 @@ export class GLOBAL {
     public static API_ResetPassword = "Account/ResetPassword";
     public static API_UserDetail_GetUserDetailsByUserId = 'Account/GetUserDetailsByUserId';
     public static API_UserDetail_EditUser = 'Account/EditUser';
+
     public static API_CurrencyCodes_GetAllCurrency = 'Code/GetAllCurrency';
     public static API_CurrencyCodes_AddCurrency = 'Code/AddCurrency';
     public static API_CurrencyCode_EditCurrency = 'Code/EditCurrency';
@@ -27,11 +28,15 @@ export class GLOBAL {
     public static API_EmailSetting_GetAllEmailSettingDetail = 'Code/GetAllEmailSettingDetail';
     public static API_EmailType_GetAllEmailType = 'Code/GetAllEmailType';
     public static API_EmailSetting_AddEmailSettingDetail = 'Code/AddEmailSettingDetail';
-    public static API_EmailSetting_EditEmailSettingDetail = 'Code/EditEmailSettingDetail';
+    public static API_EmailSetting_EditEmailSettingDetail = 'Code/EditEmailSettingDetail';    
     public static API_JournalCode_GetAllJournalDetail = 'Code/GetAllJournalDetail';
     public static API_JournalCode_AddJournalDetail = 'Code/AddJournalDetail';
     public static API_JournalCode_EditJournalDetail = 'Code/EditJournalDetail';
     public static API_JournalCode_DeleteJournalDetail = 'Code/DeleteJournalDetail';
+    public static API_ExchangeRate_GetExchangeRate = 'Code/GetAllExchangeRate';
+    public static API_ExchangeRate_AddExchangeRate = 'Code/AddExchangeRate';
+    public static API_ExchangeRate_EditExchangeRate = 'Code/EditExchangeRate';
+
     public static API_Accounting_GetAllVoucherDetails = 'Account/GetAllVoucherDetails';
     public static API_Accounting_AddVouchers = 'Account/AddVoucherDetail';
     public static API_Accounting_EditVouchers = 'Account/EditVoucherDetail';
@@ -43,8 +48,8 @@ export class GLOBAL {
     public static API_Accounting_EditVouchersTransaction = 'Account/EditVoucherTransactionDetail';
     public static API_Accounting_GetAllJournalDetails = 'Account/GetJouranlVoucherDetails';
     public static API_Accounting_GetAllLedgerDetails = 'Account/GetAllLedgerDetails';
+    public static API_Accounting_GetAllTrailBalanceDetails = 'Account/GetTrailBlanceDetailsByCondition';
 
-    //Alpit 30-11-2017
     public static API_ChartOfAccount_GetAllChartAccountDetail = 'Code/GetAllChartAccountDetail';
     public static API_Accounting_GetAllAccoutnType = 'Code/GetAllAccountType';
     public static API_ChartOfAccount_AddChartAccountDetail = 'Code/AddChartAccountDetail';

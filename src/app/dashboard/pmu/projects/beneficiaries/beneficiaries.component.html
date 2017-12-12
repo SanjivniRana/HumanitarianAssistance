@@ -30,6 +30,12 @@
           [showPageSizeSelector]="true"
           [visible]="true">
       </dxo-pager>  -->
+      <dxo-paging [pageSize]="7"></dxo-paging>
+      <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
+            [visible]="true">
+      </dxo-pager>
+
+      <dxo-scrolling mode="infinite"></dxo-scrolling>
         <dxo-filter-row 
             [visible]="true">
         </dxo-filter-row>
@@ -39,10 +45,24 @@
             [visible]="true" 
             [width]="240" 
             placeholder="Search..."></dxo-search-panel>
+
+        <!-- <dxi-column dataField="SerialNo" caption="SerialNo" cellTemplate="CellTemplateSerialNo"  editorType="dxNumberBox"></dxi-column>          
+            <div *dxTemplate="let data of 'CellTemplateSerialNo'">
+                  <dx-number-box
+                        [value]=""
+                        [showSpinButtons]="true"
+                        [showClearButton]="false">
+                  </dx-number-box> 
+            </div> -->
         <dxi-column 
             dataField="SerialNo"                 
             caption="Serial No"> 
-            <dxi-validation-rule type="required"></dxi-validation-rule>         
+            <dxi-validation-rule type="required"></dxi-validation-rule>    
+            <dx-number-box
+                  [value]=""
+                  [showSpinButtons]="true"
+                  [showClearButton]="true">
+            </dx-number-box>     
         </dxi-column>
         <dxi-column 
             dataField="Name" 

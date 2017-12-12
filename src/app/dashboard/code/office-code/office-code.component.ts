@@ -65,6 +65,7 @@ export class OfficeCodeComponent implements OnInit {
                 OfficeId: element.OfficeId,
                 OfficeCode: element.OfficeCode,
                 OfficeName : element.OfficeName,
+                OfficeKey: element.OfficeKey,
                 SupervisorName: element.SupervisorName,
                 PhoneNo : element.PhoneNo,
                 FaxNo : element.FaxNo
@@ -107,6 +108,7 @@ AddOfficeCode(model)
       OfficeId : 0,
       OfficeCode : model.OfficeCode,
       OfficeName : model.OfficeName,
+      OfficeKey: model.OfficeKey,
       SupervisorName : model.SupervisorName,
       PhoneNo : model.PhoneNo,
       FaxNo : model.FaxNo
@@ -141,6 +143,7 @@ EditOfficeCode(model)
     OfficeId : model.OfficeId,
     OfficeCode : model.OfficeCode,
     OfficeName : model.OfficeName,
+    OfficeKey: model.OfficeKey,
     SupervisorName : model.SupervisorName,
     PhoneNo : model.PhoneNo,
     FaxNo : model.FaxNo

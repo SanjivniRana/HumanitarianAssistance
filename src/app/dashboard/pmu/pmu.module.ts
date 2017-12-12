@@ -6,7 +6,7 @@ import { ImplementationComponent } from "./implementation/implementation.compone
 import { MonitoringComponent } from "./monitoring/monitoring.component";
 import { PmuRoutingModule } from "./pmu-routing.module";
 import { PmuComponent } from "./pmu.component";
-import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxDropDownBoxModule, DxTextAreaModule, DxDateBoxModule, DxFileUploaderModule, DxRadioGroupModule } from "devextreme-angular";
+import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxDropDownBoxModule, DxTextAreaModule, DxDateBoxModule, DxFileUploaderModule, DxRadioGroupModule, DxTagBoxModule } from "devextreme-angular";
 import { PmuService } from "./pmu.service";
 import { AddNewComponent } from "./projects/add-new/add-new.component";
 import { BeneficiariesComponent } from "./projects/beneficiaries/beneficiaries.component";
@@ -15,6 +15,8 @@ import { ProjectActivitiesComponent } from "./projects/project-activities/projec
 import { QuestionsComponent } from "./projects/questions/questions.component";
 import { ProjectsService } from "./projects/projects.service";
 import { EditComponent } from "./projects/edit/edit.component";
+import { ProjectActivitiesMonitoringComponent } from './monitoring/project-activities-monitoring/project-activities-monitoring.component';
+import { BeneficiariesMonitoringComponent } from './monitoring/beneficiaries-monitoring/beneficiaries-monitoring.component';
 
 @NgModule({
     imports: [
@@ -27,14 +29,13 @@ import { EditComponent } from "./projects/edit/edit.component";
         DxFormModule,
         DxPopupModule,
         DxTemplateModule,
-        DxDataGridModule,
         DxDropDownBoxModule,
         DxTextAreaModule,
         DxDateBoxModule,
         DxFileUploaderModule,
         DxRadioGroupModule,
-        CommonModule
-
+        CommonModule,
+        DxTagBoxModule
     ],
     declarations: [
         ImplementationComponent,
@@ -46,7 +47,9 @@ import { EditComponent } from "./projects/edit/edit.component";
         ProjectsComponent,
         ProjectActivitiesComponent,
         QuestionsComponent,
-        EditComponent
+        EditComponent,
+        ProjectActivitiesMonitoringComponent,
+        BeneficiariesMonitoringComponent
     ],
     providers: [
         PmuService,

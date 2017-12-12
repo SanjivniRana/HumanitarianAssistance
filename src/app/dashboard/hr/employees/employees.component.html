@@ -1,3 +1,78 @@
-<p>
-  employees works!
-</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="main-heading clearfix">
+            <h3 class="page-heading"> Employees </h3>
+            <dx-button class="button-info btn btn-default btn-green" text="Add New" [routerLink]="['../add-employees']">
+            </dx-button>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div>
+
+
+
+
+            <dx-data-grid id="gridContainer" [dataSource]="dataSource">
+
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <!-- <dxo-selection mode="multiple"></dxo-selection> -->
+                <dxo-editing mode="popup" [allowAdding]="true" [allowUpdating]="true">
+                    <dxo-popup title="Employee" [showTitle]="true" [width]="700" [height]="345" [position]="{ my: 'center', at: 'center', of: window }"></dxo-popup>
+                </dxo-editing>
+
+                <dxi-column dataField="ProfileImage" [width]="100" [allowFiltering]="false" [allowSorting]="false" cellTemplate="cellTemplate">
+                    <div *dxTemplate="let data of 'cellTemplate'">
+                        <img [src]="data.value" style="max-width: 50px; max-height: 50px; border: 1px solid black"/>
+                    </div>
+                </dxi-column>
+
+                <dxi-column dataField="EmployeeType"></dxi-column>
+                <dxi-column dataField="EmployeeCode" [allowEditing]="false" ></dxi-column>
+                <dxi-column dataField="EmployeeName"></dxi-column>
+                <dxi-column dataField="FatherName"></dxi-column>
+                <dxi-column dataField="Gender"></dxi-column>
+                <dxi-column dataField="Designation"></dxi-column>
+                <dxi-column dataField="Office"></dxi-column>
+                <dxi-column dataField="BasicPay"></dxi-column>
+                <dxi-column dataField="Currency"></dxi-column>
+
+
+
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+
+            </dx-data-grid>
+
+
+
+
+
+
+
+
+
+            <!-- <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-selection mode="multiple"></dxo-selection>
+                <dxo-editing mode="popup" [allowUpdating]="true"></dxo-editing>
+
+                <dxi-column dataField="EmployeeType"></dxi-column>
+                <dxi-column dataField="EmployeeCode" [allowEditing]="false" [width]="140"></dxi-column>
+                <dxi-column dataField="EmployeeName"></dxi-column>
+                <dxi-column dataField="FatherName"></dxi-column>
+                <dxi-column dataField="Sex"></dxi-column>
+                <dxi-column dataField="Designation"></dxi-column>
+                <dxi-column dataField="Office"></dxi-column>
+                <dxi-column dataField="BasicPay"></dxi-column>
+                <dxi-column dataField="Currency"></dxi-column>
+
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+            </dx-data-grid> -->
+        </div>
+    </div>
+</div>

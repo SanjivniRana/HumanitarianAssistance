@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HrService } from '../hr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
 
-  constructor() { }
+  dataSource: any;
+  
+  constructor(private hrService: HrService, private router: Router) {
+    this.EmployeeList();
+   }
 
   ngOnInit() {
+  }
+
+  EmployeeList() {
+    this.dataSource = this.hrService.getEmployeeLists();
   }
 
 }

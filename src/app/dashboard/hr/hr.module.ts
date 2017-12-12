@@ -1,47 +1,58 @@
-// import { NgModule } from "@angular/core";
-// import { CommonModule } from "@angular/common";
-// import { HrRoutingModule } from "./hr-routing.module";
-// import { AdvancesComponent } from "./advances/advances.component";
-// import { MonthlyLeavesRegisterComponent } from "./monthly-leaves-register/monthly-leaves-register.component";
-// import { EmployeesComponent } from "./employees/employees.component";
-// import { MonthlyPayrollSheetComponent } from "./monthly-payroll-sheet/monthly-payroll-sheet.component";
-// import { PayrollMonthlyHoursComponent } from "./payroll-monthly-hours/payroll-monthly-hours.component";
-// import { ProspectiveEmployeesComponent } from "./prospective-employees/prospective-employees.component";
-// import { HrComponent } from "./hr.component";
-// import { AdvanceHistoryComponent } from "./employees/advance-history/advance-history.component";
-// import { AnalyticalInfoComponent } from "./employees/analytical-info/analytical-info.component";
-// import { DocumentsComponent } from "./employees/documents/documents.component";
-// import { GeneralInfoComponent } from "./employees/general-info/general-info.component";
-// import { HistoryComponent } from "./employees/history/history.component";
-// import { LeaveRecordsComponent } from "./employees/leave-records/leave-records.component";
-// import { PayrollHistoryComponent } from "./employees/payroll-history/payroll-history.component";
-// import { PensionAndSalaryTaxComponent } from "./employees/pension-and-salary-tax/pension-and-salary-tax.component";
-// import { ProfessionalInfoComponent } from "./employees/professional-info/professional-info.component";
+import { NgModule } from '@angular/core';
+import { HrComponent } from './hr.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { HrRoutingModule } from './hr-routing.module';
+import { ProspectiveEmployeesComponent } from './prospective-employees/prospective-employees.component';
+import { AdvancesComponent } from './advances/advances.component';
+import { MonthlyLeavesRegisterComponent } from './monthly-leaves-register/monthly-leaves-register.component';
+import { MonthlyPayrollSheetComponent } from './monthly-payroll-sheet/monthly-payroll-sheet.component';
+import { PayrollMonthlyHoursComponent } from './payroll-monthly-hours/payroll-monthly-hours.component';
+import { HrService } from './hr.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxPopupModule, DxLookupModule, DxTemplateModule, DxDateBoxModule } from 'devextreme-angular';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { TranslateModule } from '@ngx-translate/core';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { AddEmployeesComponent } from './employees/add-employees/add-employees.component';
+import { CodeService } from '../code/code.service';
 
-// @NgModule({
-//     imports: [
-//         HrRoutingModule,
-//         CommonModule
-//     ],
-//     declarations: [
-//         AdvancesComponent,
-//         MonthlyLeavesRegisterComponent,
-//         EmployeesComponent,
-//         MonthlyPayrollSheetComponent,
-//         PayrollMonthlyHoursComponent,
-//         ProspectiveEmployeesComponent,
-//         HrComponent,
-//         AdvanceHistoryComponent,
-//         AnalyticalInfoComponent,
-//         DocumentsComponent,
-//         GeneralInfoComponent,
-//         HistoryComponent,
-//         LeaveRecordsComponent,
-//         PayrollHistoryComponent,
-//         PensionAndSalaryTaxComponent,
-//         ProfessionalInfoComponent
-//     ],
-//     providers: []
-// })
+@NgModule({
+    declarations: [
+        HrComponent,
+        EmployeesComponent,
+        ProspectiveEmployeesComponent,
+        AdvancesComponent,
+        MonthlyLeavesRegisterComponent,
+        MonthlyPayrollSheetComponent,
+        PayrollMonthlyHoursComponent,
+        AddEmployeesComponent
+    ],
+    imports: [
+        HrRoutingModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DxDataGridModule,
+        DxSelectBoxModule,
+        DxCheckBoxModule,
+        DxNumberBoxModule,
+        DxButtonModule,
+        DxFormModule,
+        DxPopupModule,
+        DxDateBoxModule,
+        DxLookupModule,
+        DxTemplateModule,
+        NgxPermissionsModule.forChild({
+            permissionsIsolate: true,
+            rolesIsolate: true
+        }),
 
-// export class HrModule { }
+    ],
+    providers: [
+        HrService,
+        CodeService
+    ],
+
+})
+export class HrModule { }

@@ -10,6 +10,8 @@ import { DocumentsComponent } from "./projects/documents/documents.component";
 import { ProjectActivitiesComponent } from "./projects/project-activities/project-activities.component";
 import { QuestionsComponent } from "./projects/questions/questions.component";
 import { EditComponent } from "./projects/edit/edit.component";
+import { ProjectActivitiesMonitoringComponent } from "./monitoring/project-activities-monitoring/project-activities-monitoring.component";
+import { BeneficiariesMonitoringComponent } from "./monitoring/beneficiaries-monitoring/beneficiaries-monitoring.component";
 
 
 const pmurouter: Routes =
@@ -25,7 +27,9 @@ const pmurouter: Routes =
                 { path: 'documents', component: DocumentsComponent },
                 { path: 'project-activities', component: ProjectActivitiesComponent },
                 { path: 'questions', component: QuestionsComponent },
-                { path: 'edit', component: EditComponent }
+                { path: 'edit', component: EditComponent },
+                { path: 'project-activities-monitoring', component: ProjectActivitiesMonitoringComponent },
+                { path: 'beneficiaries-monitoring', component: BeneficiariesMonitoringComponent }
             ]
     }];
 

@@ -372,5 +372,14 @@ tr.ui-datatable-odd.ui-widget-content { border-bottom: 0px; background: transpar
   .dx-popup-bottom .dx-button{ min-width:80px !important;}
   .dx-popup-bottom.dx-toolbar .dx-toolbar-after{ padding-left: 0px;}
   .dx-overlay-content .dx-popup-bottom.dx-toolbar{ padding-top: 0px;}
-  .dx-toolbar-items-container .dx-toolbar-center{ margin-right: 0px !important;} */
+  .dx-toolbar-items-container .dx-toolbar-center{ margin-right: 0px !important;} 
+  .dx-popup-title .dx-closebutton.dx-button-has-icon{position: absolute;right: -15px; top: 2px;}*/
   /********** POPUP UPDATES (4/12/2017) **********/
+  .dx-pivotgrid-container td.dx-filter-header.dx-bottom-border div{ display: none;}
+  .margin-auto{ margin-left: auto !important; margin-right: auto !important; }
+ .dx-field-item-content.dx-field-item-content-location-right{ text-align: left;}
+ .fld-adacntlbl .dx-fieldset-header{ font-family: 'Poppins', sans-serif;  font-weight:600; font-size: 14px; margin-right: 15px; display: inline-block;}
+ .fld-adacntlbl .dx-field { display: inline-block;}
+ .fld-adacntlbl{ margin-bottom: 0px;}
+ .panelAccount{ font-weight: 600}
+ 

@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-sm-12">
       <div class="main-heading clearfix">
-          <h3 class="page-heading">Add/Edit PMU Project Details</h3>
+          <h3 class="page-heading">Edit PMU Project Details</h3>
           <dx-button
               class="button-info btn btn-default btn-green"
               text="Cancel"
@@ -11,7 +11,7 @@
           <dx-button
               class="button-info btn btn-default btn-green"
               text="Save"
-              (onClick)="saveProjectPMU()" [routerLink]="['../projects']">
+              (onClick)="saveProjectPMU()">
       </dx-button>         
       </div> 
 
@@ -25,10 +25,10 @@
       [screenByWidth]="screen">
       validationGroup="customerData">
 
-      <dxi-item dataField="Project" editorType="dxSelectBox" [editorOptions]="{ items: projectType, value: '' }">
+      <dxi-item dataField="Project" editorType="dxSelectBox" [editorOptions]="{ dataSource: projecttype, displayExpr: 'ProjectTypeName', valueExpr: 'ProjectTypeId'  }">
           <dxi-validation-rule type="required" message="Project"></dxi-validation-rule>
       </dxi-item>
-      <dxi-item dataField="Measure Type" editorType="dxSelectBox" [editorOptions]="{ items: measureType, value: '' }">
+      <dxi-item dataField="Measure Type"  editorType="dxSelectBox" [editorOptions]="{ dataSource: measuretype, displayExpr: 'MeasureTypeName', valueExpr: 'MeasureTypeId'  }">
           <dxi-validation-rule 
               type="required"
               message="Measure Type">
@@ -177,42 +177,42 @@
               type="required"
               message="EOI is required">
           </dxi-validation-rule>
-          <a [routerLink]="['../projects']" class="second">Download</a>
+          <a class="second">Download</a>
       </dxi-item>
       <dxi-item dataField="Concept">
           <dxi-validation-rule 
               type="required"
               message="Concept is required">
           </dxi-validation-rule>
-          <a [routerLink]="['../projects']" class="second">Download</a>
+          <a class="second">Download</a>
       </dxi-item>
       <dxi-item dataField="Proposal">
           <dxi-validation-rule 
               type="required"
               message="Proposal is required">
           </dxi-validation-rule>
-          <a [routerLink]="['../projects']" class="second">Download</a>
+          <a class="second">Download</a>
       </dxi-item>
       <dxi-item dataField="Budget">
           <dxi-validation-rule 
               type="required"
               message="Budget is required">
           </dxi-validation-rule>
-          <a [routerLink]="['../projects']" class="second">Download</a>
+          <a class="second">Download</a>
       </dxi-item>
       <dxi-item dataField="Presentation">
           <dxi-validation-rule 
               type="required"
               message="Presentation is required">
           </dxi-validation-rule>
-          <a [routerLink]="['../projects']" class="second">Download</a>
+          <a class="second">Download</a>
       </dxi-item>
       <dxi-item dataField="Contract">
           <dxi-validation-rule 
               type="required"
               message="Contract is required">
           </dxi-validation-rule>
-          <a [routerLink]="['../projects']" class="second">Download</a>
+          <a class="second">Download</a>
       </dxi-item>
       <dxi-item dataField="REOI Receive Date" editorType="dxDateBox">
           <dxi-validation-rule 

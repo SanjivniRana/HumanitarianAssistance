@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule, DxTemplateHost} from 'devextreme-angular';
-import { AccountsService, Customer, JournalVoucherModel } from '../accounts.service';
-import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
+import { AccountsService, JournalVoucherModel } from '../accounts.service';
 import { ToastrService } from 'ngx-toastr';
 import { AppSettingsService } from '../../../Services/App-settings.Service';
 import { GLOBAL } from '../../../shared/global';
+import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
+import { CodeService } from '../../code/code.service';
 
 @Component({
   selector: 'app-journal',
@@ -17,17 +17,107 @@ export class JournalComponent implements OnInit {
   drillDownDataSource: any;
   journalVoucher: JournalVoucherModel[];
 
-  constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService) {
+  currencyDropdown: any[];
+  officeDropdown: any[];
+  recordTypeDropdown: any[];
+  journalFilter: any;
+  loading: any;
+
+  constructor(private accountservice: AccountsService, private codeservice: CodeService, private setting: AppSettingsService, private toastr: ToastrService) {
+    var FromDate = "01/01/" + (new Date()).getFullYear();
+    var currentDate = new Date().getDate();
+    var currentMonth = new Date().getMonth() + 1;
+    var currentYear = new Date().getFullYear();
+    var currentDateFinal = currentDate+"/"+currentMonth+"/"+currentYear;
+    this.recordTypeDropdown = [{
+      "Id": 1,
+      "Name": "Single",
+    },
+    {
+      "Id": 2,
+      "Name": "Consolidate",
+    }];
+
+    this.journalFilter = {
+      "CurrencyId": 1,
+      "OfficeId": null,
+      "RecordType": 1,
+      "FromDate": FromDate,
+      "ToDate": currentDateFinal
+    };
   }
 
   ngOnInit() {
     this.GetAllJournalDetails();
+    this.getCurrencyCodeList();
+    this.getOfficeCodeList();
+  }
+
+  onApplyingFilter(value)
+  {
+      this.journalFilter.CurrencyId = value.CurrencyId;
+      this.journalFilter.OfficeId = value.OfficeId;
+      this.journalFilter.RecordType = value.RecordType;
+      this.journalFilter.FromDate = value.FromDate;
+      this.journalFilter.ToDate = value.ToDate;
+      this.GetAllJournalDetails();
+  }
+
+  getCurrencyCodeList() {
+    this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_CurrencyCodes_GetAllCurrency).subscribe(
+      data => {
+        this.currencyDropdown = [];
+        if (data.data.CurrencyList != null) {
+          data.data.CurrencyList.forEach(element => {
+            this.currencyDropdown.push(element);
+          });
+        }
+      },
+      error => {
+        if (error.StatusCode == 500) {
+          this.toastr.error("Internal Server Error....");
+        }
+        else if (error.StatusCode == 401) {
+          this.toastr.error("Unauthorized Access Error....");
+        }
+        else if (error.StatusCode == 403) {
+          this.toastr.error("Forbidden Error....");
+        }
+      }
+    )
+  }
+
+  //Get Office Code in Add, Edit Dropdown 
+  getOfficeCodeList() {
+    this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_OfficeCode_GetAllOfficeDetails).subscribe(
+      data => {
+        if (data.data.OfficeDetailsList != null) {
+          this.officeDropdown = [];
+          data.data.OfficeDetailsList.forEach(element => {
+            this.officeDropdown.push(element);
+          });
+        }
+      },
+      error => {
+        if (error.StatusCode == 500) {
+          this.toastr.error("Internal Server Error....");
+        }
+        else if (error.StatusCode == 401) {
+          this.toastr.error("Unauthorized Access Error....");
+        }
+        else if (error.StatusCode == 403) {
+          this.toastr.error("Forbidden Error....");
+        }
+      }
+    )
   }
 
   GetAllJournalDetails() {
-    this.accountservice.GetAllJournalDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllJournalDetails).subscribe(
+    this.loading = true;
+    this.accountservice.GetAllJournalDetails(this.setting.getBaseUrl() + GLOBAL.API_Accounting_GetAllJournalDetails,this.journalFilter).subscribe(
       data => {
         if (data.StatusCode == 200) {
+          this.loading = false;
           this.journalVoucher = [];
           data.data.JournalVoucherViewList.forEach(element => {
             this.journalVoucher.push(element);
@@ -82,6 +172,10 @@ export class JournalComponent implements OnInit {
             ],
             store: this.journalVoucher
           });
+        }
+        else if (data.StatusCode == 400) {
+          this.loading = false;
+          this.toastr.error("Something went wrong TRY Again !");
         }
       },
       error => {

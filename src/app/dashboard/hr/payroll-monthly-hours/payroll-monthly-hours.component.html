@@ -1,3 +1,41 @@
-<p>
-  payroll-monthly-hours works!
-</p>
+
+<div class="row">
+  <div class="col-sm-12">
+      <div class="main-heading clearfix">
+          <h3 class="page-heading"> Payroll Monthly Hours </h3>
+          <!-- <dx-button class="button-info btn btn-default btn-green" text="Add New">
+          </dx-button> -->
+      </div>
+  </div>
+
+  <div class="col-sm-12">
+      <div>
+          <dx-data-grid id="gridContainer" [dataSource]="dataSource" [allowColumnReordering]="true" [allowColumnResizing]="true" [columnAutoWidth]="true">
+
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+              <dxo-selection mode="multiple"></dxo-selection>
+              <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true" [form]="{items: ['Office','Date','Hours']}">
+              </dxo-editing>
+              
+                <dxi-column dataField="Office" caption="Office">
+                <dxo-lookup
+                    [dataSource]="officeType"
+                    valueExpr="OfficeTypeId"
+                    displayExpr="OfficeTypeName">
+                </dxo-lookup>
+                </dxi-column>
+                <dxi-column dataField="Month" caption="Month"></dxi-column>
+                <dxi-column dataField="Year" caption="Year"></dxi-column>
+                <dxi-column dataField="Hours" caption="Hours"></dxi-column>
+                <dxi-column 
+                    dataField="Date"                 
+                    caption="Date" [visible]="false" dataType="date">      
+                </dxi-column>
+             
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          </dx-data-grid>
+      </div>
+  </div>
+</div>

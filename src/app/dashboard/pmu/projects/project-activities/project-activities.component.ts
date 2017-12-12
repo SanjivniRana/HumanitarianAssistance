@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Activity, ProjectsService, ActivitiesData } from '../projects.service';
+import { Activity, ProjectsService, ActivitiesData, BudgetType, ResourceType, ActivityLocationType, Month, DayOfMonth } from '../projects.service';
 import { FormBuilder } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap';
 import { AppSettingsService } from '../../../../Services/App-settings.Service';
@@ -11,23 +11,36 @@ import { AppSettingsService } from '../../../../Services/App-settings.Service';
 })
 export class ProjectActivitiesComponent {
   
-  activitiesdata: ActivitiesData;
-  popupAddActivitiesVisible = false;
-
+  //#region "variable declaration"
   activity: Activity[];
+  activitiesdata: ActivitiesData;
+
+  popupAddActivitiesVisible = false;
+  taskType:any;
+  recurringTaskType:any;
+  
   dataSource: any;
-  tab1: any;
-  // budgetType: BudgetTypes[];
-  // resourceType: resourceType[];
-  // locationType: locationType[];
+  budgettype: BudgetType[];
+  resourcetype: ResourceType[];
+  activitylocationtype: ActivityLocationType[];
+  dayOfMonth: DayOfMonth[];
+  month: Month[];
+  //#endregion "variable declaration"
 
   constructor(private projectsService: ProjectsService,private fb: FormBuilder,private modalService: BsModalService,private setting : AppSettingsService) { 
 
-    // this.budgetType = this.projectsService.getBudgetType();
-    // this.resourceType = this.projectsService.getResourceType();
-    // this.locationType = this.projectsService.getLocationType();
+    // this.taskType = false;
+    // this.recurringTaskType = false;
+
+    this.budgettype = this.projectsService.getBudgetType();
+    this.resourcetype = this.projectsService.getResourceType();
+    this.activitylocationtype = this.projectsService.getLocationType();
+    this.dayOfMonth = this.projectsService.getDayOfMonth();
+    this.month = this.projectsService.getMonth();
+
     this.activitiesdata = this.projectsService.getActivitiesData();
     console.log(this.activitiesdata);
+
     this.activity = this.projectsService.getActivities();
     this.dataSource = {
       store: {
@@ -35,58 +48,59 @@ export class ProjectActivitiesComponent {
         key: 'ID',
         data: this.projectsService.getActivities()
       }
-  }
-} 
-//#region "dropdown"
-    budgettypes = [
-      { BudgetTypeId: 1, BudgetTypeName: 'Demo'},
-      { BudgetTypeId: 2, BudgetTypeName: 'Demo'}
-    ];
+    }
+  } 
 
-    resourcetypes = [
-      { ResourceTypeId: 1, ResourceTypeName: 'E0001-Wasim Khan'},
-      { ResourceTypeId: 2, ResourceTypeName: 'E0002-Salman Khan'},
-      { ResourceTypeId: 3, ResourceTypeName: 'E0003-Amir Pathan'},
-      { ResourceTypeId: 4, ResourceTypeName: 'E0004-Rahul Khan'},
-      { ResourceTypeId: 4, ResourceTypeName: 'E0005-Sam Ansari'}
-    ];
 
-    activitylocationtypes = [
-      { ActivityLocationTypeId: 1, ActivityLocationTypeName: 'TES-TestOffice'},
-    ];
 
-    tasks = [
-      { tasktype: "Single Task", tasktypevalue: "SingleTask" },
-      { tasktype: "Recurring Task", tasktypevalue: "RecurringTask" }
-    ];
+  //#region "onchange recurring function"
 
-    recurringtasks = [
-      { recurringTaskType: "Daily", recurringTaskTypeValue: "Daily" },
-      { recurringTaskType: "Weekly", recurringTaskTypeValue: "Weekly" },
-      { recurringTaskType: "Monthly", recurringTaskTypeValue: "Monthly" },
-      { recurringTaskType: "Yearly", recurringTaskTypeValue: "Yearly" }
-    ];
-//#endregion "dropdown"
+  // changeTaskType(event: any) {
+  //   if(event.value==1)
+  //   {
 
-//#region "popup"
-    ShowPopup()
-    {
+  //   }
+  //   else {
+  //     this.taskType= true;
+  //   }
+  // }
+
+  // changeRecurringTaskType(event: any) {
+  //   this.recurringTaskType = event.value.ID;
+  // }
+  
+  //#endregion "onchange recurring function"
+
+  //#region "radio-button data"
+      tasks = [
+        { tasktype: "Single Task", tasktypevalue: "SingleTask" },
+        { tasktype: "Recurring Task", tasktypevalue: "RecurringTask" }
+      ];
+
+      recurringTasks = [
+        { recurringTaskType: "Daily", recurringTaskTypeValue: "Daily" },
+        { recurringTaskType: "Weekly", recurringTaskTypeValue: "Weekly" },
+        { recurringTaskType: "Monthly", recurringTaskTypeValue: "Monthly" },
+        { recurringTaskType: "Yearly", recurringTaskTypeValue: "Yearly" }
+      ];
+  //#endregion "dropdown"
+
+  //#region "popup"
+
+    ShowPopup(){
         this.activitiesdata = this.projectsService.getActivitiesData();
         this.popupAddActivitiesVisible = true;
     }
-  
-    HidePopup()
-    {
+
+    HidePopup(){
         this.popupAddActivitiesVisible = false;
     }
 
-    onFormSubmit(model)
-    {
+    onFormSubmit(model){
         this.AddActivities(model);
     }
 
-    AddActivities(model)
-    {
+    AddActivities(model){
       var addactivities: ActivitiesData = {
         ActivityDesc : model.ActivityDesc,
         PlannedStartDate : model.PlannedStartDate,
@@ -94,8 +108,31 @@ export class ProjectActivitiesComponent {
         BudgetLine : model.BudgetLine,
         Resource : model.Resource,
         LocationOfActivity : model.LocationOfActivity,
-        TaskType : model.TaskType
+        TaskType : model.TaskType,   
+        RecurringType : model.RecurringType,
+        RecurringDay : model.RecurringDay,
+        RecurringMonth : model.RecurringMonth,
+        RecurringWeekday : model.RecurringWeekday
       };
     }
-    //#endregion "popup"
+
+    GetActivitiesDetail(data)
+    {
+         
+        this.activitiesdata.ActivityDesc = data.data.ActivityDesc;
+        this.activitiesdata.PlannedStartDate = data.data.PlannedStartDate;
+        this.activitiesdata.PlannedEndDate = data.data.PlannedEndDate;
+        this.activitiesdata.BudgetLine = data.data.BudgetLine;
+        this.activitiesdata.Resource = data.data.Resource;
+        this.activitiesdata.LocationOfActivity = data.data.LocationOfActivity;
+        this.activitiesdata.TaskType = data.data.TaskType;
+        this.activitiesdata.RecurringType = data.data.RecurringType;
+        this.activitiesdata.RecurringDay = data.data.RecurringDay;
+        this.activitiesdata.RecurringMonth = data.data.RecurringMonth;
+        this.activitiesdata.RecurringWeekday = data.data.RecurringWeekday;
+        this.popupAddActivitiesVisible = true;    
+    }
+
+  //#endregion "popup"
+
 }

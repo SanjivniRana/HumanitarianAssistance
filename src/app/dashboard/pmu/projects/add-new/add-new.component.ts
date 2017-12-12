@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectsService } from '../projects.service';
+import { ProjectsService, MeasureType, ProjectType } from '../projects.service';
 
 @Component({
   selector: 'app-add-new',
@@ -9,12 +9,12 @@ import { ProjectsService } from '../projects.service';
 export class AddNewComponent implements OnInit {
 
     colCountByScreen: Object;
-    measureType: string[];
-    projectType: string[];
+    measuretype: MeasureType[];
+    projecttype: ProjectType[];
 
     constructor(private projectsService: ProjectsService) {
-        this.measureType = this.projectsService.getMeasureType();
-        this.projectType = this.projectsService.getProjectType();
+        this.measuretype = this.projectsService.getMeasureType();
+        this.projecttype = this.projectsService.getProjectType();
         this.colCountByScreen = {
         md: 2,
         sm: 2

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, Response, RequestOptions, RequestOptionsArgs} from '@angular/http';
+import { Http, Headers, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-//#region "Questions class definition"
+//#region "Questions"
 export class Ques {
     ID: number;
     Question: string;
@@ -12,18 +12,60 @@ export class Ques {
     Rating4: string;
     Rating5: string;
 }
+
+let ques: Ques[] = [
+    {
+        'ID': 1,
+        "Question": "abc",
+        "Rating1": "string",
+        "Rating2": "string",
+        "Rating3": "string",
+        "Rating4": "string",
+        "Rating5": "string",
+    },
+    {
+        'ID': 2,
+        "Question": "xyz",
+        "Rating1": "string",
+        "Rating2": "string",
+        "Rating3": "string",
+        "Rating4": "string",
+        "Rating5": "string",
+    }
+]
 //#endregion "Questions"
 
-//#region "Documents class definition"
+//#region "Documents"
 export class Documents {
     ID: number;
     DocumentName: string;
     DocumentType: number;
     DocumentFile: string;
 }
+
+let docs: Documents[] = [
+    {
+        "ID": 1,
+        "DocumentName": "Doc1",
+        "DocumentType": 1,
+        "DocumentFile": "string",
+    },
+    {
+        "ID": 2,
+        "DocumentName": "Doc2",
+        "DocumentType": 2,
+        "DocumentFile": "string",
+    },
+    {
+        "ID": 3,
+        "DocumentName": "Doc3",
+        "DocumentType": 1,
+        "DocumentFile": "string",
+    },
+]
 //#endregion "Documents"
 
-//#region "Beneficiaries class definition"
+//#region "Beneficiaries"
 export class Beneficiaries {
     ID: number;
     SerialNo: number;
@@ -41,9 +83,46 @@ export class Beneficiaries {
     TypeOfCase: string;
     TelephoneNo: number;
 }
-//#endregion "Beneficiaries class definition"
 
-//#region "Activity class definition"
+let beneficiaries: Beneficiaries[] = [
+    {
+        "ID": 1,
+        "SerialNo": 1,
+        "Name": "AlpitG",
+        "FName": "Alpit",
+        "Province": "Nagpur",
+        "District": "Nagpur",
+        "Village": "Akola",
+        "IDNo": 1,
+        "Age": 22,
+        "Sex": 1,
+        "MaritalStatus": 1,
+        "Referrer": "referrer1",
+        "ReferDate": "03/11/2017",
+        "TypeOfCase": "case1",
+        "TelephoneNo": 9076861868,
+    },
+    {
+        "ID": 2,
+        "SerialNo": 2,
+        "Name": "SurajM",
+        "FName": "Suraj",
+        "Province": "Chattisgarh",
+        "District": "Bijapur",
+        "Village": "Raipur",
+        "IDNo": 1,
+        "Age": 23,
+        "Sex": 1,
+        "MaritalStatus": 1,
+        "Referrer": "referrer2",
+        "ReferDate": "02/21/2017",
+        "TypeOfCase": "case2",
+        "TelephoneNo": 8857686868,
+    }
+]
+//#endregion "Beneficiaries"
+
+//#region "Project Activities"
 export class Activity {
     // ID: number;
     ActivityDesc: string;
@@ -59,211 +138,18 @@ export class Activity {
     OvercomingChallenges: string;
     DeviationJustification: string;
     RecurringType: string;
-    RecurringDay: string;
-    RecurringMonth: string;
+    RecurringDay: number;
+    RecurringMonth: number;
+    RecurringWeekday: string;
+    Complete: boolean;
+    Monitoring: boolean;
     TaskType: string;
 }
-//#endregion "Activity class definition"
 
-//#region "ActivitiesData class definition"
-export class ActivitiesData {
-    ActivityDesc : string;
-    PlannedStartDate : string;
-    PlannedEndDate : string;
-    BudgetLine : string;
-    Resource : string;
-    LocationOfActivity : string;
-    TaskType : string;
-}
-//#endregion "ActivitiesData class definition"
-
-
-export class ActivityLocationTypes {
-    ActivityLocationTypeId: number;
-    ActivityLocationTypeName: string;
-}
-
-export class BudgetTypes {
-    BudgetTypeId: number;
-    BudgetTypeName: string;
-}
-
-export class ResourceTypes {
-    ResourceTypeId: number;
-    ResourceTypeName: string;
-}
-
-let budgettypes : BudgetTypes[] = [
-    { BudgetTypeId: 1, BudgetTypeName: 'Demo'},
-    { BudgetTypeId: 2, BudgetTypeName: 'Demo'}
-  ];
-
- let resourcetypes : ResourceTypes[] = [
-    { ResourceTypeId: 1, ResourceTypeName: 'E0001-Wasim Khan'},
-    { ResourceTypeId: 2, ResourceTypeName: 'E0002-Salman Khan'},
-    { ResourceTypeId: 3, ResourceTypeName: 'E0003-Amir Pathan'},
-    { ResourceTypeId: 4, ResourceTypeName: 'E0004-Rahul Khan'},
-    { ResourceTypeId: 4, ResourceTypeName: 'E0005-Sam Ansari'}
-  ];
-
- let activitylocationtypes : ActivityLocationTypes[] = [
-    { ActivityLocationTypeId: 1, ActivityLocationTypeName: 'TES-TestOffice'}
-  ];
-
-//#region "activitiesdata"
-let activitiesdata = {
-    "ActivityDesc" : "",
-    "PlannedStartDate" : "",
-    "PlannedEndDate" : "",
-    "BudgetLine" : "",
-    "Resource" : "",
-    "LocationOfActivity" : "",
-    "TaskType" : ""
-}
-//#endregion "activitiesdata"
-
-//#region "measuretype"
-let measuretype: string[] = [
-   "Qualitative",
-   "Quantitative",
-   "Qualitative & Quantitative"
-]
-//#endregion "measuretype"
-
-//#region "projecttype"
-let projecttype: string[] = [
-    "projecttype1",
-    "projecttype2",
-    "projecttype3"
- ]
- //#endregion "projecttype"
-
-//#region "ques"
-let ques: Ques[] = [
-    {
-        'ID': 1,
-        "Question": "abc",
-        "Rating1": "string",
-        "Rating2": "string",
-        "Rating3": "string",
-        "Rating4": "string",
-        "Rating5": "string",
-    },
-    {
-        'ID': 2,
-        "Question": "abc",
-        "Rating1": "string",
-        "Rating2": "string",
-        "Rating3": "string",
-        "Rating4": "string",
-        "Rating5": "string",
-    },
-    {
-        'ID': 3,
-        "Question": "abc",
-        "Rating1": "string",
-        "Rating2": "string",
-        "Rating3": "string",
-        "Rating4": "string",
-        "Rating5": "string",
-    },
-
-    {
-        'ID': 4,
-        "Question": "abc",
-        "Rating1": "string",
-        "Rating2": "string",
-        "Rating3": "string",
-        "Rating4": "string",
-        "Rating5": "string",
-    }
-]
-//#endregion "ques"
-
-//#region "docs"
-let docs: Documents[] = [
-    {
-        "ID": 1,
-        "DocumentName": "string",
-        "DocumentType": 1,
-        "DocumentFile": "string",
-    },
-    {
-        "ID": 2,
-        "DocumentName": "string",
-        "DocumentType": 2,
-        "DocumentFile": "string",
-    },
-    {
-        "ID": 2,
-        "DocumentName": "string",
-        "DocumentType": 3,
-        "DocumentFile": "string",
-    },
-]
-//#endregion "docs"
-
-//#region "beneficiaries"
-let beneficiaries: Beneficiaries[] = [
-    {
-        "ID": 1,
-        "SerialNo": 34,
-        "Name": "string",
-        "FName": "string",
-        "Province": "string",
-        "District": "string",
-        "Village": "string",
-        "IDNo": 1,
-        "Age": 11,
-        "Sex": 1,
-        "MaritalStatus": 1,
-        "Referrer": "string",
-        "ReferDate": "03/11/2017",
-        "TypeOfCase": "string",
-        "TelephoneNo": 7686868,
-    },
-    {
-        "ID": 2,
-        "SerialNo": 34,
-        "Name": "string",
-        "FName": "string",
-        "Province": "string",
-        "District": "string",
-        "Village": "string",
-        "IDNo": 1,
-        "Age": 11,
-        "Sex": 1,
-        "MaritalStatus": 1,
-        "Referrer": "string",
-        "ReferDate": "02/21/2017",
-        "TypeOfCase": "string",
-        "TelephoneNo": 7686868,
-    },
-    {
-        "ID": 3,
-        "SerialNo": 34,
-        "Name": "string",
-        "FName": "string",
-        "Province": "string",
-        "District": "string",
-        "Village": "string",
-        "IDNo": 1,
-        "Age": 11,
-        "Sex": 1,
-        "MaritalStatus": 1,
-        "Referrer": "string",
-        "ReferDate": "09/02/2017",
-        "TypeOfCase": "string",
-        "TelephoneNo": 7686868,
-    }
-]
-//#endregion "beneficiaries
-
-//#region "activity"
 let activity: Activity[] = [
     {
         // "ID": 1,
-        "ActivityDesc": "string",
+        "ActivityDesc": "Planning",
         "PlannedStartDate": "01-05-2017",
         "PlannedEndDate": "02-06-2017",
         "BudgetLine": 1,
@@ -271,20 +157,188 @@ let activity: Activity[] = [
         "LocationOfActivity": 1,
         "ActualStartDate": "02-07-2017",
         "ActualEndDate": "03-08-2017",
-        "ImplementationMethod": "string",
-        "Challenges": "string",
-        "OvercomingChallenges": "string",
+        "ImplementationMethod": "Waterfall",
+        "Challenges": "deadline",
+        "OvercomingChallenges": "agile",
         "DeviationJustification": "string",
-        "RecurringType": "string",
-        "RecurringDay": "string",
-        "RecurringMonth": "string",
-        "TaskType": "string"
+        "RecurringType": "Weekly",
+        "RecurringDay": 1,
+        "RecurringMonth": 9,
+        "RecurringWeekday": "Wednesday",
+        "Complete": true,
+        "Monitoring": false,
+        "TaskType": "string",
     }
 ]
-//#endregion "activity"
+//#endregion "Project Activities"
+
+//#region "add-new dropdown data"
+export class MeasureType {
+    MeasureTypeId: number;
+    MeasureTypeName: string;
+}
+export class ProjectType {
+    ProjectTypeId: number;
+    ProjectTypeName: string;
+}
+
+let measuretype: MeasureType[] = [
+    { MeasureTypeId : 1, MeasureTypeName: "Qualitative" },
+    { MeasureTypeId : 2, MeasureTypeName: "Quantitative" },
+    { MeasureTypeId : 3, MeasureTypeName: "Qualitative & Quantitative" }
+]
+
+let projecttype: ProjectType[] = [
+    { ProjectTypeId : 1, ProjectTypeName: "vCIOPro" },
+    { ProjectTypeId : 2, ProjectTypeName: "Child Day Care" },
+    { ProjectTypeId : 3, ProjectTypeName: "Contrucks" }
+]
+ //#endregion "add-new dropdown data"
+
+//#region "project-activities dropdown data"
+export class ActivityLocationType {
+    ActivityLocationTypeId: number;
+    ActivityLocationTypeName: string;
+}
+
+export class BudgetType {
+    BudgetTypeId: number;
+    BudgetTypeName: string;
+}
+
+export class ResourceType {
+    ResourceTypeId: number;
+    ResourceTypeName: string;
+}
+
+export class RatingType {
+    RatingTypeId: number;
+    RatingTypeName: string;
+}
+
+export class DayOfMonth {
+    dayOfMonthId: number;
+    dayOfMonthName: number;
+}
+
+export class Month {
+    MonthId: number;
+    MonthName: string;
+}
+
+let dayOfMonth : DayOfMonth[] = [
+    { dayOfMonthId: 1, dayOfMonthName: 1},
+    { dayOfMonthId: 2, dayOfMonthName: 2},
+    { dayOfMonthId: 3, dayOfMonthName: 3},
+    { dayOfMonthId: 4, dayOfMonthName: 4},
+    { dayOfMonthId: 5, dayOfMonthName: 5},
+    { dayOfMonthId: 6, dayOfMonthName: 6},
+    { dayOfMonthId: 7, dayOfMonthName: 7},
+    { dayOfMonthId: 8, dayOfMonthName: 8},
+    { dayOfMonthId: 9, dayOfMonthName: 9},
+    { dayOfMonthId: 10, dayOfMonthName: 10}
+  ];
+
+let month : Month[] = [
+    { MonthId: 1, MonthName: "January"},
+    { MonthId: 2, MonthName: "February"},
+    { MonthId: 3, MonthName: "March"},
+    { MonthId: 4, MonthName: "April"},
+    { MonthId: 5, MonthName: "May"},
+    { MonthId: 6, MonthName: "June"},
+    { MonthId: 7, MonthName: "July"},
+    { MonthId: 8, MonthName: "August"},
+    { MonthId: 9, MonthName: "September"},
+    { MonthId: 10, MonthName: "October"},
+    { MonthId: 11, MonthName: "November"},
+    { MonthId: 12, MonthName: "December"}
+];
+
+let ratingtype : RatingType[] = [
+    { RatingTypeId: 1, RatingTypeName: 'ratingtype1'},
+    { RatingTypeId: 2, RatingTypeName: 'ratingtype1'}
+  ];
+
+let budgettype : BudgetType[] = [
+    { BudgetTypeId: 1, BudgetTypeName: 'Master Budget'},
+    { BudgetTypeId: 2, BudgetTypeName: 'Operating Budget'},
+    { BudgetTypeId: 3, BudgetTypeName: 'Cash Flow Budget'},
+    { BudgetTypeId: 4, BudgetTypeName: 'Financial Budget'},
+    { BudgetTypeId: 5, BudgetTypeName: 'Static Budget'}
+  ];
+
+ let resourcetype : ResourceType[] = [
+    { ResourceTypeId: 1, ResourceTypeName: 'E0001-Wasim Khan'},
+    { ResourceTypeId: 2, ResourceTypeName: 'E0002-Salman Khan'},
+    { ResourceTypeId: 3, ResourceTypeName: 'E0003-Amir Pathan'},
+    { ResourceTypeId: 4, ResourceTypeName: 'E0004-Rahul Khan'},
+    { ResourceTypeId: 4, ResourceTypeName: 'E0005-Sam Ansari'}
+  ];
+
+ let activitylocationtype : ActivityLocationType[] = [
+    { ActivityLocationTypeId: 1, ActivityLocationTypeName: 'TES-TestOffice'}
+  ];
+  //#endregion "project-activities dropdown data"
+
+//#region "activities popup"
+export class ActivitiesData {
+    ActivityDesc: string;
+    PlannedStartDate: string;
+    PlannedEndDate: string;
+    BudgetLine: number;
+    Resource: string;
+    LocationOfActivity: number;
+    TaskType: string;
+    RecurringType: string;
+    RecurringDay: number;
+    RecurringMonth: number;
+    RecurringWeekday: string; 
+}
+
+let activitiesdata = {
+
+    ActivityDesc: "",
+    PlannedStartDate: "",
+    PlannedEndDate: "",
+    BudgetLine: 1,
+    Resource: "",
+    LocationOfActivity: 1,
+    TaskType: "",
+    RecurringType: "",
+    RecurringDay: 1,
+    RecurringMonth: 1,
+    RecurringWeekday: ""
+}
+//#endregion "activitiesdata"
+
+//#region "monitoring popup"
+export class MonitoringData {
+    Rating : string;
+    VerificationSource : string;
+    Strengths : string;
+    Weeknesses : string;
+    Challenges : string;
+    Recommendations : string;
+    Comments : string;
+    FrequencyOfMonitoring : string;
+}
+
+let monitoringdata = {
+    "Rating" : "",
+    "VerificationSource" : "",
+    "Strengths" : "",
+    "Weeknesses" : "",
+    "Challenges" : "",
+    "Recommendations" : "",
+    "Comments" : "",
+    "FrequencyOfMonitoring" : ""
+}
+//#endregion "monitoringdata"
 
 @Injectable()
 export class ProjectsService {
+
+    constructor(private http: Http) { }
 
     getQues() {
         return ques;
@@ -314,16 +368,33 @@ export class ProjectsService {
         return activitiesdata;
     }
 
-    // getBudgetType() {
-    //     return budgettype;
-    // }
+    getBudgetType() {
+        return budgettype;
+    }
 
-    // getResourceType() {
-    //     return resourcetype;
-    // }
+    getResourceType() {
+        return resourcetype;
+    }
 
-    // getLocationType() {
-    //     return locationtype;
-    // }
+    getLocationType() {
+        return activitylocationtype;
+    }
+
+    getMonitoringData() {
+        return monitoringdata;
+    }
+
+    getRatingType(){
+        return ratingtype;
+    }
+
+    getDayOfMonth(){
+        return dayOfMonth;
+    }
+
+    getMonth(){
+        return month;
+    }
+    
 
 }

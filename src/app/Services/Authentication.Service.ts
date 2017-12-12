@@ -18,7 +18,6 @@ export class AuthenticationService {
     }
 
     login(loginDetails: UserLogin) {
-         
         let url = this.settings.getBaseUrl() + GLOBAL.API_Login_Auth_Url;
         return this.http.request(url, {
             body: loginDetails,

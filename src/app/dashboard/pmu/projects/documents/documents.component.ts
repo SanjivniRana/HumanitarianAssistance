@@ -24,14 +24,11 @@ export class DocumentsComponent {
         key: 'ID',
         data: this.projectsService.getDocs()
       }
-
-
-  }
-
-} 
-
-      doctypes = [
-        { DocTypeId: 1, DocTypeName: 'Lessons Learnt'},
-        { DocTypeId: 2, DocTypeName: 'Success Stories'}
-      ];
+    }
+  } 
+  
+  doctype = [
+    { DocTypeId: 1, DocTypeName: 'Lessons Learnt'},
+    { DocTypeId: 2, DocTypeName: 'Success Stories'}
+  ];
 }

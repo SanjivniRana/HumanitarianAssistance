@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { DxDataGridComponent, DxDataGridModule, DxSelectBoxModule, DxCheckBoxModule, DxNumberBoxModule, DxButtonModule, DxFormModule, DxFormComponent, DxPopupModule, DxTemplateModule } from 'devextreme-angular';
-import { VoucherClass, AccountsService, Currency } from '../accounts.service';
-import ArrayStore from 'devextreme/data/array_store';
+import { AccountsService } from '../accounts.service';
 import { AppSettingsService } from '../../../Services/App-settings.Service';
 import { GLOBAL } from '../../../shared/global';
-import { CurrencyCode, OfficeCode, JournalCodeList } from '../../../Models/CodeModel';
 import { ToastrService } from 'ngx-toastr';
-import { commonService } from '../../../Services/common.service';
 import { DocumentComponent } from './document/document.component';
+import { CodeService } from '../../code/code.service';
 
 @Component({
     selector: 'app-vouchers',
@@ -16,39 +13,20 @@ import { DocumentComponent } from './document/document.component';
 
 })
 export class VouchersComponent implements OnInit {
-
-    // @ViewChild(DocumentComponent) abc:  DocumentComponent;
-   
-    @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
-    vouchers: VoucherClass[];
-    currencyModel: CurrencyCode[];
-    officeCodeModel: OfficeCode[];
-    journalcodelist: JournalCodeList[];
+    currencyModel: any[];
+    officeCodeModel: any[];
+    journalcodelist: any[];
     voucherTypeArr: any[];
     voucherDetails: any[];
-    selectedVoucherNo: any;
+    selectedVoucherNo: any;                 //Store VoucherNo to localStorage
+    voucherNoMain: any;                     // set voucherNo on Popup
+    voucherDocumentDetails: Document[];
     popupVisibleDocument = false;
 
-    // set voucher no
-    voucherNoMain: any;
-    //get all methods from DocumentComponent
-
-    voucherDocumentDetails: Document[];
-
-    //private documentComponent: DocumentComponent,
-    constructor(private accountservice: AccountsService, private setting: AppSettingsService, private toastr: ToastrService, private commonservice: commonService) {
-
-        // Voucher Type Static array
-        this.voucherTypeArr = [
-            {
-                "VoucherTypeId": 1,
-                "VoucherTypeName": "Journal"
-            },
-            {
-                "VoucherTypeId": 2,
-                "VoucherTypeName": "Adjustment"
-            }
-        ];
+    constructor(private accountservice: AccountsService,private codeservice: CodeService, private setting: AppSettingsService, private toastr: ToastrService) {
+        // VoucherType Static array
+        this.voucherTypeArr = [{"VoucherTypeId": 1,"VoucherTypeName": "Journal"},
+                               { "VoucherTypeId": 2,"VoucherTypeName": "Adjustment"}];
     }
 
     ngOnInit() {
@@ -58,26 +36,16 @@ export class VouchersComponent implements OnInit {
         this.getAllVoucherDetails();
     }
 
-    ngAfterViewInit() {
-        //this.child.GetVoucherDocumentList();
-    }
-
     //TODO: Event for ADD, UPDATE, DELETE
     logEvent(eventName, obj) {
         if (eventName == "RowUpdating") {
             var value = Object.assign(obj.oldData, obj.newData);     // Merge old data with new Data 
             this.EditVoucher(value);
-            this.getAllVoucherDetails();
         }
-
         else if (eventName == "RowInserting") {
             this.AddVoucher(obj.data);
-            this.getAllVoucherDetails();
-        }
-
-        else {
-            //delete the row functionality
-        }
+        }        
+        this.getAllVoucherDetails();
     }
 
     AddVoucher(obj) {
@@ -96,11 +64,9 @@ export class VouchersComponent implements OnInit {
                 }
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
-                }
-                else {
-                }
+                }            
             }
-        )
+        );
     }
 
     EditVoucher(value) {
@@ -108,7 +74,6 @@ export class VouchersComponent implements OnInit {
             data => {
                 if (data.StatusCode == 200) {
                     this.toastr.success("Voucher Updated Successfully!!!");
-
                 }
             },
             error => {
@@ -121,25 +86,18 @@ export class VouchersComponent implements OnInit {
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
                 }
-                else {
-                }
             }
-        )
+        );
     }
 
     //Get Currency Code in Add, Edit Dropdown 
     getCurrencyCodeList() {
-        this.accountservice.GetAllCurrencyCodeList(this.setting.getBaseUrl() + GLOBAL.API_CurrencyCodes_GetAllCurrency).subscribe(
+        this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_CurrencyCodes_GetAllCurrency).subscribe(
             data => {
                 this.currencyModel = [];
                 if (data.data.CurrencyList != null) {
                     data.data.CurrencyList.forEach(element => {
-                        this.currencyModel.push({
-                            CurrencyId: element.CurrencyId,
-                            CurrencyCode: element.CurrencyCode,
-                            CurrencyName: element.CurrencyName,
-                            CurrencyRate: element.CurrencyRate
-                        });
+                        this.currencyModel.push(element);
                     });
                 }
             },
@@ -152,8 +110,6 @@ export class VouchersComponent implements OnInit {
                 }
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
-                }
-                else {
                 }
             }
         )
@@ -161,19 +117,12 @@ export class VouchersComponent implements OnInit {
 
     //Get Office Code in Add, Edit Dropdown 
     getOfficeCodeList() {
-        this.accountservice.GetAllOfficeCodeList(this.setting.getBaseUrl() + GLOBAL.API_OfficeCode_GetAllOfficeDetails).subscribe(
+        this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_OfficeCode_GetAllOfficeDetails).subscribe(
             data => {
                 if (data.data.OfficeDetailsList != null) {
                     this.officeCodeModel = [];
                     data.data.OfficeDetailsList.forEach(element => {
-                        this.officeCodeModel.push({
-                            OfficeId: element.OfficeId,
-                            OfficeCode: element.OfficeCode,
-                            OfficeName: element.OfficeName,
-                            SupervisorName: element.SupervisorName,
-                            PhoneNo: element.PhoneNo,
-                            FaxNo: element.FaxNo
-                        });
+                        this.officeCodeModel.push(element);
                     });
                 }
             },
@@ -186,8 +135,6 @@ export class VouchersComponent implements OnInit {
                 }
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
-                }
-                else {
                 }
             }
         )
@@ -195,12 +142,12 @@ export class VouchersComponent implements OnInit {
 
     //Get Journal Code in Add, Edit Dropdown
     getJournalCodeList() {
-        this.accountservice.GetAllJournalCodeList(this.setting.getBaseUrl() + GLOBAL.API_JournalCode_GetAllJournalDetail).subscribe(
+        this.codeservice.GetAllCodeList(this.setting.getBaseUrl() + GLOBAL.API_JournalCode_GetAllJournalDetail).subscribe(
             data => {
                 if (data.data.JournalDetailList != null) {
                     this.journalcodelist = [];
                     data.data.JournalDetailList.forEach(element => {
-                        this.journalcodelist.push({ JournalCode: element.JournalCode, JournalName: element.JournalName });
+                        this.journalcodelist.push(element);
                     });
                 }
             },
@@ -213,8 +160,6 @@ export class VouchersComponent implements OnInit {
                 }
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
-                }
-                else {
                 }
             }
         )
@@ -227,17 +172,7 @@ export class VouchersComponent implements OnInit {
                 if (data.data.VoucherDetailList != null) {
                     this.voucherDetails = [];
                     data.data.VoucherDetailList.forEach(element => {
-                        this.voucherDetails.push({
-                            VoucherNo: element.VoucherNo,
-                            VoucherDate: element.VoucherDate,
-                            VoucherRefNo: element.ReferenceNo,
-                            Office: element.OfficeId,
-                            ChequeNo: element.ChequeNo,
-                            Journal: element.JournalCode,
-                            VoucherType: element.VoucherTypeId,
-                            Description: element.Description,
-                            Currency: element.CurrencyId
-                        });
+                        this.voucherDetails.push(element);
                     });
                 }
             },
@@ -251,10 +186,8 @@ export class VouchersComponent implements OnInit {
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
                 }
-                else {
-                }
             }
-        )
+        );
     }
 
     GetVoucherDocumentList() {
@@ -278,8 +211,6 @@ export class VouchersComponent implements OnInit {
                 else if (error.StatusCode == 403) {
                     this.toastr.error("Forbidden Error....");
                 }
-                else {
-                }
             }
         )
     }
@@ -287,14 +218,18 @@ export class VouchersComponent implements OnInit {
     //Alpit -- 4/12/2017
     //Vouchers Document details popup trigger
     onRowClickEvent(data) {
-
         //use in document using input binding
-        this.voucherNoMain = data.VoucherNo;
+        this.voucherNoMain = data.VoucherRefNo;
         localStorage.setItem("SelectedVoucherNumber", data.VoucherNo);
-
         this.GetVoucherDocumentList();
-
         this.popupVisibleDocument = true;
+    }
+
+    sendRowData(rowData)
+    {
+        localStorage.setItem("SelectedVoucherNumber", rowData.key.VoucherNo);        
+        localStorage.setItem("SelectedVoucherCurrency", rowData.key.CurrencyId);                
+        localStorage.setItem("SelectedOfficeId", rowData.key.OfficeId);
     }
 
     onCancelVoucherDocument() {

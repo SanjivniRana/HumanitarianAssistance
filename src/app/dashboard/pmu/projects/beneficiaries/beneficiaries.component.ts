@@ -6,7 +6,7 @@ import { Beneficiaries, ProjectsService } from '../projects.service';
   templateUrl: './beneficiaries.component.html',
   styleUrls: ['./beneficiaries.component.css']
 })
-export class BeneficiariesComponent{
+export class BeneficiariesComponent {
 
   beneficiaries: Beneficiaries[];
 

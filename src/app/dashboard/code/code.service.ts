@@ -373,7 +373,6 @@ export class CodeService {
 
     //Dropdown for main level account
     getAccountType(url: string) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -600,7 +599,6 @@ export class CodeService {
 
     //MainLevelAccount ---------- Alpit 30-11-2017
     getMainLevelAccounts(url: string) {
-        //debugger;
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -699,12 +697,53 @@ export class CodeService {
 
     }
 
-
-
     getJournalCodeData(): JournalCodeData {
         journalcodedata.JournalCode = "";
         journalcodedata.JournalName = "";
         return journalcodedata;
+    }
+
+    GetAllExchangeRate(url: string) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    AddExchangeRate(url: string, model: any) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.post(url, JSON.stringify(model)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
+    }
+
+    EditExchangeRate(url: string, model: any) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        Myheaders.append("Content-Type", "application/json");
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.post(url, JSON.stringify(model)
+            , options)
+            .map((response: Response) => {
+                let journal = response.json();
+                if (journal) {
+                    return journal;
+                }
+            }).catch(this.handleError);
     }
 
     private handleError(error: Response) {
@@ -731,8 +770,8 @@ export class MainLevelAccount {
     AccountTypeId: number;
     Show: boolean;
     MDCode: string;
-    DepMethod: string;
-    DepRate: number;
+    // DepMethod: string;
+    // DepRate: number;
 }
 
 //ControlLevelAccount     ---important
@@ -754,7 +793,7 @@ export class SubLevelAccount {
     AccountLevelId: number;
     AccountTypeName: "Sub Level Accounts";
     AccountNote: number;
-    MainLevel: number;
+    ControlLevel: number;
     AccountName: string;
     AccountTypeId: number;
     Show: boolean;
@@ -767,7 +806,7 @@ export class InputLevelAccount {
     AccountLevelId: number;
     AccountTypeName: "Input Level Accounts";
     AccountNote: number;
-    MainLevel: number;
+    SubLevel: number;
     AccountName: string;
     AccountTypeId: number;
     Show: boolean;

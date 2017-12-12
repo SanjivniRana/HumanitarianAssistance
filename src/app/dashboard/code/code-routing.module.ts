@@ -7,6 +7,7 @@ import { AnalyticalCodesComponent } from "./analytical-codes/analytical-codes.co
 import { CurrencyCodeComponent } from "./currency-code/currency-code.component";
 import { OfficeCodeComponent } from "./office-code/office-code.component";
 import { EmailSettingComponent } from "./email-setting/email-setting.component";
+import { ExchangeRateComponent } from "./exchange-rate/exchange-rate.component";
 
 
 const appRouter: Routes =
@@ -20,7 +21,7 @@ const appRouter: Routes =
                 { path: 'currency-code', component: CurrencyCodeComponent },
                 { path: 'office-code', component: OfficeCodeComponent },
                 { path: 'email-setting', component: EmailSettingComponent },
-                
+                { path: 'exchange-rate', component: ExchangeRateComponent },
             ]
     }];
 

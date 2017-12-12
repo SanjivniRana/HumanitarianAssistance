@@ -1,107 +1,70 @@
 <div class="row">
-        <div class="col-sm-12">
-            <div class="main-heading clearfix">
-                    <h3 class="page-heading">Trial Balance</h3>
+    <div class="col-sm-12">
+        <div class="main-heading clearfix">
+            <h3 class="page-heading">Trial Balance</h3>
+        </div>
+    </div>
+    <div>
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    </div>
+    <div>
+        <div class="row" style="border:1px solid ;">
+            <div class="col-md-12">
+
+                <form action="your-action" (submit)="onApplyingFilter(trailFilters)">
+                    <dx-form id="form" [(formData)]="trailFilters" [colCount]="2" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true"
+                        validationGroup="customerData">
+                        <dxi-item dataField="CurrencyId" editorType="dxSelectBox" [editorOptions]="{ dataSource: currencyDropdown, value: CurrencyId, displayExpr: 'CurrencyCode', valueExpr: 'CurrencyId',showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="OfficeId" editorType="dxSelectBox" [editorOptions]="{ dataSource: officeDropdown, value: OfficeId, displayExpr: 'OfficeName', valueExpr: 'OfficeId', showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="RecordType" editorType="dxSelectBox" [editorOptions]="{ dataSource: recordTypeDropdown, value: Id, displayExpr: 'Name', valueExpr: 'Id', showClearButton:'true'  }"></dxi-item>
+                        <dxi-item dataField="Fromdate" editorType="dxDateBox" [editorOptions]="{ value: currentYear, width: '100%' }"></dxi-item>
+                        <dxi-item dataField="Todate" editorType="dxDateBox" [editorOptions]="{ value: now, width: '100%' }"></dxi-item>
+                    </dx-form>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8 text-center">
+                            <dx-button text="Show" type="success" validationGroup="customerData" [useSubmitBehavior]="true"></dx-button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
             </div>
         </div>
-        <div class="col-sm-12">
-            
-             <!-- Journal Filters -->   
-             <div>
-               <dx-data-grid id="gridContainer" 
-               [dataSource]="dataSource"
-               [columnHidingEnabled]="true"
-               [masterDetail]="{ enabled: true, template: 'detail' }">
-               <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
-               <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
-               <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
-               <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>           
-               <dxo-header-filter 
-               [visible]="true"></dxo-header-filter>
-               <dxo-selection                   
-                   mode="multiple">
-               </dxo-selection>
-               <dxo-filter-row 
-                    [visible]="showFilterRow">
-                </dxo-filter-row>        
-               <dxi-column dataField="Currency"></dxi-column>
-               <dxi-column dataField="Account"></dxi-column>
-               <dxi-column dataField="Office" [width]="125"></dxi-column>
-               <dxi-column dataField="RecordType" [width]="170"></dxi-column>               
-               <dxi-column dataField="VoucherDate"  dataType="date"></dxi-column>           
-               <dxo-paging [pageSize]="10"></dxo-paging>
-               <!-- <dxo-pager
-                  [allowedPageSizes]="[5, 8, 15, 30]"
-                  [showInfo]="true"
-                  [showNavigationButtons]="true"
-                  [showPageSizeSelector]="true"
-                  [visible]="true">
-              </dxo-pager>  -->
-           <dxo-column-chooser [enabled]="true" ></dxo-column-chooser>
-               <div *dxTemplate="let trail of 'detail'">
-                   <div class="internal-grid-container">
-                       <!-- <div>{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div> -->
-                       
-                       <dx-data-grid class="internal-grid"
-                           [dataSource]="trail.data.TrailBalanceVouchers"
-                           [showBorders]="true"
-                           [columnAutoWidth]="true">
-                           <dxo-selection                            
-                                mode="multiple">
-                            </dxo-selection>
-                           <!-- <dxo-export [enabled]="true" fileName="Orders"></dxo-export> -->
-                           <dxo-editing [allowAdding]="false" [allowUpdating]="false" mode="batch"></dxo-editing>
-                           <dxo-grouping [contextMenuEnabled]="true" expandMode="rowClick"></dxo-grouping>
-                           <dxo-group-panel [visible]="false" emptyPanelText="Use the context menu of header columns to group data"></dxo-group-panel>
-                           <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-                           <dxo-filter-row 
-                                [visible]="showFilterRow">
-                            </dxo-filter-row>
-                           <dxo-header-filter 
-                           [visible]="true"></dxo-header-filter>                                                          
-                               <dxi-column dataField="AccountName"></dxi-column>                               
-                               <dxi-column dataField="Debit"></dxi-column>
-                               <dxi-column dataField="Credit"></dxi-column>
-       
-                               <!-- <dxi-column  dataType="Credit" caption="Total" [calculateCellValue]="completedValue"></dxi-column> -->
-                               <dxo-summary>
-                                    <dxi-total-item
-                                            column="Debit"
-                                            summaryType="sum">
-                                    </dxi-total-item>
-                                    <dxi-total-item
-                                            column="Credit"
-                                            summaryType="sum">
-                                    </dxi-total-item>
-                                </dxo-summary>
-                       </dx-data-grid>
-                   </div>
-               </div>
-           </dx-data-grid>  
-           
-           <!-- <div class="options">
-               <div class="caption">Options</div>
-               <div class="option">
-                   <span>Select All Mode</span>
-                   <dx-select-box
-                       id="select-all-mode"
-                       #selectAllMode
-                       [dataSource]="['allPages', 'page']"                   
-                       [disabled]="showCheckBoxesMode ? showCheckBoxesMode.value === 'none' : true"
-                   ></dx-select-box>
-               </div>
-               <div class="option checkboxes-mode">
-                   <span>Show Checkboxes Mode</span>
-                   <dx-select-box
-                       id="show-checkboxes-mode"
-                       #showCheckBoxesMode
-                       [dataSource]="['none', 'onClick', 'onLongTap', 'always']"
-                       value="onClick"
-                   ></dx-select-box>
-               </div>
-           </div> -->
-           
-           </div>
-       </div>
     </div>
-    
+
+    <div class="col-sm-12">
+        <div>
+            <dx-data-grid id="gridContainer" [dataSource]="trailBalanceData" [allowColumnReordering]="true" [allowColumnResizing]="true">
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+
+                <!-- <dxi-column dataField="VoucherNo" [width]="130" alignment="right" caption="Voucher No"> -->
+                <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
+                <!-- </dxi-column> -->
+
+                <!-- <dxi-column dataField="CurrencyName" caption="Currency" alignment="right">
+                </dxi-column> -->
+
+                <dxi-column dataField="AccountName" caption="Account" alignment="right">
+                </dxi-column>
+
+                <dxi-column dataField="DebitAmount" caption="Debit" alignment="right">
+                </dxi-column>
+
+                <dxi-column dataField="CreditAmount" caption="Credit" alignment="right">
+                </dxi-column>
+
+                <dxo-summary>
+                    <dxi-total-item column="DebitAmount" summaryType="sum">
+                    </dxi-total-item>
+                    <dxi-total-item column="CreditAmount" summaryType="sum">
+                    </dxi-total-item>
+                </dxo-summary>
+
+            </dx-data-grid>
+        </div>
+    </div>
+</div>

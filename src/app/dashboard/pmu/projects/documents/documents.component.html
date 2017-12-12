@@ -30,6 +30,12 @@
           [showPageSizeSelector]="true"
           [visible]="true">
       </dxo-pager>  -->
+      <dxo-paging [pageSize]="7"></dxo-paging>
+      <dxo-pager [allowedPageSizes]="[5, 8, 15, 30]" [showInfo]="true" [showNavigationButtons]="true" [showPageSizeSelector]="true"
+            [visible]="true">
+      </dxo-pager>
+
+      <dxo-scrolling mode="infinite"></dxo-scrolling>
         <dxo-filter-row 
             [visible]="true">
         </dxo-filter-row>
@@ -53,7 +59,7 @@
         <dxi-column dataField="DocumentType">
             <dxi-validation-rule type="required"></dxi-validation-rule>
             <dxo-lookup
-                [dataSource]="doctypes"
+                [dataSource]="doctype"
                 valueExpr="DocTypeId"
                 displayExpr="DocTypeName">
             </dxo-lookup>
@@ -64,7 +70,11 @@
             <dxi-validation-rule type="required"></dxi-validation-rule>
             <dx-file-uploader accept="image/*"></dx-file-uploader>
         </dxi-column> -->
-        <dxi-column 
+        <dxi-column dataField="DocumentFile" caption="Document File" cellTemplate="CellTemplateDocumentFile"></dxi-column>          
+            <div *dxTemplate="let data of 'CellTemplateDocumentFile'">
+                <a>Document</a>
+            </div>
+        <!-- <dxi-column 
             dataField="DocumentFile"
             caption="Document File">
             <dxi-validation-rule type="required"></dxi-validation-rule>
@@ -74,7 +84,7 @@
                 accept="image/*"
                 uploadMode="useButtons">
             </dx-file-uploader>
-        </dxi-column>
+        </dxi-column> -->
     </dx-data-grid>  
   </div>
 </div>

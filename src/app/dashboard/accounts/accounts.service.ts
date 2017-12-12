@@ -31,7 +31,7 @@ export class VoucherTransaction {
     CreditAccount: number;
     Amount: number;
     TransactionDate: string;
-    TransactionId?: string;    
+    TransactionId?: string;
 }
 
 //Journal
@@ -788,7 +788,7 @@ export class AccountsService {
 
     //Voucher Services
 
-    GetAllCurrencyCodeList(url: string) {
+    GetAllVoucherDetails(url: string) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -801,46 +801,7 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
-    GetAllOfficeCodeList(url: string) {        
-        let Myheaders = new Headers();
-        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
-        let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url, options)
-            .map((response: Response) => {
-                let codelist = response.json();
-                if (codelist) {
-                    return codelist;
-                }
-            }).catch(this.handleError);
-    }
-
-    GetAllJournalCodeList(url: string) {        
-        let Myheaders = new Headers();
-        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
-        let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url, options)
-            .map((response: Response) => {
-                let codelist = response.json();
-                if (codelist) {
-                    return codelist;
-                }
-            }).catch(this.handleError);
-    }
-
-    GetAllVoucherDetails(url: string) {    
-        let Myheaders = new Headers();
-        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
-        let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url, options)
-            .map((response: Response) => {
-                let codelist = response.json();
-                if (codelist) {
-                    return codelist;
-                }
-            }).catch(this.handleError);
-    }
-
-    AddVoucher(url: string, model: any) {        
+    AddVoucher(url: string, model: any) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -868,7 +829,7 @@ export class AccountsService {
 
     }
 
-    EditVoucher(url: string, model: any) {        
+    EditVoucher(url: string, model: any) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
@@ -898,11 +859,11 @@ export class AccountsService {
     }
 
     //Voucher Document Services
-    GetVoucherDocumentDetails(url: string, VoucherNo) {        
+    GetVoucherDocumentDetails(url: string, VoucherNo) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url+"?VoucherNo="+VoucherNo, options)
+        return this.http.get(url + "?VoucherNo=" + VoucherNo, options)
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
@@ -916,15 +877,15 @@ export class AccountsService {
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         Myheaders.append("Content-Type", "application/json");
         let options = new RequestOptions({ headers: Myheaders });
-        let obj : any =
-            {
-                DocumentName : model.DocumentName,
-                FilePath : model.DocumentFilePath,
-                DocumentDate : model.DocumentDate,
-                VoucherNo : model.VoucherNo
-            }
+        // let obj : any =
+        //     {
+        //         DocumentName : model.DocumentName,
+        //         FilePath : model.DocumentFilePath,
+        //         DocumentDate : model.DocumentDate,
+        //         VoucherNo : model.VoucherNo
+        //     }
 
-        return this.http.post(url, obj
+        return this.http.post(url, model
             , options)
             .map((response: Response) => {
                 let journal = response.json();
@@ -938,7 +899,7 @@ export class AccountsService {
     // Voucher Transaction Services
 
     //Dropdown Bind For Credit & Debit Accounts
-    GetAccountDetails(url: string) {        
+    GetAccountDetails(url: string) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
@@ -951,11 +912,11 @@ export class AccountsService {
             }).catch(this.handleError);
     }
 
-    GetAllVoucherTransactionDetail(url: string, VoucherNo) {        
+    GetAllVoucherTransactionDetail(url: string, VoucherNo) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url+"?VoucherNo="+ VoucherNo, options)
+        return this.http.get(url + "?VoucherNo=" + VoucherNo, options)
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
@@ -971,12 +932,13 @@ export class AccountsService {
         let options = new RequestOptions({ headers: Myheaders });
         let obj =
             {
-                DebitAccount : model.DebitAccount,
-                CreditAccount : model.CreditAccount,
-                Amount : model.Amount,
-                Description : model.LineItemDescription,
-                TransactionDate : model.TransactionDate,
-                VoucherNo : model.VoucherNo
+                DebitAccount: model.DebitAccount,
+                CreditAccount: model.CreditAccount,
+                Amount: model.Amount,
+                Description: model.LineItemDescription,
+                TransactionDate: model.TransactionDate,
+                VoucherNo: model.VoucherNo,
+                CurrencyId: model.CurrencyId
             }
 
         return this.http.post(url, JSON.stringify(obj)
@@ -997,13 +959,14 @@ export class AccountsService {
         let options = new RequestOptions({ headers: Myheaders });
         let obj =
             {
-                DebitAccount : model.DebitAccount,
-                CreditAccount : model.CreditAccount,
-                Amount : model.Amount,
-                Description : model.Description,
-                TransactionDate : model.TransactionDate,
-                VoucherNo : model.VoucherNo,
-                TransactionId : model.TransactionId
+                DebitAccount: model.DebitAccount,
+                CreditAccount: model.CreditAccount,
+                Amount: model.Amount,
+                Description: model.Description,
+                TransactionDate: model.TransactionDate,
+                VoucherNo: model.VoucherNo,
+                TransactionId: model.TransactionId,
+                CurrencyId: model.CurrencyId
             }
 
         return this.http.post(url, JSON.stringify(obj)
@@ -1019,11 +982,11 @@ export class AccountsService {
 
     //Journal Services
 
-    GetAllJournalDetails(url: string) {
+    GetAllJournalDetails(url: string, model: any) {
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url, options)
+        return this.http.get(url + "?CurrencyId=" + model.CurrencyId + "&fromdate=" + model.FromDate + "&todate=" + model.ToDate + "&officeid=" + model.OfficeId + "&RecordType=" + model.RecordType, options)
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
@@ -1034,11 +997,32 @@ export class AccountsService {
 
     //Ledger Services
 
-    GetAllLedgerDetails(url: string) {
+    GetAllLedgerDetails(url: string, model: any) {
+        let obj = {
+            CurrencyId: model.CurrencyId,
+            OfficeCode: model.OfficeCode,
+            RecordType: model.RecordType,
+            AccountId: model.AccountId,
+            FromDate: model.FromDate,
+            ToDate: model.ToDate
+        };
         let Myheaders = new Headers();
         Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
         let options = new RequestOptions({ headers: Myheaders });
-        return this.http.get(url, options)
+        return this.http.post(url, obj, options)
+            .map((response: Response) => {
+                let codelist = response.json();
+                if (codelist) {
+                    return codelist;
+                }
+            }).catch(this.handleError);
+    }
+
+    GetAllTrailBalance(url: string, model: any) {
+        let Myheaders = new Headers();
+        Myheaders.append("Authorization", "Bearer " + localStorage.getItem("authenticationtoken"));
+        let options = new RequestOptions({ headers: Myheaders });
+        return this.http.get(url + "?OfficeId=" + model.OfficeId + "&Fromdate=" + model.Fromdate + "&Todate=" + model.Todate + "&CurrencyId=" + model.CurrencyId + "&RecordType=" + model.RecordType, options)
             .map((response: Response) => {
                 let codelist = response.json();
                 if (codelist) {
